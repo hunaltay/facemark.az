@@ -809,8 +809,8 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
         <div class="stat-card" style="border-left:3px solid var(--gold);display:flex;align-items:center;padding:14px 18px">
           <div style="flex:1">
             <div style="font-size:.6rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Aktiv Tədbirlər</div>
-            <div class="stat-val" style="font-size:1.45rem">3</div>
-            <div class="stat-delta up" style="margin-top:2px">▲ 2026-da cəmi 8 tədbir</div>
+            <div class="stat-val" id="stat-active-events" style="font-size:1.45rem">—</div>
+            <div class="stat-delta up" id="stat-active-events-sub" style="margin-top:2px">Yüklənir...</div>
           </div>
         </div>
 
@@ -830,7 +830,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
         <div class="stat-card" style="border-left:3px solid var(--orange);display:flex;align-items:center;padding:14px 18px">
           <div style="flex:1">
             <div style="font-size:.6rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Yeni Müraciət</div>
-            <div class="stat-val" style="font-size:1.45rem">7</div>
+            <div class="stat-val" id="stat-new-inquiries" style="font-size:1.45rem">—</div>
             <div class="stat-delta" style="color:var(--orange);margin-top:2px">⏳ Cavablanmamış</div>
           </div>
         </div>
@@ -1194,158 +1194,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
               <th>Tədbir adı</th><th>Tarix</th><th>Yer</th>
               <th>Bilet növü</th><th>Qeydiyyat</th><th>Status</th><th>Əməliyyat</th>
             </tr></thead>
-            <tbody id="events-tbody">
-
-              <!-- AKTIV rows -->
-              <tr data-evstatus="aktiv" onclick="showView('event-new',null)" style="cursor:pointer">
-                <td>
-                  <div style="font-weight:700;font-size:.75rem">Milli Marketinq Forumu 2026</div>
-                  <div style="font-size:.62rem;color:var(--muted)">mmf-2026</div>
-                </td>
-                <td style="font-size:.68rem;white-space:nowrap">6 İyun 2026</td>
-                <td style="font-size:.68rem">Bakı Konqres Mərkəzi</td>
-                <td><span style="font-size:.65rem">Standard · VIP · Korporativ</span></td>
-                <td>
-                  <div style="font-size:.72rem;font-weight:700">420 / 600</div>
-                  <div class="prog-bar" style="width:80px"><div class="prog-fill" style="width:70%"></div></div>
-                </td>
-                <td><span class="status-badge status-active">● Aktiv</span></td>
-                <td><div style="display:flex;gap:4px">
-                  <button class="btn btn-sm btn-outline" onclick="showView('event-new',event)">✏️</button>
-                  <button class="btn btn-sm btn-outline">👁️</button>
-                </div></td>
-              </tr>
-
-              <tr data-evstatus="aktiv">
-                <td>
-                  <div style="font-weight:700;font-size:.75rem">Milli İnsan Resursları Forumu</div>
-                  <div style="font-size:.62rem;color:var(--muted)">hr-forum-2026</div>
-                </td>
-                <td style="font-size:.68rem;white-space:nowrap">16 May 2026</td>
-                <td style="font-size:.68rem">Baku Marriott Hotel</td>
-                <td><span style="font-size:.65rem">Standard · VIP</span></td>
-                <td>
-                  <div style="font-size:.72rem;font-weight:700">310 / 400</div>
-                  <div class="prog-bar" style="width:80px"><div class="prog-fill" style="width:77%"></div></div>
-                </td>
-                <td><span class="status-badge status-active">● Aktiv</span></td>
-                <td><div style="display:flex;gap:4px">
-                  <button class="btn btn-sm btn-outline">✏️</button>
-                  <button class="btn btn-sm btn-outline">👁️</button>
-                </div></td>
-              </tr>
-
-              <tr data-evstatus="aktiv">
-                <td>
-                  <div style="font-weight:700;font-size:.75rem">Bloger & İnfluenser Forumu 2026</div>
-                  <div style="font-size:.62rem;color:var(--muted)">blogger-2026</div>
-                </td>
-                <td style="font-size:.68rem;white-space:nowrap">10–11 İyun 2026</td>
-                <td style="font-size:.68rem">Dreamland Baku</td>
-                <td><span style="font-size:.65rem">Gündəlik · 2 Günlük · VIP</span></td>
-                <td>
-                  <div style="font-size:.72rem;font-weight:700">517 / 800</div>
-                  <div class="prog-bar" style="width:80px"><div class="prog-fill" style="width:65%"></div></div>
-                </td>
-                <td><span class="status-badge status-active">● Aktiv</span></td>
-                <td><div style="display:flex;gap:4px">
-                  <button class="btn btn-sm btn-outline">✏️</button>
-                  <button class="btn btn-sm btn-outline">👁️</button>
-                </div></td>
-              </tr>
-
-              <!-- DRAFT rows -->
-              <tr data-evstatus="draft">
-                <td>
-                  <div style="font-weight:700;font-size:.75rem">Milli Satış Forumu 2026</div>
-                  <div style="font-size:.62rem;color:var(--muted)">sales-forum-2026</div>
-                </td>
-                <td style="font-size:.68rem;white-space:nowrap;color:var(--muted)">Sentyabr 2026</td>
-                <td style="font-size:.68rem;color:var(--muted)">Hələ təyin edilməyib</td>
-                <td style="font-size:.65rem;color:var(--muted)">—</td>
-                <td style="font-size:.68rem;color:var(--muted)">— / 500</td>
-                <td><span class="status-badge status-draft">○ Draft</span></td>
-                <td><div style="display:flex;gap:4px">
-                  <button class="btn btn-sm btn-outline">✏️</button>
-                  <button class="btn btn-sm btn-red">🗑</button>
-                </div></td>
-              </tr>
-
-              <tr data-evstatus="draft">
-                <td>
-                  <div style="font-weight:700;font-size:.75rem">Texnologiya & İnnovasiya Forumu</div>
-                  <div style="font-size:.62rem;color:var(--muted)">tech-forum-2026</div>
-                </td>
-                <td style="font-size:.68rem;white-space:nowrap;color:var(--muted)">Oktyabr 2026</td>
-                <td style="font-size:.68rem;color:var(--muted)">Hələ təyin edilməyib</td>
-                <td style="font-size:.65rem;color:var(--muted)">—</td>
-                <td style="font-size:.68rem;color:var(--muted)">— / 400</td>
-                <td><span class="status-badge status-draft">○ Draft</span></td>
-                <td><div style="display:flex;gap:4px">
-                  <button class="btn btn-sm btn-outline">✏️</button>
-                  <button class="btn btn-sm btn-red">🗑</button>
-                </div></td>
-              </tr>
-
-              <!-- TAMAMLANDI rows -->
-              <tr data-evstatus="tamamlandi">
-                <td>
-                  <div style="font-weight:700;font-size:.75rem">Milli Marketinq Forumu 2025</div>
-                  <div style="font-size:.62rem;color:var(--muted)">mmf-2025</div>
-                </td>
-                <td style="font-size:.68rem;white-space:nowrap">12 İyun 2025</td>
-                <td style="font-size:.68rem">Bakı Konqres Mərkəzi</td>
-                <td><span style="font-size:.65rem">Standard · VIP · Korporativ</span></td>
-                <td>
-                  <div style="font-size:.72rem;font-weight:700">598 / 600</div>
-                  <div class="prog-bar" style="width:80px"><div class="prog-fill" style="width:99%"></div></div>
-                </td>
-                <td><span class="status-badge" style="background:rgba(107,104,120,.1);color:var(--muted)">✓ Tamamlandı</span></td>
-                <td><div style="display:flex;gap:4px">
-                  <button class="btn btn-sm btn-outline">📊</button>
-                  <button class="btn btn-sm btn-outline">👁️</button>
-                </div></td>
-              </tr>
-
-              <tr data-evstatus="tamamlandi">
-                <td>
-                  <div style="font-weight:700;font-size:.75rem">HR Forum 2025</div>
-                  <div style="font-size:.62rem;color:var(--muted)">hr-forum-2025</div>
-                </td>
-                <td style="font-size:.68rem;white-space:nowrap">20 May 2025</td>
-                <td style="font-size:.68rem">Baku Marriott Hotel</td>
-                <td><span style="font-size:.65rem">Standard · VIP</span></td>
-                <td>
-                  <div style="font-size:.72rem;font-weight:700">395 / 400</div>
-                  <div class="prog-bar" style="width:80px"><div class="prog-fill" style="width:98%"></div></div>
-                </td>
-                <td><span class="status-badge" style="background:rgba(107,104,120,.1);color:var(--muted)">✓ Tamamlandı</span></td>
-                <td><div style="display:flex;gap:4px">
-                  <button class="btn btn-sm btn-outline">📊</button>
-                  <button class="btn btn-sm btn-outline">👁️</button>
-                </div></td>
-              </tr>
-
-              <tr data-evstatus="tamamlandi">
-                <td>
-                  <div style="font-weight:700;font-size:.75rem">Bloger Forumu 2025</div>
-                  <div style="font-size:.62rem;color:var(--muted)">blogger-2025</div>
-                </td>
-                <td style="font-size:.68rem;white-space:nowrap">15 İyun 2025</td>
-                <td style="font-size:.68rem">Dreamland Baku</td>
-                <td><span style="font-size:.65rem">Gündəlik · 2 Günlük · VIP</span></td>
-                <td>
-                  <div style="font-size:.72rem;font-weight:700">756 / 800</div>
-                  <div class="prog-bar" style="width:80px"><div class="prog-fill" style="width:94%"></div></div>
-                </td>
-                <td><span class="status-badge" style="background:rgba(107,104,120,.1);color:var(--muted)">✓ Tamamlandı</span></td>
-                <td><div style="display:flex;gap:4px">
-                  <button class="btn btn-sm btn-outline">📊</button>
-                  <button class="btn btn-sm btn-outline">👁️</button>
-                </div></td>
-              </tr>
-
-            </tbody>
+            <tbody id="events-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -1901,317 +1750,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
                 <th></th>
               </tr>
             </thead>
-            <tbody id="inq-tbody">
-
-              <!-- YENI + SPONSOR -->
-              <tr data-cat="sponsor yeni">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Kamran İsmayılov</div><div style="font-size:.62rem;color:var(--muted)">kamran@kapital.az</div></td>
-                <td style="font-size:.72rem">Kapital Bank</td>
-                <td><span class="status-badge" style="background:rgba(8,145,178,.1);color:#0891B2;margin-bottom:3px">🏆 Sponsor</span><div style="font-size:.68rem;color:var(--muted)">Qızıl Sponsor — MMF 2026</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">05.07 · 08:30</td>
-                <td><span class="status-badge status-new">Yeni</span></td>
-                <td><button class="btn btn-sm btn-gold" onclick="openInqReply({name:'Kamran İsmayılov',email:'kamran@kapital.az',co:'Kapital Bank',sub:'Qızıl Sponsor — MMF 2026',msg:'MMF 2026 tədbirinin qızıl sponsoru olmaq istəyirik. Paket haqqında məlumat verə bilərsiniz?',status:'Yeni'})">Cavabla</button></td>
-              </tr>
-
-              <!-- YENI + BILET -->
-              <tr data-cat="bilet yeni">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Nigar Əliyeva</div><div style="font-size:.62rem;color:var(--muted)">nigar@pasha.az</div></td>
-                <td style="font-size:.72rem">PASHA Holding</td>
-                <td><span class="status-badge" style="background:rgba(49,130,206,.1);color:var(--blue);margin-bottom:3px">🎫 Bilet sorğusu</span><div style="font-size:.68rem;color:var(--muted)">Qrup bilet (×10) — MMF 2026</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">05.07 · 09:14</td>
-                <td><span class="status-badge status-new">Yeni</span></td>
-                <td><button class="btn btn-sm btn-gold" onclick="openInqReply({name:'Nigar Əliyeva',email:'nigar@pasha.az',co:'PASHA Holding',sub:'Qrup bilet (×10) — MMF 2026',msg:'Şirkətimiz üçün 10 ədəd qrup bilet almaq istəyirik. Korporativ endirim varmı?',status:'Yeni'})">Cavabla</button></td>
-              </tr>
-
-              <!-- YENI + MARKETING -->
-              <tr data-cat="marketing yeni">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Tural Nəsirov</div><div style="font-size:.62rem;color:var(--muted)">tural@startup.az</div></td>
-                <td style="font-size:.72rem">StartUp AZ</td>
-                <td><span class="status-badge" style="background:rgba(221,107,32,.1);color:var(--orange);margin-bottom:3px">📣 Marketing Air</span><div style="font-size:.68rem;color:var(--muted)">Sosial Media paketi sorğusu</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">04.07 · 16:45</td>
-                <td><span class="status-badge status-new">Yeni</span></td>
-                <td><button class="btn btn-sm btn-gold" onclick="openInqReply({name:'Tural Nəsirov',email:'tural@startup.az',co:'StartUp AZ',sub:'Marketing Air — Sosial Media paketi',msg:'Marketing Air paketinin sosial media hissəsi haqqında ətraflı məlumat istəyirik.',status:'Yeni'})">Cavabla</button></td>
-              </tr>
-
-              <!-- YENI + PARTNYOR -->
-              <tr data-cat="partnyor yeni">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Bakcell MMC</div><div style="font-size:.62rem;color:var(--muted)">partner@bakcell.az</div></td>
-                <td style="font-size:.72rem">Bakcell</td>
-                <td><span class="status-badge" style="background:rgba(196,151,58,.1);color:var(--gold);margin-bottom:3px">🤝 Partnyor</span><div style="font-size:.68rem;color:var(--muted)">Media partnyorluğu sorğusu</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">04.07 · 11:20</td>
-                <td><span class="status-badge status-new">Yeni</span></td>
-                <td><button class="btn btn-sm btn-gold" onclick="openInqReply({name:'Bakcell MMC',email:'partner@bakcell.az',co:'Bakcell',sub:'Media Partnyorluğu',msg:'Facemark tədbirləri üçün rəsmi media partnyor olmaq marağımız var.',status:'Yeni'})">Cavabla</button></td>
-              </tr>
-
-              <!-- GÖZLƏYIR + BILET -->
-              <tr data-cat="bilet">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Əli Hüseynov</div><div style="font-size:.62rem;color:var(--muted)">ali@azercell.az</div></td>
-                <td style="font-size:.72rem">Azercell</td>
-                <td><span class="status-badge" style="background:rgba(49,130,206,.1);color:var(--blue);margin-bottom:3px">🎫 Bilet sorğusu</span><div style="font-size:.68rem;color:var(--muted)">VIP bilet (×5) — HR Forum</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">03.07 · 14:00</td>
-                <td><span class="status-badge status-pending">Gözləyir</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Əli Hüseynov',email:'ali@azercell.az',co:'Azercell',sub:'VIP bilet (×5) — HR Forum',msg:'HR Forum üçün 5 ədəd VIP bilet almaq istəyirik.',status:'Gözləyir'})">Bax</button></td>
-              </tr>
-
-              <!-- GÖZLƏYIR + SPONSOR -->
-              <tr data-cat="sponsor">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">AzərGold</div><div style="font-size:.62rem;color:var(--muted)">info@azergold.az</div></td>
-                <td style="font-size:.72rem">AzərGold</td>
-                <td><span class="status-badge" style="background:rgba(8,145,178,.1);color:#0891B2;margin-bottom:3px">🏆 Sponsor</span><div style="font-size:.68rem;color:var(--muted)">Gümüş Sponsor — Bloger Forum</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">03.07 · 10:30</td>
-                <td><span class="status-badge status-pending">Gözləyir</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'AzərGold',email:'info@azergold.az',co:'AzərGold',sub:'Gümüş Sponsor — Bloger Forum',msg:'Bloger Forum 2026 üçün gümüş sponsor paketi haqqında məlumat istəyirik.',status:'Gözləyir'})">Bax</button></td>
-              </tr>
-
-              <!-- GÖZLƏYIR + PARTNYOR -->
-              <tr data-cat="partnyor">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Azərsu ASC</div><div style="font-size:.62rem;color:var(--muted)">info@azersu.az</div></td>
-                <td style="font-size:.72rem">Azərsu ASC</td>
-                <td><span class="status-badge" style="background:rgba(196,151,58,.1);color:var(--gold);margin-bottom:3px">🤝 Partnyor</span><div style="font-size:.68rem;color:var(--muted)">Uzunmüddətli media partnyorluğu</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">02.07 · 14:11</td>
-                <td><span class="status-badge status-pending">Gözləyir</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Azərsu ASC',email:'info@azersu.az',co:'Azərsu ASC',sub:'Uzunmüddətli media partnyorluğu',msg:'Facemark ilə uzunmüddətli media partnyorluğu barədə danışmaq istərdik.',status:'Gözləyir'})">Bax</button></td>
-              </tr>
-
-              <!-- GÖZLƏYIR + MARKETING -->
-              <tr data-cat="marketing">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Nar Mobile</div><div style="font-size:.62rem;color:var(--muted)">marketing@nar.az</div></td>
-                <td style="font-size:.72rem">Nar Mobile</td>
-                <td><span class="status-badge" style="background:rgba(221,107,32,.1);color:var(--orange);margin-bottom:3px">📣 Marketing Air</span><div style="font-size:.68rem;color:var(--muted)">Banner + e-poçt kampaniyası</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">02.07 · 09:55</td>
-                <td><span class="status-badge status-pending">Gözləyir</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Nar Mobile',email:'marketing@nar.az',co:'Nar Mobile',sub:'Banner + e-poçt kampaniyası',msg:'Marketing Air banner və e-poçt paketini birlikdə almaq istəyirik.',status:'Gözləyir'})">Bax</button></td>
-              </tr>
-
-              <!-- CAVABLANDI + SPONSOR -->
-              <tr data-cat="sponsor cavablandı">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Silk Way Airlines</div><div style="font-size:.62rem;color:var(--muted)">partner@silkway.az</div></td>
-                <td style="font-size:.72rem">Silk Way Airlines</td>
-                <td><span class="status-badge" style="background:rgba(8,145,178,.1);color:#0891B2;margin-bottom:3px">🏆 Sponsor</span><div style="font-size:.68rem;color:var(--muted)">Platin Sponsor — HR Forum</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">29.06 · 11:00</td>
-                <td><span class="status-badge status-active">Cavablandı</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Silk Way Airlines',email:'partner@silkway.az',co:'Silk Way Airlines',sub:'Platin Sponsor — HR Forum',msg:'HR Forum 2026 üçün platin sponsor olmaq istəyirik.',status:'Cavablandı'})">Bax</button></td>
-              </tr>
-
-              <!-- CAVABLANDI + BILET -->
-              <tr data-cat="bilet cavablandı">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Leyla Hüseynova</div><div style="font-size:.62rem;color:var(--muted)">leyla@biz.az</div></td>
-                <td style="font-size:.72rem">—</td>
-                <td><span class="status-badge" style="background:rgba(49,130,206,.1);color:var(--blue);margin-bottom:3px">🎫 Bilet sorğusu</span><div style="font-size:.68rem;color:var(--muted)">Standart bilet (×3) — MMF 2026</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">28.06 · 15:30</td>
-                <td><span class="status-badge status-active">Cavablandı</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Leyla Hüseynova',email:'leyla@biz.az',co:'—',sub:'Standart bilet (×3) — MMF 2026',msg:'3 nəfərlik standart bilet almaq istəyirəm.',status:'Cavablandı'})">Bax</button></td>
-              </tr>
-
-              <!-- CAVABLANDI + PARTNYOR -->
-              <tr data-cat="partnyor cavablandı">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">PASHA Bank</div><div style="font-size:.62rem;color:var(--muted)">bd@pashabank.az</div></td>
-                <td style="font-size:.72rem">PASHA Bank</td>
-                <td><span class="status-badge" style="background:rgba(196,151,58,.1);color:var(--gold);margin-bottom:3px">🤝 Partnyor</span><div style="font-size:.68rem;color:var(--muted)">Strateji partnyorluq müqaviləsi</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">27.06 · 10:00</td>
-                <td><span class="status-badge status-active">Cavablandı</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'PASHA Bank',email:'bd@pashabank.az',co:'PASHA Bank',sub:'Strateji partnyorluq müqaviləsi',msg:'Facemark ilə strateji tərəfdaşlıq müzakirəsi üçün görüş istəyirik.',status:'Cavablandı'})">Bax</button></td>
-              </tr>
-
-              <!-- CAVABLANDI + MARKETING -->
-              <tr data-cat="marketing cavablandı">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">ABB Bank</div><div style="font-size:.62rem;color:var(--muted)">media@abb.az</div></td>
-                <td style="font-size:.72rem">ABB Bank</td>
-                <td><span class="status-badge" style="background:rgba(221,107,32,.1);color:var(--orange);margin-bottom:3px">📣 Marketing Air</span><div style="font-size:.68rem;color:var(--muted)">E-bülletin reklamı</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">25.06 · 13:45</td>
-                <td><span class="status-badge status-active">Cavablandı</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'ABB Bank',email:'media@abb.az',co:'ABB Bank',sub:'E-bülletin reklamı',msg:'Biznes Radar e-bülleteninde reklam yerləşdirmək istəyirik.',status:'Cavablandı'})">Bax</button></td>
-              </tr>
-
-              <!-- CAVABLANDI + PARTNYOR 2 -->
-              <tr data-cat="partnyor cavablandı">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Bank Respublika</div><div style="font-size:.62rem;color:var(--muted)">pr@bankr.az</div></td>
-                <td style="font-size:.72rem">Bank Respublika</td>
-                <td><span class="status-badge" style="background:rgba(196,151,58,.1);color:var(--gold);margin-bottom:3px">🤝 Partnyor</span><div style="font-size:.68rem;color:var(--muted)">Media partnyorluğu</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">24.06 · 09:20</td>
-                <td><span class="status-badge status-active">Cavablandı</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Bank Respublika',email:'pr@bankr.az',co:'Bank Respublika',sub:'Media partnyorluğu',msg:'Tədbirləriniz üçün media dəstəyi verməkdə maraqlıyıq.',status:'Cavablandı'})">Bax</button></td>
-              </tr>
-
-              <!-- CAVABLANDI + BILET 2 -->
-              <tr data-cat="bilet cavablandı">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Anar Babayev</div><div style="font-size:.62rem;color:var(--muted)">anar@mail.ru</div></td>
-                <td style="font-size:.72rem">—</td>
-                <td><span class="status-badge" style="background:rgba(49,130,206,.1);color:var(--blue);margin-bottom:3px">🎫 Bilet sorğusu</span><div style="font-size:.68rem;color:var(--muted)">VIP bilet (×2) — Bloger Forum</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">22.06 · 17:10</td>
-                <td><span class="status-badge status-active">Cavablandı</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Anar Babayev',email:'anar@mail.ru',co:'—',sub:'VIP bilet (×2) — Bloger Forum',msg:'2 ədəd VIP bilet almaq istəyirəm.',status:'Cavablandı'})">Bax</button></td>
-              </tr>
-
-              <!-- CAVABLANDI -->
-              <tr data-cat="cavablandı bilet">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Günay Babayeva</div><div style="font-size:.62rem;color:var(--muted)">gunay@nargiz.az</div></td>
-                <td style="font-size:.72rem">Nargiz Məktəbi</td>
-                <td><span class="status-badge" style="background:rgba(49,130,206,.1);color:var(--blue);margin-bottom:3px">🎫 Bilet sorğusu</span><div style="font-size:.68rem;color:var(--muted)">Tələbə bilet (×20) — MMF 2026</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">20.06 · 12:00</td>
-                <td><span class="status-badge status-active">Cavablandı</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Günay Babayeva',email:'gunay@nargiz.az',co:'Nargiz Məktəbi',sub:'Tələbə bilet (×20) — MMF 2026',msg:'Tələbələrimiz üçün 20 endirimli bilet almaq istəyirik.',status:'Cavablandı'})">Bax</button></td>
-              </tr>
-
-
-              <!-- RADAR ABUNƏ rows -->
-              <tr data-cat="radar yeni">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">radar.user@biz.az</div><div style="font-size:.62rem;color:var(--muted)">radar.user@biz.az</div></td>
-                <td style="font-size:.72rem">—</td>
-                <td><span class="status-badge" style="background:rgba(124,58,237,.1);color:#7C3AED;margin-bottom:3px">📰 Radar Abunə</span><div style="font-size:.68rem;color:var(--muted)">Biznes Radar səhifəsi</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">Dünən 11:48</td>
-                <td><span class="status-badge status-active">Aktiv</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'radar.user@biz.az',email:'radar.user@biz.az',co:'—',sub:'Biznes Radar abunəsi',msg:'Biznes Radar səhifəsi vasitəsilə abunə olub.',status:'Aktiv'})">Bax</button></td>
-              </tr>
-              <tr data-cat="radar yeni">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">boss@company.az</div><div style="font-size:.62rem;color:var(--muted)">boss@company.az</div></td>
-                <td style="font-size:.72rem">Company AZ</td>
-                <td><span class="status-badge" style="background:rgba(124,58,237,.1);color:#7C3AED;margin-bottom:3px">📰 Radar Abunə</span><div style="font-size:.68rem;color:var(--muted)">Biznes Radar xəbər bölməsi</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">03.07 · 09:20</td>
-                <td><span class="status-badge status-active">Aktiv</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'boss@company.az',email:'boss@company.az',co:'Company AZ',sub:'Biznes Radar abunəsi',msg:'Xəbər bölməsindən abunə olub.',status:'Aktiv'})">Bax</button></td>
-              </tr>
-              <tr data-cat="radar">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">finance@bank.az</div><div style="font-size:.62rem;color:var(--muted)">finance@bank.az</div></td>
-                <td style="font-size:.72rem">Bank AZ</td>
-                <td><span class="status-badge" style="background:rgba(124,58,237,.1);color:#7C3AED;margin-bottom:3px">📰 Radar Abunə</span><div style="font-size:.68rem;color:var(--muted)">Radar newsletter bağlantısı</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">02.07</td>
-                <td><span class="status-badge status-active">Aktiv</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'finance@bank.az',email:'finance@bank.az',co:'Bank AZ',sub:'Radar newsletter abunəsi',msg:'Newsletter bağlantısı vasitəsilə abunə olub.',status:'Aktiv'})">Bax</button></td>
-              </tr>
-              <tr data-cat="radar">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">startup@az.com</div><div style="font-size:.62rem;color:var(--muted)">startup@az.com</div></td>
-                <td style="font-size:.72rem">StartUp AZ</td>
-                <td><span class="status-badge" style="background:rgba(124,58,237,.1);color:#7C3AED;margin-bottom:3px">📰 Radar Abunə</span><div style="font-size:.68rem;color:var(--muted)">Radar sidebar forması</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">01.07</td>
-                <td><span class="status-badge status-active">Aktiv</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'startup@az.com',email:'startup@az.com',co:'StartUp AZ',sub:'Radar sidebar abunəsi',msg:'Sidebar forması vasitəsilə abunə olub.',status:'Aktiv'})">Bax</button></td>
-              </tr>
-              <tr data-cat="radar">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">media@press.az</div><div style="font-size:.62rem;color:var(--muted)">media@press.az</div></td>
-                <td style="font-size:.72rem">Press AZ</td>
-                <td><span class="status-badge" style="background:rgba(124,58,237,.1);color:#7C3AED;margin-bottom:3px">📰 Radar Abunə</span><div style="font-size:.68rem;color:var(--muted)">Biznes Radar ana səhifə</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">29.06</td>
-                <td><span class="status-badge" style="background:rgba(229,62,62,.1);color:var(--red)">Deaktiv</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'media@press.az',email:'media@press.az',co:'Press AZ',sub:'Radar abunəsi — deaktiv',msg:'Ana səhifədən abunə olub, sonra deaktiv etdirib.',status:'Deaktiv'})">Bax</button></td>
-              </tr>
-
-              <!-- CV rows -->
-              <tr data-cat="cv yeni">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Rauf Əlizadə</div><div style="font-size:.62rem;color:var(--muted)">rauf.a@gmail.com</div></td>
-                <td style="font-size:.72rem">—</td>
-                <td><span class="status-badge" style="background:rgba(221,107,32,.1);color:var(--orange);margin-bottom:3px">📄 CV Göndər</span><div style="font-size:.68rem;color:var(--muted)">Karyera səhifəsi vasitəsilə</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">Dünən 17:30</td>
-                <td><span class="status-badge status-pending">Baxılır</span></td>
-                <td><button class="btn btn-sm btn-gold" onclick="openInqReply({name:'Rauf Əlizadə',email:'rauf.a@gmail.com',co:'—',sub:'CV göndərişi',msg:'Karyera səhifəsindəki formadan CV göndərib. Marketinq mütəxəssisi vəzifəsinə müraciət edir.',status:'Baxılır'})">Bax</button></td>
-              </tr>
-              <tr data-cat="cv yeni">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Günel Rəsulova</div><div style="font-size:.62rem;color:var(--muted)">gunel@startup.az</div></td>
-                <td style="font-size:.72rem">StartUp AZ</td>
-                <td><span class="status-badge" style="background:rgba(221,107,32,.1);color:var(--orange);margin-bottom:3px">📄 CV Göndər</span><div style="font-size:.68rem;color:var(--muted)">"Komandamız" bölməsi vasitəsilə</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">02.07</td>
-                <td><span class="status-badge status-new">Yeni</span></td>
-                <td><button class="btn btn-sm btn-gold" onclick="openInqReply({name:'Günel Rəsulova',email:'gunel@startup.az',co:'StartUp AZ',sub:'CV göndərişi',msg:'Komandamız bölməsindən CV göndərib. SMM mütəxəssisi vəzifəsinə müraciət edir.',status:'Yeni'})">Cavabla</button></td>
-              </tr>
-              <tr data-cat="cv">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Elşən Quliyev</div><div style="font-size:.62rem;color:var(--muted)">elshan@mail.ru</div></td>
-                <td style="font-size:.72rem">—</td>
-                <td><span class="status-badge" style="background:rgba(221,107,32,.1);color:var(--orange);margin-bottom:3px">📄 CV Göndər</span><div style="font-size:.68rem;color:var(--muted)">Karyera səhifəsi vasitəsilə</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">01.07</td>
-                <td><span class="status-badge" style="background:rgba(229,62,62,.1);color:var(--red)">Rədd edildi</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Elşən Quliyev',email:'elshan@mail.ru',co:'—',sub:'CV göndərişi',msg:'Karyera səhifəsindən CV göndərib. Qrafik dizayner vəzifəsinə müraciət edib.',status:'Rədd edildi'})">Bax</button></td>
-              </tr>
-              <tr data-cat="cv cavablandı">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Nərmin Abbasova</div><div style="font-size:.62rem;color:var(--muted)">nermin@gmail.com</div></td>
-                <td style="font-size:.72rem">—</td>
-                <td><span class="status-badge" style="background:rgba(221,107,32,.1);color:var(--orange);margin-bottom:3px">📄 CV Göndər</span><div style="font-size:.68rem;color:var(--muted)">Karyera səhifəsi vasitəsilə</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">30.06</td>
-                <td><span class="status-badge status-active">Qəbul edildi</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Nərmin Abbasova',email:'nermin@gmail.com',co:'—',sub:'CV göndərişi',msg:'Karyera səhifəsindən CV göndərib. Redaktor vəzifəsinə müraciət edib, qəbul edilib.',status:'Qəbul edildi'})">Bax</button></td>
-              </tr>
-              <tr data-cat="cv">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Tural Hüseynli</div><div style="font-size:.62rem;color:var(--muted)">tural.h@outlook.com</div></td>
-                <td style="font-size:.72rem">—</td>
-                <td><span class="status-badge" style="background:rgba(221,107,32,.1);color:var(--orange);margin-bottom:3px">📄 CV Göndər</span><div style="font-size:.68rem;color:var(--muted)">Karyera səhifəsi vasitəsilə</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">28.06</td>
-                <td><span class="status-badge status-new">Yeni</span></td>
-                <td><button class="btn btn-sm btn-gold" onclick="openInqReply({name:'Tural Hüseynli',email:'tural.h@outlook.com',co:'—',sub:'CV göndərişi',msg:'Karyera səhifəsindən CV göndərib. Video operator vəzifəsinə müraciət edir.',status:'Yeni'})">Cavabla</button></td>
-              </tr>
-
-
-              <!-- ABUNE rows -->
-              <tr data-cat="abune yeni">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Leyla Məmmədzadə</div><div style="font-size:.62rem;color:var(--muted)">leyla.m@mail.ru</div></td>
-                <td style="font-size:.72rem">—</td>
-                <td><span class="status-badge" style="background:rgba(56,161,105,.1);color:var(--green);margin-bottom:3px">🎪 Tədbir Abunəsi</span><div style="font-size:.68rem;color:var(--muted)">Ana səhifə footer vasitəsilə</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">Bu gün 08:52</td>
-                <td><span class="status-badge status-active">Aktiv</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Leyla Məmmədzadə',email:'leyla.m@mail.ru',co:'—',sub:'Tədbir abunəsi',msg:'Ana səhifə footer vasitəsilə abunə olub.',status:'Aktiv'})">Bax</button></td>
-              </tr>
-              <tr data-cat="abune yeni">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Anar Babayev</div><div style="font-size:.62rem;color:var(--muted)">anar.b@gmail.com</div></td>
-                <td style="font-size:.72rem">—</td>
-                <td><span class="status-badge" style="background:rgba(56,161,105,.1);color:var(--green);margin-bottom:3px">🎪 Tədbir Abunəsi</span><div style="font-size:.68rem;color:var(--muted)">Tədbirlər səhifəsi vasitəsilə</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">Dünən 16:30</td>
-                <td><span class="status-badge status-active">Aktiv</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Anar Babayev',email:'anar.b@gmail.com',co:'—',sub:'Tədbir abunəsi',msg:'Tədbirlər səhifəsi vasitəsilə abunə olub.',status:'Aktiv'})">Bax</button></td>
-              </tr>
-              <tr data-cat="abune">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">TechCorp AZ</div><div style="font-size:.62rem;color:var(--muted)">info@company.az</div></td>
-                <td style="font-size:.72rem">TechCorp AZ</td>
-                <td><span class="status-badge" style="background:rgba(56,161,105,.1);color:var(--green);margin-bottom:3px">🎪 Tədbir Abunəsi</span><div style="font-size:.68rem;color:var(--muted)">Korporativ abunə paketi</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">Dünən 12:15</td>
-                <td><span class="status-badge status-active">Aktiv</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'TechCorp AZ',email:'info@company.az',co:'TechCorp AZ',sub:'Korporativ tədbir abunəsi',msg:'Şirkət adından korporativ abunə olub.',status:'Aktiv'})">Bax</button></td>
-              </tr>
-              <tr data-cat="abune">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Murad Süleymanov</div><div style="font-size:.62rem;color:var(--muted)">murad.s@mail.ru</div></td>
-                <td style="font-size:.72rem">—</td>
-                <td><span class="status-badge" style="background:rgba(56,161,105,.1);color:var(--green);margin-bottom:3px">🎪 Tədbir Abunəsi</span><div style="font-size:.68rem;color:var(--muted)">Ana səhifə footer vasitəsilə</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">03.07</td>
-                <td><span class="status-badge status-active">Aktiv</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Murad Süleymanov',email:'murad.s@mail.ru',co:'—',sub:'Tədbir abunəsi',msg:'Ana səhifə footer vasitəsilə abunə olub.',status:'Aktiv'})">Bax</button></td>
-              </tr>
-              <tr data-cat="abune">
-                <td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-chk" onchange="inqRowCheck()" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>
-                <td><div style="font-size:.73rem;font-weight:700">Gülnar Rəhimova</div><div style="font-size:.62rem;color:var(--muted)">gulnar@az.com</div></td>
-                <td style="font-size:.72rem">StartUp Lab</td>
-                <td><span class="status-badge" style="background:rgba(56,161,105,.1);color:var(--green);margin-bottom:3px">🎪 Tədbir Abunəsi</span><div style="font-size:.68rem;color:var(--muted)">MMF 2026 qeydiyyat forması</div></td>
-                <td style="font-size:.68rem;color:var(--muted);white-space:nowrap">01.07</td>
-                <td><span class="status-badge" style="background:rgba(229,62,62,.1);color:var(--red)">Deaktiv</span></td>
-                <td><button class="btn btn-sm btn-outline" onclick="openInqReply({name:'Gülnar Rəhimova',email:'gulnar@az.com',co:'StartUp Lab',sub:'Tədbir abunəsi — deaktiv',msg:'MMF 2026 qeydiyyat forması vasitəsilə abunə olub, sonra deaktiv etdirb.',status:'Deaktiv'})">Bax</button></td>
-              </tr>
-
-            </tbody>
+            <tbody id="inq-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -3863,6 +3402,9 @@ function showView(id, el){
   // Init media grid when navigating to media view
   if(id==='media'){ setTimeout(function(){ mediaRender(); },50); }
     if(id==='services'){ setTimeout(function(){ filterServices(''); },50); }
+  if(id==='inquiries'){ setTimeout(function(){ renderInquiries(); },50); }
+  if(id==='events-list'){ setTimeout(function(){ renderEventsList(); },50); }
+  if(id==='dashboard'){ setTimeout(function(){ renderDashboardStats(); },50); }
 
   document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active')});
   if(el&&el.classList&&el.classList.contains('sb-item'))el.classList.add('active');
@@ -4226,15 +3768,178 @@ function closeEd(){
 function setEdStatus(btn){
   var bg = btn.getAttribute('data-bg');
   var bc = btn.getAttribute('data-bc');
-  btn.closest('.ed-status-row').querySelectorAll('.ed-status-btn').forEach(function(b){
+  var row = btn.closest('.ed-status-row') || btn.parentElement;
+  row.querySelectorAll('.ed-status-btn').forEach(function(b){
     b.style.background='transparent';
     b.style.boxShadow='none';
   });
   btn.style.background=bg;
   btn.style.boxShadow='0 0 0 2px '+bc;
+  var st = btn.getAttribute('data-status');
+  if(st) _inqSelectedStatus = st;
 }
 
 /* ── Son Forma Girişləri filter ─────────────────────────── */
+// ── Real Supabase data render funksiyaları ──────────────────────────
+function _escHtml(s){
+  return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+async function renderInquiries(){
+  var tbody = document.getElementById('inq-tbody');
+  if(!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr>';
+  var res = await supabaseClient.from('applications').select('*').neq('status','archived').order('created_at',{ascending:false});
+  var data = res.data, error = res.error;
+  if(error){
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənmə xətası: '+_escHtml(error.message)+'</td></tr>';
+    return;
+  }
+  data = data || [];
+  var typeLabelMap = { sponsorship:'🏆 Sponsor', career:'📄 CV Göndər', team:'📄 CV Göndər', contact:'📨 Müraciət' };
+  var typeCatMap = { sponsorship:'sponsor', career:'cv', team:'cv', contact:'' };
+  var statusLabelMap = { new:'Yeni', pending:'Gözləyir', reviewed:'Cavablandı' };
+  var statusBadgeHtml = {
+    new:'<span class="status-badge status-new">🔵 Yeni</span>',
+    pending:'<span class="status-badge" style="background:rgba(221,107,32,.12);color:var(--orange)">🕐 Gözləyir</span>',
+    reviewed:'<span class="status-badge status-active">✅ Cavablandı</span>'
+  };
+  var statusCatMap = { new:'yeni', reviewed:'cavablandı', pending:'' };
+
+  if(!data.length){
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Hələ heç bir müraciət yoxdur.</td></tr>';
+  } else {
+    tbody.innerHTML = data.map(function(r){
+      var cat = ((statusCatMap[r.status]||'') + ' ' + (typeCatMap[r.form_type]||'')).trim();
+      var rowData = {
+        id: r.id,
+        name: r.full_name,
+        email: r.email || '',
+        co: r.subject || '',
+        sub: (typeLabelMap[r.form_type] || r.form_type) + (r.subject ? ' — '+r.subject : ''),
+        msg: r.message || (r.cv_url ? ('CV: '+r.cv_url) : ''),
+        status: statusLabelMap[r.status] || r.status
+      };
+      var dataAttr = JSON.stringify(rowData).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+      var dateStr = r.created_at ? new Date(r.created_at).toLocaleDateString('az-AZ') : '';
+      return '<tr data-cat="'+_escHtml(cat)+'">'+
+        '<td style="padding:8px 6px 8px 12px"><input type="checkbox" class="inq-row-check" style="width:15px;height:15px;cursor:pointer;accent-color:var(--dark)"></td>'+
+        '<td><div style="font-weight:700">'+_escHtml(r.full_name)+'</div><div style="font-size:.68rem;color:var(--muted)">'+_escHtml(r.email||r.phone||'')+'</div></td>'+
+        '<td style="font-size:.72rem">'+_escHtml(r.subject||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(typeLabelMap[r.form_type]||_escHtml(r.form_type))+'</td>'+
+        '<td style="font-size:.68rem;white-space:nowrap">'+dateStr+'</td>'+
+        '<td>'+(statusBadgeHtml[r.status]||_escHtml(r.status))+'</td>'+
+        '<td style="text-align:right;padding-right:12px"><button class="btn btn-outline btn-sm" onclick=\'openInqReply('+dataAttr+')\'>Bax</button></td>'+
+      '</tr>';
+    }).join('');
+  }
+
+  var counts = { '':data.length, yeni:0, sponsor:0, cv:0, 'cavablandı':0 };
+  data.forEach(function(r){
+    if(r.status==='new') counts.yeni++;
+    if(r.status==='reviewed') counts['cavablandı']++;
+    if(r.form_type==='sponsorship') counts.sponsor++;
+    if(r.form_type==='career'||r.form_type==='team') counts.cv++;
+  });
+  document.querySelectorAll('.inq-tab').forEach(function(btn){
+    var m = (btn.getAttribute('onclick')||'').match(/filterInq\(\'([^\']*)\'/);
+    var cat = m ? m[1] : '';
+    var span = btn.querySelector('.inq-cnt');
+    if(span){ span.textContent = (counts[cat]!==undefined ? counts[cat] : 0); }
+  });
+  var subEl = document.getElementById('inq-sub');
+  if(subEl) subEl.textContent = counts.yeni + ' cavablanmamış · Cəmi ' + data.length;
+
+  var activeTab = document.querySelector('.inq-tab.active');
+  var activeCat = '';
+  if(activeTab){ var mm=(activeTab.getAttribute('onclick')||'').match(/filterInq\(\'([^\']*)\'/); activeCat = mm?mm[1]:''; }
+  filterInq(activeCat, activeTab);
+}
+
+async function renderEventsList(){
+  var tbody = document.getElementById('events-tbody');
+  if(!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr>';
+  var res = await supabaseClient.from('events').select('*').order('date_start',{ascending:false, nullsFirst:false});
+  var data = res.data, error = res.error;
+  if(error){
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənmə xətası: '+_escHtml(error.message)+'</td></tr>';
+    return;
+  }
+  data = data || [];
+  var evStatusMap = { active:'aktiv', upcoming:'draft', past:'tamamlandi', partner:'' };
+  var badgeHtml = {
+    active:'<span class="status-badge status-active">● Aktiv</span>',
+    upcoming:'<span class="status-badge" style="background:rgba(221,107,32,.12);color:var(--orange)">○ Draft</span>',
+    past:'<span class="status-badge" style="background:rgba(107,104,120,.1);color:var(--muted)">✓ Tamamlandı</span>',
+    partner:'<span class="status-badge" style="background:rgba(66,133,244,.12);color:#4285f4">🤝 Partnyor</span>'
+  };
+  var monthsAz = ['Yan','Fev','Mar','Apr','May','İyun','İyul','Avq','Sen','Okt','Noy','Dek'];
+  function fmtDate(d){
+    if(!d) return '—';
+    var dt = new Date(d+'T00:00:00');
+    if(isNaN(dt.getTime())) return d;
+    return dt.getDate()+' '+monthsAz[dt.getMonth()]+' '+dt.getFullYear();
+  }
+
+  if(!data.length){
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Tədbir tapılmadı.</td></tr>';
+  } else {
+    tbody.innerHTML = data.map(function(ev){
+      var dateStr = ev.date_start ? (fmtDate(ev.date_start) + (ev.date_end && ev.date_end!==ev.date_start ? ' – '+fmtDate(ev.date_end) : '')) : '—';
+      return '<tr data-evstatus="'+_escHtml(evStatusMap[ev.status]||'')+'">'+
+        '<td><div style="font-weight:700;font-size:.75rem">'+_escHtml(ev.title_az)+'</div><div style="font-size:.62rem;color:var(--muted)">'+_escHtml(ev.slug)+'</div></td>'+
+        '<td style="font-size:.68rem;white-space:nowrap">'+dateStr+'</td>'+
+        '<td style="font-size:.68rem">'+_escHtml(ev.venue||'—')+'</td>'+
+        '<td><span style="font-size:.65rem;color:var(--muted)">—</span></td>'+
+        '<td><span style="font-size:.65rem;color:var(--muted)">—</span></td>'+
+        '<td>'+(badgeHtml[ev.status]||_escHtml(ev.status))+'</td>'+
+        '<td><div style="display:flex;gap:4px">'+
+          '<button class="btn btn-sm btn-outline" onclick="showView(\'event-new\',event)">✏️</button>'+
+          '<button class="btn btn-sm btn-outline">👁️</button>'+
+        '</div></td>'+
+      '</tr>';
+    }).join('');
+  }
+
+  var counts = { '':data.length, aktiv:0, draft:0, tamamlandi:0 };
+  data.forEach(function(ev){
+    var c = evStatusMap[ev.status];
+    if(c && counts[c]!==undefined) counts[c]++;
+  });
+  document.querySelectorAll('.ev-tab-btn').forEach(function(btn){
+    var m = (btn.getAttribute('onclick')||'').match(/filterEvents\(\'([^\']*)\'/);
+    var cat = m ? m[1] : '';
+    var span = btn.querySelector('.inq-cnt');
+    if(span){ span.textContent = (counts[cat]!==undefined ? counts[cat] : 0); }
+  });
+  var pageSub = document.querySelector('#view-events-list .page-sub');
+  if(pageSub) pageSub.textContent = data.length + ' tədbir (bazadan)';
+}
+
+async function renderDashboardStats(){
+  var activeEl = document.getElementById('stat-active-events');
+  var activeSubEl = document.getElementById('stat-active-events-sub');
+  var newInqEl = document.getElementById('stat-new-inquiries');
+
+  var evRes = await supabaseClient.from('events').select('id, status', {count:'exact'});
+  if(!evRes.error && evRes.data){
+    var total = evRes.data.length;
+    var activeCount = evRes.data.filter(function(e){ return e.status==='active'; }).length;
+    if(activeEl) activeEl.textContent = activeCount;
+    if(activeSubEl) activeSubEl.textContent = '2026-da cəmi '+total+' tədbir (bazadan)';
+  } else if(activeEl){
+    activeEl.textContent = '—';
+  }
+
+  var inqRes = await supabaseClient.from('applications').select('id').eq('status','new');
+  if(!inqRes.error && inqRes.data){
+    if(newInqEl) newInqEl.textContent = inqRes.data.length;
+  } else if(newInqEl){
+    newInqEl.textContent = '—';
+  }
+}
+
 function filterInq(cat, btn) {
   var rows = document.querySelectorAll('#inq-tbody tr');
   var count = 0;
@@ -4275,6 +3980,7 @@ function filterInq(cat, btn) {
 }
 
 var _inqCurrent = null;
+var _inqSelectedStatus = null;
 
 function openInqReply(data) {
   _inqCurrent = data;
@@ -4325,14 +4031,14 @@ function openInqReply(data) {
         'placeholder="Zəhmət olmasa, müraciətə cavab mətnini daxil edin..."></textarea>' +
       '</div>' +
       '<div class="ed-field"><label style="font-size:.7rem;font-weight:700;color:var(--muted);display:block;margin-bottom:6px">Status yenilə</label>' +
-        '<div style="display:flex;gap:6px">' +
-          '<button class="ed-status-btn" data-bg="rgba(49,130,206,.12)" data-bc="var(--blue)" onclick="setEdStatus(this)" style="color:var(--blue);border-color:var(--blue)">🔵 Yeni</button>' +
-          '<button class="ed-status-btn" data-bg="rgba(221,107,32,.12)" data-bc="var(--orange)" onclick="setEdStatus(this)" style="color:var(--orange);border-color:var(--orange)">🕐 Gözləyir</button>' +
-          '<button class="ed-status-btn" data-bg="rgba(56,161,105,.12)" data-bc="var(--green)" onclick="setEdStatus(this)" style="color:var(--green);border-color:var(--green)">✅ Cavablandı</button>' +
+        '<div class="ed-status-row" style="display:flex;gap:6px">' +
+          '<button class="ed-status-btn" data-status="new" data-bg="rgba(49,130,206,.12)" data-bc="var(--blue)" onclick="setEdStatus(this)" style="'+(data.status==='Yeni'?'background:rgba(49,130,206,.12);box-shadow:0 0 0 2px var(--blue);':'')+'color:var(--blue);border-color:var(--blue)">🔵 Yeni</button>' +
+          '<button class="ed-status-btn" data-status="pending" data-bg="rgba(221,107,32,.12)" data-bc="var(--orange)" onclick="setEdStatus(this)" style="'+(data.status==='Gözləyir'?'background:rgba(221,107,32,.12);box-shadow:0 0 0 2px var(--orange);':'')+'color:var(--orange);border-color:var(--orange)">🕐 Gözləyir</button>' +
+          '<button class="ed-status-btn" data-status="reviewed" data-bg="rgba(56,161,105,.12)" data-bc="var(--green)" onclick="setEdStatus(this)" style="'+(data.status==='Cavablandı'?'background:rgba(56,161,105,.12);box-shadow:0 0 0 2px var(--green);':'')+'color:var(--green);border-color:var(--green)">✅ Cavablandı</button>' +
         '</div>' +
       '</div>';
   }
-
+  _inqSelectedStatus = null;
   overlay.classList.add('open');
 }
 
@@ -4342,21 +4048,34 @@ function closeInqReply() {
   _inqCurrent = null;
 }
 
-function sendInqReply() {
+async function sendInqReply() {
   var msgEl = document.getElementById('inq-reply-msg');
   var msg = msgEl ? msgEl.value.trim() : '';
   if (!msg) {
     if (msgEl) { msgEl.style.borderColor = 'var(--red)'; msgEl.focus(); }
     return;
   }
-  // Show success
+  if (!_inqCurrent || !_inqCurrent.id) {
+    alert('Bu müraciət real bazadan gəlmədiyi üçün status yenilənə bilmir (demo qeyd).');
+    closeInqReply();
+    return;
+  }
+  var newStatus = _inqSelectedStatus || 'reviewed';
   var body = document.getElementById('inq-reply-body');
+  var sendBtn = document.querySelector('#inq-reply-overlay .fd-footer button.btn-gold');
+  if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = 'Göndərilir...'; }
+  var { error } = await supabaseClient.from('applications').update({ status: newStatus }).eq('id', _inqCurrent.id);
+  if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = 'Göndər'; }
+  if (error) {
+    alert('Xəta: ' + error.message);
+    return;
+  }
   if (body) {
     body.innerHTML =
       '<div style="text-align:center;padding:32px 16px">' +
         '<div style="font-size:2.2rem;margin-bottom:10px">✅</div>' +
-        '<div style="font-size:.95rem;font-weight:700;margin-bottom:6px">Cavab göndərildi!</div>' +
-        '<div style="font-size:.75rem;color:var(--muted)">' + (_inqCurrent ? _inqCurrent.email : 'Ünvan') + ' ünvanına göndərildi.</div>' +
+        '<div style="font-size:.95rem;font-weight:700;margin-bottom:6px">Status yeniləndi!</div>' +
+        '<div style="font-size:.75rem;color:var(--muted)">' + (_inqCurrent ? _inqCurrent.email : 'Ünvan') + ' ünvanına aid müraciət yeniləndi.</div>' +
       '</div>';
   }
   var footer = document.querySelector('#inq-reply-overlay .fd-footer');
@@ -4364,7 +4083,8 @@ function sendInqReply() {
   setTimeout(function() {
     closeInqReply();
     if (footer) footer.style.display = '';
-  }, 1800);
+    renderInquiries();
+  }, 1400);
 }
 
 
