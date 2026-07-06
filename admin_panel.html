@@ -3346,12 +3346,38 @@ Digər</textarea>
     </div>
 
     <div class="view" id="view-team">
-      <div class="page-hdr"><div class="page-title">👥 Komanda</div></div>
-      <div class="empty-state"><div style="font-size:2rem;margin-bottom:10px">👥</div><b>Komanda modulu</b>Üzv kartları, şəkillər, rollar idarə olunur</div>
+      <div class="page-hdr">
+        <div>
+          <div class="page-title">👥 Komanda</div>
+          <div class="page-sub" id="team-sub">Yüklənir...</div>
+        </div>
+        <div style="margin-left:auto"><button class="btn btn-gold" onclick="openTeamEdit(null)">+ Üzv əlavə et</button></div>
+      </div>
+      <div class="card">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:56px">Şəkil</th><th>Ad Soyad</th><th>Vəzifə</th><th>LinkedIn</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+            <tbody id="team-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <div class="view" id="view-careers">
-      <div class="page-hdr"><div class="page-title">💼 Karyera</div></div>
-      <div class="empty-state"><div style="font-size:2rem;margin-bottom:10px">💼</div><b>Karyera modulu</b>Vakansiyalar, müraciətlər, CV-lər idarə olunur</div>
+      <div class="page-hdr">
+        <div>
+          <div class="page-title">💼 Karyera</div>
+          <div class="page-sub" id="jobs-sub">Yüklənir...</div>
+        </div>
+        <div style="margin-left:auto"><button class="btn btn-gold" onclick="openJobEdit(null)">+ Vakansiya əlavə et</button></div>
+      </div>
+      <div class="card">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Vəzifə</th><th>Departament</th><th>Yer</th><th>Növ</th><th>Status</th><th>Əməliyyat</th></tr></thead>
+            <tbody id="jobs-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
   </div><!-- /content -->
@@ -3405,6 +3431,8 @@ function showView(id, el){
   if(id==='inquiries'){ setTimeout(function(){ renderInquiries(); },50); }
   if(id==='events-list'){ setTimeout(function(){ renderEventsList(); },50); }
   if(id==='dashboard'){ setTimeout(function(){ renderDashboardStats(); },50); }
+  if(id==='team'){ setTimeout(function(){ renderTeamList(); },50); }
+  if(id==='careers'){ setTimeout(function(){ renderJobsList(); },50); }
 
   document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active')});
   if(el&&el.classList&&el.classList.contains('sb-item'))el.classList.add('active');
@@ -6090,5 +6118,252 @@ async function agLogin(){
 document.getElementById('agPass').addEventListener('keydown', e=>{ if(e.key==='Enter') agLogin(); });
 agCheckSession();
 </script>
+
+<!-- ══ Komanda üzvü redaktə overlay ══ -->
+<div class="fd-overlay" id="team-edit-overlay" onclick="closeTeamEdit()">
+  <div class="fd-panel" style="width:480px" onclick="event.stopPropagation()">
+    <div class="fd-header">
+      <span style="font-size:1rem">👤</span>
+      <span class="fd-title" id="team-edit-title">Yeni üzv</span>
+      <button class="fd-close" onclick="closeTeamEdit()">✕</button>
+    </div>
+    <div class="fd-body" id="team-edit-body"></div>
+    <div style="padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0">
+      <button class="btn btn-outline" onclick="closeTeamEdit()">Ləğv et</button>
+      <button class="btn btn-gold" id="team-save-btn" onclick="saveTeamMember()">✓ Saxla</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Vakansiya redaktə overlay ══ -->
+<div class="fd-overlay" id="job-edit-overlay" onclick="closeJobEdit()">
+  <div class="fd-panel" style="width:480px" onclick="event.stopPropagation()">
+    <div class="fd-header">
+      <span style="font-size:1rem">💼</span>
+      <span class="fd-title" id="job-edit-title">Yeni vakansiya</span>
+      <button class="fd-close" onclick="closeJobEdit()">✕</button>
+    </div>
+    <div class="fd-body" id="job-edit-body"></div>
+    <div style="padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0">
+      <button class="btn btn-outline" onclick="closeJobEdit()">Ləğv et</button>
+      <button class="btn btn-gold" id="job-save-btn" onclick="saveJobOpening()">✓ Saxla</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// KOMANDA (team_members) — real Supabase CRUD
+// ══════════════════════════════════════════════════════════════════
+var _teamEditId = null;
+
+function _tjEsc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function _tjField(label, id, value, opts){
+  opts = opts || {};
+  var type = opts.type || 'text';
+  var st = 'width:100%;padding:8px 11px;border:1.5px solid var(--border);border-radius:8px;font-size:.78rem;outline:none;box-sizing:border-box';
+  var html = '<div class="ed-field" style="margin-bottom:12px">';
+  html += '<label style="font-size:.7rem;font-weight:700;color:var(--muted);display:block;margin-bottom:4px">'+label+(opts.req?' <span style="color:var(--red)">*</span>':'')+'</label>';
+  if(type==='textarea'){
+    html += '<textarea id="'+id+'" rows="3" style="'+st+';resize:vertical">'+_tjEsc(value)+'</textarea>';
+  } else if(type==='checkbox'){
+    html += '<label style="display:flex;align-items:center;gap:8px;font-size:.78rem;cursor:pointer"><input type="checkbox" id="'+id+'" '+(value?'checked':'')+' style="width:16px;height:16px;accent-color:var(--dark)"> Aktivdir</label>';
+  } else {
+    html += '<input id="'+id+'" type="'+type+'" value="'+_tjEsc(value)+'" style="'+st+'">';
+  }
+  html += '</div>';
+  return html;
+}
+
+async function renderTeamList(){
+  var tbody = document.getElementById('team-tbody');
+  if(!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr>';
+  var res = await supabaseClient.from('team_members').select('*').order('sort_order',{ascending:true});
+  var data = res.data, error = res.error;
+  var sub = document.getElementById('team-sub');
+  if(error){
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənmə xətası: '+_tjEsc(error.message)+'</td></tr>';
+    if(sub) sub.textContent = 'Xəta';
+    return;
+  }
+  data = data || [];
+  if(sub) sub.textContent = data.length + ' komanda üzvü';
+  if(!data.length){
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Hələ komanda üzvü əlavə olunmayıb.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.map(function(m){
+    var photo = m.photo_url ? '<img src="'+_tjEsc(m.photo_url)+'" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.style.visibility=\'hidden\'">' : '<div style="width:36px;height:36px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.9rem">👤</div>';
+    var linkedin = m.linkedin_url ? '<a href="'+_tjEsc(m.linkedin_url)+'" target="_blank" style="color:var(--blue)">🔗 Profil</a>' : '<span style="color:var(--muted)">—</span>';
+    return '<tr>'+
+      '<td>'+photo+'</td>'+
+      '<td style="font-weight:700;font-size:.78rem">'+_tjEsc(m.name)+'</td>'+
+      '<td style="font-size:.72rem">'+_tjEsc(m.role_az||'—')+'</td>'+
+      '<td style="font-size:.72rem">'+linkedin+'</td>'+
+      '<td style="font-size:.72rem">'+(m.sort_order||0)+'</td>'+
+      '<td><div style="display:flex;gap:4px">'+
+        '<button class="btn btn-sm btn-outline" onclick=\'openTeamEdit('+JSON.stringify(m).replace(/'/g,"&#39;")+')\'>✏️</button>'+
+        '<button class="btn btn-sm btn-outline" onclick="deleteTeamMember(\''+m.id+'\')">🗑️</button>'+
+      '</div></td>'+
+    '</tr>';
+  }).join('');
+}
+
+function openTeamEdit(m){
+  _teamEditId = m ? m.id : null;
+  document.getElementById('team-edit-title').textContent = m ? 'Üzvü redaktə et' : 'Yeni üzv';
+  var html = '';
+  html += _tjField('Ad Soyad', 'tf-name', m?m.name:'', {req:true});
+  html += _tjField('Vəzifə (AZ)', 'tf-role-az', m?m.role_az:'');
+  html += _tjField('Vəzifə (EN)', 'tf-role-en', m?m.role_en:'');
+  html += _tjField('Şəkil URL', 'tf-photo', m?m.photo_url:'');
+  html += _tjField('Bio (AZ)', 'tf-bio-az', m?m.bio_az:'', {type:'textarea'});
+  html += _tjField('Bio (EN)', 'tf-bio-en', m?m.bio_en:'', {type:'textarea'});
+  html += _tjField('LinkedIn URL', 'tf-linkedin', m?m.linkedin_url:'');
+  html += _tjField('Sıra nömrəsi', 'tf-sort', m?m.sort_order:0, {type:'number'});
+  document.getElementById('team-edit-body').innerHTML = html;
+  document.getElementById('team-edit-overlay').classList.add('open');
+}
+function closeTeamEdit(){
+  document.getElementById('team-edit-overlay').classList.remove('open');
+  _teamEditId = null;
+}
+async function saveTeamMember(){
+  var name = document.getElementById('tf-name').value.trim();
+  if(!name){ showInqToast('Ad Soyad məcburidir.', 'var(--red)'); return; }
+  var payload = {
+    name: name,
+    role_az: document.getElementById('tf-role-az').value.trim() || null,
+    role_en: document.getElementById('tf-role-en').value.trim() || null,
+    photo_url: document.getElementById('tf-photo').value.trim() || null,
+    bio_az: document.getElementById('tf-bio-az').value.trim() || null,
+    bio_en: document.getElementById('tf-bio-en').value.trim() || null,
+    linkedin_url: document.getElementById('tf-linkedin').value.trim() || null,
+    sort_order: parseInt(document.getElementById('tf-sort').value,10) || 0
+  };
+  var btn = document.getElementById('team-save-btn');
+  btn.disabled = true; btn.textContent = '⏳ Saxlanılır...';
+  var res;
+  if(_teamEditId){
+    res = await supabaseClient.from('team_members').update(payload).eq('id', _teamEditId);
+  } else {
+    res = await supabaseClient.from('team_members').insert([payload]);
+  }
+  btn.disabled = false; btn.textContent = '✓ Saxla';
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
+  showInqToast('Saxlanıldı ✓', 'var(--green)');
+  closeTeamEdit();
+  renderTeamList();
+}
+async function deleteTeamMember(id){
+  if(!confirm('Bu üzvü silmək istədiyinizə əminsiniz?')) return;
+  var res = await supabaseClient.from('team_members').delete().eq('id', id);
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
+  showInqToast('Silindi', 'var(--dark)');
+  renderTeamList();
+}
+
+// ══════════════════════════════════════════════════════════════════
+// KARYERA (job_openings) — real Supabase CRUD
+// ══════════════════════════════════════════════════════════════════
+var _jobEditId = null;
+
+async function renderJobsList(){
+  var tbody = document.getElementById('jobs-tbody');
+  if(!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr>';
+  var res = await supabaseClient.from('job_openings').select('*').order('sort_order',{ascending:true});
+  var data = res.data, error = res.error;
+  var sub = document.getElementById('jobs-sub');
+  if(error){
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənmə xətası: '+_tjEsc(error.message)+'</td></tr>';
+    if(sub) sub.textContent = 'Xəta';
+    return;
+  }
+  data = data || [];
+  if(sub) sub.textContent = data.length + ' vakansiya ('+data.filter(function(j){return j.is_active;}).length+' aktiv)';
+  if(!data.length){
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Hələ vakansiya əlavə olunmayıb.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.map(function(j){
+    var statusBadge = j.is_active ? '<span class="status-badge status-active">● Aktiv</span>' : '<span class="status-badge" style="background:rgba(107,104,120,.1);color:var(--muted)">○ Deaktiv</span>';
+    return '<tr>'+
+      '<td style="font-weight:700;font-size:.78rem">'+_tjEsc(j.title_az)+'</td>'+
+      '<td style="font-size:.72rem">'+_tjEsc(j.department||'—')+'</td>'+
+      '<td style="font-size:.72rem">'+_tjEsc(j.location||'—')+'</td>'+
+      '<td style="font-size:.72rem">'+_tjEsc(j.employment_type||'—')+'</td>'+
+      '<td style="cursor:pointer" onclick="toggleJobActive(\''+j.id+'\','+(!!j.is_active)+')">'+statusBadge+'</td>'+
+      '<td><div style="display:flex;gap:4px">'+
+        '<button class="btn btn-sm btn-outline" onclick=\'openJobEdit('+JSON.stringify(j).replace(/'/g,"&#39;")+')\'>✏️</button>'+
+        '<button class="btn btn-sm btn-outline" onclick="deleteJobOpening(\''+j.id+'\')">🗑️</button>'+
+      '</div></td>'+
+    '</tr>';
+  }).join('');
+}
+
+function openJobEdit(j){
+  _jobEditId = j ? j.id : null;
+  document.getElementById('job-edit-title').textContent = j ? 'Vakansiyanı redaktə et' : 'Yeni vakansiya';
+  var html = '';
+  html += _tjField('Vəzifə adı (AZ)', 'jf-title-az', j?j.title_az:'', {req:true});
+  html += _tjField('Vəzifə adı (EN)', 'jf-title-en', j?j.title_en:'');
+  html += _tjField('Departament', 'jf-dept', j?j.department:'');
+  html += _tjField('Yer', 'jf-location', j?j.location:'');
+  html += _tjField('İş növü (məs: Tam ştat)', 'jf-emptype', j?j.employment_type:'');
+  html += _tjField('Təsvir (AZ)', 'jf-desc-az', j?j.description_az:'', {type:'textarea'});
+  html += _tjField('Təsvir (EN)', 'jf-desc-en', j?j.description_en:'', {type:'textarea'});
+  html += _tjField('Sıra nömrəsi', 'jf-sort', j?j.sort_order:0, {type:'number'});
+  html += _tjField('', 'jf-active', j?j.is_active:true, {type:'checkbox'});
+  document.getElementById('job-edit-body').innerHTML = html;
+  document.getElementById('job-edit-overlay').classList.add('open');
+}
+function closeJobEdit(){
+  document.getElementById('job-edit-overlay').classList.remove('open');
+  _jobEditId = null;
+}
+async function saveJobOpening(){
+  var titleAz = document.getElementById('jf-title-az').value.trim();
+  if(!titleAz){ showInqToast('Vəzifə adı məcburidir.', 'var(--red)'); return; }
+  var payload = {
+    title_az: titleAz,
+    title_en: document.getElementById('jf-title-en').value.trim() || null,
+    department: document.getElementById('jf-dept').value.trim() || null,
+    location: document.getElementById('jf-location').value.trim() || null,
+    employment_type: document.getElementById('jf-emptype').value.trim() || null,
+    description_az: document.getElementById('jf-desc-az').value.trim() || null,
+    description_en: document.getElementById('jf-desc-en').value.trim() || null,
+    sort_order: parseInt(document.getElementById('jf-sort').value,10) || 0,
+    is_active: document.getElementById('jf-active').checked
+  };
+  var btn = document.getElementById('job-save-btn');
+  btn.disabled = true; btn.textContent = '⏳ Saxlanılır...';
+  var res;
+  if(_jobEditId){
+    res = await supabaseClient.from('job_openings').update(payload).eq('id', _jobEditId);
+  } else {
+    res = await supabaseClient.from('job_openings').insert([payload]);
+  }
+  btn.disabled = false; btn.textContent = '✓ Saxla';
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
+  showInqToast('Saxlanıldı ✓', 'var(--green)');
+  closeJobEdit();
+  renderJobsList();
+}
+async function deleteJobOpening(id){
+  if(!confirm('Bu vakansiyanı silmək istədiyinizə əminsiniz?')) return;
+  var res = await supabaseClient.from('job_openings').delete().eq('id', id);
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
+  showInqToast('Silindi', 'var(--dark)');
+  renderJobsList();
+}
+async function toggleJobActive(id, current){
+  var res = await supabaseClient.from('job_openings').update({is_active: !current}).eq('id', id);
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
+  renderJobsList();
+}
+</script>
+
 </body>
 </html>
