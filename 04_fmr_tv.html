@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="az" class="lang-az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FMR TV — Facemark</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montagu+Slab:opsz,wght@16..144,700&family=Roboto:wght@400;700&display=swap');
+
+html{scroll-behavior:smooth}
+:root{
+  --bg:#F9F7F3;--bg2:#F0EBE1;--card:#FFFFFF;--border:rgba(0,0,0,.08);
+  --dark:#1C1828;--gold:#C4973A;--gold2:#E8B84B;--goldBg:rgba(196,151,58,.08);
+  --text:#1C1828;--muted:#6B6878;--red:#DC2626;
+  --shadow:0 2px 14px rgba(0,0,0,.07);--radius:10px;--tr:all .2s ease;
+  --font:'Roboto','Segoe UI',system-ui,sans-serif
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* ── NAV ── */
+.nav{background:var(--bg);position:sticky;top:0;z-index:200;padding:8px 20px}
+.nav-in{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:6px;height:56px;background:rgba(255,255,255,.96);border:1px solid var(--border);border-radius:12px;backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.07)}
+section[id]{scroll-margin-top:72px}
+.logo-wrap{display:flex;align-items:center;gap:10px}
+.logo-facemark{font-family:'Montagu Slab',serif;font-size:1.1rem;font-weight:700;color:var(--text)}
+.logo-sep{color:var(--border);font-size:1.1rem;margin:0 2px}
+.logo-tv{font-family:'Montagu Slab',serif;font-size:1rem;font-weight:700;color:var(--red)}
+.breadcrumb{font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:5px;margin-left:6px}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:var(--border)}
+.spacer{flex:1}
+.nav-links{display:flex;align-items:center;gap:1px;margin-left:8px}
+.nav-links a{font-size:.75rem;color:var(--muted);padding:5px 9px;border-radius:6px;transition:var(--tr);white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--bg2)}
+.nav-links a.active{font-weight:700;color:var(--text)}
+.btn{border:none;cursor:pointer;font-family:var(--font);font-weight:600;border-radius:7px;transition:var(--tr);font-size:.78rem}
+.btn-red{background:var(--red);color:#fff;padding:8px 16px}
+.btn-red:hover{background:#b91c1c}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text);padding:7px 13px}
+.btn-outline:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
+.lang-sw{display:flex;gap:1px;background:var(--bg2);border-radius:6px;padding:2px;margin-left:6px}
+.lang-sw button{border:none;background:none;color:var(--muted);padding:3px 9px;font-size:.72rem;font-weight:600;cursor:pointer;border-radius:5px;transition:var(--tr)}
+.lang-sw button.on{background:#fff;color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+/* ── HERO ── */
+.tv-hero-wrap{padding:14px 20px 0;background:var(--bg)}
+.tv-hero{background:linear-gradient(135deg,#0F0D1C 0%,#1C1828 55%,#1a0d0d 100%) center/cover no-repeat,url('https://fmrtv.facemark.az/images/slider/2026-05-19_12-39-39.jpg') center/cover no-repeat;padding:0;position:relative;overflow:hidden;max-width:1200px;margin:0 auto;border-radius:16px}
+.tv-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(15,13,28,.94) 0%,rgba(15,13,28,.82) 45%,rgba(15,13,28,.45) 100%),radial-gradient(ellipse at 20% 70%,rgba(196,151,58,.10),transparent 50%)}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:0;min-height:240px;position:relative;z-index:1}
+.hero-left{padding:30px 40px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.hero-left p{margin-left:auto;margin-right:auto}
+.tv-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3);border-radius:20px;padding:5px 13px;font-size:.68rem;font-weight:700;color:#f87171;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;width:fit-content}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#f87171;animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.tv-hero h1{font-family:'Montagu Slab',serif;font-size:2.1rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:12px}
+.tv-hero h1 em{color:var(--gold2);font-style:normal}
+.tv-hero p{font-size:.86rem;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:24px;max-width:400px}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+/* ── HERO STATS ── */
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:0;margin-top:18px;flex-wrap:wrap}
+.sstat{text-align:center;padding:0 24px}
+.sstat+.sstat{border-left:1px solid rgba(255,255,255,.1)}
+.sstat-num{font-family:'Montagu Slab',serif;font-size:1.5rem;font-weight:700;color:#fff}
+.sstat-label{font-size:.69rem;color:rgba(255,255,255,.45);margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── SECTION ── */
+.sec{padding:32px 20px}
+.sec-in{max-width:1200px;margin:0 auto}
+.sec-head{margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.sec-head-left{flex:1;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sec-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--red);display:flex;align-items:center;gap:8px}
+.sec-tag::before{content:'';width:14px;height:2px;background:var(--red);border-radius:1px}
+.sec-tag.gold{color:var(--gold)}
+.sec-tag.gold::before{background:var(--gold)}
+.sec-head h2{font-family:'Montagu Slab',serif;font-size:1.55rem;font-weight:700;color:var(--text);margin:0}
+.see-all{font-size:.73rem;font-weight:600;color:var(--muted);border:1.5px solid var(--border);padding:6px 14px;border-radius:6px;transition:var(--tr);white-space:nowrap;flex-shrink:0}
+.see-all:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
+
+/* ── CATEGORY CARDS ── */
+.cat-card{display:flex;align-items:center;gap:12px;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius,10px);padding:14px 16px;text-decoration:none;transition:var(--tr);box-shadow:var(--shadow,0 2px 14px rgba(0,0,0,.07))}
+.cat-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.cat-card-icon{font-size:1.4rem;flex-shrink:0;width:38px;height:38px;background:var(--goldBg);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.cat-card-label{font-size:.85rem;font-weight:700;color:var(--text)}
+
+/* ── CAT TABS ── */
+.cat-tabs{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.cat-tab{padding:5px 13px;border-radius:16px;font-size:.72rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--muted);transition:var(--tr);font-family:var(--font);white-space:nowrap}
+.cat-tab.active{background:var(--goldBg);border-color:var(--gold);color:var(--gold)}
+.cat-tab:hover:not(.active){background:var(--bg2)}
+[data-cat]{display:none}
+[data-cat].show{display:grid}
+
+/* ── TƏDBİRLƏR CONTROLS ── */
+#tedbirler{padding-top:18px;padding-bottom:18px}
+#tedbirler .sec-head{margin-bottom:10px}
+.tedbirler-controls{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px}
+.tedbirler-controls .cat-tabs{margin-bottom:0;flex:1}
+.ev-search-wrap{flex-shrink:0}
+.ev-search{padding:8px 14px;border-radius:16px;font-size:.78rem;border:1.5px solid var(--border);background:var(--card);color:var(--text);font-family:var(--font);min-width:220px;transition:var(--tr)}
+.ev-search:focus{outline:none;border-color:var(--gold)}
+.vid-grid-title{font-family:'Montagu Slab',serif;font-size:1.02rem;font-weight:700;color:var(--text);margin:18px 0 8px}
+.vid-grid-title:first-of-type{margin-top:12px}
+
+/* ── EVENTS PORTFOLIO ── */
+.ev-port-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ev-port-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius,10px);overflow:hidden;cursor:pointer;transition:var(--tr);box-shadow:var(--shadow,0 2px 14px rgba(0,0,0,.07))}
+.ev-port-card:hover{border-color:var(--gold);box-shadow:0 10px 28px rgba(0,0,0,.1);transform:translateY(-3px)}
+.ev-port-thumb{position:relative;overflow:hidden;aspect-ratio:16/9;background:#111}
+.ev-port-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s;display:block}
+.ev-port-card:hover .ev-port-thumb img{transform:scale(1.04)}
+.ev-port-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 55%);display:flex;align-items:flex-end;padding:10px}
+.ev-port-count{font-size:.6rem;font-weight:700;color:#fff;background:rgba(0,0,0,.5);padding:2px 7px;border-radius:4px;backdrop-filter:blur(4px)}
+.ev-port-body{padding:10px 12px 12px}
+.ev-port-title{font-size:.78rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:4px;min-height:2.2em}
+.ev-port-meta{font-size:.65rem;color:var(--muted)}
+.tedbirler-back{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--gold);cursor:pointer;margin-bottom:14px}
+.tedbirler-back:hover{text-decoration:underline}
+
+/* ── VIDEO GRID ── */
+.vid-grid{grid-template-columns:repeat(4,1fr);gap:14px;margin-top:0}
+.vid-grid-3{grid-template-columns:repeat(3,1fr);gap:16px}
+.vid-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius,10px);overflow:hidden;transition:var(--tr);cursor:pointer;box-shadow:var(--shadow,0 2px 14px rgba(0,0,0,.07));display:flex;flex-direction:column}
+.vid-card:hover{border-color:var(--gold);box-shadow:0 10px 28px rgba(0,0,0,.1);transform:translateY(-3px)}
+.vid-thumb{position:relative;overflow:hidden;aspect-ratio:16/9;background:#111}
+.vid-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s;display:block}
+.vid-card:hover .vid-thumb img{transform:scale(1.04)}
+.vid-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);opacity:0;transition:var(--tr)}
+.vid-card:hover .vid-play{opacity:1}
+.vid-play-btn{width:38px;height:38px;border-radius:50%;background:rgba(220,38,38,.9);display:flex;align-items:center;justify-content:center}
+.vid-play-btn span{color:#fff;font-size:.8rem;margin-left:2px}
+.vid-cat-badge{position:absolute;top:8px;left:8px;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:rgba(0,0,0,.6);color:#fff;padding:2px 6px;border-radius:4px;backdrop-filter:blur(4px)}
+.vid-body{padding:10px 12px 12px;display:flex;flex-direction:column;flex:1}
+.vid-title{font-size:.76rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:5px}
+.vid-meta{font-size:.65rem;color:var(--muted)}
+.vid-event{font-size:.8rem;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:2px}
+.vid-type{font-size:.68rem;font-weight:600;color:var(--red);margin-bottom:7px}
+.vid-meta-row{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:auto;padding-top:7px}
+.vid-meta-cat{font-weight:700;color:var(--gold);background:var(--goldBg);padding:2px 7px;border-radius:4px;font-size:.58rem;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.vid-meta-date{font-size:.63rem;color:var(--muted);white-space:nowrap}
+
+/* Festivallar — wider cards */
+.fest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.fest-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius,10px);overflow:hidden;transition:var(--tr);cursor:pointer;box-shadow:var(--shadow,0 2px 14px rgba(0,0,0,.07))}
+.fest-card:hover{border-color:var(--gold);box-shadow:0 10px 28px rgba(0,0,0,.1);transform:translateY(-3px)}
+.fest-thumb{position:relative;overflow:hidden;aspect-ratio:16/9;background:#111}
+.fest-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s;display:block}
+.fest-card:hover .fest-thumb img{transform:scale(1.04)}
+.fest-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65) 0%,transparent 50%);display:flex;align-items:flex-end;padding:12px;opacity:0;transition:var(--tr)}
+.fest-card:hover .fest-overlay{opacity:1}
+.fest-play-btn{width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center}
+.fest-play-btn span{color:#fff;font-size:.75rem;margin-left:2px}
+.fest-body{padding:10px 12px 12px}
+.fest-title{font-size:.78rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:4px}
+.fest-meta{font-size:.65rem;color:var(--muted)}
+
+/* ── ABOUT BAND ── */
+.about-band{background:var(--dark);padding:44px 20px}
+.about-band-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.about-band h2{font-family:'Montagu Slab',serif;font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:12px}
+.about-band h2 em{color:var(--gold2);font-style:normal}
+.about-band p{font-size:.86rem;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:16px}
+.about-band p:last-of-type{margin-bottom:0}
+.ab-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ab-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px;text-align:center}
+.ab-stat-num{font-family:'Montagu Slab',serif;font-size:1.7rem;font-weight:700;color:var(--gold2)}
+.ab-stat-label{font-size:.69rem;color:rgba(255,255,255,.4);margin-top:4px}
+
+/* ── FOOTER ── */
+.foot{background:var(--dark);padding:32px 20px 0;border-top:1px solid rgba(255,255,255,.06)}
+.foot-in{max-width:1200px;margin:0 auto}
+.foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.07)}
+.foot-brand p{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.7;margin:10px 0 16px;max-width:220px}
+.foot-social{display:flex;gap:8px}
+.fsoc{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);transition:var(--tr);cursor:pointer;flex-shrink:0}
+.fsoc:hover{color:rgba(255,255,255,.9)}
+.fsoc svg{display:block;width:18px;height:18px}
+.foot-col h5{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin:0 0 14px}
+.foot-col a{display:block;font-size:.78rem;color:rgba(255,255,255,.5);margin-bottom:7px;transition:var(--tr)}
+.foot-col a:hover{color:rgba(255,255,255,.9)}
+.foot-contact-item{display:flex;align-items:flex-start;gap:7px;margin-bottom:8px}
+.foot-contact-icon{width:18px;height:18px;border-radius:4px;background:rgba(196,151,58,.15);display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;margin-top:1px}
+.foot-contact-text{font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.5}
+.foot-contact-text a{color:rgba(255,255,255,.7);display:inline}
+.foot-contact-text a:hover{color:var(--gold2)}
+.foot-bottom{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:12px;flex-wrap:wrap}
+.foot-copy{font-size:.72rem;color:rgba(255,255,255,.25)}
+.foot-badge{font-size:.68rem;color:rgba(255,255,255,.2);display:flex;align-items:center;gap:5px}
+.foot-badge span{color:var(--gold);font-weight:700}
+.foot-logo{font-family:'Montagu Slab',serif;font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:4px}
+.foot-logo em{color:var(--gold2);font-style:normal}
+.foot-tagline{font-size:.68rem;color:rgba(255,255,255,.28);letter-spacing:.04em}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr}
+  .about-band-in{grid-template-columns:1fr}
+  .vid-grid{grid-template-columns:1fr 1fr}
+  .fest-grid{grid-template-columns:1fr 1fr}
+  .foot-top{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+}
+@media(max-width:560px){
+  .vid-grid,.fest-grid{grid-template-columns:1fr}
+  .tv-hero h1{font-size:1.65rem}
+  .stats-in{justify-content:flex-start}
+  .cat-grid{grid-template-columns:1fr 1fr!important}
+}
+
+/* ── LANGUAGE SWITCH ── */
+html.lang-en [data-az]{display:none!important}
+html.lang-az [data-en]{display:none!important}
+
+/* ── SITE SEARCH ── */
+.site-search{position:relative;flex-shrink:0}
+.site-search-btn{width:34px;height:34px;border-radius:8px;border:1.5px solid var(--border);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);transition:var(--tr)}
+.site-search-btn:hover{background:var(--bg2);color:var(--text)}
+.site-search-box{position:absolute;top:calc(100% + 8px);right:0;width:320px;max-width:88vw;background:var(--card);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.14);padding:10px;display:none;z-index:500}
+.site-search-box.open{display:block}
+.site-search-box input{width:100%;padding:8px 12px;border-radius:7px;border:1.5px solid var(--border);font-family:var(--font);font-size:.8rem;background:var(--bg);box-sizing:border-box;color:var(--text)}
+.site-search-box input:focus{outline:none;border-color:var(--gold)}
+.site-search-results{margin-top:8px;max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.site-search-result{display:block;padding:8px 10px;border-radius:7px;font-size:.78rem;color:var(--text);transition:var(--tr);text-decoration:none;cursor:pointer}
+.site-search-result:hover{background:var(--goldBg,rgba(196,151,58,.08))}
+.site-search-result .ssr-cat{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.site-search-empty{font-size:.75rem;color:var(--muted);padding:8px 4px;text-align:center}
+@media(max-width:760px){.site-search-box{position:fixed;top:60px;left:12px;right:12px;width:auto}}
+/* ── 3-Button dropdown ── */
+.bilet-wrap{position:relative;margin-left:4px}
+.bilet-drop{position:absolute;top:calc(100%+6px);right:0;background:#fff;border:1px solid var(--border);border-radius:12px;min-width:280px;padding:8px;z-index:500;box-shadow:0 10px 32px rgba(0,0,0,.12);display:none}
+.bilet-wrap.open .bilet-drop{display:block}
+.bilet-drop-title{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px 6px;font-weight:700}
+.bilet-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;cursor:pointer;transition:all .2s}
+.bilet-item:hover{background:var(--bg2)}
+.bilet-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.bilet-name{font-size:.77rem;font-weight:700;color:var(--text);margin-bottom:1px}
+.bilet-date{font-size:.68rem;color:var(--muted)}
+.bilet-cta{padding:6px 10px 2px;border-top:1px solid var(--border);margin-top:4px}
+.bilet-cta a{font-size:.7rem;color:var(--gold);font-weight:700;text-decoration:none}
+.btn-dark-nav{background:var(--dark);color:#fff;border:none;padding:7px 13px;border-radius:7px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:5px;margin-left:4px}
+.btn-dark-nav:hover{background:#2D2840}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--dark);padding:32px 20px 14px}
+.foot-in{max-width:1200px;margin:0 auto}
+.fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:26px;margin-bottom:22px}
+.fcol h4{font-size:.68rem;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.flogo img{height:26px;object-fit:contain;margin-bottom:8px}
+.fcol-desc{font-size:.72rem;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:10px}
+.f-socials{display:flex;gap:5px;margin-bottom:12px}
+.fsoc{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);transition:var(--tr);cursor:pointer;flex-shrink:0}
+.fsoc:hover{color:rgba(255,255,255,.9)}
+.fsoc svg{display:block;width:18px;height:18px}
+.fcol a{display:block;font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:5px;transition:var(--tr)}
+.fcol a:hover{color:#fff}
+.fcol a.special{color:var(--gold2)}
+.fnews-item{font-size:.68rem;color:rgba(255,255,255,.4);line-height:1.5;padding-bottom:5px;margin-bottom:5px;border-bottom:1px solid rgba(255,255,255,.06)}
+.fnews-item span{display:block;color:rgba(255,255,255,.65);font-weight:600;font-size:.7rem;margin-bottom:1px}
+.f-sub{display:flex;margin-bottom:9px}
+.f-sub input{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:6px 0 0 6px;color:#fff;padding:7px 10px;font-size:.71rem;outline:none;font-family:var(--font)}
+.f-sub input::placeholder{color:rgba(255,255,255,.25)}
+.f-sub button{background:var(--gold);color:#fff;border:none;border-radius:0 6px 6px 0;padding:7px 11px;font-size:.71rem;font-weight:700;cursor:pointer}
+.f-contact-mini{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:10px}
+.f-contact-mini p{font-size:.67rem;color:rgba(255,255,255,.35);margin-bottom:6px}
+.f-contact-mini input,.f-contact-mini textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;color:#fff;padding:5px 8px;font-size:.69rem;font-family:var(--font);outline:none;margin-bottom:4px}
+.f-contact-mini textarea{resize:none;height:42px}
+.f-contact-mini button{width:100%;background:var(--gold);color:#fff;border:none;border-radius:5px;padding:6px;font-size:.7rem;font-weight:700;cursor:pointer}
+.fbot{border-top:1px solid rgba(255,255,255,.07);padding-top:12px;display:flex;justify-content:space-between;align-items:center;font-size:.67rem;color:rgba(255,255,255,.3);flex-wrap:wrap;gap:8px}
+.fstats{display:flex;gap:14px}
+.fst{color:rgba(255,255,255,.3)}
+.fst b{color:var(--gold2)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <div class="logo-wrap">
+      <a href="facemark_homepage_FINAL.html"><span class="logo-facemark">facemark</span></a>
+      <span class="logo-sep">/</span>
+      <a href="fmr_tv.html"><span class="logo-tv">FMR TV</span></a>
+    </div>
+    <div class="spacer"></div>
+    <nav class="nav-links">
+      <a href="#latest"><span data-az>Son yüklənən</span><span data-en>Latest Uploads</span></a>
+      <a href="#musahibe"><span data-az>Video Müsahibə</span><span data-en>Video Interviews</span></a>
+      <a href="#tedbirler"><span data-az>Tədbirlər</span><span data-en>Events</span></a>
+      <a href="#icmal"><span data-az>Video İcmal</span><span data-en>Video Highlights</span></a>
+      <a href="#tanitim"><span data-az>Tanıtım Çarxı</span><span data-en>Promo Reel</span></a>
+    </nav>
+    <div class="site-search" id="siteSearch">
+      <button class="site-search-btn" type="button" onclick="toggleSiteSearch()" aria-label="Axtar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+      <div class="site-search-box" id="siteSearchBox">
+        <input type="text" id="siteSearchInput" oninput="runSiteSearch(this.value)" placeholder="Saytda axtar...">
+        <div class="site-search-results" id="siteSearchResults"></div>
+      </div>
+    </div>
+    <div class="lang-sw">
+      <button class="on" id="btn-az" onclick="setLang('az')">AZ</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <!-- Sponsor Ol -->
+    <div class="bilet-wrap" id="sponsorWrap">
+      <button class="btn btn-outline" onclick="toggleDrop('sponsorWrap')">🤝 <span data-az>Sponsor Ol ▾</span><span data-en>Become a Sponsor ▾</span></button>
+      <div class="bilet-drop">
+        <div class="bilet-drop-title"><span data-az>Sponsor olmaq istədiyin tədbiri seç</span><span data-en>Choose the event you want to sponsor</span></div>
+        <div class="bilet-item" onclick="location.href='facemark_homepage_FINAL.html#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli Marketinq Forumu 2026</span><span data-en>National Marketing Forum 2026</span></div><div class="bilet-date"><span data-az>6 İyun 2026 · Bakı Konqres Mərkəzi</span><span data-en>June 6, 2026 · Baku Congress Center</span></div></div></div>
+        <div class="bilet-item" onclick="location.href='facemark_homepage_FINAL.html#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli İnsan Resursları Forumu 2026</span><span data-en>National HR Forum 2026</span></div><div class="bilet-date"><span data-az>16 May 2026 · Baku Marriott Hotel</span></div></div></div>
+        <div class="bilet-item" onclick="location.href='facemark_homepage_FINAL.html#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Bloger və İnfluenserlər Forumu 2026</span><span data-en>Blogger & Influencer Forum 2026</span></div><div class="bilet-date"><span data-az>10–11 İyun 2026 · Dreamland Baku</span></div></div></div>
+        <div class="bilet-cta"><a href="facemark_homepage_FINAL.html#events"><span data-az>Bütün tədbirləri gör →</span><span data-en>See all events →</span></a></div>
+      </div>
+    </div>
+    <!-- Bilet Al -->
+    <div class="bilet-wrap" id="biletWrap">
+      <button class="btn btn-gold" style="background:var(--gold);color:#fff;border:none;padding:7px 13px;border-radius:7px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:5px" onclick="toggleDrop('biletWrap')">🎫 <span data-az>Bilet Al ▾</span><span data-en>Get Tickets ▾</span></button>
+      <div class="bilet-drop">
+        <div class="bilet-drop-title"><span data-az>Aktiv tədbirlər</span><span data-en>Active events</span></div>
+        <div class="bilet-item" onclick="location.href='mmf_inner_page_FINAL.html'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli Marketinq Forumu 2026</span><span data-en>National Marketing Forum 2026</span></div><div class="bilet-date"><span data-az>6 İyun 2026 · Bakı Konqres Mərkəzi</span><span data-en>June 6, 2026 · Baku Congress Center</span></div></div></div>
+        <div class="bilet-item" onclick="location.href='facemark_homepage_FINAL.html#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli İnsan Resursları Forumu 2026</span><span data-en>National HR Forum 2026</span></div><div class="bilet-date"><span data-az>16 May 2026 · Baku Marriott Hotel</span></div></div></div>
+        <div class="bilet-item" onclick="location.href='facemark_homepage_FINAL.html#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Bloger və İnfluenserlər Forumu 2026</span><span data-en>Blogger & Influencer Forum 2026</span></div><div class="bilet-date"><span data-az>10–11 İyun 2026 · Dreamland Baku</span></div></div></div>
+        <div class="bilet-cta"><a href="facemark_homepage_FINAL.html#events"><span data-az>Bütün tədbirlərə bax →</span><span data-en>View all events →</span></a></div>
+      </div>
+    </div>
+    <!-- Müraciət Et -->
+    <button class="btn-dark-nav" onclick="window.location.href='about_FINAL.html#contact'">📩 <span data-az>Müraciət Et</span><span data-en>Send Inquiry</span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="tv-hero-wrap">
+<section class="tv-hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="tv-badge"><div class="live-dot"></div><span data-az>Video Platforma</span><span data-en>Video Platform</span></div>
+      <h1><span data-az>Azərbaycanın ilk<br>biznes<br>televizyası</span><span data-en>Azerbaijan's first<br>business<br>television</span></h1>
+      <p><span data-az>Forum icmalları, ekspert müsahibələri — Facemark tədbirlərinin video arxivi.</span><span data-en>Forum highlights, expert interviews — the video archive of Facemark events.</span></p>
+      <div class="hero-btns">
+        <button class="btn btn-red" onclick="document.getElementById('tedbirler').scrollIntoView({behavior:'smooth'})"><span data-az>Videolara bax</span><span data-en>Watch videos</span></button>
+        <button class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.2)" onclick="document.getElementById('icmal').scrollIntoView({behavior:'smooth'})"><span data-az>Tədbir icmalları</span><span data-en>Event highlights</span></button>
+      </div>
+      <div class="hero-stats">
+        <div class="sstat"><div class="sstat-num">116+</div><div class="sstat-label"><span data-az>Tədbir</span><span data-en>Events</span></div></div>
+        <div class="sstat"><div class="sstat-num">15</div><div class="sstat-label"><span data-az>İl</span><span data-en>Years</span></div></div>
+        <div class="sstat"><div class="sstat-num">100K+</div><div class="sstat-label"><span data-az>İştirakçı</span><span data-en>Attendees</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- SON YÜKLƏMƏLƏR -->
+<section class="sec" id="latest" style="background:var(--bg);padding-top:20px">
+  <div class="sec-in">
+    <div class="sec-head">
+      <div class="sec-head-left">
+        <h2><span data-az>Son yüklənən videolar</span><span data-en>Latest Uploaded Videos</span></h2>
+      </div>
+    </div>
+
+    <div class="vid-grid show" data-cat="latest" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Insan-Resurslari-Forumu-2026--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-19_12-39-39.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli İnsan Resursları Forumu 2026 – İcmal video</span><span data-en>National Human Resources Forum 2026 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Milli İnsan Resursları Forumu</span><span data-en>National Human Resources Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnsan Resursları</span><span data-en>Human Resources</span></span>
+            <span class="vid-meta-date"><span data-az>19 May 2026</span><span data-en>May 19, 2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Interyer-Insaat-Memarliq-Mebel-Forumu-2026--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-13_15-55-26.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu 2026 – İcmal video</span><span data-en>Interior, Construction & Architecture Furniture Forum 2026 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu</span><span data-en>Interior, Construction & Architecture Furniture Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnteryer, İnşaat & Memarlıq</span><span data-en>Interior, Construction & Architecture</span></span>
+            <span class="vid-meta-date"><span data-az>13 May 2026</span><span data-en>May 13, 2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Qadin-Liderleri-Zirvesi-2026--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-03-17_16-05-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Qadın Liderləri Zirvəsi 2026 – İcmal video</span><span data-en>Women Leaders Summit 2026 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Qadın Liderləri Zirvəsi</span><span data-en>Women Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Qadın Liderliyi</span><span data-en>Women's Leadership</span></span>
+            <span class="vid-meta-date"><span data-az>17 Mart 2026</span><span data-en>March 17, 2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Data-ERP-ve-Suni-Intellekt-Zirvesi-2025--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-11-25_14-51-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Data, ERP və Süni İntellekt Zirvəsi 2025 – İcmal video</span><span data-en>Data, ERP & AI Summit 2025 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Data, ERP və Süni İntellekt Zirvəsi</span><span data-en>Data, ERP & AI Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Texnologiya & AI</span><span data-en>Technology & AI</span></span>
+            <span class="vid-meta-date"><span data-az>25 Noyabr 2025</span><span data-en>November 25, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Techizat-Zenciri-Liderleri-Zirvesi-2025--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-11-25_14-21-53.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Təchizat Zənciri Liderləri Zirvəsi 2025 – İcmal video</span><span data-en>Supply Chain Leaders Summit 2025 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Təchizat Zənciri Liderləri Zirvəsi</span><span data-en>Supply Chain Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Təchizat & Satınalma</span><span data-en>Supply Chain & Procurement</span></span>
+            <span class="vid-meta-date"><span data-az>25 Noyabr 2025</span><span data-en>November 25, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2025--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-10-21_14-36-25.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Xəzər Su İnnovasiya Forumu 2025 – İcmal video</span><span data-en>Caspian Water Innovation Forum 2025 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Xəzər Su İnnovasiya Forumu</span><span data-en>Caspian Water Innovation Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Su Mühəndisliyi</span><span data-en>Water Engineering</span></span>
+            <span class="vid-meta-date"><span data-az>21 Oktyabr 2025</span><span data-en>October 21, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Occupational-Aesthetic-Congress-2025--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-10-21_14-24-13.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Occupational Aesthetic Congress 2025 – İcmal video</span><span data-en>Occupational Aesthetic Congress 2025 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Occupational Aesthetic Congress</span><span data-en>Occupational Aesthetic Congress</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Səhiyyə</span><span data-en>Healthcare</span></span>
+            <span class="vid-meta-date"><span data-az>21 Oktyabr 2025</span><span data-en>October 21, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Maliyye-Investisiya-Forumu-2025--Icmal-videosu" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-06-02_10-04-26.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Maliyyə İnvestisiya Forumu 2025 – İcmal videosu</span><span data-en>Finance & Investment Forum 2025 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Maliyyə İnvestisiya Forumu</span><span data-en>Finance & Investment Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Maliyyə & İnvestisiya</span><span data-en>Finance & Investment</span></span>
+            <span class="vid-meta-date"><span data-az>2 İyun 2025</span><span data-en>June 2, 2025</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TƏDBİRLƏR -->
+<section class="sec" id="tedbirler" style="background:var(--bg)">
+  <div class="sec-in">
+    <div class="sec-head">
+      <div class="sec-head-left">
+        <h2><span data-az>Tədbirlər</span><span data-en>Events</span></h2>
+      </div>
+    </div>
+    <div class="tedbirler-controls">
+      <div class="cat-tabs" id="tedbirler-cats" style="flex-wrap:wrap">
+        <button class="cat-tab active" onclick="filterEventCat(this,'all')"><span data-az>Hamısı</span><span data-en>All</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'mmf')">📊 <span data-az>Marketinq</span><span data-en>Marketing</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'mirf')">👥 <span data-az>İnsan Resursları</span><span data-en>Human Resources</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'mif')">💰 <span data-az>Maliyyə & İnvestisiya</span><span data-en>Finance & Investment</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'iimmf')">🏗️ <span data-az>İnteryer, İnşaat & Memarlıq</span><span data-en>Interior, Construction & Architecture</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'smz')">🏥 <span data-az>Səhiyyə</span><span data-en>Healthcare</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'tzlz')">🔗 <span data-az>Təchizat & Satınalma</span><span data-en>Supply Chain & Procurement</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'dsiz')">🤖 <span data-az>Texnologiya & AI</span><span data-en>Technology & AI</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'vmz')">🧾 <span data-az>Vergi & Mühasibatlıq</span><span data-en>Tax & Accounting</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'eif')">🏠 <span data-az>Əmlak & İnvestisiya</span><span data-en>Real Estate & Investment</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'qlz')">👩‍💼 <span data-az>Qadın Liderliyi</span><span data-en>Women's Leadership</span></button>
+        <button class="cat-tab" onclick="filterEventCat(this,'xsif')">💧 <span data-az>Su Mühəndisliyi</span><span data-en>Water Engineering</span></button>
+      </div>
+      <div class="ev-search-wrap">
+        <input type="text" id="tedbirler-search" class="ev-search" oninput="filterEventSearch(this.value)" data-az-placeholder="Tədbir adına görə axtar..." data-en-placeholder="Search by event name..." placeholder="Tədbir adına görə axtar...">
+      </div>
+    </div>
+    <div id="tedbirler-empty" style="display:none;color:var(--muted);font-size:.85rem;padding:24px 0;text-align:center"><span data-az>Heç bir tədbir tapılmadı.</span><span data-en>No events found.</span></div>
+    <div class="ev-port-grid" id="tedbirler-portfolio">
+      <div class="ev-port-card" data-event="mirf2026" data-cats="mirf" data-name="Milli İnsan Resursları Forumu 2026|National Human Resources Forum 2026" onclick="openEventVideos('mirf2026')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-19_12-39-39.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>2 video</span><span data-en>2 videos</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Milli İnsan Resursları Forumu</span><span data-en>National Human Resources Forum</span></div>
+          <div class="ev-port-meta"><span data-az>19 May 2026</span><span data-en>May 19, 2026</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="iimmf2026" data-cats="iimmf" data-name="İnteryer İnşaat Memarlıq Mebel Forumu 2026|Interior, Construction & Architecture Furniture Forum 2026" onclick="openEventVideos('iimmf2026')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-13_15-55-26.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>2 video</span><span data-en>2 videos</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu</span><span data-en>Interior, Construction & Architecture Furniture Forum</span></div>
+          <div class="ev-port-meta"><span data-az>13 May 2026</span><span data-en>May 13, 2026</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="qlz2026" data-cats="qlz" data-name="Qadın Liderləri Zirvəsi 2026|Women Leaders Summit 2026" onclick="openEventVideos('qlz2026')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-03-17_16-05-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>2 video</span><span data-en>2 videos</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Qadın Liderləri Zirvəsi</span><span data-en>Women Leaders Summit</span></div>
+          <div class="ev-port-meta"><span data-az>17 Mart 2026</span><span data-en>March 17, 2026</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="dsiz2025" data-cats="dsiz" data-name="Data, ERP və Süni İntellekt Zirvəsi 2025|Data, ERP & AI Summit 2025" onclick="openEventVideos('dsiz2025')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-11-25_14-51-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>1 video</span><span data-en>1 video</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Data, ERP və Süni İntellekt Zirvəsi</span><span data-en>Data, ERP & AI Summit</span></div>
+          <div class="ev-port-meta"><span data-az>25 Noyabr 2025</span><span data-en>November 25, 2025</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="tzlz2025" data-cats="tzlz" data-name="Təchizat Zənciri Liderləri Zirvəsi 2025|Supply Chain Leaders Summit 2025" onclick="openEventVideos('tzlz2025')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-11-25_14-21-53.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>1 video</span><span data-en>1 video</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Təchizat Zənciri Liderləri Zirvəsi</span><span data-en>Supply Chain Leaders Summit</span></div>
+          <div class="ev-port-meta"><span data-az>25 Noyabr 2025</span><span data-en>November 25, 2025</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="xsif2025" data-cats="xsif" data-name="Xəzər Su İnnovasiya Forumu 2025|Caspian Water Innovation Forum 2025" onclick="openEventVideos('xsif2025')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-10-21_14-36-25.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>2 video</span><span data-en>2 videos</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Xəzər Su İnnovasiya Forumu</span><span data-en>Caspian Water Innovation Forum</span></div>
+          <div class="ev-port-meta"><span data-az>21 Oktyabr 2025</span><span data-en>October 21, 2025</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="oac2025" data-cats="smz" data-name="Occupational Aesthetic Congress 2025|Occupational Aesthetic Congress 2025" onclick="openEventVideos('oac2025')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-10-21_14-24-13.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>1 video</span><span data-en>1 video</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Occupational Aesthetic Congress</span><span data-en>Occupational Aesthetic Congress</span></div>
+          <div class="ev-port-meta"><span data-az>21 Oktyabr 2025</span><span data-en>October 21, 2025</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="mif2025" data-cats="mif" data-name="Maliyyə İnvestisiya Forumu 2025|Finance & Investment Forum 2025" onclick="openEventVideos('mif2025')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-06-02_10-04-26.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>1 video</span><span data-en>1 video</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Maliyyə İnvestisiya Forumu</span><span data-en>Finance & Investment Forum</span></div>
+          <div class="ev-port-meta"><span data-az>2 İyun 2025</span><span data-en>June 2, 2025</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="mmf2025" data-cats="mmf" data-name="Milli Marketinq Forumu 2025|National Marketing Forum 2025" onclick="openEventVideos('mmf2025')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-05-29_17-25-38.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>1 video</span><span data-en>1 video</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Milli Marketinq Forumu</span><span data-en>National Marketing Forum</span></div>
+          <div class="ev-port-meta"><span data-az>29 May 2025</span><span data-en>May 29, 2025</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="vmz2025" data-cats="vmz" data-name="Vergi və Mühasibatlıq Zirvəsi 2025|Tax & Accounting Summit 2025" onclick="openEventVideos('vmz2025')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2025-03-17_15-50-29.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>2 video</span><span data-en>2 videos</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Vergi və Mühasibatlıq Zirvəsi</span><span data-en>Tax & Accounting Summit</span></div>
+          <div class="ev-port-meta"><span data-az>17 Mart 2025</span><span data-en>March 17, 2025</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="mmf2024" data-cats="mmf" data-name="Milli Marketinq Forumu 2024|National Marketing Forum 2024" onclick="openEventVideos('mmf2024')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2024-07-03_11-18-10.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>2 video</span><span data-en>2 videos</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Milli Marketinq Forumu</span><span data-en>National Marketing Forum</span></div>
+          <div class="ev-port-meta"><span data-az>3 İyul 2024</span><span data-en>July 3, 2024</span></div>
+        </div>
+      </div>
+      <div class="ev-port-card" data-event="biez2024" data-cats="eif" data-name="Beynəlxalq İnvestisiya və Əmlak Zirvəsi 2024|International Investment & Real Estate Summit 2024" onclick="openEventVideos('biez2024')">
+        <div class="ev-port-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2024-06-07_15-13-15.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="ev-port-overlay"><div class="ev-port-count"><span data-az>1 video</span><span data-en>1 video</span></div></div>
+        </div>
+        <div class="ev-port-body">
+          <div class="ev-port-title"><span data-az>Beynəlxalq İnvestisiya və Əmlak Zirvəsi</span><span data-en>International Investment & Real Estate Summit</span></div>
+          <div class="ev-port-meta"><span data-az>7 İyun 2024</span><span data-en>June 7, 2024</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tedbirler-detail" style="display:none">
+      <div class="tedbirler-back" onclick="closeEventVideos()">← <span data-az>Bütün tədbirlər</span><span data-en>All events</span></div>
+      <div class="ev-detail-block" data-event="mirf2026" style="display:none">
+    <div class="vid-grid-title"><span data-az>Milli İnsan Resursları Forumu 2026</span><span data-en>National Human Resources Forum 2026</span></div>
+    <div class="vid-grid" data-event="mirf2026" data-cats="mirf" data-name="Milli İnsan Resursları Forumu 2026|National Human Resources Forum 2026" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Insan-Resurslari-Forumu-2026--Icmal-video" target="_blank" data-event="mirf2026">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-19_12-39-39.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli İnsan Resursları Forumu 2026 | İcmal video</span><span data-en>National Human Resources Forum 2026 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Milli İnsan Resursları Forumu</span><span data-en>National Human Resources Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnsan Resursları</span><span data-en>Human Resources</span></span>
+            <span class="vid-meta-date"><span data-az>19 May 2026</span><span data-en>May 19, 2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://www.youtube.com/@Facemarkaz/playlists" target="_blank" data-event="mirf2026">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-19_12-39-39.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli İnsan Resursları Forumu 2026 | Tanıtım çarxı</span><span data-en>National Human Resources Forum 2026 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>Milli İnsan Resursları Forumu</span><span data-en>National Human Resources Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnsan Resursları</span><span data-en>Human Resources</span></span>
+            <span class="vid-meta-date"><span data-az>2026</span><span data-en>2026</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="iimmf2026" style="display:none">
+    <div class="vid-grid-title"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu 2026</span><span data-en>Interior, Construction & Architecture Furniture Forum 2026</span></div>
+    <div class="vid-grid" data-event="iimmf2026" data-cats="iimmf" data-name="İnteryer İnşaat Memarlıq Mebel Forumu 2026|Interior, Construction & Architecture Furniture Forum 2026" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Interyer-Insaat-Memarliq-Mebel-Forumu-2026--Icmal-video" target="_blank" data-event="iimmf2026">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-13_15-55-26.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu 2026 | İcmal video</span><span data-en>Interior, Construction & Architecture Furniture Forum 2026 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu</span><span data-en>Interior, Construction & Architecture Furniture Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnteryer, İnşaat & Memarlıq</span><span data-en>Interior, Construction & Architecture</span></span>
+            <span class="vid-meta-date"><span data-az>13 May 2026</span><span data-en>May 13, 2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://www.youtube.com/@Facemarkaz/playlists" target="_blank" data-event="iimmf2026">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-13_15-55-26.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu 2026 | Tanıtım çarxı</span><span data-en>Interior, Construction & Architecture Furniture Forum 2026 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu</span><span data-en>Interior, Construction & Architecture Furniture Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnteryer, İnşaat & Memarlıq</span><span data-en>Interior, Construction & Architecture</span></span>
+            <span class="vid-meta-date"><span data-az>2026</span><span data-en>2026</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="qlz2026" style="display:none">
+    <div class="vid-grid-title"><span data-az>Qadın Liderləri Zirvəsi 2026</span><span data-en>Women Leaders Summit 2026</span></div>
+    <div class="vid-grid" data-event="qlz2026" data-cats="qlz" data-name="Qadın Liderləri Zirvəsi 2026|Women Leaders Summit 2026" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Qadin-Liderleri-Zirvesi-2026--Icmal-video" target="_blank" data-event="qlz2026">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-03-17_16-05-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Qadın Liderləri Zirvəsi 2026 | İcmal video</span><span data-en>Women Leaders Summit 2026 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Qadın Liderləri Zirvəsi</span><span data-en>Women Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Qadın Liderliyi</span><span data-en>Women's Leadership</span></span>
+            <span class="vid-meta-date"><span data-az>17 Mart 2026</span><span data-en>March 17, 2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://www.youtube.com/@Facemarkaz/playlists" target="_blank" data-event="qlz2026">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-03-17_16-05-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Qadın Liderləri Zirvəsi 2026 | Tanıtım çarxı</span><span data-en>Women Leaders Summit 2026 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>Qadın Liderləri Zirvəsi</span><span data-en>Women Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Qadın Liderliyi</span><span data-en>Women's Leadership</span></span>
+            <span class="vid-meta-date"><span data-az>2026</span><span data-en>2026</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="dsiz2025" style="display:none">
+    <div class="vid-grid-title"><span data-az>Data, ERP və Süni İntellekt Zirvəsi 2025</span><span data-en>Data, ERP & AI Summit 2025</span></div>
+    <div class="vid-grid" data-event="dsiz2025" data-cats="dsiz" data-name="Data, ERP və Süni İntellekt Zirvəsi 2025|Data, ERP & AI Summit 2025" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Data-ERP-ve-Suni-Intellekt-Zirvesi-2025--Icmal-video" target="_blank" data-event="dsiz2025">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-11-25_14-51-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Data, ERP və Süni İntellekt Zirvəsi 2025 | İcmal video</span><span data-en>Data, ERP & AI Summit 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Data, ERP və Süni İntellekt Zirvəsi</span><span data-en>Data, ERP & AI Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Texnologiya & AI</span><span data-en>Technology & AI</span></span>
+            <span class="vid-meta-date"><span data-az>25 Noyabr 2025</span><span data-en>November 25, 2025</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="tzlz2025" style="display:none">
+    <div class="vid-grid-title"><span data-az>Təchizat Zənciri Liderləri Zirvəsi 2025</span><span data-en>Supply Chain Leaders Summit 2025</span></div>
+    <div class="vid-grid" data-event="tzlz2025" data-cats="tzlz" data-name="Təchizat Zənciri Liderləri Zirvəsi 2025|Supply Chain Leaders Summit 2025" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Techizat-Zenciri-Liderleri-Zirvesi-2025--Icmal-video" target="_blank" data-event="tzlz2025">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-11-25_14-21-53.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Təchizat Zənciri Liderləri Zirvəsi 2025 | İcmal video</span><span data-en>Supply Chain Leaders Summit 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Təchizat Zənciri Liderləri Zirvəsi</span><span data-en>Supply Chain Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Təchizat & Satınalma</span><span data-en>Supply Chain & Procurement</span></span>
+            <span class="vid-meta-date"><span data-az>25 Noyabr 2025</span><span data-en>November 25, 2025</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="xsif2025" style="display:none">
+    <div class="vid-grid-title"><span data-az>Xəzər Su İnnovasiya Forumu 2025</span><span data-en>Caspian Water Innovation Forum 2025</span></div>
+    <div class="vid-grid" data-event="xsif2025" data-cats="xsif" data-name="Xəzər Su İnnovasiya Forumu 2025|Caspian Water Innovation Forum 2025" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2025--Icmal-video" target="_blank" data-event="xsif2025">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-10-21_14-36-25.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Xəzər Su İnnovasiya Forumu 2025 | İcmal video</span><span data-en>Caspian Water Innovation Forum 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Xəzər Su İnnovasiya Forumu</span><span data-en>Caspian Water Innovation Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Su Mühəndisliyi</span><span data-en>Water Engineering</span></span>
+            <span class="vid-meta-date"><span data-az>21 Oktyabr 2025</span><span data-en>October 21, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2023" target="_blank" data-event="xsif2025">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2023-04-08_11-59-31.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Xəzər Su İnnovasiya Forumu | Müsahibə</span><span data-en>Caspian Water Innovation Forum | Interview</span></div>
+          <div class="vid-type"><span data-az>Xəzər Su İnnovasiya Forumu</span><span data-en>Caspian Water Innovation Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Su Mühəndisliyi</span><span data-en>Water Engineering</span></span>
+            <span class="vid-meta-date"><span data-az>8 Aprel 2023</span><span data-en>April 8, 2023</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="oac2025" style="display:none">
+    <div class="vid-grid-title"><span data-az>Occupational Aesthetic Congress 2025</span><span data-en>Occupational Aesthetic Congress 2025</span></div>
+    <div class="vid-grid" data-event="oac2025" data-cats="smz" data-name="Occupational Aesthetic Congress 2025|Occupational Aesthetic Congress 2025" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Occupational-Aesthetic-Congress-2025--Icmal-video" target="_blank" data-event="oac2025">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-10-21_14-24-13.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Occupational Aesthetic Congress 2025 | İcmal video</span><span data-en>Occupational Aesthetic Congress 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Occupational Aesthetic Congress</span><span data-en>Occupational Aesthetic Congress</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Səhiyyə</span><span data-en>Healthcare</span></span>
+            <span class="vid-meta-date"><span data-az>21 Oktyabr 2025</span><span data-en>October 21, 2025</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="mmf2025" style="display:none">
+    <div class="vid-grid-title"><span data-az>Milli Marketinq Forumu 2025</span><span data-en>National Marketing Forum 2025</span></div>
+    <div class="vid-grid" data-event="mmf2025" data-cats="mmf" data-name="Milli Marketinq Forumu 2025|National Marketing Forum 2025" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2025--Icmal-video" target="_blank" data-event="mmf2025">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-05-29_17-25-38.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli Marketinq Forumu 2025 — İcmal video</span><span data-en>National Marketing Forum 2025 — Highlight video</span></div>
+          <div class="vid-type"><span data-az>Milli Marketinq Forumu</span><span data-en>National Marketing Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Marketinq</span><span data-en>Marketing</span></span>
+            <span class="vid-meta-date"><span data-az>29 May 2025</span><span data-en>May 29, 2025</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="mif2025" style="display:none">
+    <div class="vid-grid-title"><span data-az>Maliyyə İnvestisiya Forumu 2025</span><span data-en>Finance & Investment Forum 2025</span></div>
+    <div class="vid-grid" data-event="mif2025" data-cats="mif" data-name="Maliyyə İnvestisiya Forumu 2025|Finance & Investment Forum 2025" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Maliyye-Investisiya-Forumu-2025--Icmal-videosu" target="_blank" data-event="mif2025">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-06-02_10-04-26.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Maliyyə İnvestisiya Forumu 2025 | İcmal videosu</span><span data-en>Finance & Investment Forum 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Maliyyə İnvestisiya Forumu</span><span data-en>Finance & Investment Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Maliyyə & İnvestisiya</span><span data-en>Finance & Investment</span></span>
+            <span class="vid-meta-date"><span data-az>2 İyun 2025</span><span data-en>June 2, 2025</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="vmz2025" style="display:none">
+    <div class="vid-grid-title"><span data-az>Vergi və Mühasibatlıq Zirvəsi 2025</span><span data-en>Tax & Accounting Summit 2025</span></div>
+    <div class="vid-grid" data-event="vmz2025" data-cats="vmz" data-name="Vergi və Mühasibatlıq Zirvəsi 2025|Tax & Accounting Summit 2025" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesi-2025--Icmal-videosu" target="_blank" data-event="vmz2025">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2025-03-17_15-50-29.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Vergi və Mühasibatlıq Zirvəsi 2025 | İcmal videosu</span><span data-en>Tax & Accounting Summit 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Vergi və Mühasibatlıq Zirvəsi</span><span data-en>Tax & Accounting Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Vergi & Mühasibatlıq</span><span data-en>Tax & Accounting</span></span>
+            <span class="vid-meta-date"><span data-az>17 Mart 2025</span><span data-en>March 17, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesinin-Teskilatcilari-ile-canli-yayim" target="_blank" data-event="vmz2025">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2023-01-13_16-15-58.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Vergi və Mühasibatlıq Zirvəsinin Təşkilatçıları ilə canlı yayım</span><span data-en>Live broadcast with the organizers of the Tax & Accounting Summit</span></div>
+          <div class="vid-type"><span data-az>Vergi və Mühasibatlıq Zirvəsi</span><span data-en>Tax & Accounting Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Vergi & Mühasibatlıq</span><span data-en>Tax & Accounting</span></span>
+            <span class="vid-meta-date"><span data-az>Müsahibə · 2023</span><span data-en>Interview · 2023</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="mmf2024" style="display:none">
+    <div class="vid-grid-title"><span data-az>Milli Marketinq Forumu 2024</span><span data-en>National Marketing Forum 2024</span></div>
+    <div class="vid-grid" data-event="mmf2024" data-cats="mmf" data-name="Milli Marketinq Forumu 2024|National Marketing Forum 2024" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--30-iyun-III-gun--Icmal-video" target="_blank" data-event="mmf2024">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2024-07-03_11-18-10.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli Marketinq Forumu 2024 — III gün | İcmal video</span><span data-en>National Marketing Forum 2024 — Day 3 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Milli Marketinq Forumu</span><span data-en>National Marketing Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Marketinq</span><span data-en>Marketing</span></span>
+            <span class="vid-meta-date"><span data-az>3 İyul 2024</span><span data-en>July 3, 2024</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--29-iyun-II-gun--Icmal-video" target="_blank" data-event="mmf2024">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2024-07-03_10-37-40.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli Marketinq Forumu 2024 — II gün | İcmal video</span><span data-en>National Marketing Forum 2024 — Day 2 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Milli Marketinq Forumu</span><span data-en>National Marketing Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Marketinq</span><span data-en>Marketing</span></span>
+            <span class="vid-meta-date"><span data-az>3 İyul 2024</span><span data-en>July 3, 2024</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+      <div class="ev-detail-block" data-event="biez2024" style="display:none">
+    <div class="vid-grid-title"><span data-az>Beynəlxalq İnvestisiya və Əmlak Zirvəsi 2024</span><span data-en>International Investment & Real Estate Summit 2024</span></div>
+    <div class="vid-grid" data-event="biez2024" data-cats="eif" data-name="Beynəlxalq İnvestisiya və Əmlak Zirvəsi 2024|International Investment & Real Estate Summit 2024" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Beynelxalq-Investisiya-ve-Emlak-Zirvesi--Icmal-video" target="_blank" data-event="biez2024">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2024-06-07_15-13-15.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Beynəlxalq İnvestisiya və Əmlak Zirvəsi | İcmal video</span><span data-en>International Investment & Real Estate Summit | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Beynəlxalq İnvestisiya və Əmlak Zirvəsi</span><span data-en>International Investment & Real Estate Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Əmlak & İnvestisiya</span><span data-en>Real Estate & Investment</span></span>
+            <span class="vid-meta-date"><span data-az>7 İyun 2024</span><span data-en>June 7, 2024</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VİDEO İCMAL -->
+<section class="sec" id="icmal" style="background:var(--bg2);border-top:1px solid var(--border)">
+  <div class="sec-in">
+    <div class="sec-head">
+      <div class="sec-head-left">
+        <h2><span data-az>Video İcmal</span><span data-en>Video Highlights</span></h2>
+      </div>
+      <a class="see-all" id="icmal-seeall" href="javascript:void(0)" onclick="showAllVideos('icmal')"><span data-az>Hamısına bax →</span><span data-en>View all →</span></a>
+    </div>
+    <div class="vid-grid show" data-cat="latest" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Maliyye-Investisiya-Forumu-2025--Icmal-videosu" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-06-02_10-04-26.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Maliyyə İnvestisiya Forumu 2025 | İcmal videosu</span><span data-en>Finance & Investment Forum 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Maliyyə İnvestisiya Forumu</span><span data-en>Finance & Investment Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Maliyyə & İnvestisiya</span><span data-en>Finance & Investment</span></span>
+            <span class="vid-meta-date"><span data-az>2 İyun 2025</span><span data-en>June 2, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Qadin-Liderler-Zirvesi-2025--Icmal-videosu" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2025-03-18_14-55-04.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Qadın Liderlər Zirvəsi 2025 | İcmal videosu</span><span data-en>Women Leaders Summit 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Qadın Liderlər Zirvəsi</span><span data-en>Women Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Qadın Liderliyi</span><span data-en>Women's Leadership</span></span>
+            <span class="vid-meta-date"><span data-az>18 Mart 2025</span><span data-en>March 18, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesi-2025--Icmal-videosu" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2025-03-17_15-50-29.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Vergi və Mühasibatlıq Zirvəsi 2025 | İcmal videosu</span><span data-en>Tax & Accounting Summit 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Vergi və Mühasibatlıq Zirvəsi</span><span data-en>Tax & Accounting Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Vergi & Mühasibatlıq</span><span data-en>Tax & Accounting</span></span>
+            <span class="vid-meta-date"><span data-az>17 Mart 2025</span><span data-en>March 17, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--30-iyun-III-gun--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2024-07-03_11-18-10.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli Marketinq Forumu 2024 — III gün | İcmal video</span><span data-en>National Marketing Forum 2024 — Day 3 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Milli Marketinq Forumu</span><span data-en>National Marketing Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Marketinq</span><span data-en>Marketing</span></span>
+            <span class="vid-meta-date"><span data-az>3 İyul 2024</span><span data-en>July 3, 2024</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="vid-grid vid-grid-all" id="icmal-all" style="display:none">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Insan-Resurslari-Forumu-2026--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-19_12-39-39.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli İnsan Resursları Forumu 2026 – İcmal video</span><span data-en>National Human Resources Forum 2026 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Milli İnsan Resursları Forumu</span><span data-en>National Human Resources Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnsan Resursları</span><span data-en>Human Resources</span></span>
+            <span class="vid-meta-date"><span data-az>19 May 2026</span><span data-en>May 19, 2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Interyer-Insaat-Memarliq-Mebel-Forumu-2026--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-13_15-55-26.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu 2026 – İcmal video</span><span data-en>Interior, Construction & Architecture Furniture Forum 2026 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu</span><span data-en>Interior, Construction & Architecture Furniture Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnteryer, İnşaat & Memarlıq</span><span data-en>Interior, Construction & Architecture</span></span>
+            <span class="vid-meta-date"><span data-az>13 May 2026</span><span data-en>May 13, 2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Qadin-Liderleri-Zirvesi-2026--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-03-17_16-05-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Qadın Liderləri Zirvəsi 2026 – İcmal video</span><span data-en>Women Leaders Summit 2026 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Qadın Liderləri Zirvəsi</span><span data-en>Women Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Qadın Liderliyi</span><span data-en>Women's Leadership</span></span>
+            <span class="vid-meta-date"><span data-az>17 Mart 2026</span><span data-en>March 17, 2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Data-ERP-ve-Suni-Intellekt-Zirvesi-2025--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-11-25_14-51-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Data, ERP və Süni İntellekt Zirvəsi 2025 – İcmal video</span><span data-en>Data, ERP & AI Summit 2025 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Data, ERP və Süni İntellekt Zirvəsi</span><span data-en>Data, ERP & AI Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Texnologiya & AI</span><span data-en>Technology & AI</span></span>
+            <span class="vid-meta-date"><span data-az>25 Noyabr 2025</span><span data-en>November 25, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Techizat-Zenciri-Liderleri-Zirvesi-2025--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-11-25_14-21-53.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Təchizat Zənciri Liderləri Zirvəsi 2025 – İcmal video</span><span data-en>Supply Chain Leaders Summit 2025 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Təchizat Zənciri Liderləri Zirvəsi</span><span data-en>Supply Chain Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Təchizat & Satınalma</span><span data-en>Supply Chain & Procurement</span></span>
+            <span class="vid-meta-date"><span data-az>25 Noyabr 2025</span><span data-en>November 25, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2025--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-10-21_14-36-25.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Xəzər Su İnnovasiya Forumu 2025 – İcmal video</span><span data-en>Caspian Water Innovation Forum 2025 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Xəzər Su İnnovasiya Forumu</span><span data-en>Caspian Water Innovation Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Su Mühəndisliyi</span><span data-en>Water Engineering</span></span>
+            <span class="vid-meta-date"><span data-az>21 Oktyabr 2025</span><span data-en>October 21, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Occupational-Aesthetic-Congress-2025--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-10-21_14-24-13.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Occupational Aesthetic Congress 2025 – İcmal video</span><span data-en>Occupational Aesthetic Congress 2025 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Occupational Aesthetic Congress</span><span data-en>Occupational Aesthetic Congress</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Səhiyyə</span><span data-en>Healthcare</span></span>
+            <span class="vid-meta-date"><span data-az>21 Oktyabr 2025</span><span data-en>October 21, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Maliyye-Investisiya-Forumu-2025--Icmal-videosu" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-06-02_10-04-26.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Maliyyə İnvestisiya Forumu 2025 – İcmal videosu</span><span data-en>Finance & Investment Forum 2025 – Highlight video</span></div>
+          <div class="vid-type"><span data-az>Maliyyə İnvestisiya Forumu</span><span data-en>Finance & Investment Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Maliyyə & İnvestisiya</span><span data-en>Finance & Investment</span></span>
+            <span class="vid-meta-date"><span data-az>2 İyun 2025</span><span data-en>June 2, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2025--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-05-29_17-25-38.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli Marketinq Forumu 2025 — İcmal video</span><span data-en>National Marketing Forum 2025 — Highlight video</span></div>
+          <div class="vid-type"><span data-az>Milli Marketinq Forumu</span><span data-en>National Marketing Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Marketinq</span><span data-en>Marketing</span></span>
+            <span class="vid-meta-date"><span data-az>29 May 2025</span><span data-en>May 29, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Qadin-Liderler-Zirvesi-2025--Icmal-videosu" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2025-03-18_14-55-04.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Qadın Liderlər Zirvəsi 2025 | İcmal videosu</span><span data-en>Women Leaders Summit 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Qadın Liderlər Zirvəsi</span><span data-en>Women Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Qadın Liderliyi</span><span data-en>Women's Leadership</span></span>
+            <span class="vid-meta-date"><span data-az>18 Mart 2025</span><span data-en>March 18, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesi-2025--Icmal-videosu" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2025-03-17_15-50-29.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Vergi və Mühasibatlıq Zirvəsi 2025 | İcmal videosu</span><span data-en>Tax & Accounting Summit 2025 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Vergi və Mühasibatlıq Zirvəsi</span><span data-en>Tax & Accounting Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Vergi & Mühasibatlıq</span><span data-en>Tax & Accounting</span></span>
+            <span class="vid-meta-date"><span data-az>17 Mart 2025</span><span data-en>March 17, 2025</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--30-iyun-III-gun--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2024-07-03_11-18-10.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli Marketinq Forumu 2024 — III gün | İcmal video</span><span data-en>National Marketing Forum 2024 — Day 3 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Milli Marketinq Forumu</span><span data-en>National Marketing Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Marketinq</span><span data-en>Marketing</span></span>
+            <span class="vid-meta-date"><span data-az>3 İyul 2024</span><span data-en>July 3, 2024</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--29-iyun-II-gun--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2024-07-03_10-37-40.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli Marketinq Forumu 2024 — II gün | İcmal video</span><span data-en>National Marketing Forum 2024 — Day 2 | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Milli Marketinq Forumu</span><span data-en>National Marketing Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Marketinq</span><span data-en>Marketing</span></span>
+            <span class="vid-meta-date"><span data-az>3 İyul 2024</span><span data-en>July 3, 2024</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Beynelxalq-Investisiya-ve-Emlak-Zirvesi--Icmal-video" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2024-06-07_15-13-15.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Beynəlxalq İnvestisiya və Əmlak Zirvəsi | İcmal video</span><span data-en>International Investment & Real Estate Summit | Highlight video</span></div>
+          <div class="vid-type"><span data-az>Beynəlxalq İnvestisiya və Əmlak Zirvəsi</span><span data-en>International Investment & Real Estate Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Əmlak & İnvestisiya</span><span data-en>Real Estate & Investment</span></span>
+            <span class="vid-meta-date"><span data-az>7 İyun 2024</span><span data-en>June 7, 2024</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="see-all-back" id="icmal-back" style="display:none;text-align:center;margin-top:18px">
+      <a class="tedbirler-back" onclick="hideAllVideos('icmal')" style="display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--gold);cursor:pointer"><span data-az>← Bağla</span><span data-en>← Close</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- MÜSAHİBƏ -->
+<!-- TANITIM ÇARXI -->
+<section class="sec" id="tanitim" style="background:var(--bg)">
+  <div class="sec-in">
+    <div class="sec-head">
+      <div class="sec-head-left">
+        <h2><span data-az>Tanıtım Çarxı</span><span data-en>Promo Reel</span></h2>
+      </div>
+      <a class="see-all" id="tanitim-seeall" href="javascript:void(0)" onclick="showAllVideos('tanitim')"><span data-az>Hamısına bax →</span><span data-en>View all →</span></a>
+    </div>
+    <div class="vid-grid show" data-cat="latest" style="display:grid">
+      <a class="vid-card" href="https://facemark.az/mirf" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-19_12-39-39.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli İnsan Resursları Forumu 2026 | Tanıtım çarxı</span><span data-en>National Human Resources Forum 2026 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>Milli İnsan Resursları Forumu</span><span data-en>National Human Resources Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnsan Resursları</span><span data-en>Human Resources</span></span>
+            <span class="vid-meta-date"><span data-az>2026</span><span data-en>2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://facemark.az/iimmf" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-13_15-55-26.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu 2026 | Tanıtım çarxı</span><span data-en>Interior, Construction & Architecture Furniture Forum 2026 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu</span><span data-en>Interior, Construction & Architecture Furniture Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnteryer, İnşaat & Memarlıq</span><span data-en>Interior, Construction & Architecture</span></span>
+            <span class="vid-meta-date"><span data-az>2026</span><span data-en>2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://facemark.az/qlz" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-03-17_16-05-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Qadın Liderləri Zirvəsi 2026 | Tanıtım çarxı</span><span data-en>Women Leaders Summit 2026 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>Qadın Liderləri Zirvəsi</span><span data-en>Women Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Qadın Liderliyi</span><span data-en>Women's Leadership</span></span>
+            <span class="vid-meta-date"><span data-az>2026</span><span data-en>2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://facemark.az/dsiz" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-11-25_14-51-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%221C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Data, ERP və Süni İntellekt Zirvəsi 2025 | Tanıtım çarxı</span><span data-en>Data, ERP & AI Summit 2025 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>Data, ERP və Süni İntellekt Zirvəsi</span><span data-en>Data, ERP & AI Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Texnologiya & AI</span><span data-en>Technology & AI</span></span>
+            <span class="vid-meta-date"><span data-az>2025</span><span data-en>2025</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="vid-grid vid-grid-all" id="tanitim-all" style="display:none">
+      <a class="vid-card" href="https://www.youtube.com/@Facemarkaz/playlists" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-19_12-39-39.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Milli İnsan Resursları Forumu 2026 | Tanıtım çarxı</span><span data-en>National Human Resources Forum 2026 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>Milli İnsan Resursları Forumu</span><span data-en>National Human Resources Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnsan Resursları</span><span data-en>Human Resources</span></span>
+            <span class="vid-meta-date"><span data-az>2026</span><span data-en>2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://www.youtube.com/@Facemarkaz/playlists" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-05-13_15-55-26.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu 2026 | Tanıtım çarxı</span><span data-en>Interior, Construction & Architecture Furniture Forum 2026 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>İnteryer İnşaat Memarlıq Mebel Forumu</span><span data-en>Interior, Construction & Architecture Furniture Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>İnteryer, İnşaat & Memarlıq</span><span data-en>Interior, Construction & Architecture</span></span>
+            <span class="vid-meta-date"><span data-az>2026</span><span data-en>2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://www.youtube.com/@Facemarkaz/playlists" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2026-03-17_16-05-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Qadın Liderləri Zirvəsi 2026 | Tanıtım çarxı</span><span data-en>Women Leaders Summit 2026 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>Qadın Liderləri Zirvəsi</span><span data-en>Women Leaders Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Qadın Liderliyi</span><span data-en>Women's Leadership</span></span>
+            <span class="vid-meta-date"><span data-az>2026</span><span data-en>2026</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://facemark.az/dsiz" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/slider/2025-11-25_14-51-58.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Data, ERP və Süni İntellekt Zirvəsi 2025 | Tanıtım çarxı</span><span data-en>Data, ERP & AI Summit 2025 | Promo reel</span></div>
+          <div class="vid-type"><span data-az>Data, ERP və Süni İntellekt Zirvəsi</span><span data-en>Data, ERP & AI Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Texnologiya & AI</span><span data-en>Technology & AI</span></span>
+            <span class="vid-meta-date"><span data-az>2025</span><span data-en>2025</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="see-all-back" id="tanitim-back" style="display:none;text-align:center;margin-top:18px">
+      <a class="tedbirler-back" onclick="hideAllVideos('tanitim')" style="display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--gold);cursor:pointer"><span data-az>← Bağla</span><span data-en>← Close</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- VİDEO MÜSAHİBƏ -->
+<section class="sec" id="musahibe" style="background:var(--bg2);border-top:1px solid var(--border)">
+  <div class="sec-in">
+    <div class="sec-head">
+      <div class="sec-head-left">
+        <h2><span data-az>Müsahibə videoları</span><span data-en>Interview Videos</span></h2>
+      </div>
+      <a class="see-all" id="musahibe-seeall" href="javascript:void(0)" onclick="showAllVideos('musahibe')"><span data-az>Hamısına bax →</span><span data-en>View all →</span></a>
+    </div>
+    <div class="vid-grid" style="display:grid">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2023" target="_blank">
+        <div class="vid-thumb"><img src="https://fmrtv.facemark.az/images/video_thumb/2023-04-08_11-59-31.jpg" alt="" onerror="this.parentElement.style.background='#1C1828'"><div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div><div class="vid-cat-badge"><span data-az>Müsahibə</span><span data-en>Interview</span></div></div>
+        <div class="vid-body"><div class="vid-title"><span data-az>Xəzər Su İnnovasiya Forumu 2023</span><span data-en>Caspian Water Innovation Forum 2023</span></div><div class="vid-meta"><span data-az>8 Aprel 2023</span><span data-en>April 8, 2023</span></div></div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/MIRF-2023de-bizi-neler-gozleyir-CANLI" target="_blank">
+        <div class="vid-thumb"><img src="https://fmrtv.facemark.az/images/video_thumb/2023-04-05_10-52-18.jpg" alt="" onerror="this.parentElement.style.background='#1C1828'"><div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div><div class="vid-cat-badge"><span data-az>Müsahibə</span><span data-en>Interview</span></div></div>
+        <div class="vid-body"><div class="vid-title"><span data-az>MİRF 2023-də bizi nələr gözləyir? — CANLI</span><span data-en>What awaits us at MİRF 2023? — LIVE</span></div><div class="vid-meta"><span data-az>5 Aprel 2023</span><span data-en>April 5, 2023</span></div></div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Biznes-Verilis-Idareciliyi" target="_blank">
+        <div class="vid-thumb"><img src="https://fmrtv.facemark.az/images/video_thumb/2023-03-03_16-41-54.jpg" alt="" onerror="this.parentElement.style.background='#1C1828'"><div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div><div class="vid-cat-badge"><span data-az>Müsahibə</span><span data-en>Interview</span></div></div>
+        <div class="vid-body"><div class="vid-title"><span data-az>Biznes Veriliş İdarəçiliyi</span><span data-en>Business Show Management</span></div><div class="vid-meta"><span data-az>3 Mart 2023</span><span data-en>March 3, 2023</span></div></div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Sirketlerde-auditin-vacibliyi" target="_blank">
+        <div class="vid-thumb"><img src="https://fmrtv.facemark.az/images/video_thumb/2023-01-13_16-16-44.png" alt="" onerror="this.parentElement.style.background='#1C1828'"><div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div><div class="vid-cat-badge"><span data-az>Müsahibə</span><span data-en>Interview</span></div></div>
+        <div class="vid-body"><div class="vid-title"><span data-az>"Şirkətlərdə auditin vacibliyi"</span><span data-en>"The importance of audit in companies"</span></div><div class="vid-meta"><span data-az>13 Yanvar 2023</span><span data-en>January 13, 2023</span></div></div>
+      </a>
+    </div>
+    <div class="vid-grid vid-grid-all" id="musahibe-all" style="display:none">
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesinin-Teskilatcilari-ile-canli-yayim" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2023-01-13_16-15-58.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Vergi və Mühasibatlıq Zirvəsinin Təşkilatçıları ilə canlı yayım</span><span data-en>Live broadcast with the organizers of the Tax & Accounting Summit</span></div>
+          <div class="vid-type"><span data-az>Vergi və Mühasibatlıq Zirvəsi</span><span data-en>Tax & Accounting Summit</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Vergi & Mühasibatlıq</span><span data-en>Tax & Accounting</span></span>
+            <span class="vid-meta-date"><span data-az>Müsahibə · 2023</span><span data-en>Interview · 2023</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2023" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2023-04-08_11-59-31.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Xəzər Su İnnovasiya Forumu | Müsahibə</span><span data-en>Caspian Water Innovation Forum | Interview</span></div>
+          <div class="vid-type"><span data-az>Xəzər Su İnnovasiya Forumu</span><span data-en>Caspian Water Innovation Forum</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Su Mühəndisliyi</span><span data-en>Water Engineering</span></span>
+            <span class="vid-meta-date"><span data-az>8 Aprel 2023</span><span data-en>April 8, 2023</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2023" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2023-04-08_11-59-31.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Xəzər Su İnnovasiya Forumu 2023</span><span data-en>Caspian Water Innovation Forum 2023</span></div>
+          <div class="vid-type"><span data-az>Xəzər Su İnnovasiya Forumu 2023</span><span data-en>Caspian Water Innovation Forum 2023</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Müsahibə</span><span data-en>Interview</span></span>
+            <span class="vid-meta-date"><span data-az>8 Aprel 2023</span><span data-en>April 8, 2023</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/MIRF-2023de-bizi-neler-gozleyir-CANLI" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2023-04-05_10-52-18.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>MİRF 2023-də bizi nələr gözləyir? — CANLI</span><span data-en>What awaits us at MİRF 2023? — LIVE</span></div>
+          <div class="vid-type"><span data-az>MİRF 2023-də bizi nələr gözləyir? — CANLI</span><span data-en>What awaits us at MİRF 2023? — LIVE</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Müsahibə</span><span data-en>Interview</span></span>
+            <span class="vid-meta-date"><span data-az>5 Aprel 2023</span><span data-en>April 5, 2023</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Biznes-Verilis-Idareciliyi" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2023-03-03_16-41-54.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>Biznes Veriliş İdarəçiliyi</span><span data-en>Business Show Management</span></div>
+          <div class="vid-type"><span data-az>Biznes Veriliş İdarəçiliyi</span><span data-en>Business Show Management</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Müsahibə</span><span data-en>Interview</span></span>
+            <span class="vid-meta-date"><span data-az>3 Mart 2023</span><span data-en>March 3, 2023</span></span>
+          </div>
+        </div>
+      </a>
+      <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Sirketlerde-auditin-vacibliyi" target="_blank">
+        <div class="vid-thumb">
+          <img src="https://fmrtv.facemark.az/images/video_thumb/2023-01-13_16-16-44.png" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
+          <div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div>
+        </div>
+        <div class="vid-body">
+          <div class="vid-event"><span data-az>"Şirkətlərdə auditin vacibliyi"</span><span data-en>"The importance of audit in companies"</span></div>
+          <div class="vid-type"><span data-az>"Şirkətlərdə auditin vacibliyi"</span><span data-en>"The importance of audit in companies"</span></div>
+          <div class="vid-meta-row">
+            <span class="vid-meta-cat"><span data-az>Müsahibə</span><span data-en>Interview</span></span>
+            <span class="vid-meta-date"><span data-az>13 Yanvar 2023</span><span data-en>January 13, 2023</span></span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="see-all-back" id="musahibe-back" style="display:none;text-align:center;margin-top:18px">
+      <a class="tedbirler-back" onclick="hideAllVideos('musahibe')" style="display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--gold);cursor:pointer"><span data-az>← Bağla</span><span data-en>← Close</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot" id="contact">
+  <div class="foot-in">
+    <div class="fgrid">
+      <div class="fcol">
+        <div class="flogo"><img src="https://facemark.az/public/storage/images/ACGaivoyKw8HE5IwOGZwzjHlZVJgLSb36XNJBXnr.png" alt="Facemark" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none;font-size:.95rem;font-weight:800;font-style:italic;color:var(--gold)">facemark</span></div>
+        <p class="fcol-desc"><span data-az>Azərbaycanda biznes tədbirlərinin aparıcı platforması. 15 ildən artıq təcrübə.</span><span data-en>The leading business events platform in Azerbaijan. Over 15 years of experience.</span></p>
+        <div class="f-socials">
+          <a href="https://facebook.com/facemark.az" target="_blank" class="fsoc" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg></a>
+          <a href="https://www.instagram.com/_facemark?igsh=YmJkYjNieWYwZnJh" target="_blank" class="fsoc" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://www.linkedin.com/company/facemark/" target="_blank" class="fsoc" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://www.youtube.com/channel/UCC3A17lgWFY3PPpU7tBNydg" target="_blank" class="fsoc" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.499 6.203a3.008 3.008 0 00-2.089-2.089c-1.87-.501-9.4-.501-9.4-.501s-7.509-.01-9.399.501A3.008 3.008 0 00.5 6.203a31.45 31.45 0 00-.5 5.799 31.45 31.45 0 00.501 5.783 3.008 3.008 0 002.088 2.088c1.868.502 9.4.502 9.4.502s7.509 0 9.399-.502a3.008 3.008 0 002.089-2.088 31.45 31.45 0 00.5-5.783 31.45 31.45 0 00-.478-5.799zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+          <a href="https://www.tiktok.com/@__facemark" target="_blank" class="fsoc" title="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg></a>
+        </div>
+      </div>
+      <div class="fcol">
+        <h4><span data-az>Şirkət</span><span data-en>Company</span></h4>
+        <a href="about_FINAL.html"><span data-az>Haqqımızda</span><span data-en>About Us</span></a>
+        <a href="#events"><span data-az>Tədbirlər</span><span data-en>Events</span></a>
+        <a href="komandamiz.html"><span data-az>Komandamız</span><span data-en>Our Team</span></a>
+        <a href="fmr_tv.html" style="color:var(--gold);font-weight:700">FMR TV</a>
+        <a href="karyera.html"><span data-az>Karyera</span><span data-en>Careers</span></a>
+      </div>
+      <div class="fcol">
+        <h4><span data-az>Tədbirlər</span><span data-en>Events</span></h4>
+        <a href="#events"><span data-az>Aktiv Tədbirlər</span><span data-en>Active Events</span></a>
+        <a href="#events"><span data-az>Yaxınlaşan</span><span data-en>Upcoming</span></a>
+        <a href="#events"><span data-az>Keçmiş Tədbirlər</span><span data-en>Past Events</span></a>
+        <a href="#events"><span data-az>Partnyor Tədbirləri</span><span data-en>Partner Events</span></a>
+        <a href="#events"><span data-az>Ümumi Siyahı</span><span data-en>Full List</span></a>
+      </div>
+      <div class="fcol">
+        <h4><span data-az>Tədbirlərdən Məlumatlı Ol</span><span data-en>Stay Informed About Events</span></h4>
+        <p style="font-size:.68rem;color:rgba(255,255,255,.3);margin-bottom:7px"><span data-az>Yeni tədbirlərdən ilk sən xəbər al</span><span data-en>Be the first to hear about new events</span></p>
+        <div class="f-sub"><input type="email" placeholder="E-poçt ünvanın" data-az-placeholder="E-poçt ünvanın" data-en-placeholder="Your email address"><button><span data-az>Abunə</span><span data-en>Subscribe</span></button></div>
+        <div style="margin-top:8px;font-size:.68rem;color:rgba(255,255,255,.32)"><a href="tel:+994502161636" style="color:var(--gold);display:block;margin-bottom:2px">+994 50 216 16 36</a><a href="mailto:info@facemark.az" style="color:var(--gold);display:block">info@facemark.az</a></div>
+      </div>
+    </div>
+    <div class="fbot">
+            <div><span data-az>© 2026 Facemark LLC. Bütün hüquqlar qorunur.</span><span data-en>© 2026 Facemark LLC. All rights reserved.</span></div>
+      <div class="fstats"><span class="fst"><b>116+</b> <span data-az>Tədbir</span><span data-en>Events</span></span><span class="fst"><b>15</b> <span data-az>İl</span><span data-en>Years</span></span><span class="fst"><b>100K+</b> <span data-az>İştirakçı</span><span data-en>Attendees</span></span></div>
+      <div style="display:flex;gap:12px"><a href="#" style="color:rgba(255,255,255,.25)"><span data-az>Məxfilik</span><span data-en>Privacy</span></a><a href="#" style="color:rgba(255,255,255,.25)"><span data-az>Şərtlər</span><span data-en>Terms</span></a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+var _tedbirlerCat = 'all';
+function filterEventCat(btn, cat) {
+  _tedbirlerCat = cat;
+  document.querySelectorAll('#tedbirler-cats .cat-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  applyTedbirlerFilters();
+}
+function filterEventSearch() {
+  applyTedbirlerFilters();
+}
+function applyTedbirlerFilters() {
+  var q = (document.getElementById('tedbirler-search').value || '').toLowerCase().trim();
+  var visibleCount = 0;
+  document.querySelectorAll('#tedbirler-portfolio .ev-port-card').forEach(function(card) {
+    var cats = (card.dataset.cats || '').split(',');
+    var name = (card.dataset.name || '').toLowerCase();
+    var catMatch = (_tedbirlerCat === 'all') || cats.indexOf(_tedbirlerCat) > -1;
+    var searchMatch = (q === '') || name.indexOf(q) > -1;
+    var show = catMatch && searchMatch;
+    card.style.display = show ? '' : 'none';
+    if (show) visibleCount++;
+  });
+  var empty = document.getElementById('tedbirler-empty');
+  if (empty) empty.style.display = visibleCount === 0 ? 'block' : 'none';
+}
+
+function showAllVideos(cat){
+  var def = document.querySelector('#' + cat + ' .vid-grid:not(.vid-grid-all)');
+  var all = document.getElementById(cat + '-all');
+  var back = document.getElementById(cat + '-back');
+  var seeall = document.getElementById(cat + '-seeall');
+  if(def) def.style.display = 'none';
+  if(all) all.style.display = 'grid';
+  if(back) back.style.display = 'block';
+  if(seeall) seeall.style.display = 'none';
+}
+function hideAllVideos(cat){
+  var def = document.querySelector('#' + cat + ' .vid-grid:not(.vid-grid-all)');
+  var all = document.getElementById(cat + '-all');
+  var back = document.getElementById(cat + '-back');
+  var seeall = document.getElementById(cat + '-seeall');
+  if(def) def.style.display = 'grid';
+  if(all) all.style.display = 'none';
+  if(back) back.style.display = 'none';
+  if(seeall) seeall.style.display = '';
+  document.getElementById(cat).scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function openEventVideos(key) {
+  document.getElementById('tedbirler-portfolio').style.display = 'none';
+  var controls = document.querySelector('.tedbirler-controls');
+  if (controls) controls.style.display = 'none';
+  var empty = document.getElementById('tedbirler-empty');
+  if (empty) empty.style.display = 'none';
+  var detail = document.getElementById('tedbirler-detail');
+  detail.style.display = 'block';
+  detail.querySelectorAll('.ev-detail-block').forEach(function(b) {
+    b.style.display = (b.dataset.event === key) ? 'block' : 'none';
+  });
+  detail.scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+function closeEventVideos() {
+  document.getElementById('tedbirler-detail').style.display = 'none';
+  document.getElementById('tedbirler-portfolio').style.display = 'grid';
+  var controls = document.querySelector('.tedbirler-controls');
+  if (controls) controls.style.display = 'flex';
+  applyTedbirlerFilters();
+}
+var _lang = 'az';
+function applyLangToElement(el){
+  if(!el) return;
+  el.querySelectorAll('[data-az],[data-en]').forEach(function(s){
+    s.style.display = '';
+  });
+  el.querySelectorAll('[data-az-placeholder],[data-en-placeholder]').forEach(function(s){
+    var ph = _lang === 'en' ? s.getAttribute('data-en-placeholder') : s.getAttribute('data-az-placeholder');
+    if(ph) s.setAttribute('placeholder', ph);
+  });
+}
+function toggleDrop(id){var el=document.getElementById(id);var isOpen=el.classList.contains('open');document.querySelectorAll('.bilet-wrap.open').forEach(function(x){x.classList.remove('open');});if(!isOpen)el.classList.add('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('.bilet-wrap'))document.querySelectorAll('.bilet-wrap.open').forEach(function(x){x.classList.remove('open');});});
+function setLang(l){
+  _lang = l;
+  document.documentElement.classList.remove('lang-az','lang-en');
+  document.documentElement.classList.add('lang-' + l);
+  var btnAz = document.getElementById('btn-az');
+  var btnEn = document.getElementById('btn-en');
+  if(btnAz) btnAz.classList.toggle('on', l === 'az');
+  if(btnEn) btnEn.classList.toggle('on', l === 'en');
+  applyLangToElement(document.body);
+}
+document.documentElement.classList.add('lang-az');
+applyLangToElement(document.body);
+</script>
+<script>
+var SITE_INDEX = [
+
+  {az:'Ana Səhifə',en:'Home',cat_az:'Səhifə',cat_en:'Page',url:'facemark_homepage_FINAL.html'},
+  {az:'Tədbirlər Portfoliomuz',en:'Our Event Portfolio',cat_az:'Bölmə',cat_en:'Section',url:'facemark_homepage_FINAL.html#events'},
+  {az:'Xidmətlərimiz',en:'Our Services',cat_az:'Bölmə',cat_en:'Section',url:'facemark_homepage_FINAL.html#services'},
+  {az:'Partnyorlarımız',en:'Our Partners',cat_az:'Bölmə',cat_en:'Section',url:'facemark_homepage_FINAL.html#partners'},
+  {az:'Haqqımızda',en:'About Us',cat_az:'Səhifə',cat_en:'Page',url:'about_FINAL.html'},
+  {az:'Komandamız',en:'Our Team',cat_az:'Səhifə',cat_en:'Page',url:'komandamiz.html'},
+  {az:'Karyera',en:'Careers',cat_az:'Səhifə',cat_en:'Page',url:'karyera.html',kw:'iş work job cv müraciət vakansiya'},
+  {az:'Marketing AIR',en:'Marketing AIR',cat_az:'Platforma',cat_en:'Platform',url:'marketing_air.html'},
+  {az:'Marketing AIR — Proqramlar',en:'Marketing AIR — Programs',cat_az:'Bölmə',cat_en:'Section',url:'marketing_air.html#programs'},
+  {az:'Marketing AIR — Təlimçilər',en:'Marketing AIR — Trainers',cat_az:'Bölmə',cat_en:'Section',url:'marketing_air.html#trainers'},
+  {az:'FMR TV',en:'FMR TV',cat_az:'Platforma',cat_en:'Platform',url:'fmr_tv.html'},
+  {az:'FMR TV — Tədbirlər',en:'FMR TV — Events',cat_az:'Bölmə',cat_en:'Section',url:'fmr_tv.html#tedbirler'},
+  {az:'FMR TV — Son Yüklənənlər',en:'FMR TV — Latest Uploads',cat_az:'Bölmə',cat_en:'Section',url:'fmr_tv.html#latest',kw:'video'},
+  {az:'Milli Marketinq Forumu (MMF)',en:'National Marketing Forum (MMF)',cat_az:'Tədbir',cat_en:'Event',url:'mmf_inner_page_FINAL.html'},
+  {az:'MMF — Spikerlər',en:'MMF — Speakers',cat_az:'Bölmə',cat_en:'Section',url:'mmf_inner_page_FINAL.html#speakers'},
+  {az:'MMF — Biletlər',en:'MMF — Tickets',cat_az:'Bölmə',cat_en:'Section',url:'mmf_inner_page_FINAL.html#tickets'},
+  {az:'Əlaqə',en:'Contact',cat_az:'Bölmə',cat_en:'Section',url:'about_FINAL.html#contact',kw:'email phone telefon mobil'}
+,
+  // FMR TV — Tədbirlər (event names)
+  {az:'Milli İnsan Resursları Forumu',en:'National Human Resources Forum',cat_az:'İnsan Resursları',cat_en:'Human Resources',url:'#tedbirler',action:"openEventVideos('mirf2026')"},
+  {az:'İnteryer İnşaat Memarlıq Mebel Forumu',en:'Interior, Construction & Architecture Furniture Forum',cat_az:'İnteryer, İnşaat & Memarlıq',cat_en:'Interior, Construction & Architecture',url:'#tedbirler',action:"openEventVideos('iimmf2026')"},
+  {az:'Qadın Liderləri Zirvəsi',en:'Women Leaders Summit',cat_az:'Qadın Liderliyi',cat_en:'Women\'s Leadership',url:'#tedbirler',action:"openEventVideos('qlz2026')"},
+  {az:'Data, ERP və Süni İntellekt Zirvəsi',en:'Data, ERP & AI Summit',cat_az:'Texnologiya & AI',cat_en:'Technology & AI',url:'#tedbirler',action:"openEventVideos('dsiz2025')"},
+  {az:'Təchizat Zənciri Liderləri Zirvəsi',en:'Supply Chain Leaders Summit',cat_az:'Təchizat & Satınalma',cat_en:'Supply Chain & Procurement',url:'#tedbirler',action:"openEventVideos('tzlz2025')"},
+  {az:'Xəzər Su İnnovasiya Forumu',en:'Caspian Water Innovation Forum',cat_az:'Su Mühəndisliyi',cat_en:'Water Engineering',url:'#tedbirler',action:"openEventVideos('xsif2025')"},
+  {az:'Occupational Aesthetic Congress',en:'Occupational Aesthetic Congress',cat_az:'Səhiyyə',cat_en:'Healthcare',url:'#tedbirler',action:"openEventVideos('oac2025')"},
+  {az:'Milli Marketinq Forumu 2025',en:'National Marketing Forum 2025',cat_az:'Marketinq',cat_en:'Marketing',url:'#tedbirler',action:"openEventVideos('mmf2025')"},
+  {az:'Maliyyə İnvestisiya Forumu',en:'Finance & Investment Forum',cat_az:'Maliyyə & İnvestisiya',cat_en:'Finance & Investment',url:'#tedbirler',action:"openEventVideos('mif2025')"},
+  {az:'Vergi və Mühasibatlıq Zirvəsi',en:'Tax & Accounting Summit',cat_az:'Vergi & Mühasibatlıq',cat_en:'Tax & Accounting',url:'#tedbirler',action:"openEventVideos('vmz2025')"},
+  {az:'Milli Marketinq Forumu 2024',en:'National Marketing Forum 2024',cat_az:'Marketinq',cat_en:'Marketing',url:'#tedbirler',action:"openEventVideos('mmf2024')"},
+  {az:'Beynəlxalq İnvestisiya və Əmlak Zirvəsi',en:'International Investment & Real Estate Summit',cat_az:'Əmlak & İnvestisiya',cat_en:'Real Estate & Investment',url:'#tedbirler',action:"openEventVideos('biez2024')"},
+  // FMR TV — Video titles
+  {az:'Milli İnsan Resursları Forumu 2026 | İcmal video',en:'National Human Resources Forum 2026 | Highlight video',cat_az:'Milli İnsan Resursları Forumu',cat_en:'National Human Resources Forum',url:'#tedbirler',action:"openEventVideos('mirf2026')",kw:'video youtube'},
+  {az:'Milli İnsan Resursları Forumu 2026 | Tanıtım çarxı',en:'National Human Resources Forum 2026 | Promo reel',cat_az:'Milli İnsan Resursları Forumu',cat_en:'National Human Resources Forum',url:'#tedbirler',action:"openEventVideos('mirf2026')",kw:'video youtube'},
+  {az:'İnteryer İnşaat Memarlıq Mebel Forumu 2026 | İcmal video',en:'Interior, Construction & Architecture Furniture Forum 2026 | Highlight video',cat_az:'İnteryer İnşaat Memarlıq Mebel Forumu',cat_en:'Interior, Construction & Architecture Furniture Forum',url:'#tedbirler',action:"openEventVideos('iimmf2026')",kw:'video youtube'},
+  {az:'İnteryer İnşaat Memarlıq Mebel Forumu 2026 | Tanıtım çarxı',en:'Interior, Construction & Architecture Furniture Forum 2026 | Promo reel',cat_az:'İnteryer İnşaat Memarlıq Mebel Forumu',cat_en:'Interior, Construction & Architecture Furniture Forum',url:'#tedbirler',action:"openEventVideos('iimmf2026')",kw:'video youtube'},
+  {az:'Qadın Liderləri Zirvəsi 2026 | İcmal video',en:'Women Leaders Summit 2026 | Highlight video',cat_az:'Qadın Liderləri Zirvəsi',cat_en:'Women Leaders Summit',url:'#tedbirler',action:"openEventVideos('qlz2026')",kw:'video youtube'},
+  {az:'Qadın Liderləri Zirvəsi 2026 | Tanıtım çarxı',en:'Women Leaders Summit 2026 | Promo reel',cat_az:'Qadın Liderləri Zirvəsi',cat_en:'Women Leaders Summit',url:'#tedbirler',action:"openEventVideos('qlz2026')",kw:'video youtube'},
+  {az:'Data, ERP və Süni İntellekt Zirvəsi 2025 | İcmal video',en:'Data, ERP & AI Summit 2025 | Highlight video',cat_az:'Data, ERP və Süni İntellekt Zirvəsi',cat_en:'Data, ERP & AI Summit',url:'#tedbirler',action:"openEventVideos('dsiz2025')",kw:'video youtube'},
+  {az:'Təchizat Zənciri Liderləri Zirvəsi 2025 | İcmal video',en:'Supply Chain Leaders Summit 2025 | Highlight video',cat_az:'Təchizat Zənciri Liderləri Zirvəsi',cat_en:'Supply Chain Leaders Summit',url:'#tedbirler',action:"openEventVideos('tzlz2025')",kw:'video youtube'},
+  {az:'Xəzər Su İnnovasiya Forumu 2025 | İcmal video',en:'Caspian Water Innovation Forum 2025 | Highlight video',cat_az:'Xəzər Su İnnovasiya Forumu',cat_en:'Caspian Water Innovation Forum',url:'#tedbirler',action:"openEventVideos('xsif2025')",kw:'video youtube'},
+  {az:'Xəzər Su İnnovasiya Forumu | Müsahibə',en:'Caspian Water Innovation Forum | Interview',cat_az:'Xəzər Su İnnovasiya Forumu',cat_en:'Caspian Water Innovation Forum',url:'#tedbirler',action:"openEventVideos('xsif2025')",kw:'video youtube'},
+  {az:'Occupational Aesthetic Congress 2025 | İcmal video',en:'Occupational Aesthetic Congress 2025 | Highlight video',cat_az:'Occupational Aesthetic Congress',cat_en:'Occupational Aesthetic Congress',url:'#tedbirler',action:"openEventVideos('oac2025')",kw:'video youtube'},
+  {az:'Milli Marketinq Forumu 2025 — İcmal video',en:'National Marketing Forum 2025 — Highlight video',cat_az:'Milli Marketinq Forumu 2025',cat_en:'National Marketing Forum 2025',url:'#tedbirler',action:"openEventVideos('mmf2025')",kw:'video youtube'},
+  {az:'Maliyyə İnvestisiya Forumu 2025 | İcmal videosu',en:'Finance & Investment Forum 2025 | Highlight video',cat_az:'Maliyyə İnvestisiya Forumu',cat_en:'Finance & Investment Forum',url:'#tedbirler',action:"openEventVideos('mif2025')",kw:'video youtube'},
+  {az:'Vergi və Mühasibatlıq Zirvəsi 2025 | İcmal videosu',en:'Tax & Accounting Summit 2025 | Highlight video',cat_az:'Vergi və Mühasibatlıq Zirvəsi',cat_en:'Tax & Accounting Summit',url:'#tedbirler',action:"openEventVideos('vmz2025')",kw:'video youtube'},
+  {az:'Vergi və Mühasibatlıq Zirvəsinin Təşkilatçıları ilə canlı yayım',en:'Live broadcast with the organizers of the Tax & Accounting Summit',cat_az:'Vergi və Mühasibatlıq Zirvəsi',cat_en:'Tax & Accounting Summit',url:'#tedbirler',action:"openEventVideos('vmz2025')",kw:'video youtube'},
+  {az:'Milli Marketinq Forumu 2024 — III gün | İcmal video',en:'National Marketing Forum 2024 — Day 3 | Highlight video',cat_az:'Milli Marketinq Forumu 2024',cat_en:'National Marketing Forum 2024',url:'#tedbirler',action:"openEventVideos('mmf2024')",kw:'video youtube'},
+  {az:'Milli Marketinq Forumu 2024 — II gün | İcmal video',en:'National Marketing Forum 2024 — Day 2 | Highlight video',cat_az:'Milli Marketinq Forumu 2024',cat_en:'National Marketing Forum 2024',url:'#tedbirler',action:"openEventVideos('mmf2024')",kw:'video youtube'},
+  {az:'Beynəlxalq İnvestisiya və Əmlak Zirvəsi | İcmal video',en:'International Investment & Real Estate Summit | Highlight video',cat_az:'Beynəlxalq İnvestisiya və Əmlak Zirvəsi',cat_en:'International Investment & Real Estate Summit',url:'#tedbirler',action:"openEventVideos('biez2024')",kw:'video youtube'}
+];
+</script>
+
+<script>
+function toggleSiteSearch(){
+  var box=document.getElementById('siteSearchBox');
+  box.classList.toggle('open');
+  if(box.classList.contains('open')){
+    var inp=document.getElementById('siteSearchInput');
+    inp.placeholder=(document.documentElement.classList.contains('lang-en'))?'Search the site...':'Saytda axtar...';
+    inp.focus();
+  }
+}
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('siteSearch');
+  var box=document.getElementById('siteSearchBox');
+  if(wrap && box && !wrap.contains(e.target)) box.classList.remove('open');
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    var box=document.getElementById('siteSearchBox');
+    if(box) box.classList.remove('open');
+  }
+});
+function runSiteSearch(q){
+  var results=document.getElementById('siteSearchResults');
+  q=q.trim().toLowerCase();
+  if(!q){ results.innerHTML=''; return; }
+  var isEn=document.documentElement.classList.contains('lang-en');
+  var matches=SITE_INDEX.filter(function(item){
+    return item.az.toLowerCase().indexOf(q)>-1 || item.en.toLowerCase().indexOf(q)>-1 || (item.kw && item.kw.toLowerCase().indexOf(q)>-1);
+  }).slice(0,8);
+  if(!matches.length){
+    results.innerHTML='<div class="site-search-empty">'+(isEn?'No results found.':'Nəticə tapılmadı.')+'</div>';
+    return;
+  }
+  results.innerHTML=matches.map(function(m){
+    var title=isEn?m.en:m.az;
+    var cat=isEn?m.cat_en:m.cat_az;
+    var act=m.action?(m.action+';'):'';
+    return '<a class="site-search-result" href="'+m.url+'" onclick="'+act+'document.getElementById(\'siteSearchBox\').classList.remove(\'open\')">'+title+'<div class="ssr-cat">'+cat+'</div></a>';
+  }).join('');
+}
+</script>
+</body>
+</html>

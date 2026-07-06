@@ -1,0 +1,8 @@
+.DS_Store
+backend/node_modules/
+backend/data.db
+backend/data.db-journal
+backend/test2.db
+backend/test2.db-journal
+backend/data.json
+backend/uploads/

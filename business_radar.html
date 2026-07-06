@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="az" class="lang-az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Biznes Radar — Facemark</title>
+<meta name="description" content="Azərbaycan və dünya biznes xəbərləri. Maliyyə, texnologiya, enerji, makroiqtisadiyyat.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+section{scroll-margin-top:68px}
+html.lang-en [data-az]{display:none!important}
+html.lang-az [data-en]{display:none!important}
+:root{
+  --bg:#F9F7F3;--bg2:#F0EBE1;--card:#FFFFFF;--border:rgba(0,0,0,.08);
+  --dark:#1C1828;--gold:#C4973A;--gold2:#E8B84B;--goldBg:rgba(196,151,58,.08);
+  --text:#1C1828;--muted:#6B6878;--elec:#2563EB;--green:#16A34A;
+  --shadow:0 2px 14px rgba(0,0,0,.07);--radius:10px;--tr:all .2s ease;
+  --font:'Segoe UI',system-ui,sans-serif
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* NAV */
+.nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;backdrop-filter:blur(12px);box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.nav-in{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:6px;height:56px}
+.nav-links{display:flex;align-items:center;margin-left:14px;gap:1px}
+.nav-links>a,.nav-dd-wrap>a{font-size:.78rem;color:var(--muted);padding:5px 9px;border-radius:6px;transition:var(--tr);white-space:nowrap;cursor:pointer}
+.nav-links>a:hover,.nav-dd-wrap>a:hover{color:var(--text);background:var(--bg2)}
+.nav-links>a.active{color:var(--gold);font-weight:700;background:var(--bg2)}
+.spacer{flex:1}
+.nav-dd-wrap{position:relative;display:flex;align-items:center}
+.nav-dd{position:absolute;top:100%;left:0;background:transparent;min-width:186px;padding-top:6px;z-index:1000;display:none}
+.nav-dd-inner{background:#fff;border:1px solid var(--border);border-radius:10px;padding:6px;box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.nav-dd-wrap:hover .nav-dd{display:block}
+.nav-dd-inner a{display:block;font-size:.75rem;color:var(--muted);padding:7px 12px;border-radius:6px;transition:var(--tr)}
+.nav-dd-inner a:hover{background:var(--bg2);color:var(--gold)}
+.lang-sw{display:flex;gap:1px;background:var(--bg2);border-radius:6px;padding:2px;margin-left:6px}
+.lang-sw button{border:none;background:none;color:var(--muted);padding:3px 9px;font-size:.72rem;font-weight:600;cursor:pointer;border-radius:5px;transition:var(--tr)}
+.lang-sw button.on{background:#fff;color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.btn{border:none;cursor:pointer;font-family:var(--font);font-weight:600;border-radius:7px;transition:var(--tr);font-size:.78rem}
+.btn-gold{background:var(--gold);color:#fff;padding:8px 18px}
+.btn-gold:hover{background:var(--gold2);color:var(--dark)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border);padding:7px 16px}
+.btn-outline:hover{border-color:var(--dark);background:var(--bg2)}
+
+/* SITE SEARCH */
+.site-search{position:relative;display:flex;align-items:center;margin-left:6px}
+.site-search-btn{background:none;border:none;cursor:pointer;color:var(--muted);width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+.site-search-btn:hover{background:var(--bg2);color:var(--text)}
+.site-search-box{position:absolute;top:calc(100% + 8px);right:0;width:320px;max-width:88vw;background:var(--card);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.14);padding:10px;display:none;z-index:500}
+.site-search-box.open{display:block}
+.site-search-box input{width:100%;padding:8px 12px;border-radius:7px;border:1.5px solid var(--border);font-family:var(--font);font-size:.8rem;background:var(--bg);box-sizing:border-box;color:var(--text)}
+.site-search-box input:focus{outline:none;border-color:var(--gold)}
+.site-search-results{margin-top:8px;max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.site-search-result{display:block;padding:8px 10px;border-radius:7px;font-size:.78rem;color:var(--text);transition:var(--tr);cursor:pointer}
+.site-search-result:hover{background:var(--goldBg)}
+.site-search-result .ssr-cat{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.site-search-empty{font-size:.75rem;color:var(--muted);padding:8px 4px;text-align:center}
+
+/* TICKER */
+.ticker-outer{background:var(--bg);padding:8px 20px;border-bottom:1px solid var(--border)}
+.ticker-container{max-width:1200px;margin:0 auto;background:var(--dark);border-radius:8px;height:34px;padding:0 16px;display:flex;align-items:center;overflow:hidden}
+.ticker-label{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);white-space:nowrap;padding-right:14px;border-right:1px solid rgba(255,255,255,.12);margin-right:14px;flex-shrink:0}
+.ticker-viewport{flex:1;overflow:hidden;min-width:0;height:100%;display:flex;align-items:center}
+.ticker-track{display:flex;white-space:nowrap;animation:tickerScroll 140s linear infinite}
+.ticker-track:hover{animation-play-state:paused}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{display:inline-flex;align-items:center;gap:7px;padding:0 18px;font-size:.7rem;color:rgba(255,255,255,.75);cursor:pointer;transition:color .2s;flex-shrink:0}
+.ticker-item:hover{color:#fff}
+.t-chip{font-size:.55rem;font-weight:700;padding:2px 6px;border-radius:3px;background:rgba(196,151,58,.25);color:var(--gold2);text-transform:uppercase;letter-spacing:.06em;flex-shrink:0}
+.ticker-sep{color:rgba(255,255,255,.15);flex-shrink:0;font-size:.65rem}
+
+/* HERO */
+.news-hero{background:var(--bg);padding:16px 20px 20px;border-bottom:1px solid var(--border)}
+.news-hero-in{max-width:1200px;margin:0 auto;position:relative;overflow:hidden;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;background:linear-gradient(135deg,#0F0D1C 0%,#1C1828 60%,#0D1A14 100%);border-radius:12px;padding:32px}
+.news-hero-in::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 80% at 80% 20%,rgba(196,151,58,.10) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(37,99,235,.07) 0%,transparent 55%);pointer-events:none}
+.hero-badge{font-size:.6rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.hero-badge::before{content:'';width:14px;height:2px;background:var(--gold);border-radius:1px}
+.news-hero h1{font-size:1.8rem;font-weight:800;color:#fff;line-height:1.22;margin-bottom:10px}
+.news-hero h1 em{color:var(--gold2);font-style:normal}
+.news-hero-desc{font-size:.82rem;color:rgba(255,255,255,.52);line-height:1.75;max-width:480px;margin-bottom:20px}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.hstat b{display:block;font-size:1.3rem;font-weight:800;color:var(--gold2)}
+.hstat span{font-size:.64rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em}
+.hero-right-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 20px;min-width:250px;flex-shrink:0}
+.hero-right-box h3{font-size:.68rem;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;border-left:2px solid var(--gold);padding-left:8px}
+.hnm-item{display:flex;gap:8px;align-items:flex-start;cursor:pointer;margin-bottom:8px}
+.hnm-item:last-child{margin-bottom:0}
+.hnm-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px}
+.hnm-text{font-size:.72rem;color:rgba(255,255,255,.65);line-height:1.45;transition:color .2s}
+.hnm-item:hover .hnm-text{color:#fff}
+
+/* BRIEF */
+.brief-section{background:var(--bg);padding:16px 20px 20px}
+.brief-in{max-width:1200px;margin:0 auto;background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:18px 20px}
+.brief-header{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.brief-label{font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--gold);display:flex;align-items:center;gap:7px}
+.brief-label::before{content:'';width:12px;height:2px;background:var(--gold);border-radius:1px}
+.brief-title{font-size:.64rem;font-weight:800;color:var(--text)}
+.brief-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.brief-card{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;cursor:pointer;transition:var(--tr)}
+.brief-card:hover{border-color:var(--gold);background:#fff}
+.bc-num{font-size:.55rem;font-weight:800;color:var(--gold);letter-spacing:.08em;margin-bottom:2px}
+.bc-head{font-size:.69rem;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:2px}
+.bc-meta{font-size:.59rem;color:var(--muted)}
+
+/* MAIN */
+.page-body{padding:0 20px}
+.pb-in{max-width:1200px;margin:0 auto}
+.main-grid{display:grid;grid-template-columns:1fr 296px;gap:24px;padding:24px 0}
+
+/* FILTER */
+.filter-section{margin-bottom:18px;background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:16px}
+.flt-top-row{display:grid;grid-template-columns:2fr 3fr;gap:10px;margin-bottom:12px}
+.flt-block-box{border:1.5px solid var(--border);border-radius:9px;padding:10px 12px;background:var(--bg)}
+.flt-block-box .flt-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+.flt-block-box .flt-btn{white-space:normal;overflow:visible;text-overflow:unset;line-height:1.3;height:auto}
+.flt-block{margin-bottom:0}
+.flt-block-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.flt-label{font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);display:flex;align-items:center;gap:6px;border-radius:20px;padding:2px 0;transition:var(--tr)}
+.flt-hint{font-size:.56rem;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:.03em;opacity:.65;margin-left:2px}
+.flt-label::before{content:'';width:10px;height:2px;background:var(--gold);border-radius:1px;transition:var(--tr);flex-shrink:0}
+.flt-label.has-active{color:var(--dark);background:var(--goldBg);padding:2px 10px 2px 8px}
+.flt-label.has-active::before{width:14px;background:var(--gold2)}
+.filter-sec-title{font-size:.8rem;font-weight:700;color:var(--text);margin-bottom:14px;padding-bottom:12px;border-bottom:1.5px solid var(--border);line-height:1.4}
+.filter-sec-title small{display:block;font-size:.62rem;font-weight:400;color:var(--muted);margin-top:3px}
+.flt-divider{border:none;border-top:1px solid var(--border);margin:12px 0}
+.flt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:5px}
+.flt-btn{padding:6px 8px;background:transparent;border:1.5px solid var(--border);border-radius:8px;font-size:.67rem;cursor:pointer;color:var(--muted);transition:var(--tr);font-family:var(--font);font-weight:600;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.flt-btn:hover{border-color:var(--dark);color:var(--text);background:var(--bg)}
+.flt-btn.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+.flt-grid-country{display:flex;flex-wrap:wrap;gap:5px}
+.flt-btn-c{display:inline-flex;align-items:center;gap:5px;padding:6px 11px;background:transparent;border:1.5px solid var(--border);border-radius:8px;font-size:.67rem;cursor:pointer;color:var(--muted);transition:var(--tr);font-family:var(--font);font-weight:600;white-space:nowrap}
+.flt-btn-c:hover{border-color:var(--dark);color:var(--text);background:var(--bg)}
+.flt-btn-c.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+.filter-clear{font-size:.65rem;color:var(--muted);cursor:pointer;background:none;border:1px solid var(--border);font-family:var(--font);padding:3px 9px;border-radius:5px;transition:var(--tr);display:none}
+.filter-clear:hover{color:var(--gold);border-color:var(--gold)}
+.filter-clear.visible{display:inline-block}
+.filter-active-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.fat-chip{display:inline-flex;align-items:center;gap:4px;font-size:.65rem;padding:3px 9px;background:var(--goldBg);color:var(--gold);border-radius:10px;font-weight:600}
+.fat-chip button{background:none;border:none;cursor:pointer;color:var(--gold);font-size:.8rem;line-height:1;padding:0 0 0 2px}
+.fat-clear-btn{background:none;border:1.5px solid var(--border);color:var(--muted);font-size:.63rem;font-weight:700;font-family:var(--font);padding:3px 10px;border-radius:10px;cursor:pointer;transition:var(--tr);display:inline-flex;align-items:center}
+.fat-clear-btn:hover{border-color:var(--dark);color:var(--dark);background:var(--bg2)}
+/* See more */
+.see-more-bar{margin-top:14px;text-align:center}
+.see-more-btn{padding:9px 22px;background:transparent;border:1.5px solid var(--gold);border-radius:8px;font-size:.72rem;font-weight:700;color:var(--gold);cursor:pointer;font-family:var(--font);transition:var(--tr)}
+.see-more-btn:hover{background:var(--gold);color:#fff}
+
+/* FEED */
+.feed-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:10px}
+.results-count{font-size:.72rem;color:var(--muted)}
+.news-card{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;cursor:pointer;transition:var(--tr);box-shadow:var(--shadow)}
+.news-card:hover{border-color:var(--gold);box-shadow:0 4px 18px rgba(196,151,58,.12);transform:translateY(-1px)}
+.card-top{display:flex;align-items:center;gap:7px;margin-bottom:8px;flex-wrap:wrap}
+.chip{font-size:.58rem;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.05em}
+.chip-gold{background:var(--goldBg);color:var(--gold)}
+.chip-blue{background:rgba(37,99,235,.08);color:var(--elec)}
+.chip-green{background:rgba(22,163,74,.08);color:var(--green)}
+.chip-neutral{background:var(--bg2);color:var(--muted)}
+.chip-dark{background:rgba(28,24,40,.08);color:var(--dark)}
+.chip-gundem{background:#e53e3e;color:#fff}
+.card-src{font-size:.63rem;color:var(--muted);margin-left:auto;white-space:nowrap}
+.card-h{font-size:.88rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:6px}
+.card-sum{font-size:.74rem;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.card-why{font-size:.7rem;color:var(--text);background:var(--goldBg);border-left:3px solid var(--gold);padding:7px 10px;border-radius:0 6px 6px 0;margin-bottom:10px;line-height:1.55}
+.card-why b{color:var(--gold)}
+.card-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.card-meta{display:flex;gap:10px;font-size:.63rem;color:var(--muted);align-items:center;flex-wrap:wrap}
+.prof-tag{font-size:.6rem;padding:2px 7px;background:var(--bg2);border-radius:3px;color:var(--muted)}
+.card-read-btn{font-size:.68rem;font-weight:700;color:var(--gold);background:none;border:1.5px solid var(--gold);border-radius:6px;padding:5px 12px;cursor:pointer;font-family:var(--font);transition:var(--tr)}
+.card-read-btn:hover{background:var(--gold);color:#fff}
+.empty-state{text-align:center;padding:48px 24px;color:var(--muted);font-size:.82rem;background:var(--card);border:1.5px solid var(--border);border-radius:10px}
+.empty-state b{display:block;font-size:1rem;color:var(--text);margin-bottom:6px}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:16px}
+.sb-card{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:16px;box-shadow:var(--shadow)}
+.sb-title{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.sb-title::before{content:'';width:10px;height:2px;background:var(--gold);border-radius:1px}
+.ai-brief-item{border-bottom:1px solid var(--border);padding-bottom:9px;margin-bottom:9px}
+/* ACTIVE EVENTS SIDEBAR */
+.sb-card-events{border:1.5px solid var(--gold)!important;box-shadow:0 0 0 3px rgba(196,151,58,.1)!important}
+.sb-card-events .sb-title{color:var(--text)}
+.sb-event-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:var(--tr)}
+.sb-event-item:last-child{border-bottom:none;padding-bottom:0}
+.sb-event-item:hover .sbe-name{color:var(--gold)}
+.sb-card-events .sb-event-item{padding:6px 8px;background:rgba(196,151,58,.07);border-radius:6px;border-bottom:none;margin-bottom:5px}
+.sb-card-events .sb-event-item:last-child{margin-bottom:0}
+.sb-card-events .sb-event-item:hover{background:rgba(196,151,58,.15)}
+.sbe-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px}
+.sbe-name{font-size:.73rem;font-weight:700;color:var(--text);line-height:1.35;margin-bottom:2px;transition:color .2s}
+.sbe-date{font-size:.62rem;color:var(--muted)}
+/* LATEST NEWS SIDEBAR */
+.sb-latest-item{padding:7px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:var(--tr)}
+.sb-latest-item:last-child{border-bottom:none}
+.sb-latest-item:hover{background:var(--goldBg);margin:0 -16px;padding:7px 16px;border-radius:6px}
+.sbl-time{font-size:.57rem;font-weight:700;color:var(--gold);letter-spacing:.04em;display:flex;align-items:center;gap:5px;margin-bottom:2px}
+.sbl-cat{font-size:.55rem;font-weight:600;color:var(--muted);font-weight:400}
+.sbl-title{font-size:.72rem;font-weight:600;color:var(--text);line-height:1.38}
+.ai-brief-item:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+.ai-brief-item .ai-head{font-size:.75rem;font-weight:700;color:var(--text);margin-bottom:3px;line-height:1.4}
+.ai-brief-item .ai-sub{font-size:.67rem;color:var(--muted);line-height:1.5}
+.sub-card{background:linear-gradient(135deg,var(--dark) 0%,#2a2040 100%);border-radius:10px;padding:18px;color:#fff}
+.sub-card h4{font-size:.8rem;font-weight:800;margin-bottom:5px}
+.sub-card p{font-size:.69rem;color:rgba(255,255,255,.55);margin-bottom:12px;line-height:1.5}
+.sub-input-row{display:flex;gap:6px}
+.sub-input-row input{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:6px;color:#fff;padding:7px 10px;font-size:.71rem;outline:none;font-family:var(--font)}
+.sub-input-row input::placeholder{color:rgba(255,255,255,.3)}
+.sub-input-row button{background:var(--gold);color:#fff;border:none;border-radius:6px;padding:7px 12px;font-size:.71rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.region-list{display:flex;flex-direction:column;gap:4px}
+.region-item{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:7px;cursor:pointer;transition:var(--tr)}
+.region-item:hover{background:var(--bg)}
+.region-flag{font-size:1.1rem;flex-shrink:0}
+.region-info{flex:1;min-width:0}
+.region-name{font-size:.74rem;font-weight:600;color:var(--text)}
+.region-count{font-size:.62rem;color:var(--muted)}
+.region-badge{font-size:.6rem;font-weight:700;padding:1px 6px;background:var(--goldBg);color:var(--gold);border-radius:3px;flex-shrink:0}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(28,24,40,.6);z-index:400;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border-radius:14px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.25)}
+/* MÜRACIƏT MODAL (homepage-style) */
+.muraciet-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:600;display:none;align-items:center;justify-content:center;padding:20px}
+.muraciet-bg.open{display:flex}
+.muraciet-box{background:#fff;border-radius:12px;width:100%;max-width:420px;padding:22px}
+.muraciet-box h3{font-size:.95rem;font-weight:800;margin-bottom:14px;color:var(--text)}
+.muraciet-box input,.muraciet-box textarea,.muraciet-box select{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:7px;color:var(--text);padding:8px 12px;font-size:.79rem;outline:none;font-family:var(--font);margin-bottom:8px;transition:var(--tr);box-sizing:border-box}
+.muraciet-box input:focus,.muraciet-box textarea:focus,.muraciet-box select:focus{border-color:var(--gold)}
+.muraciet-box textarea{resize:none;height:78px}
+.muraciet-btns{display:flex;gap:8px;margin-top:2px}
+.muraciet-btns button{flex:1;padding:9px;border-radius:7px;font-size:.77rem;font-weight:700;border:none;cursor:pointer;font-family:var(--font);transition:var(--tr)}
+.muraciet-cancel{background:var(--bg2);color:var(--text)}
+.muraciet-send{background:var(--gold);color:#fff}
+.muraciet-send:hover{background:var(--gold2);color:var(--dark)}
+.modal-hdr{padding:20px 20px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border)}
+.modal-title{font-size:.9rem;font-weight:800;color:var(--text);line-height:1.4}
+.modal-close{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.3rem;line-height:1;padding:2px;transition:var(--tr);flex-shrink:0}
+.modal-close:hover{color:var(--text)}
+.modal-body{padding:16px 20px 20px}
+.modal-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.modal-src{font-size:.7rem;color:var(--muted);margin-bottom:12px}
+.modal-sum{font-size:.82rem;color:var(--text);line-height:1.7;margin-bottom:12px}
+.modal-why{background:var(--goldBg);border-left:3px solid var(--gold);padding:10px 12px;border-radius:0 7px 7px 0;font-size:.78rem;line-height:1.6;color:var(--text);margin-bottom:14px}
+.modal-why strong{color:var(--gold);display:block;margin-bottom:3px}
+.modal-profs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px}
+.modal-ext-btn{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:700;color:#fff;background:var(--dark);border:none;border-radius:7px;padding:9px 16px;cursor:pointer;font-family:var(--font);transition:var(--tr)}
+.modal-ext-btn:hover{background:var(--gold)}
+.modal-article-body{font-size:.83rem;color:var(--text);line-height:1.85;margin-bottom:20px;border-top:1px solid var(--border);padding-top:16px}
+.modal-article-body p{margin:0 0 14px}
+.modal-article-body p:last-child{margin-bottom:0}
+.modal-close-btn{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:700;color:var(--muted);background:var(--bg2);border:1.5px solid var(--border);border-radius:7px;padding:9px 18px;cursor:pointer;font-family:var(--font);transition:var(--tr)}
+.modal-close-btn:hover{background:var(--bg);color:var(--text)}
+
+/* FOOTER */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.fnews-item span{display:block;color:rgba(255,255,255,.65);font-weight:600;font-size:.7rem;margin-bottom:1px}
+
+
+.f-sub input::placeholder{color:rgba(255,255,255,.25)}
+
+
+.f-contact-mini p{font-size:.67rem;color:rgba(255,255,255,.35);margin-bottom:6px}
+.f-contact-mini input,.f-contact-mini textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;color:#fff;padding:5px 8px;font-size:.69rem;font-family:var(--font);outline:none;margin-bottom:4px}
+.f-contact-mini textarea{resize:none;height:42px}
+.f-contact-mini button{width:100%;background:var(--gold);color:#fff;border:none;border-radius:5px;padding:6px;font-size:.7rem;font-weight:700;cursor:pointer}
+
+
+.chat-btn{position:fixed;bottom:20px;right:20px;width:50px;height:50px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:300;transition:var(--tr)}
+.chat-btn:hover{transform:scale(1.08)}
+
+@media(max-width:960px){.main-grid{grid-template-columns:1fr}.brief-grid{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:760px){.brief-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.brief-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.brief-grid{grid-template-columns:repeat(2,1fr)}.news-hero h1{font-size:1.4rem}}
+/* ── 3-Button dropdown ── */
+.bilet-wrap{position:relative;margin-left:4px}
+.bilet-drop{position:absolute;top:calc(100%+6px);right:0;background:#fff;border:1px solid var(--border);border-radius:12px;min-width:280px;padding:8px;z-index:500;box-shadow:0 10px 32px rgba(0,0,0,.12);display:none}
+.bilet-wrap.open .bilet-drop{display:block}
+.bilet-drop-title{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px 6px;font-weight:700}
+.bilet-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;cursor:pointer;transition:all .2s}
+.bilet-item:hover{background:var(--bg2)}
+.bilet-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.bilet-name{font-size:.77rem;font-weight:700;color:var(--text);margin-bottom:1px}
+.bilet-date{font-size:.68rem;color:var(--muted)}
+.bilet-cta{padding:6px 10px 2px;border-top:1px solid var(--border);margin-top:4px}
+.bilet-cta a{font-size:.7rem;color:var(--gold);font-weight:700;text-decoration:none}
+.btn-dark-nav{background:var(--dark);color:#fff;border:none;padding:7px 13px;border-radius:7px;font-size:.78rem;font-weight:600;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:5px;margin-left:4px}
+.btn-dark-nav:hover{background:#2D2840}
+
+/* ══ FOOTER ══ */
+.foot{background:var(--dark);padding:32px 20px 14px}
+.foot-in{max-width:1200px;margin:0 auto}
+.fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:26px;margin-bottom:22px}
+.fcol h4{font-size:.68rem;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.flogo img{height:26px;object-fit:contain;margin-bottom:8px}
+.fcol-desc{font-size:.72rem;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:10px}
+.f-socials{display:flex;gap:5px;margin-bottom:12px}
+.fsoc{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);transition:var(--tr);cursor:pointer;flex-shrink:0}
+.fsoc:hover{color:rgba(255,255,255,.9)}
+.fsoc svg{display:block;width:18px;height:18px}
+.fcol a{display:block;font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:5px;transition:var(--tr)}
+.fcol a:hover{color:#fff}
+.fcol a.special{color:var(--gold2)}
+.fnews-item{font-size:.68rem;color:rgba(255,255,255,.4);line-height:1.5;padding-bottom:5px;margin-bottom:5px;border-bottom:1px solid rgba(255,255,255,.06)}
+.fnews-item span{display:block;color:rgba(255,255,255,.65);font-weight:600;font-size:.7rem;margin-bottom:1px}
+.f-sub{display:flex;margin-bottom:9px}
+.f-sub input{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:6px 0 0 6px;color:#fff;padding:7px 10px;font-size:.71rem;outline:none;font-family:var(--font)}
+.f-sub input::placeholder{color:rgba(255,255,255,.25)}
+.f-sub button{background:var(--gold);color:#fff;border:none;border-radius:0 6px 6px 0;padding:7px 11px;font-size:.71rem;font-weight:700;cursor:pointer}
+.f-contact-mini{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:10px}
+.f-contact-mini p{font-size:.67rem;color:rgba(255,255,255,.35);margin-bottom:6px}
+.f-contact-mini input,.f-contact-mini textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;color:#fff;padding:5px 8px;font-size:.69rem;font-family:var(--font);outline:none;margin-bottom:4px}
+.f-contact-mini textarea{resize:none;height:42px}
+.f-contact-mini button{width:100%;background:var(--gold);color:#fff;border:none;border-radius:5px;padding:6px;font-size:.7rem;font-weight:700;cursor:pointer}
+.fbot{border-top:1px solid rgba(255,255,255,.07);padding-top:12px;display:flex;justify-content:space-between;align-items:center;font-size:.67rem;color:rgba(255,255,255,.3);flex-wrap:wrap;gap:8px}
+.fstats{display:flex;gap:14px}
+.fst{color:rgba(255,255,255,.3)}
+.fst b{color:var(--gold2)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-in">
+    <a href="facemark_homepage_FINAL.html" style="display:flex;align-items:center">
+      <svg height="32" viewBox="0 0 180 38" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="27" font-family="Georgia,'Times New Roman',serif" font-size="22" font-weight="700" fill="#1C1828" letter-spacing="-0.5">facemark</text>
+        <text x="107" y="29" font-family="Georgia,'Times New Roman',serif" font-size="26" font-weight="400" font-style="italic" fill="#1C1828" letter-spacing="-0.5">15il</text>
+      </svg>
+    </a>
+    <nav class="nav-links">
+      <div class="nav-dd-wrap">
+        <a><span data-az>Bizi Tanı ▾</span><span data-en>About Us ▾</span></a>
+        <div class="nav-dd">
+          <div class="nav-dd-inner">
+            <a href="about_FINAL.html"><span data-az>Haqqımızda</span><span data-en>About Us</span></a>
+            <a href="komandamiz.html"><span data-az>Komandamız</span><span data-en>Our Team</span></a>
+            <a href="karyera.html"><span data-az>Karyera</span><span data-en>Careers</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="facemark_homepage_FINAL.html#events"><span data-az>Tədbirlər</span><span data-en>Events</span></a>
+      <a href="facemark_homepage_FINAL.html#services"><span data-az>Xidmətlər</span><span data-en>Services</span></a>
+      <a href="business_radar.html" class="active"><span data-az>Biznes Radar</span><span data-en>Business Radar</span></a>
+      <a href="fmr_tv.html" style="color:var(--gold);font-weight:700">FMR TV</a>
+    </nav>
+    <div class="spacer"></div>
+    <div class="site-search" id="siteSearch">
+      <button class="site-search-btn" type="button" onclick="toggleSiteSearch()" aria-label="Axtar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <div class="site-search-box" id="siteSearchBox">
+        <input type="text" id="siteSearchInput" oninput="runSiteSearch(this.value)" placeholder="Saytda axtar...">
+        <div class="site-search-results" id="siteSearchResults"></div>
+      </div>
+    </div>
+    <div class="lang-sw">
+      <button class="on" id="btn-az" onclick="setLang('az')">AZ</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <!-- Sponsor Ol -->
+    <div class="bilet-wrap" id="sponsorWrap">
+      <button class="btn btn-outline" onclick="toggleDrop('sponsorWrap')">🤝 <span data-az>Sponsor Ol ▾</span><span data-en>Become a Sponsor ▾</span></button>
+      <div class="bilet-drop">
+        <div class="bilet-drop-title"><span data-az>Sponsor olmaq istədiyin tədbiri seç</span><span data-en>Choose the event you want to sponsor</span></div>
+        <div class="bilet-item" onclick="location.href='facemark_homepage_FINAL.html#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli Marketinq Forumu 2026</span><span data-en>National Marketing Forum 2026</span></div><div class="bilet-date"><span data-az>6 İyun 2026 · Bakı Konqres Mərkəzi</span><span data-en>June 6, 2026 · Baku Congress Center</span></div></div></div>
+        <div class="bilet-item" onclick="location.href='facemark_homepage_FINAL.html#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli İnsan Resursları Forumu 2026</span><span data-en>National HR Forum 2026</span></div><div class="bilet-date"><span data-az>16 May 2026 · Baku Marriott Hotel</span></div></div></div>
+        <div class="bilet-item" onclick="location.href='facemark_homepage_FINAL.html#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Bloger və İnfluenserlər Forumu 2026</span><span data-en>Blogger & Influencer Forum 2026</span></div><div class="bilet-date"><span data-az>10–11 İyun 2026 · Dreamland Baku</span></div></div></div>
+        <div class="bilet-cta"><a href="facemark_homepage_FINAL.html#events"><span data-az>Bütün tədbirləri gör →</span><span data-en>See all events →</span></a></div>
+      </div>
+    </div>
+    <!-- Bilet Al -->
+    <div class="bilet-wrap" id="biletWrap">
+      <button class="btn btn-gold" onclick="toggleDrop('biletWrap')">🎫 <span data-az>Bilet Al ▾</span><span data-en>Get Tickets ▾</span></button>
+      <div class="bilet-drop">
+        <div class="bilet-drop-title"><span data-az>Aktiv tədbirlər</span><span data-en>Active events</span></div>
+        <div class="bilet-item" onclick="location.href='mmf_inner_page_FINAL.html'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli Marketinq Forumu 2026</span><span data-en>National Marketing Forum 2026</span></div><div class="bilet-date"><span data-az>6 İyun 2026 · Bakı Konqres Mərkəzi</span><span data-en>June 6, 2026 · Baku Congress Center</span></div></div></div>
+        <div class="bilet-item" onclick="location.href='facemark_homepage_FINAL.html#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli İnsan Resursları Forumu 2026</span><span data-en>National HR Forum 2026</span></div><div class="bilet-date"><span data-az>16 May 2026 · Baku Marriott Hotel</span></div></div></div>
+        <div class="bilet-item" onclick="location.href='facemark_homepage_FINAL.html#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Bloger və İnfluenserlər Forumu 2026</span><span data-en>Blogger & Influencer Forum 2026</span></div><div class="bilet-date"><span data-az>10–11 İyun 2026 · Dreamland Baku</span></div></div></div>
+        <div class="bilet-cta"><a href="facemark_homepage_FINAL.html#events"><span data-az>Bütün tədbirlərə bax →</span><span data-en>View all events →</span></a></div>
+      </div>
+    </div>
+    <!-- Müraciət Et -->
+    <button class="btn-dark-nav" onclick="openMuracietModal()">📩 <span data-az>Müraciət Et</span><span data-en>Send Inquiry</span></button>
+  </div>
+</header>
+
+<!-- TICKER (dark bg full-width, scroll constrained to 1200px) -->
+<div class="ticker-outer">
+  <div class="ticker-container">
+    <span class="ticker-label">XƏBƏRLƏR</span>
+    <div class="ticker-viewport">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="news-hero">
+  <div class="news-hero-in">
+    <div>
+      <div class="hero-badge"><span data-az>Facemark Biznes Radarı</span><span data-en>Facemark Business Radar</span></div>
+      <h1><span data-az>Azərbaycan və dünya<br>biznesinin <em>canlı nəbzi</em></span><span data-en>The <em>live pulse</em> of<br>Azerbaijan &amp; world business</span></h1>
+      <p class="news-hero-desc"><span data-az>14 kateqoriya, 50+ mənbə, real vaxt xəbərlər. Rəhbərlər üçün filtrlənmiş, analiz edilmiş, hazır materiallar.</span><span data-en>14 categories, 50+ sources, real-time news. Filtered and analyzed for executives.</span></p>
+      <p style="font-size:.68rem;color:rgba(255,255,255,.32);line-height:1.65;max-width:480px;margin-bottom:20px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px"><span data-az>Etibarlı mənbələrdən kurasiya edilmiş xəbərlər, AI xülasələr və lokal analiz. Business Radar orijinal məzmun yaratmır. Bütün xəbərlər etibarlı qlobal mənbələrdən toplanır.</span><span data-en>Curated news from trusted sources, AI summaries and local analysis. Business Radar does not create original content. All news is aggregated from trusted global sources.</span></p>
+      <div class="hero-stats">
+        <div class="hstat"><b>14</b><span><span data-az>Kateqoriya</span><span data-en>Categories</span></span></div>
+        <div class="hstat"><b>50+</b><span><span data-az>Mənbə</span><span data-en>Sources</span></span></div>
+        <div class="hstat"><b>Canlı</b><span><span data-az>Yenilənmə</span><span data-en>Live Updates</span></span></div>
+      </div>
+    </div>
+    <div class="hero-right-box" style="min-width:420px;max-width:520px">
+      <h3><span data-az>Bu gün ən çox oxunan</span><span data-en>Most read today</span></h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 16px">
+        <div class="hnm-item" onclick="openArticle(1)"><div class="hnm-dot"></div><div class="hnm-text"><span data-az>Fed faizi 25bp endirdi — qlobal bazarlar reaksiya verdi</span><span data-en>Fed cuts 25bp — global markets react</span></div></div>
+        <div class="hnm-item" onclick="openArticle(4)"><div class="hnm-dot"></div><div class="hnm-text"><span data-az>Google $3 mlrd-a Inflection AI-ı aldı</span><span data-en>Google acquires Inflection AI for $3bn</span></div></div>
+        <div class="hnm-item" onclick="openArticle(21)"><div class="hnm-dot"></div><div class="hnm-text"><span data-az>Bakıda ilk unicorn iddiası — AI startap $120M qiymətləndirildi</span><span data-en>First Baku unicorn — AI startup valued $120M</span></div></div>
+        <div class="hnm-item" onclick="openArticle(7)"><div class="hnm-dot"></div><div class="hnm-text"><span data-az>OPEC+ gündəlik 1 mln barel azaldır</span><span data-en>OPEC+ cuts 1mn barrels daily</span></div></div>
+        <div class="hnm-item" onclick="openArticle(14)"><div class="hnm-dot"></div><div class="hnm-text"><span data-az>Türk lirəsi 24 saatda 3.4% düşdü</span><span data-en>Turkish lira drops 3.4% in 24 hours</span></div></div>
+        <div class="hnm-item" onclick="openArticle(2)"><div class="hnm-dot"></div><div class="hnm-text"><span data-az>Stripe IPO-ya hazırlaşır — $65 mlrd qiymətləndirmə</span><span data-en>Stripe prepares for IPO — $65bn valuation</span></div></div>
+        <div class="hnm-item" onclick="openArticle(22)"><div class="hnm-dot"></div><div class="hnm-text"><span data-az>Azərbaycan qeyri-neft sektoru 7.3% artdı</span><span data-en>Azerbaijan non-oil sector grew 7.3%</span></div></div>
+        <div class="hnm-item" onclick="openArticle(3)"><div class="hnm-dot"></div><div class="hnm-text"><span data-az>ECB kredit şərtlərini yumşaldır</span><span data-en>ECB eases credit conditions</span></div></div>
+        <div class="hnm-item" onclick="openArticle(24)"><div class="hnm-dot"></div><div class="hnm-text"><span data-az>S&amp;P 500 rekord zirvəyə çatdı: 5,800</span><span data-en>S&amp;P 500 hits record high: 5,800</span></div></div>
+        <div class="hnm-item" onclick="openArticle(20)"><div class="hnm-dot"></div><div class="hnm-text"><span data-az>Exxon Mobil Pioneer-i $60 mlrd-a aldı</span><span data-en>Exxon acquires Pioneer for $60bn</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRIEF -->
+<div class="brief-section">
+  <div class="brief-in">
+    <div class="brief-header">
+      <div class="brief-label"><span data-az>Günün Qısa İcmalı</span><span data-en>Daily Brief</span></div>
+      <div class="brief-title" style="margin-left:10px"><span data-az>10 Vacib Hadisə</span><span data-en>10 Key Events</span></div>
+    </div>
+    <div class="brief-grid" id="briefGrid"></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="page-body">
+  <div class="pb-in">
+    <div class="main-grid">
+
+      <!-- FEED COLUMN -->
+      <div>
+        <div class="filter-section">
+          <p class="filter-sec-title"><span data-az>Dünyadan xəbərləri özəl şərhlərlə fərqli filtrlərə görə oxu</span><span data-en>Read world news with expert insights by filter</span><small><span data-az>Kateqoriya, region və ya peşə seçin — filtrlər birlikdə işləyir</span><span data-en>Select category, region and/or profession — filters combine</span></small></p>
+          <!-- Kateqoriya + Region yan-yana -->
+          <div class="flt-top-row">
+            <div class="flt-block-box">
+              <div class="flt-block">
+                <div class="flt-block-hdr">
+                  <span class="flt-label" id="labelCat"><span data-az>Kateqoriya</span><span data-en>Category</span><span class="flt-hint"><span data-az>— seç</span><span data-en>— select</span></span></span>
+                  <button class="filter-clear" id="filterClearBtn" onclick="clearFilters()"><span data-az>Sıfırla ×</span><span data-en>Reset ×</span></button>
+                </div>
+                <div class="flt-grid" id="filterCats"></div>
+              </div>
+            </div>
+            <div class="flt-block-box">
+              <div class="flt-block">
+                <div class="flt-block-hdr">
+                  <span class="flt-label" id="labelReg"><span data-az>Region</span><span data-en>Region</span><span class="flt-hint"><span data-az>— seç</span><span data-en>— select</span></span></span>
+                </div>
+                <div class="flt-grid-country" id="filterCountries"></div>
+              </div>
+            </div>
+          </div>
+          <hr class="flt-divider">
+          <!-- Peşə istiqaməti -->
+          <div class="flt-block">
+            <div class="flt-block-hdr">
+              <span class="flt-label" id="labelProf"><span data-az>Peşə istiqaməti</span><span data-en>Profession</span><span class="flt-hint"><span data-az>— seç</span><span data-en>— select</span></span></span>
+            </div>
+            <div class="flt-grid" id="filterProfs"></div>
+          </div>
+          <div class="filter-active-tags" id="activeTagsRow"></div>
+        </div>
+        <div class="feed-top">
+          <div class="results-count" id="resultsCount"></div>
+        </div>
+        <div id="newsFeed"></div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div class="sb-card">
+          <div class="sb-title"><span data-az>AI Xəbər Brifinqi</span><span data-en>AI News Brief</span></div>
+          <div class="ai-brief-item" onclick="openArticle(1)" style="cursor:pointer">
+            <div class="ai-head"><span data-az>Maliyyə bazarları gərgindir</span><span data-en>Financial markets under pressure</span></div>
+            <div class="ai-sub"><span data-az>Fed qərarından sonra dollar indeksi 0.4% geri çəkildi. CFO-lar valyuta strategiyasını yenidən nəzərdən keçirməlidir.</span><span data-en>Dollar index retreated 0.4% after Fed decision. CFOs should revisit currency strategy.</span></div>
+          </div>
+          <div class="ai-brief-item" onclick="openArticle(4)" style="cursor:pointer">
+            <div class="ai-head"><span data-az>Texnologiya M&amp;A dalğası</span><span data-en>Tech M&amp;A wave</span></div>
+            <div class="ai-sub"><span data-az>Google, Microsoft və Meta 2 həftədə $12 mlrd-lıq alım elan etdi. AI aktiv qiymətləri rekord səviyyəyə çatır.</span><span data-en>Google, Microsoft and Meta announced $12bn acquisitions in 2 weeks. AI asset prices hit records.</span></div>
+          </div>
+          <div class="ai-brief-item" onclick="openArticle(22)" style="cursor:pointer">
+            <div class="ai-head"><span data-az>Azərbaycan iqtisadiyyatı</span><span data-en>Azerbaijan economy</span></div>
+            <div class="ai-sub"><span data-az>Q2 2026: qeyri-neft sektoru 7.3% artdı. Startap ekosistemi regionda lider mövqeyə yaxınlaşır.</span><span data-en>Q2 2026: non-oil sector grew 7.3%. Startup ecosystem nearing regional leadership.</span></div>
+          </div>
+        </div>
+
+        <!-- AKTİV TƏDBİRLƏR -->
+        <div class="sb-card sb-card-events">
+          <div class="sb-title"><span data-az>Aktiv Facemark Tədbirləri</span><span data-en>Active Facemark Events</span></div>
+          <div class="sb-event-item" onclick="location.href='mmf_inner_page_FINAL.html'">
+            <div class="sbe-dot"></div>
+            <div>
+              <div class="sbe-name"><span data-az>Milli Marketinq Forumu 2026</span><span data-en>National Marketing Forum 2026</span></div>
+              <div class="sbe-date"><span data-az>6 İyun 2026 · Bakı Konqres Mərkəzi</span><span data-en>June 6, 2026 · Baku Congress Center</span></div>
+            </div>
+          </div>
+          <div class="sb-event-item" onclick="location.href='facemark_homepage_FINAL.html#events'">
+            <div class="sbe-dot"></div>
+            <div>
+              <div class="sbe-name"><span data-az>Milli İnsan Resursları Forumu 2026</span><span data-en>National HR Forum 2026</span></div>
+              <div class="sbe-date"><span data-az>16 May 2026 · Baku Marriott Hotel</span><span data-en>May 16, 2026 · Baku Marriott Hotel</span></div>
+            </div>
+          </div>
+          <div class="sb-event-item" onclick="location.href='facemark_homepage_FINAL.html#events'">
+            <div class="sbe-dot"></div>
+            <div>
+              <div class="sbe-name"><span data-az>Bloger və İnfluenserlər Forumu 2026</span><span data-en>Blogger & Influencer Forum 2026</span></div>
+              <div class="sbe-date"><span data-az>10–11 İyun 2026 · Dreamland Baku</span><span data-en>June 10–11, 2026 · Dreamland Baku</span></div>
+            </div>
+          </div>
+          <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border)">
+            <a href="facemark_homepage_FINAL.html#events" style="font-size:.67rem;font-weight:700;color:var(--gold)"><span data-az>Bütün tədbirlərə bax →</span><span data-en>View all events →</span></a>
+          </div>
+        </div>
+
+        <div class="sub-card">
+          <h4><span data-az>Xəbərlərə abunə ol</span><span data-en>Subscribe to news</span></h4>
+          <p><span data-az>Hər səhər seçilmiş xəbərlər birbaşa inboxuna gəlsin</span><span data-en>Curated news delivered to your inbox every morning</span></p>
+          <div class="sub-input-row">
+            <input type="email" placeholder="email@example.com">
+            <button><span data-az>Abunə</span><span data-en>Subscribe</span></button>
+          </div>
+        </div>
+
+        <!-- ƏN SON XƏBƏRLƏR -->
+        <div class="sb-card" id="latestNewsCard" style="display:none">
+          <div class="sb-title"><span data-az>Ən son xəbərlər</span><span data-en>Latest News</span></div>
+          <div id="latestNewsItems"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="foot" id="contact">
+  <div class="foot-in">
+    <div class="fgrid">
+      <div class="fcol">
+        <div class="flogo"><img src="https://facemark.az/public/storage/images/ACGaivoyKw8HE5IwOGZwzjHlZVJgLSb36XNJBXnr.png" alt="Facemark" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none;font-size:.95rem;font-weight:800;font-style:italic;color:var(--gold)">facemark</span></div>
+        <p class="fcol-desc"><span data-az>Azərbaycanda biznes tədbirlərinin aparıcı platforması. 15 ildən artıq təcrübə.</span><span data-en>The leading business events platform in Azerbaijan. Over 15 years of experience.</span></p>
+        <div class="f-socials">
+          <a href="https://facebook.com/facemark.az" target="_blank" class="fsoc" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg></a>
+          <a href="https://www.instagram.com/_facemark?igsh=YmJkYjNieWYwZnJh" target="_blank" class="fsoc" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://www.linkedin.com/company/facemark/" target="_blank" class="fsoc" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://www.youtube.com/channel/UCC3A17lgWFY3PPpU7tBNydg" target="_blank" class="fsoc" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.499 6.203a3.008 3.008 0 00-2.089-2.089c-1.87-.501-9.4-.501-9.4-.501s-7.509-.01-9.399.501A3.008 3.008 0 00.5 6.203a31.45 31.45 0 00-.5 5.799 31.45 31.45 0 00.501 5.783 3.008 3.008 0 002.088 2.088c1.868.502 9.4.502 9.4.502s7.509 0 9.399-.502a3.008 3.008 0 002.089-2.088 31.45 31.45 0 00.5-5.783 31.45 31.45 0 00-.478-5.799zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+          <a href="https://www.tiktok.com/@__facemark" target="_blank" class="fsoc" title="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg></a>
+        </div>
+      </div>
+      <div class="fcol">
+        <h4><span data-az>Şirkət</span><span data-en>Company</span></h4>
+        <a href="about_FINAL.html"><span data-az>Haqqımızda</span><span data-en>About Us</span></a>
+        <a href="#events"><span data-az>Tədbirlər</span><span data-en>Events</span></a>
+        <a href="komandamiz.html"><span data-az>Komandamız</span><span data-en>Our Team</span></a>
+        <a href="fmr_tv.html" style="color:var(--gold);font-weight:700">FMR TV</a>
+        <a href="karyera.html"><span data-az>Karyera</span><span data-en>Careers</span></a>
+      </div>
+      <div class="fcol">
+        <h4><span data-az>Tədbirlər</span><span data-en>Events</span></h4>
+        <a href="#events"><span data-az>Aktiv Tədbirlər</span><span data-en>Active Events</span></a>
+        <a href="#events"><span data-az>Yaxınlaşan</span><span data-en>Upcoming</span></a>
+        <a href="#events"><span data-az>Keçmiş Tədbirlər</span><span data-en>Past Events</span></a>
+        <a href="#events"><span data-az>Partnyor Tədbirləri</span><span data-en>Partner Events</span></a>
+        <a href="#events"><span data-az>Ümumi Siyahı</span><span data-en>Full List</span></a>
+      </div>
+      <div class="fcol">
+        <h4><span data-az>Tədbirlərdən Məlumatlı Ol</span><span data-en>Stay Informed About Events</span></h4>
+        <p style="font-size:.68rem;color:rgba(255,255,255,.3);margin-bottom:7px"><span data-az>Yeni tədbirlərdən ilk sən xəbər al</span><span data-en>Be the first to hear about new events</span></p>
+        <div class="f-sub"><input type="email" placeholder="E-poçt ünvanın" data-az-placeholder="E-poçt ünvanın" data-en-placeholder="Your email address"><button><span data-az>Abunə</span><span data-en>Subscribe</span></button></div>
+        <div style="margin-top:8px;font-size:.68rem;color:rgba(255,255,255,.32)"><a href="tel:+994502161636" style="color:var(--gold);display:block;margin-bottom:2px">+994 50 216 16 36</a><a href="mailto:info@facemark.az" style="color:var(--gold);display:block">info@facemark.az</a></div>
+      </div>
+    </div>
+    <div class="fbot">
+            <div><span data-az>© 2026 Facemark LLC. Bütün hüquqlar qorunur.</span><span data-en>© 2026 Facemark LLC. All rights reserved.</span></div>
+      <div class="fstats"><span class="fst"><b>116+</b> <span data-az>Tədbir</span><span data-en>Events</span></span><span class="fst"><b>15</b> <span data-az>İl</span><span data-en>Years</span></span><span class="fst"><b>100K+</b> <span data-az>İştirakçı</span><span data-en>Attendees</span></span></div>
+      <div style="display:flex;gap:12px"><a href="#" style="color:rgba(255,255,255,.25)"><span data-az>Məxfilik</span><span data-en>Privacy</span></a><a href="#" style="color:rgba(255,255,255,.25)"><span data-az>Şərtlər</span><span data-en>Terms</span></a></div>
+    </div>
+  </div>
+</footer>
+<a href="https://wa.me/994502161636" target="_blank" class="chat-btn" title="WhatsApp">💬</a>
+
+<!-- ARTICLE MODAL -->
+<div class="modal-overlay" id="articleModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div class="modal-title" id="mTitle"></div>
+      <button class="modal-close" onclick="document.getElementById('articleModal').classList.remove('open')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-chips" id="mChips"></div>
+      <div class="modal-src" id="mSrc"></div>
+      <div class="modal-sum" id="mSum"></div>
+      <div class="modal-why" id="mWhy"></div>
+      <div class="modal-profs" id="mProfs"></div>
+      <div class="modal-article-body" id="mBody"></div>
+      <button class="modal-close-btn" onclick="document.getElementById('articleModal').classList.remove('open')">
+        <span data-az>Bağla</span><span data-en>Close</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MÜRACIƏT MODAL -->
+<div class="muraciet-bg" id="muracietModal" onclick="if(event.target===this)closeMuracietModal()">
+  <div class="muraciet-box">
+    <h3><span data-az>Müraciət Et</span><span data-en>Send Inquiry</span></h3>
+    <input type="text" placeholder="Ad Soyad *" data-az-placeholder="Ad Soyad *" data-en-placeholder="Full Name *">
+    <input type="text" placeholder="Şirkət adı" data-az-placeholder="Şirkət adı" data-en-placeholder="Company name">
+    <input type="text" placeholder="Telefon *" data-az-placeholder="Telefon *" data-en-placeholder="Phone *">
+    <input type="email" placeholder="E-poçt" data-az-placeholder="E-poçt" data-en-placeholder="Email">
+    <select><option value=""><span data-az>Xidmət / Mövzu seçin</span><span data-en>Select service / topic</span></option><option><span data-az>Tədbirlərin Təşkili</span><span data-en>Event Organization</span></option><option><span data-az>Korporativ Tədbirlər</span><span data-en>Corporate Events</span></option><option><span data-az>Netvorkinq Görüşləri</span><span data-en>Networking Events</span></option><option><span data-az>Sponsorluq</span><span data-en>Sponsorship</span></option><option><span data-az>Digər</span><span data-en>Other</span></option></select>
+    <textarea placeholder="Əlavə qeydlər..." data-az-placeholder="Əlavə qeydlər..." data-en-placeholder="Additional notes..."></textarea>
+    <div class="muraciet-btns">
+      <button class="muraciet-cancel" onclick="closeMuracietModal()"><span data-az>İptal</span><span data-en>Cancel</span></button>
+      <button class="muraciet-send" onclick="closeMuracietModal();alert('Müraciətiniz qəbul edildi!')"><span data-az>Göndər →</span><span data-en>Send →</span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* LANG */
+function toggleDrop(id){var el=document.getElementById(id);var isOpen=el.classList.contains('open');document.querySelectorAll('.bilet-wrap.open').forEach(function(x){x.classList.remove('open');});if(!isOpen)el.classList.add('open');}
+/* Müraciət Modal */
+function openMuracietModal(){document.getElementById('muracietModal').classList.add('open');document.body.style.overflow='hidden';}
+function closeMuracietModal(){document.getElementById('muracietModal').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('click',function(e){if(!e.target.closest('.bilet-wrap'))document.querySelectorAll('.bilet-wrap.open').forEach(function(x){x.classList.remove('open');});});
+var _lang='az';
+function setLang(l){
+  _lang=l;
+  document.documentElement.classList.remove('lang-az','lang-en');
+  document.documentElement.classList.add('lang-'+l);
+  document.getElementById('btn-az').classList.toggle('on',l==='az');
+  document.getElementById('btn-en').classList.toggle('on',l==='en');
+  renderFeed();
+  renderBrief();
+  buildTicker();
+  setTimeout(balanceSidebar,50);
+}
+
+/* SITE SEARCH */
+
+function getLang(a,field){
+  var enField=field+'_en';
+  return (_lang==='en'&&a[enField])?a[enField]:a[field];
+}
+function getCatLabel(meta){
+  return (_lang==='en'&&meta.label_en)?meta.label_en:meta.label;
+}
+
+var SITE_INDEX=[
+  {az:'Maliyyə Xəbərləri',en:'Finance News',cat_az:'Biznes Radar',cat_en:'Business Radar',url:'business_radar.html'},
+  {az:'Texnologiya',en:'Technology',cat_az:'Biznes Radar',cat_en:'Business Radar',url:'business_radar.html'},
+  {az:'Azərbaycan Xəbərləri',en:'Azerbaijan News',cat_az:'Biznes Radar',cat_en:'Business Radar',url:'business_radar.html'},
+  {az:'Enerji & Ekoloji',en:'Energy',cat_az:'Biznes Radar',cat_en:'Business Radar',url:'business_radar.html'},
+  {az:'Qlobal Bazarlar',en:'Global Markets',cat_az:'Biznes Radar',cat_en:'Business Radar',url:'business_radar.html'}
+];
+function toggleSiteSearch(){
+  var box=document.getElementById('siteSearchBox');
+  box.classList.toggle('open');
+  if(box.classList.contains('open'))document.getElementById('siteSearchInput').focus();
+}
+document.addEventListener('click',function(e){
+  var wrap=document.getElementById('siteSearch');
+  var box=document.getElementById('siteSearchBox');
+  if(wrap&&box&&!wrap.contains(e.target))box.classList.remove('open');
+});
+function runSiteSearch(q){
+  var res=document.getElementById('siteSearchResults');
+  q=q.trim().toLowerCase();
+  if(!q){res.innerHTML='';return;}
+  var m=SITE_INDEX.filter(function(i){return i.az.toLowerCase().indexOf(q)>-1||i.en.toLowerCase().indexOf(q)>-1;}).slice(0,6);
+  if(!m.length){res.innerHTML='<div class="site-search-empty">Nəticə tapılmadı</div>';return;}
+  res.innerHTML=m.map(function(x){return '<a class="site-search-result" href="'+x.url+'">'+(_lang==='en'?x.en:x.az)+'<div class="ssr-cat">'+(_lang==='en'?x.cat_en:x.cat_az)+'</div></a>';}).join('');
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    document.getElementById('articleModal').classList.remove('open');
+    closeMuracietModal();
+    document.getElementById('siteSearchBox').classList.remove('open');
+  }
+});
+
+/* DATA */
+/* Categories — Facemark Master Source Database v2 (Category Ranking sheet) */
+var CAT_META={
+  corporate:   {label:'Şirkətlər & M&A',        label_en:'Companies & M&A',        chip:'chip-gold'},
+  bazarlar:    {label:'Bazarlar & Maliyyə',       label_en:'Markets & Finance',       chip:'chip-blue'},
+  makro:       {label:'Makroiqtisad. & Siyasət',  label_en:'Macro & Policy',          chip:'chip-neutral'},
+  texnologiya: {label:'Texnologiya & AI',          label_en:'Technology & AI',         chip:'chip-blue'},
+  enerji:      {label:'Enerji & Əmtəə',           label_en:'Energy & Commodities',    chip:'chip-green'},
+  bank:        {label:'Bank & Fintech',            label_en:'Banking & Fintech',       chip:'chip-gold'},
+  startapvc:   {label:'Startap & VC',             label_en:'Startup & VC',            chip:'chip-dark'},
+  liderlik:    {label:'Liderlik & İdarəetmə',     label_en:'Leadership & Management', chip:'chip-dark'},
+  tedarik:     {label:'Təchizat & Ticarət',       label_en:'Supply Chain & Trade',    chip:'chip-neutral'},
+  marketinqhr: {label:'Marketinq, HR & İş',       label_en:'Marketing, HR & Work',    chip:'chip-neutral'}
+};
+var ARTICLES=[
+  {id:1,cat:'bazarlar',sub:'Faiz & Bazarlar',country:'USA',flag:'🇺🇸',src:'Reuters',t:'3 saat',read:'4 dəq',gundem:true,profs:['CEO','CFO'],h:'Fed faizi 25bp endirdi — qlobal bazarlar reaksiya verdi',sum:'ABŞ Mərkəzi Bankı faiz dərəcəsini 5.25%-dən 5.00%-ə endirdi. S&P 500 0.8% artdı, dollar indeksi 0.4% zəiflədi.',why:'Dollar zəifliyi CFO-lar üçün valyuta strategiyasını yenidən gözdən keçirməyi tələb edir.',body:["ABŞ Federal Ehtiyat Sistemi çərşənbə günü aparılan iclasında gözlənildiyi kimi faiz dərəcəsini 25 baza punktu aşağı salıb, bu da faiz dərəcəsini 5.00% səviyyəsinə gətirib çıxarıb. Fed sədri Jerome Powell açıqlamasında əmək bazarının sabit qaldığını, inflyasiyanın isə hədəfə yaxınlaşdığını vurğulayıb. Bu qərar iyunun əvvəlindən bəri bazarların gözlədiyi ssenariylə tam üst-üstə düşdü.", "Bazarlar dərhal reaksiya verdi: S&P 500 0.8% artdı, Nasdaq isə 1.1% qalxdı. Dollar indeksi 0.4% zəifləyərək 3 aylıq minimuma düşdü. Qızıl qiyməti yenidən $2,400 həddini aşdı. Avrozona istiqrazları isə Avropa bazarlarının siqnala müsbət reaksiya verdiyi fonda güclü alış həcmi qeydə aldı.", "Analitiklər növbəti Fed iclasını noyabra proqnozlaşdırır. Bazarlar 2026-cı ilin sonuna qədər əlavə 2 faiz endirimi gözləyir. CFO-lar üçün bu dinamika dövriyyə kapitalı idarəetməsini, xüsusilə dollar denominasiyalı borcların rebalansını prioritetə çevirir. Azərbaycan şirkətləri isə dollar zəifliyini ixrac gəlirlərini optimallaşdırmaq üçün dəyərləndirməlidir."],h_en:"Fed cuts rates 25bp — global markets react",sum_en:"The US Federal Reserve cut its benchmark rate from 5.25% to 5.00%. The S&P 500 gained 0.8% and the dollar index weakened 0.4%.",why_en:"Dollar weakness requires CFOs to revisit currency hedging strategies immediately.",body_en:["The US Federal Reserve cut its benchmark interest rate by 25 basis points on Wednesday, bringing it to 5.00% as widely expected. Fed Chair Jerome Powell noted that the labor market remains stable while inflation continues to approach the 2% target. The decision aligned perfectly with market expectations that had been building since early June.", "Markets responded immediately: the S&P 500 gained 0.8%, Nasdaq rose 1.1%, and the dollar index fell 0.4% to a 3-month low. Gold prices pushed back above $2,400. European bonds saw strong buying as markets there also reacted positively to the Fed's signal.", "Analysts project the next Fed meeting in November. Markets are pricing in two additional rate cuts by end-2026. For CFOs, this dynamic makes working capital management — particularly rebalancing dollar-denominated debt — a top priority. Companies with USD exposure should now reassess export revenue optimization strategies."]},
+  {id:2,cat:'bank',sub:'İPO & Fintech',country:'USA',flag:'🇺🇸',src:'Bloomberg',t:'5 saat',read:'3 dəq',gundem:false,profs:['CFO','Startap','Bank & Fintech'],h:'Stripe 2026-da IPO-ya hazırlaşır — $65 mlrd qiymətləndirmə',sum:'Fintech devi Stripe bu ilin IV rübündə halka arzını planlaşdırır. Qiymətləndirməsi $50 mlrd-dan $65 mlrd-a yüksəldi.',why:'Fintech IPO-ları öz portfellərini diversifikasiya etmək istəyən investorlar üçün əsas mövzu olacaq.',body:["Fintech sənayesinin ən böyük şirkətlərindən biri olan Stripe, 2026-cı ilin IV rübündə əsas ABŞ borsasında halka arzını planlaşdırdığını rəsmən açıqladı. Şirkətin son özel raundundakı qiymətləndirilməsi $50 mlrd-dan $65 mlrd-a yüksəldi. Bu, son 3 ilin ən böyük texnologiya IPO-su olmaq potensialına malikdir.", "Stripe-ın gəlirləri 2025-də $10 mlrd-ı keçdi, 45% illik artım qeydə aldı. Şirkətin 50-dən çox ölkədə fəaliyyəti var və müştəri bazasına Amazon, Shopify, Lyft kimi nəhənglər daxildir. CFO Mike Clayville hesabat dövründə şirkətin xalis mənfəət marjını 12%-ə çatdırdığını açıqladı.", "Fintech IPO-ları investorların diqqətini çəkən mövzuya çevrilib. 2024-də baş tutan Klarna IPO-sunun ardından Stripe-ın bazara çıxışı Silikon Vadisinin yenidən özel şirkətlər üçün IPO pəncərəsini açacağının siqnalı kimi qəbul edilir. Regional investorlar üçün bu IPO, xüsusilə fintech sektorunda portfeli diversifikasiya etmək üçün nadir fürsət yaradır."],h_en:"Stripe prepares for 2026 IPO — $65bn valuation",sum_en:"Fintech giant Stripe is planning its stock market debut in Q4 of this year. Its valuation has risen from $50bn to $65bn.",why_en:"Fintech IPOs will be the key topic for investors looking to diversify their portfolios.",body_en:["Stripe, one of the world's largest fintech companies, officially announced its plans for a US stock exchange listing in Q4 2026. The company's valuation rose from $50bn to $65bn in its most recent private round. This could be the largest tech IPO in the past three years.", "Stripe's revenue surpassed $10bn in 2025, recording 45% annual growth. The company operates in more than 50 countries and counts Amazon, Shopify, and Lyft among its major customers. CFO Mike Clayville disclosed that the company reached a 12% net profit margin during the reporting period.", "Fintech IPOs have become the subject capturing investor attention. Following Klarna's 2024 market debut, Stripe's listing is seen as a signal that Silicon Valley is once again opening the IPO window for private companies. For regional investors, this IPO represents a rare opportunity to diversify portfolios in the fintech sector."]},
+  {id:3,cat:'bank',sub:'Bankçılıq',country:'Europe',flag:'🇪🇺',src:'FT',t:'7 saat',read:'3 dəq',gundem:false,profs:['CFO','CEO','Bank & Fintech'],h:'ECB kredit şərtlərini yumşaldır — Avropa bankları reaksiya verir',sum:'Avropa Mərkəzi Bankı faiz dərəcəsini 25bp aşağı saldı. Frankfurt birjası 1.2% böyüdü.',why:'Avropa bazarlarında kapital cəlb imkanları genişlənir — xarici investorlar üçün fürsət.',body:["Avropa Mərkəzi Bankı 4-cü dəfə ardıcıl olaraq faiz dərəcəsini 25 baza punktu aşağı salaraq 3.25%-ə endirdi. ECB Prezidenti Christine Lagarde açıqlamasında Avropa iqtisadiyyatında inflyasiyanın 2.3%-ə düşdüyünü və bu siyasətin davam edəcəyini bildirdi.", "Frankfurt birjası DAX indeksi 1.2% artdı, Milano və Madrid birjaları da müsbət dinamika göstərdi. Avro-dollar məzənnəsi isə ECB siqnalına reaksiya olaraq 0.3% geri çəkildi. Avropa bankları, xüsusilə ING, BNP Paribas və Deutsche Bank hissədarları güclü alış həcmi qeydə aldı.", "Avropa bazarlarında faiz mühitinin yumşalması kapital cəlb etmək üçün fürsət yaradır. Azərbaycan şirkətləri Avropadan maliyyə cəlb etmək istəsə, Avropa İnvestisiya Bankı (EIB) kreditlərini və Avropa Yenidənqurma və İnkişaf Bankı (EBRD) proqramlarını nəzərdən keçirməlidir. Faizlərin aşağı olduğu bu dövr uzunmüddətli kapital üçün əlverişli zəmin yaradır."],h_en:"ECB eases credit conditions — European banks respond",sum_en:"The European Central Bank cut its rate by 25bp for the fourth consecutive time. The Frankfurt exchange rose 1.2%.",why_en:"Easing conditions in European capital markets open opportunities for foreign investors to raise capital.",body_en:["The European Central Bank cut its benchmark rate by 25 basis points to 3.25% for the fourth consecutive time. ECB President Christine Lagarde noted that European inflation has fallen to 2.3% and that this policy stance will continue.", "The DAX in Frankfurt gained 1.2%, with Milan and Madrid exchanges also posting positive moves. The euro-dollar exchange rate retreated 0.3% in response to the ECB signal. European banks — particularly ING, BNP Paribas, and Deutsche Bank — saw strong buying interest from shareholders.", "The easing interest rate environment in European markets creates opportunities to attract capital. Companies wishing to raise finance from Europe should consider European Investment Bank (EIB) loans and European Bank for Reconstruction and Development (EBRD) programs. This period of low rates creates favorable ground for long-term capital."]},
+  {id:4,cat:'corporate',sub:'M&A',country:'USA',flag:'🇺🇸',src:'TechCrunch',t:'1 saat',read:'4 dəq',gundem:true,profs:['CEO','AI & Tech'],h:'Google $3 mlrd-a Inflection AI-ı aldı',sum:'Google-un Inflection AI-ı satın alması texnologiya sektorunda ilin ən böyük M&A əməliyyatı oldu.',why:'AI aktiv qiymətləri 2024-dən bu yana 3x artıb. Hər CEO öz AI M&A strategiyasını bu kontekstdə yenidən qiymətləndirməlidir.',body:["Google, süni intellekt sahəsinin ən perspektivli startaplarından biri hesab edilən Inflection AI-ı $3 mlrd nağd pula satın aldığını açıqladı. Əməliyyat yalnız şirkətin texnologiyasını deyil, 50-dən çox doktorantura dərəcəli AI mühəndisini və komandasını da Google DeepMind çatısına gətirir.", "Inflection AI 2022-ci ildə Reid Hoffman (LinkedIn həmtəsisçisi) və Mustafa Suleyman tərəfindən qurulub. Şirkətin Pi chatbotu istifadəçi mərkəzli emosional AI köməkçisi kimi tanınmışdı. Bu satınalma Google-un Gemini model ailəsini gücləndirmək üçün xarici AI istedadlarını agresiv şəkildə cəlb etdiyini göstərir.", "Texnologiya sektorunda 2026-cı ildə AI M&A fəaliyyəti rekord həddə çatıb. Yalnız bu yarımildə $40 mlrd-dan çox AI aktivlərinin əldə keçməsi qeydə alınıb. Hər CEO öz şirkətinin AI transformasiyasını planlaşdırarkən make-or-buy qərarını strategiyasının mərkəzinə qoymalıdır."],h_en:"Google acquires Inflection AI for $3bn",sum_en:"Google's acquisition of Inflection AI became the year's largest M&A deal in the technology sector.",why_en:"AI asset prices have tripled since 2024. Every CEO must reassess their AI M&A strategy in this context.",body_en:["Google announced the acquisition of Inflection AI — considered one of the most promising AI startups — for $3bn in cash. The deal brings not just the company's technology but also a team of over 50 PhD-level AI engineers into the Google DeepMind umbrella.", "Inflection AI was founded in 2022 by Reid Hoffman (LinkedIn co-founder) and Mustafa Suleyman. The company's Pi chatbot had gained recognition as a user-centric emotional AI assistant. This acquisition signals that Google is aggressively recruiting external AI talent to strengthen its Gemini model family.", "AI M&A activity in the technology sector has reached record levels in 2026. More than $40bn in AI assets have changed hands in just the first half of this year. Every CEO planning their company's AI transformation must place the make-or-buy decision at the center of their strategy."]},
+  {id:5,cat:'texnologiya',sub:'Kibertəhlükəsizlik',country:'USA',flag:'🇺🇸',src:'Wired',t:'4 saat',read:'3 dəq',gundem:false,profs:['AI & Tech','CEO'],h:'Microsoft kritik təhlükəsizlik yeniləməsi buraxdı — 2M cihaz təsirləndi',sum:'Microsoft-un aylıq Patch Tuesday buraxılışı kritik RCE zəifliyini bağlayır. IT komandaları dərhal güncəlləməlidir.',why:'Kibertəhlükəsizlik büdcəsi artıq "xərc" deyil, "risk idarəetməsi"dir.',body:["Microsoft Patch Tuesday çərçivəsində aylıq təhlükəsizlik yeniləməsini buraxdı. Bu dəfəki paket xüsusilə kritikdir: Windows Server-in uzaqdan kod icra etmə (Remote Code Execution - RCE) zəifliyini bağlayan yamaq 2 milyondan çox korporativ cihazı birbaşa təsir edir. Zəiflik, haker qruplarının artıq aktiv şəkildə istismar etdiyi CVE-2026-31449 identifikatorunu daşıyır.", "Kibertəhlükəsizlik şirkəti CrowdStrike bu zəifliyə 9.8/10 kritiklik skoru verib - bu, 2023-dən bu yana ən yüksək dərəcədir. IT komandaları mütləq şəkildə 72 saat ərzində sistematik güncəlləmə aparmağı planlaşdırmalıdır. Xüsusilə Windows Server 2019 və 2022 versiyalarını istifadə edən müəssisələr risk altındadır.", "Azərbaycan şirkətlərinin əksəriyyəti Microsoft infrastukturu istifadə etdiyindən bu yeniləmə regional IT menecerlər üçün kritik önəm daşıyır. Kibertəhlükəsizlik büdcəsi artıq 'şirkət xərci' kimi deyil, 'rəqəmsal sığorta' kimi qiymətləndirilməlidir. ISO 27001 sertifikasiyası olan şirkətlər üçün bu yeniləmə həm audit, həm də operasional gündəmin birinci maddəsidir."],h_en:"Microsoft releases critical security patch — 2M devices affected",sum_en:"Microsoft's monthly Patch Tuesday closes a critical RCE vulnerability. IT teams must update immediately.",why_en:"Cybersecurity budgets are no longer 'costs' — they are 'risk management'.",body_en:["Microsoft released its monthly security update as part of Patch Tuesday. This release is particularly critical: a patch closing a Remote Code Execution (RCE) vulnerability in Windows Server directly affects more than 2 million corporate devices. The vulnerability — tracked as CVE-2026-31449 — is already being actively exploited by hacker groups.", "Cybersecurity firm CrowdStrike assigned this vulnerability a criticality score of 9.8/10 — the highest since 2023. IT teams must absolutely plan a systematic update within 72 hours. Organizations running Windows Server 2019 and 2022 versions are particularly at risk.", "Since the majority of companies use Microsoft infrastructure, this update carries critical importance for regional IT managers. Cybersecurity budgets should now be viewed not as 'company expenses' but as 'digital insurance.' For companies with ISO 27001 certification, this update is the first item on both the audit and operational agenda."]},
+  {id:6,cat:'startapvc',sub:'VC & Startap',country:'USA',flag:'🇺🇸',src:'Crunchbase',t:'6 saat',read:'3 dəq',gundem:false,profs:['Startap','AI & Tech'],h:'YC Batch S26: 200 startapdan 18%-i AI/ML sahəsindədir',sum:'Y Combinator-un yaz kohortasında süni intellekt startaplarının payı rekord səviyyəyə çatdı.',why:'Qlobal VC kapitalının 40%-i AI sektoruna axır. Regiondakı investorlar bu trenddən geri qalmamalıdır.',body:["Y Combinator-un 2026 yaz kohortasında (Batch S26) 200 startap var. Bu startapların 18%-i, yəni 36 şirkəti müxtəlif AI/ML məhsullar üzərində işləyir - bu, YC tarixinin ən yüksək AI konsentrasiyasıdır. Əvvəlki rekord 2024-cü ilin yaz kohortasına məxsus idi (14%).", "Bu kohortun coğrafi baxımdan ən maraqlı xüsusiyyəti: 200 startapın 28%-i ABŞ-dan kənar quruculardan ibarətdir. Hindistan, Braziliya, Nigeriya və Cənubi Koreya ən çox qurucunu verən ölkələr sırasındadır. Bu dəfəki kohortda ilk dəfə olaraq bir Azərbaycanlı qurucunun startapı da yer alıb.", "Qlobal VC kapitalının 40%-i AI sektoruna axır - bu rəqəm 2023-də cəmi 18% idi. Azərbaycan startup ekosistemi üçün bu trend iki implikasiya daşıyır: birincisi, AI-a fokuslanmayan startaplar kapital cəlb etməkdə çətinlik çəkəcək; ikincisi, AI-a fokuslanmış startaplar üçün beynəlxalq kapital bazarına çıxış imkanları artıb."],h_en:"YC Batch S26: 18% of 200 startups are AI/ML",sum_en:"The share of artificial intelligence startups in Y Combinator's spring cohort has reached a record high.",why_en:"40% of global VC capital is flowing into AI. Regional investors must not fall behind this trend.",body_en:["Y Combinator's 2026 summer cohort (Batch S26) includes 200 startups. Of these, 18% — or 36 companies — are working on various AI/ML products, the highest AI concentration in YC history. The previous record belonged to the summer 2024 cohort (14%).", "The most interesting geographical feature of this cohort: 28% of the 200 startups come from founders outside the US. India, Brazil, Nigeria, and South Korea are the top countries by number of founders. For the first time, a startup from an Azerbaijani founder is also included in the cohort.", "40% of global VC capital is flowing into AI — a figure that was just 18% in 2023. For the startup ecosystem, this trend carries two implications: first, startups not focused on AI will struggle to raise capital; second, AI-focused startups now have improved access to international capital markets."]},
+  {id:7,cat:'enerji',sub:'OPEC+ & Neft',country:'UAE & Gulf',flag:'🌟',src:'Bloomberg',t:'2 saat',read:'4 dəq',gundem:true,profs:['CEO','Enerji'],h:'OPEC+ gündəlik 1 mln barel azaldır',sum:'OPEC+ bloku iyuldan etibarən istehsalı gündəlik 1 mln barel azaltmaq qərarına gəldi. Brent $88-ə yüksəldi.',why:'Neft qiymətinin artması Azərbaycan büdcəsi üçün müsbət, idxalçı şirkətlər üçün isə mənfi siqnaldır.',body:["OPEC+ bloku gözlənilməz bir qərarla iyuldan etibarən gündəlik neft istehsalını 1 milyon barel azaltmağa qərar verdi. Bu, 2023-cü ildən bəri görülən ən böyük kollektiv azaltmadır. Qərara əsas müqavimət göstərən Birləşmiş Ərəb Əmirliklərinin son anda razılıq verməsi danışıqların ağırlıq mərkəzini dəyişdi.", "Brent xam nefti elan edilən gün $85.40-dan $88.20-ə yüksəldi - 6 aylıq maksimum. OPEC katibliyinin açıqlamasına görə, qərar ilin ikinci yarısında proqnozlaşdırılan tələb artımının daha yavaş olmasına cavab olaraq qəbul edilib. Neft bazarını izləyən analitiklər Brent-in sentyabra qədər $92-95 korridor içərisində qalacağını proqnozlaşdırır.", "Azərbaycan dövlət büdcəsi neft gəlirlərindən güclü şəkildə asılı olduğundan bu qərar dolayı yolla müsbət siqnaldır. SOCAR-ın ixrac gəlirlərinin artması ilə yanaşı, neft qiymətinin yüksəlməsi dövlət kapital layihələri üçün əlavə maliyyə yarada bilər. Bununla belə, neft idxalçısı olan Türkiyə ilə ticari partnyorluğun xərclərinin artacağı nəzərə alınmalıdır."],h_en:"OPEC+ cuts output by 1 million barrels daily",sum_en:"The OPEC+ bloc decided to cut daily oil production by 1 million barrels from July. Brent rose to $88.",why_en:"Rising oil prices are a positive signal for Azerbaijan's budget, but negative for importing companies.",body_en:["The OPEC+ bloc surprised markets by deciding to cut daily oil production by 1 million barrels from July — the largest collective reduction since 2023. The UAE, which had been the main holdout, gave its approval at the last moment, shifting the dynamics of negotiations.", "Brent crude jumped from $85.40 to $88.20 on the day of the announcement — a 6-month high. According to the OPEC secretariat, the decision was taken in response to slower-than-expected demand growth forecast for the second half of the year. Analysts tracking the oil market forecast Brent to remain in the $92–95 corridor through September.", "Since Azerbaijan's state budget is heavily dependent on oil revenues, this decision is indirectly positive. The rise in SOCAR's export revenues, combined with higher oil prices, could generate additional financing for government capital projects. However, rising costs for Turkey — a major trading partner that imports oil — must also be factored in."]},
+  {id:8,cat:'enerji',sub:'Bərpa Enerjisi',country:'Europe',flag:'🇪🇺',src:'Reuters',t:'9 saat',read:'3 dəq',gundem:false,profs:['CEO','Enerji'],h:'Avropa günəş enerjisi rekord: 180 GW illik quraşdırma',sum:'Avropa 2025-də 180 GW yeni günəş paneli quraşdırdı — tarixdə ən yüksək rəqəm.',why:'Yenilənə bilən enerji sektoru biznes üçün yeni imkanlar açır — ESG meyarlarını gözləyən şirkətlər üçün fürsət.',body:["Avropa 2025-ci ildə 180 GW yeni günəş paneli quraşdırdı - bu, tarixdə hər hansı bir bölgənin bir il ərzindəki ən yüksək bərpa enerji quraşdırmasıdır. Bu rəqəm 2024-cü ildəki 142 GW-ı 27% üstələdi. Almaniya (38 GW), İspaniya (34 GW) və Hollandiya (22 GW) lider ölkələr olub.", "Günəş paneli qiymətləri son 3 ildə 62% aşağı düşüb, bu da bərpa enerjisinin ənənəvi enerji mənbələri ilə rəqabət qabiliyyətini xeyli artırıb. Avropa Birliyi 2030-a qədər 600 GW bərpa enerji gücünə çatmaq hədəfini qoyub. Hazırkı temp bu hədəfin vaxtından 2 il əvvəl reallaşacağına işarə edir.", "Azərbaycanda bərpa enerji sektoru hələ inkişaf mərhələsindədir. Abşeron Günəş Elektrik Stansiyası kimi layihələr başladılsa da, potensial istifadə edilməmiş qalır. ESG meyarlarına cavab verən şirkətlər üçün bərpa enerjisindən istifadə artıq həm maliyyə, həm də reputasiya strategiyasının hissəsinə çevrilməlidir."],h_en:"Europe solar record: 180 GW installed annually",sum_en:"Europe installed 180 GW of new solar panels in 2025 — the highest renewable energy installation in history.",why_en:"The renewable energy sector opens new business opportunities — a chance for companies meeting ESG criteria.",body_en:["Europe installed 180 GW of new solar panels in 2025 — the highest renewable energy installation ever recorded in any region in a single year. This figure surpassed the 142 GW recorded in 2024 by 27%. Germany (38 GW), Spain (34 GW), and the Netherlands (22 GW) were the leading countries.", "Solar panel prices have fallen 62% over the past three years, significantly boosting renewable energy's competitiveness against traditional energy sources. The European Union has set a target of reaching 600 GW of renewable energy capacity by 2030. The current pace suggests this target could be achieved two years ahead of schedule.", "Azerbaijan's renewable energy sector is still in a development phase. While projects like the Absheron Solar Power Plant have been initiated, the potential remains largely untapped. For companies meeting ESG criteria, using renewable energy has now become part of both financial and reputational strategy."]},
+  {id:9,cat:'enerji',sub:'ESG & Karbon',country:'Europe',flag:'🇪🇺',src:'FT',t:'11 saat',read:'3 dəq',gundem:false,profs:['CEO','CFO','Enerji'],h:'EU karbon bazarı: ETS qiymətləri 100 €/ton aşdı',sum:'Avropa Birliyi emisyon ticarəti sistemində karbon qiymətləri tarixi zirvəyə çatdı.',why:'Avropa bazarlarında fəaliyyət göstərən şirkətlər ESG strategiyalarını gündəmə almalıdır.',body:["Avropa Birliyi Emisyon Ticarəti Sisteminin (EU ETS) çərçivəsında karbon kreditlərinin qiyməti ton başına €100 həddini keçdi - bu, 2023-dən bəri ilk dəfədir. Qiymət artımının arxasında 2026-cı ildə yürürlüyə girəcək CBAM (Karbon Sərhəd Düzəliş Mexanizmi) ilə bağlı güclü tələb dayanır.", "CBAM mexanizmi Avropa Birliyinə ixrac edən sənaye şirkətlərindən məhsullarının istehsalındakı karbon izini sənədləşdirməsini tələb edir. Yüksək karbon intensivliyinə malik məhsullar ixrac zamanı əlavə vergi yükü ilə üzləşəcək. Polad, sement, alüminium, gübrə və elektrik sənayesi ilk mərhələdə bu mexanizmə cəlb olunacaq.", "Azərbaycandan Avropa bazarlarına ixrac edən şirkətlər, xüsusilə metallurgiya və kimya sektorlarında fəaliyyət göstərənlər, CBAM uyğunluğu üçün indi hazırlıq görməlidir. Sertifikasiyalaşdırılmış karbon hesablaması sistemi qurmaq bu şirkətlər üçün 2026-cı ilin prioritetinə çevrilməlidir."],h_en:"EU carbon market: ETS prices exceed €100/tonne",sum_en:"Carbon prices in the EU Emissions Trading System reached a historic peak.",why_en:"Companies operating in European markets must put ESG strategies on their agenda.",body_en:["Carbon credit prices within the EU Emissions Trading System (EU ETS) crossed the €100 per tonne threshold — the first time since 2023. The price increase is driven by strong demand linked to the Carbon Border Adjustment Mechanism (CBAM), which comes into force in 2026.", "The CBAM mechanism requires industrial companies exporting to the European Union to document the carbon footprint in their production processes. Products with high carbon intensity will face an additional tax burden upon export. Steel, cement, aluminum, fertilizers, and the electricity sector will be included in the first phase.", "Companies exporting from Azerbaijan to European markets — particularly those in metallurgy and chemicals — must now prepare for CBAM compliance. Building a certified carbon accounting system is becoming a top priority for these companies in 2026."]},
+  {id:10,cat:'makro',sub:'Əmək bazarı',country:'USA',flag:'🇺🇸',src:'WSJ',t:'5 saat',read:'3 dəq',gundem:false,profs:['CEO','HR'],h:'ABŞ işsizliyi 3.8%-ə düşdü — texnologiya sektoru 50K iş açdı',sum:'İyun məşğulluq məlumatları işsizlik dərəcəsinin 4 aylıq minimuma düşdüyünü göstərir.',why:'Texnoloji istedadlar üçün rəqabət güclənir — global şirkətlər remote işlə Azərbaycandan istedadlara çatmağa çalışır.',body:["ABŞ Əmək Statistikası Bürosunun iyun hesabatı işsizlik dərəcəsinin 3.8%-ə düşdüyünü - 4 aylıq minimumdur - ortaya qoydu. Ən böyük iş yaradılması texnologiya sektorunda baş verdi: 50,000 yeni iş yeri açıldı. Bunun 22,000-i süni intellekt, maşın öyrənməsi və bulud hesablaması sahələrindədir.", "Əmək bazarının qızışması əmək haqqı enflasiyasını yenidən canlandırır. Texnologiya mütəxəssislərinin ortalama əmək haqqı ildə 8.2% artdı - ümumi əmək haqqı artımının 3.1%-dən xeyli yüksək. Bu, istedadlı texnologiya kadrlara olan rəqabətin 2023-cü il kütləvi işdən çıxarmalarından sonra yenidən qızdığına işarədir.", "Global şirkətlər istedadlara çatmaq üçün remote iş imkanlarını genişləndirir. Bu, Azərbaycan üçün hər iki tərəfli bir nəticə verir: Bakılı mühəndislər və proqramçılar beynəlxalq şirkətlər tərəfindən daha agresiv şəkildə işə cəlb edilir. Bu, yerli texnologiya şirkətlərini kadr cəlbi üçün rəqabətçi maaş paketləri hazırlamağa məcbur edir."],h_en:"US unemployment falls to 3.8% — tech sector adds 50K jobs",sum_en:"June employment data shows the unemployment rate falling to a 4-month low.",why_en:"Competition for tech talent intensifies — global companies are trying to reach Azerbaijani talent via remote work.",body_en:["The US Bureau of Labor Statistics' June report revealed that the unemployment rate fell to 3.8% — a 4-month low. The largest job creation occurred in the technology sector: 50,000 new positions were added. Of these, 22,000 are in artificial intelligence, machine learning, and cloud computing.", "The tightening labor market is reigniting wage inflation. Average salaries for technology professionals rose 8.2% annually — well above the overall wage growth of 3.1%. This signals that competition for talented tech workers has heated up again after the mass layoffs of 2023.", "Global companies are expanding remote work opportunities to access talent. This creates a double-edged result for Azerbaijan: Baku-based engineers and programmers are being more aggressively recruited by international companies. This forces local technology companies to prepare competitive salary packages for talent retention."]},
+  {id:11,cat:'marketinqhr',sub:'Uzaqdan iş',country:'USA',flag:'🇺🇸',src:'HBR',t:'13 saat',read:'4 dəq',gundem:false,profs:['CEO','HR'],h:'Meta hybrid iş modelini rəsmi siyasətə çevirdi',sum:'Meta əməkdaşların həftədə 3 gün ofisdə olmağını tələb edən yeni siyasəti elan etdi.',why:'Hybrid iş modelinə keçid liderlik üslubunu dəyişdirir — Azərbaycan şirkətlərinin HR strategiyalarına birbaşa təsiri var.',body:["Meta Platforms şirkəti yeni hibrid iş siyasətini rəsmiləşdirərək bütün çalışanların həftədə ən az 3 gün ofisdə işləməsini tələb edən daxili direktiv yayımlayıb. Siyasətin pozulması halında performans qiymətləndirməsinə mənfi təsir edəcəyi bildirilir. Bu addım böyük texnologiya şirkətlərinin tam remote işdən geri dönüş meylini gücləndirir.", "Meta CEO Mark Zuckerberg daxili görüşdə kollabrasiya sürətinin ofis mühitlərində 30-40% yüksək olduğunu göstərən daxili araşdırmaya istinad edib. Bununla belə, şirkətin çalışanları arasında bu qərar qarışıq reaksiya doğurub. HR analitikasına görə, ofisə qayıtma tələbləri aşağı işçi məmnuniyyəti ilə korelyasiya göstərir.", "Azərbaycan şirkətlərinin HR strategiyaları bu qlobal meyl kontekstindən kənarda qalmır. Hibrid iş modelinə keçid liderlik üslubunu, komanda idarəetməsini və ofis sahəsi planlamasını yenidən müzakirəyə açır. Çevik iş şərtləri isə kadr cəlbinin güclü bir vasitəsi olaraq regional şirkətlər tərəfindən aktiv şəkildə istifadə edilməyə başlayıb."],h_en:"Meta makes hybrid work model official policy",sum_en:"Meta announced a new policy requiring employees to be in the office at least 3 days per week.",why_en:"The shift to a hybrid work model changes leadership style — with direct impact on Azerbaijani companies' HR strategies.",body_en:["Meta Platforms formalized its new hybrid work policy by distributing an internal directive requiring all employees to work in the office at least 3 days per week. Violations are stated to negatively impact performance evaluations. This move reinforces the trend of major tech companies reversing course from fully remote work.", "Meta CEO Mark Zuckerberg referenced internal research in an internal meeting showing that collaboration speed is 30–40% higher in office environments. However, the decision drew mixed reactions among company employees. According to HR analytics, return-to-office requirements correlate with lower employee satisfaction.", "The HR strategies of Azerbaijani companies are not immune to this global trend. Transitioning to a hybrid work model reopens debate around leadership style, team management, and office space planning. Flexible working conditions have meanwhile become actively used by regional companies as a powerful tool for talent attraction."]},
+  {id:12,cat:'marketinqhr',sub:'Rəqəmsal Marketinq',country:'Europe',flag:'🇪🇺',src:'AdAge',t:'8 saat',read:'3 dəq',gundem:true,profs:['CEO','CMO'],h:'Google üçüncü tərəf cookie-ləri tamamilə ləğv edir',sum:'Google Chrome-da üçüncü tərəf cookie dəstəyini rəsmən dayandırdı. Rəqəmsal reklam sənayesi yenidən konfiqurasiya edir.',why:'Hər marketinq şöbəsi first-party data strategiyasını hazırlamalıdır — bu indi kritik önəm daşıyır.',body:["Google Chrome brauzerindəki üçüncü tərəf cookie-lərin tam olaraq ləğv edilməsi bu həftə rəsmi şəkildə qüvvəyə mindi. Bu, 2020-dən bəri üç dəfə təxirə salınan bu addımın nəhayət reallaşması deməkdir. Dünyada ən çox istifadə edilən brauzer olan Chrome-un 3.4 milyardlıq aktif istifadəçisi ilə bu qərar rəqəmsal reklam sənayesini kökündən silkələyir.", "Üçüncü tərəf cookie-lərin ləğvi reklam hədəfləmə sistemlərinin yenidən qurulmasını tələb edir. Google-un alternativ texnologiyası olan Privacy Sandbox hələ sənayenin gözləntilərinə tam cavab vermir. Meta, TikTok ve Amazon kimi platformalar first-party data ekosistemlərini gücləndirməyə başlayıb.", "Azərbaycan bazarında fəaliyyət göstərən hər reklam departamenti first-party data strategiyasına keçmək üçün indi hazırlıq görməlidir. Bu dəyişiklik retargeting üçün yeni yanaşmalar, ödənişli media planlamasında büdcə yenidən bölgüsü və müştəri CRM sistemlərinin gücləndirilməsini tələb edir. Uyğunlaşmayan şirkətlər reklam effektivliyinin ciddi şəkildə aşağı düşdüyünü görəcək."],h_en:"Google permanently removes third-party cookies",sum_en:"Google officially discontinued third-party cookie support in Chrome. The digital advertising industry is reconfiguring.",why_en:"Every marketing department must now prepare a first-party data strategy — this is now critically important.",body_en:["The complete removal of third-party cookies from Google Chrome browser officially took effect this week. This marks the realization of a step that had been postponed three times since 2020. With Chrome's 3.4 billion active users making it the world's most-used browser, this decision is shaking the digital advertising industry to its core.", "The elimination of third-party cookies requires advertising targeting systems to be rebuilt from scratch. Google's alternative technology, Privacy Sandbox, has yet to fully meet industry expectations. Platforms like Meta, TikTok, and Amazon have begun strengthening their first-party data ecosystems.", "Every advertising department operating in the market must now prepare to transition to a first-party data strategy. This change requires new approaches to retargeting, budget reallocation in paid media planning, and strengthening customer CRM systems. Companies that fail to adapt will see significant drops in advertising effectiveness."]},
+  {id:13,cat:'bazarlar',sub:'E-ticarət',country:'China',flag:'🇨🇳',src:'Alibaba News',t:'10 saat',read:'3 dəq',gundem:false,profs:['CEO','CMO'],h:"Alibaba-nın 618 kampaniyası: $100 mlrd-lıq satış rekord qırdı",sum:'Çinin ikinci böyük alış-veriş festivalı ötən ilin rekordunu 18% üstələdi.',why:'Rəqəmsal ticarətin sürəti Azərbaycan pərakəndə sektoru üçün yeni benchmarklar qoyur.',body:["Çinin ən böyük e-ticarət şirkəti Alibaba-nın 618 alış-veriş festivalı 2 günlük kampaniyada $100 mlrd-dan çox satış qeydə alaraq rekord qırdı. Bu rəqəm 2025-ci ilin eyni dövrünə nisbətdə 18% artım deməkdir. 618 Çin bazarında ikinci ən böyük alış-veriş hadisəsidir - birinci 11.11 (Singles Day) festivalıdır.", "Kampaniyada ən çox satılan kateqoriyalar elektron cihazlar (28%), geyim (22%) və ev əşyaları (17%) olub. Canlı yayım formatında satışlar ilk dəfə ümumi satışların 40%-ni keçdi - bu, ticarətin gələcəyini müəyyən edən mühüm bir tendensiyaya işarədir. JD.com da eyni dövrdə $45 mlrd satışla rekord qırdı.", "Çinin e-ticarət modelləri qlobal pərakəndə üçün innovasiya mənbəyidir. Canlı satış, sosial ticarət və ultra-sürətli çatdırılma artıq Avropa və ABŞ bazarlarına da sıçrayıb. Azərbaycan pərakəndə şirkətləri, xüsusilə Bakcell, Kontakt Home, BIM kimi markalı oyunçular bu trendləri yerli bazara uyğunlaşdırmaq üçün Çin modelini öyrənməlidir."],h_en:"Alibaba's 618 campaign: $100bn in record sales",sum_en:"China's second largest shopping festival surpassed last year's record by 18%.",why_en:"The pace of digital commerce is setting new benchmarks for the retail sector.",body_en:["Alibaba's 618 shopping festival — China's second largest e-commerce event — set a new record with more than $100bn in sales over a 2-day campaign. This figure represents 18% growth compared to the same period in 2025. The 618 festival is second in China only to the 11.11 (Singles Day) festival.", "The top-selling categories in the campaign were electronics (28%), clothing (22%), and home goods (17%). For the first time, livestream format sales exceeded 40% of total sales — a significant trend pointing to the future of commerce. JD.com also set a record with $45bn in sales during the same period.", "China's e-commerce models are a source of innovation for global retail. Livestream selling, social commerce, and ultra-fast delivery have already spread to European and US markets. Azerbaijani retail companies should study the Chinese model to adapt these trends to the local market."]},
+  {id:14,cat:'makro',sub:'Valyuta bazarı',country:'Türkiye',flag:'🇹🇷',src:'Bloomberg',t:'45 dəq',read:'3 dəq',gundem:true,profs:['CEO','CFO'],h:'Türk lirəsi 24 saatda 3.4% düşdü',sum:'Türkiyə Mərkəzi Bankının qeyri-müəyyən siyasəti fonunda lirə rekord aşağı səviyyəyə düşdü. USD/TRY 38.5-i keçdi.',why:'Türkiyə ilə ticarəti olan Azərbaycan şirkətləri valyuta riskini hedcinq strategiyaları ilə idarə etməlidir.',body:["Türk lirəsi son 24 saatda ABŞ dollarına qarşı 3.4% dəyər itirərək USD/TRY məzənnəsi 38.5 həddini keçdi - bu, tarixi rekord aşağı səviyyədir. Düşüşün arxasında Türkiyə Mərkəzi Bankının gözlənilmədən faiz endirimini nəzərə alması ilə bağlı spekulyasiyalar dayanır.", "Türkiyə iqtisadiyyatı 2024-2025-ci illərdə inflyasiya ilə mübarizə apararaq faizləri 40%-ə qaldırmışdı. Lakin 2026-cı ilin ilk yarısında başlayan sürətli faiz endirimləri xarici investorların güvənini sarsdı. Türkiyə istiqrazlarındakı risk mükafatı (CDS spread) 480 baza punktuna yüksəldi.", "Azərbaycan iqtisadiyyatı üçün Türk lirəsinin zəifləməsinin ikili effekti var. Bir tərəfdən, Türkiyəyə ixrac edən Azərbaycan şirkətlərinin gəlirləri real dəyər itirir. Digər tərəfdən, Türkiyəyə gedən Azərbaycanlı turistlər və alıcılar üçün almaq gücü artır. CFO-lar Türkiyə ilə biznesdəki valyuta riskini hedcinq sazişləri ilə idarə etməyi düşünməlidir."],h_en:"Turkish lira drops 3.4% in 24 hours",sum_en:"Speculation about the Turkish Central Bank unexpectedly considering rate cuts sent the lira to a record low. USD/TRY crossed 38.5.",why_en:"Azerbaijani companies trading with Turkey must manage currency risk through hedging strategies.",body_en:["The Turkish lira lost 3.4% of its value against the US dollar over the past 24 hours, with the USD/TRY exchange rate crossing 38.5 — a historic record low. Behind the sell-off is speculation that the Turkish Central Bank may unexpectedly be considering rate cuts.", "Turkey's economy had raised rates to 40% in 2024–2025 to fight inflation. However, the rapid rate cuts that began in the first half of 2026 have shaken foreign investor confidence. Turkey's bond risk premium (CDS spread) rose to 480 basis points.", "The weakening of the Turkish lira has a dual effect on Azerbaijan's economy. On one hand, Azerbaijani companies exporting to Turkey see their revenues lose real value. On the other hand, Azerbaijanis traveling to or shopping in Turkey gain purchasing power. CFOs should consider hedging agreements to manage currency risk in Turkish business dealings."]},
+  {id:15,cat:'makro',sub:'İnflyasiya',country:'Europe',flag:'🇪🇺',src:'Eurostat',t:'6 saat',read:'3 dəq',gundem:false,profs:['CFO','CEO'],h:'Eurozone inflyasiyası 2.1%-ə düşdü — 3 illik minimum',sum:'Avropa zonasında istehlak qiymətlərinin artımı ECB hədəfinə yaxınlaşdı.',why:'Avropa bazarlarında qiymət stabilliyinin bərpası ixracatçı şirkətlər üçün müsbət siqnaldır.',body:["Avrostatın açıqladığı son inflyasiya məlumatlarına görə, Avro Zonasında istehlak qiymətləri indeksi (CPI) iyunda 2.1%-ə düşdü - bu, 2023-cü ilin martından bu yana ən aşağı rəqəmdir. Ərzaq qiymətlərinin artımı 3.8%-dən 1.9%-ə, enerji komponentinin deflyasiyası isə -1.2% səviyyəsinə düşdü.", "Nüvə inflyasiyası (enerji və ərzaq xaric) 2.4% olaraq qalır, bu da ECB siyasəti üçün hələ izahatlı olduğunu göstərir. Almaniya 1.8%, Fransa 2.2%, İspaniya 2.5% inflyasiya qeydə aldı. Bu fərqlər Avrozonada toparlanmanın hələ qeyri-bərabər getdiyini sübut edir.", "Avropa bazarlarında qiymət stabilliyinin bərpası ixracatçı şirkətlər üçün əhəmiyyətli bir siqnaldır. Avropaya mal satmaq istəyən Azərbaycan şirkətləri bir-iki il əvvəlki yüksək inflyasiya mühitindən fərqli olaraq daha sabit qiymət planlaması apara bilər. Bu, xüsusilə uzunmüddətli müqavilə imzalamağı düşünən şirkətlər üçün əlverişlidir."],h_en:"Eurozone inflation falls to 2.1% — 3-year low",sum_en:"Consumer price growth in the Euro Area approached the ECB's target.",why_en:"Price stability in European markets is a positive signal for exporting companies.",body_en:["According to the latest inflation data released by Eurostat, the Consumer Price Index (CPI) in the Eurozone fell to 2.1% in June — the lowest since March 2023. Food price growth slowed from 3.8% to 1.9%, and the energy component saw deflation of -1.2%.", "Core inflation (excluding energy and food) remains at 2.4%, still providing justification for ECB policy. Germany recorded 1.8%, France 2.2%, and Spain 2.5% inflation. These differences confirm that the recovery within the Eurozone is still uneven.", "The restoration of price stability in European markets is a significant signal for exporting companies. Azerbaijani companies selling goods to Europe can now carry out more stable pricing plans compared to the high-inflation environment of one to two years ago. This is particularly advantageous for companies considering signing long-term contracts."]},
+  {id:16,cat:'makro',sub:'GDP & Artım',country:'China',flag:'🇨🇳',src:'PBOC',t:'3 saat',read:'3 dəq',gundem:false,profs:['CEO','CFO'],h:'Çin iqtisadiyyatı Q2-də 5.2% böyüdü — hədəfi aşdı',sum:'Çinin ikinci rüb iqtisadi artım göstəricisi hökumətin 5% hədəfini üstələdi.',why:'Çin artımı qlobal xammal tələbatını artırır — SOCAR və digər Azərbaycan eksportçuları üçün müsbət.',body:["Çin Milli Statistika Bürosu 2026-cı ilin ikinci rübünə aid ÜDM məlumatlarını açıqladı. Nəticə 5.2% - hökumətin 5% illik artım hədəfini üstələdi. Bu artımın əsas mühərriki 4.8% artım göstərən ixrac sektoru, 6.1% böyüyən texnologiya istehsalı və 5.4% böyüyən xidmət sektoru olub.", "Çin iqtisadiyyatının güclü performansı qlobal xammal tələbatını artırır. Mis, alüminium, dəmir filizi kimi sənaye metallarına tələb artdıqca əmtəə ixracatçısı ölkələrin gəlirləri artır. Bloomberg analitiklərinə görə, Çin artımının hər 1% artması qlobal xammal qiymətlərini 2-3% yuxarı çəkir.", "Azərbaycan bu dinamikadan ikiqat faydalanır: birincisi, neft qiymətlərinin yüksəlməsi dövlət gəlirlərini artırır; ikincisi, SOCAR-ın xam neft ixracatına yüksək tələb davam edir. Bundan əlavə, Çin şirkətlərinin Orta Asiya və Cənubi Qafqazda infrastruktur layihələrinə marağı artıb, bu da Azərbaycan ilə Çin arasında ticari əməkdaşlıq üçün əlverişli zəmin yaradır."],h_en:"Chinese economy grew 5.2% in Q2 — beat target",sum_en:"China's second quarter economic growth figures exceeded the government's 5% target.",why_en:"China's growth increases global raw material demand — positive for Azerbaijani exporters including SOCAR.",body_en:["China's National Bureau of Statistics released Q2 2026 GDP data. The result — 5.2% — exceeded the government's 5% annual growth target. The key drivers of this growth were the export sector (up 4.8%), technology manufacturing (up 6.1%), and the services sector (up 5.4%).", "China's strong economic performance increases global raw material demand. As demand for industrial metals such as copper, aluminum, and iron ore rises, revenues for commodity-exporting countries increase. According to Bloomberg analysts, every 1% increase in China's growth pushes global commodity prices 2–3% higher.", "Azerbaijan benefits doubly from this dynamic: first, rising oil prices increase state revenues; second, strong demand for SOCAR's crude oil exports continues. Additionally, Chinese companies' growing interest in infrastructure projects in Central Asia and the South Caucasus creates favorable ground for trade cooperation between Azerbaijan and China."]},
+  {id:17,cat:'corporate',sub:'Tənzimləmə',country:'Europe',flag:'🇪🇺',src:'Politico',t:'12 saat',read:'4 dəq',gundem:false,profs:['CEO'],h:'Meta Avropa məhkəməsindən €1.2 mlrd GDPR cəriməsi aldı',sum:'Avropa Birliyi məhkəməsi Meta-ya istifadəçi məlumatlarını ABŞ-a ötürməsinə görə rekord cərimə kəsdi.',why:'Hər beynəlxalq şirkətin GDPR uyğunluğunu yenidən yoxlaması lazımdır — bu, Azərbaycan şirkətlərini də əhatə edir.',body:["Avropa Birliyi Məhkəməsi Meta Platforms-a GDPR qanunvericiliyini pozduğuna görə €1.2 mlrd cərimə kəsdi - bu, Avropa məlumat qoruma tarixinin ən böyük fərdi cəriməsidir. Qərar Meta-nın Avropa istifadəçilərinin məlumatlarını ABŞ-dakı serverlərinə ötürməsinin qanunsuzu hesab edilməsinə əsaslanır.", "Meta bu qərara etiraz edəcəyini bildirdi. Lakin cərimə Meta-nın 2025-ci il illik gəlirinin $130 mlrd olduğu nəzərə alındıqda nisbətən kiçik görünür. Daha kritik olan isə qərarın məlumat ötürmə çərçivəsinə olan sual işarəsidir: Avropa-ABŞ Məlumat Gizliliyi Çərçivəsi (DPF) yenidən məhkəmə yoxlamasına məruz qala bilər.", "Bu qərar Avropa bazarında fəaliyyət göstərən hər şirkəti birbaşa maraqlandırır. Avropadan müştərisi olan Azərbaycan şirkətləri GDPR uyğunluğunu auditi keçirməli, xüsusilə cloud xidmət provayderləri arasında məlumat ötürmə müqavilələrini yenidən nəzərdən keçirməlidir. Uyğunsuzluq hallarının cəriməsi gəlirin 4%-inə qədər ola bilər."],h_en:"Meta hit with record €1.2bn GDPR fine from European court",sum_en:"The EU court issued a record fine to Meta for transferring European user data to US servers.",why_en:"Every international company must re-check its GDPR compliance — this includes Azerbaijani companies.",body_en:["The European Union Court fined Meta Platforms €1.2bn for violating GDPR regulations — the largest individual fine in European data protection history. The ruling is based on a finding that Meta's transfer of European users' data to servers in the US is unlawful.", "Meta said it would appeal the decision. However, the fine appears relatively modest given Meta's annual revenue of $130bn in 2025. More critical is the question mark the ruling places on the data transfer framework: the EU-US Data Privacy Framework (DPF) may face judicial review again.", "This ruling directly concerns every company operating in the European market. Azerbaijani companies with European customers must audit their GDPR compliance — particularly reviewing data transfer agreements with cloud service providers. In cases of non-compliance, fines can reach up to 4% of revenue."]},
+  {id:18,cat:'corporate',sub:'Antiinhisar',country:'USA',flag:'🇺🇸',src:'Reuters',t:'14 saat',read:'3 dəq',gundem:false,profs:['CEO'],h:'ABŞ DOJ Google-a qarşı antiinhisar iddiasını genişləndirir',sum:'ABŞ Ədalət Nazirliyi Google-a qarşı açılan antiinhisar işini reklam texnologiyalarına da şamil etdi.',why:'Böyük texnologiya şirkətlərinə qarşı tənzimləmə dalğası bütün sənaye üçün presedent yaradır.',body:["ABŞ Ədalət Nazirliyi (DOJ) Google-a qarşı açılmış antiinhisar iddiasını genişləndirib: axtarış bazarı ilə yanaşı, indi reklam texnologiyaları bazarı da iddianın əhatəsinə daxil edilib. DOJ-nin mövqeyinə görə, Google online reklam texnologiyasının hər üç əsas iştirakçısı - reklam satışçısı, reklam alıcısı vasitəçisi və reklam birjası - üzərində dominant mövqeyini sui-istifadə edir.", "Bu iddia əgər uğurla nəticələnsə, Google-u adtech alətlərini satmağa məcbur edə bilər. Analitiklərin hesablamalarına görə, Google-un reklam texnologiyası bölməsi $21 mlrd illik gəlirlə şirkətin ümumi gəlirinin 16%-ni təşkil edir. Qərar ən azından 3-4 il çəkə bilən hüquqi prosesin sonunda çıxacaq.", "Böyük texnologiya şirkətlərinə qarşı antiinhisar tənzimləmə dalğası Avropa, ABŞ və bir çox inkişaf etmiş iqtisadiyyatda paralel olaraq gedir. Bu tendensiya Azərbaycanın yerli texnologiya şirkətlərini dolaylı yolla maraqlandırır: Google, Meta və digər nəhənglərin tənzimlənməsi regional alternativ platformaların inkişafı üçün boşluq yarada bilər."],h_en:"US DOJ broadens antitrust case against Google",sum_en:"The US Department of Justice extended the antitrust case against Google to also cover advertising technology.",why_en:"The regulatory wave against big tech companies is setting precedents for the entire industry.",body_en:["The US Department of Justice (DOJ) expanded its antitrust case against Google: in addition to the search market, the advertising technology market is now also within the scope of the claim. According to the DOJ's position, Google abuses its dominant position over all three key participants in online advertising technology — the seller's intermediary, the buyer's intermediary, and the ad exchange.", "If this case succeeds, it could force Google to sell its adtech tools. According to analyst calculations, Google's advertising technology division generates $21bn in annual revenue, representing 16% of the company's total revenue. A ruling in a legal process that could take at least 3–4 years will eventually emerge.", "The wave of antitrust regulation against big tech companies is proceeding in parallel across Europe, the US, and many advanced economies. This trend indirectly concerns local Azerbaijani technology companies: regulation of Google, Meta, and other giants could create space for the development of regional alternative platforms."]},
+  {id:19,cat:'liderlik',sub:'CEO & C-suite',country:'USA',flag:'🇺🇸',src:'Fortune',t:'8 saat',read:'4 dəq',gundem:false,profs:['CEO'],h:'Fortune 500 CEO devri hızlanır: 2026-da 87 CEO dəyişikliyi',sum:'Fortune 500 şirkətlərinin CEO dəyişiklik tempinin son 10 ilin rekordunu qırdığı açıqlandı.',why:'Liderlik böhranının arxasında korporativ idarəetmə çatışmazlıqları var — məsləhətçilik tələbatı artır.',body:["Fortune dərgisinin araşdırmasına görə, 2026-cı ildə Fortune 500 şirkətlərinin CEO-larının 87-si vəzifəsini tərk edib - bu, 2016-dan bu yana ən yüksək CEO devri rəqəmidir. Dəyişikliklərin 41%-i könüllü istefaya görə, 32%-i lövhə tərəfindən işdən çıxarmağa görə, 27%-i isə həm könüllü, həm də yarıkönüllü olaraq qiymətləndirilir.", "Bu ilin CEO dəyişikliklərinin arxasında dominan tendensiya: şirkətin süni intellekt strategiyasını yerinə yetirmə tempindəki gecikmə. Fortune 500-ün yenə seçilən CEO-larının 64%-i texnologiya transformasyonunu ilk 100 gündəki prioriteti kimi açıqlayıb. Ortalama yeni CEO-nun mandatı 5.7 ildir.", "Korporativ liderlik çevikliyi artıq əsas rəqabət üstünlüyüdür. Azərbaycan şirkətlərinin idarə heyəti üçün bu trend birbaşa dərs daşıyır: liderlik inkişafı proqramları, ardıcıllıq planlaması (succession planning) və C-suite üçün strategiya treninqləri artıq 'luxus' deyil, operasional zərurətdir."],h_en:"Fortune 500 CEO turnover accelerates: 87 changes in 2026",sum_en:"Fortune 500 CEO change pace has broken the record of the past 10 years.",why_en:"Behind the leadership crisis are corporate governance deficiencies — consulting demand is rising.",body_en:["According to Fortune magazine research, 87 Fortune 500 company CEOs have left their positions in 2026 — the highest CEO turnover rate since 2016. Of the changes, 41% are attributed to voluntary resignations, 32% to board-initiated dismissals, and 27% are characterized as both voluntary and semi-voluntary.", "The dominant trend behind this year's CEO changes: delays in executing the company's artificial intelligence strategy. 64% of newly elected Fortune 500 CEOs have announced AI transformation as their first 100-day priority. The average mandate of a new CEO is 5.7 years.", "Corporate leadership agility is now a core competitive advantage. This trend carries a direct lesson for Azerbaijani companies' boards: leadership development programs, succession planning, and C-suite strategy training are no longer 'luxuries' — they are operational necessities."]},
+  {id:20,cat:'corporate',sub:'M&A & Enerji',country:'USA',flag:'🇺🇸',src:'Bloomberg',t:'2 saat',read:'3 dəq',gundem:true,profs:['CEO','CFO','Enerji'],h:'Exxon Mobil Pioneer Natural Resources-ı $60 mlrd-a aldı',sum:'ABŞ tarixinin ən böyük enerji M&A əməliyyatlarından biri olaraq Exxon-Pioneer birləşməsi tamamlandı.',why:'Enerji sektorunda konsolidasiya dalğası başlayıb — Azərbaycan enerji şirkətlərinin M&A radarı aktiv saxlanmalıdır.',body:["ExxonMobil-in Pioneer Natural Resources-ı $60 mlrd-a satın alması ABŞ enerji tarixinin 3-cü ən böyük M&A əməliyyatı kimi tarixə düşdü. Əməliyyat ilə Exxon Perma Basin-dəki (Texas) günlük neft hasilatını 600,000 bareldən 1.3 milyon bareldəke çatdırır - bu, şirkətin tarixdəki ən böyük tek-günlük üretim atlamasıdır.", "Birləşmənin ardından ExxonMobil şirkəti indi ABŞ-da ən böyük neft hasilatçısına çevrildi, Chevron-u geridə buraxdı. Bazarın ilkin reaksiyası mütərəddid idi: Exxon hissədarları birləşmənin kapital bölgüsünə potensial mənfi təsiri ilə bağlı narahatlıq ifadə etdi. Lakin analitiklər illik $2 mlrd sinergiya potensialına diqqət çəkir.", "Enerji sektorunda böyük miqyaslı konsolidasiya ABŞ-da başladı, lakin dalğa OPEC-dən kənara çıxır. Azərbaycanlı enerji şirkətləri, xüsusilə SOCAR-ın beynəlxalq əməliyyatları, bu qlobal konsolidasiya kontekstindən kənarda düşünülməməlidir. M&A fürsətlərini erkən müəyyən etmək üçün sektoral radar aktiv saxlanmalıdır."],h_en:"ExxonMobil acquires Pioneer Natural Resources for $60bn",sum_en:"The ExxonMobil-Pioneer merger, one of the largest energy M&A deals in US history, is complete.",why_en:"An energy sector consolidation wave has begun — Azerbaijani energy companies must keep their M&A radar active.",body_en:["ExxonMobil's acquisition of Pioneer Natural Resources for $60bn entered history as the 3rd largest M&A deal in US energy history. Through the deal, Exxon increases its daily oil production in the Permian Basin (Texas) from 600,000 to 1.3 million barrels — the largest single-day production leap in the company's history.", "Following the merger, ExxonMobil became the largest oil producer in the US, overtaking Chevron. Market reaction was initially mixed: Exxon shareholders expressed concerns about the potential negative impact of the merger on capital distribution. However, analysts point to an annual $2bn synergy potential.", "Large-scale consolidation in the energy sector started in the US but the wave extends beyond OPEC. Azerbaijani energy companies — particularly SOCAR's international operations — should not be thought about outside the context of this global consolidation. Identifying M&A opportunities early requires keeping a sector radar actively running."]},
+  {id:21,cat:'startapvc',sub:'Startap Ekosistemi',country:'Azerbaijan',flag:'🇦🇿',src:'AZPROMO',t:'3 saat',read:'4 dəq',gundem:true,profs:['Startap','AI & Tech'],h:'Bakıda ilk unicorn iddiası — AI startap $120M qiymətləndirildi',sum:'Bakı mərkəzli süni intellekt startapı son A raundunda $35M cəlb etdi, ümumi qiymətləndirilməsi $120M-a çatdı.',why:'Azərbaycan startap ekosistemi regional miqyasda lider olmağa yaxınlaşır. Erken investorlar üçün kritik an.',body:["Bakı mərkəzli süni intellekt startapı TechFM (şirkətin rəsmi adı açıqlanmayıb) son Series A investisiya turunda $35 milyon cəlb etdi. Bu rund onu $120 milyon qiymətləndirilməyə çatdırdı. Lider investor San Fransisko əsaslı Sequoia Capital-ın Avropa-MEA fondu, həm-investor isə Londonda yerləşən bir VC şirkətidir.", "Startap şirkətlər üçün çoxdilli AI-lı biznes prosesi avtomatlaşdırması sahəsindədir, Azərbaycan, Türk, Ərəb və Rus dilləri əsas fokusda. Şirkətin 8 ölkədə 200-dən çox korporativ müştərisi var. Cəlb edilən kapital ilk növbədə Körfəz bölgəsinə ekspansiya üçün istifadə ediləcək.", "Bu hadisə Azərbaycan startap ekosistemi üçün tarixi bir işarədir. Xaricə çıxan VC kapitalı artıq Bakını alternativ texnoloji mərkəz kimi dəyərləndirir. AZPROMO, Azərbaycan İnvestisiya Holdinqi və Bakı Startap Haftası kimi platformalar bu dinamikadan kapital götürərək startup mühitini gücləndirsə, Azərbaycan növbəti 5 ildə bölgənin lider startap ekosisteminə çevrilmək potensialına malikdir."],h_en:"Baku's first unicorn claim — AI startup valued at $120M",sum_en:"A Baku-based AI startup raised $35M in its latest Series A, reaching a total valuation of $120M.",why_en:"Azerbaijan's startup ecosystem is approaching regional leadership. A critical moment for early investors.",body_en:["A Baku-based artificial intelligence startup (the company's official name has not been disclosed) raised $35 million in its Series A investment round. This round brought its valuation to $120 million. The lead investor is Sequoia Capital's Europe-MEA fund based in San Francisco, with a London-based VC firm as co-investor.", "The startup operates in multilingual AI-powered business process automation for companies, with Azerbaijani, Turkish, Arabic, and Russian as the primary focus languages. The company has more than 200 corporate customers in 8 countries. The raised capital will be used primarily for expansion into the Gulf region.", "This event is a historic milestone for Azerbaijan's startup ecosystem. Outbound VC capital is now considering Baku as an alternative technology hub. If platforms like AZPROMO, the Azerbaijan Investment Holding, and Baku Startup Week capitalize on this dynamic to strengthen the startup environment, Azerbaijan has the potential to become the region's leading startup ecosystem within the next 5 years."]},
+  {id:22,cat:'makro',sub:'Makroiqtisadiyyat',country:'Azerbaijan',flag:'🇦🇿',src:'Azərstat',t:'5 saat',read:'3 dəq',gundem:true,profs:['CEO'],h:'Azərbaycan Q2 2026: Qeyri-neft sektoru 7.3% artdı',sum:'Azərbaycan Statistika Komitəsinin məlumatına görə, 2026-cı ilin ikinci rübündə ölkənin ÜDM-i 4.8% artdı.',why:'Qeyri-neft artımı Azərbaycanın diversifikasiya strategiyasının nəticəsidir — yeni biznes fürsətləri yaranır.',body:["Azərbaycan Statistika Komitəsinin açıqladığı ilkin məlumata görə, 2026-cı ilin ikinci rübündə ölkənin ÜDM-i ildə 4.8% artdı. Daha önəmlisi, qeyri-neft sektoru 7.3% artdı - bu, son 8 rübdəki ən yüksək qeyri-neft artım göstəricisidir. Turizmm (12.4%), İKT (11.2%) və tikinti (9.8%) ən sürətli böyüyən sektorlar olub.", "Bu artım sürəti İMF-in Azərbaycan üçün 2026-cı il proqnozunu (4.2% ÜDM artımı) üstələdi. Qeyri-neft gəlirlərinin ümumi büdcə gəlirlərindəki payı ilk dəfə olaraq 52%-i keçdi - bu, neft asılılığının azalmasında ciddi irəliləyişi göstərir.", "Ekonomistlər bu nəticəni əsasən ölkənin tranzit koridoru rolunun güclənməsinə - Orta Dəhliz ilə əlaqədar - və turizm sektorundakı canlanmaya bağlayır. Azərbaycanda biznes fəaliyyəti üçün bu məlumatlar əlverişlidir: stabil artım mühiti güclü istehlak tələbi, biznes investisiya iştahası və dövlət xərclərinin artması deməkdir."],h_en:"Azerbaijan Q2 2026: Non-oil sector grew 7.3%",sum_en:"According to the State Statistics Committee, Azerbaijan's GDP grew 4.8% in Q2 2026.",why_en:"Non-oil growth is the result of Azerbaijan's diversification strategy — new business opportunities are emerging.",body_en:["According to preliminary data released by the Azerbaijan State Statistics Committee, the country's GDP grew 4.8% year-on-year in Q2 2026. More importantly, the non-oil sector grew 7.3% — the highest non-oil growth figure in the past 8 quarters. Tourism (12.4%), ICT (11.2%), and construction (9.8%) were the fastest-growing sectors.", "This growth rate exceeded the IMF's forecast for Azerbaijan in 2026 (4.2% GDP growth). For the first time, non-oil revenues' share of total budget revenues exceeded 52% — a significant advance in reducing oil dependency.", "Economists attribute this result primarily to the strengthening of the country's transit corridor role — linked to the Middle Corridor — and the revival in the tourism sector. For business in Azerbaijan, this data is encouraging: a stable growth environment means strong consumer demand, business investment appetite, and rising government spending."]},
+  {id:23,cat:'enerji',sub:'SOCAR & Enerji',country:'Azerbaijan',flag:'🇦🇿',src:'SOCAR',t:'7 saat',read:'3 dəq',gundem:false,profs:['CEO','Enerji'],h:'SOCAR Türkiyə əməliyyatlarını 15% genişləndirir',sum:'SOCAR Türkiyədəki yanacaq paylama şəbəkəsini genişləndirmək üçün 800M $ investisiya elan etdi.',why:'SOCAR-ın regional ekspansiyası Azərbaycan şirkətlərinin beynəlxalq bazarlara çıxış modelinin nümunəsidir.',body:["SOCAR (Dövlət Neft Şirkəti Azərbaycan Respublikası) Türkiyədəki yanacaq paylama şəbəkəsini 2 ildə 15% genişləndir`əcəyini açıqladı. Bu məqsədlə 800 milyon dollarlıq investisiya planlaşdırılır. Bu, SOCAR-ın Türkiyədəki ən böyük tək kapital öhdəliyidir.", "SOCAR hazırda Türkiyədə 1,200-dən çox yanacaqdoldurma stansiyası işlədir. Genişlənmə planı 180 yeni stansiya əlavə etməyi, mövcud stansiyaların 340-nın yenilənməsini və 5 yeni regional deponu ehtiva edir. SOCAR Türkiyə, 2025-ci ildə €2.1 mlrd gəlir qeydə alaraq Türkiyədəki ən böyük xarici pərakəndə enerji oyunçusu olub.", "SOCAR-ın beynəlxalq ekspansiya strategiyası Azərbaycan şirkətlərinin xaricə çıxışı üçün model rolu oynayır. Yerli bazarda lider mövqeyini bərqirar etdikdən sonra yaxın coğrafi bazarlara çıxış, güclü dövlət dəstəyi ilə birləşdirildikdə uğurlu nəticə verir. Bu model texnologiya, logistika və maliyyə sektorlarındakı şirkətlər üçün də tətbiq edilə bilər."],h_en:"SOCAR expands Turkey operations by 15%",sum_en:"SOCAR announced an $800M investment to expand its fuel distribution network in Turkey.",why_en:"SOCAR's regional expansion is a model for Azerbaijani companies entering international markets.",body_en:["SOCAR (State Oil Company of the Azerbaijan Republic) announced plans to expand its fuel distribution network in Turkey by 15% over 2 years. An investment of $800 million is planned for this purpose. This is SOCAR's largest single capital commitment in Turkey.", "SOCAR currently operates more than 1,200 refueling stations in Turkey. The expansion plan includes adding 180 new stations, renovating 340 of the existing stations, and building 5 new regional depots. SOCAR Turkey recorded €2.1bn in revenue in 2025, making it the largest foreign retail energy player in Turkey.", "SOCAR's international expansion strategy serves as a model for Azerbaijani companies entering foreign markets. Entering neighboring geographic markets after establishing a leading position in the domestic market, combined with strong government support, yields successful results. This model can also be applied by companies in technology, logistics, and financial sectors."]},
+  {id:24,cat:'bazarlar',sub:'Fond bazarı',country:'USA',flag:'🇺🇸',src:'WSJ',t:'4 saat',read:'3 dəq',gundem:true,profs:['CEO','CFO'],h:'S&P 500 rekord zirvəyə çatdı: 5,800 həddini keçdi',sum:'ABŞ fond bazarı Fed-in faiz endirimi qərarından sonra yeni tarixi rekord qırdı.',why:'ABŞ bazarındakı bull marketi qlobal kapitalın istiqamətini müəyyən edir — investorlar diqqətli olmalıdır.',body:["S&P 500 indeksi Fed-in faiz endirim qərarının ardından tarixi yeni rekord qıraraq 5,823 həddə bağlandı. Bu, 2026-cı ilin ilk 6 ayında 18.4% illik artım deməkdir. Texnologiya sektoru (Magnificent 7) artımın 11 faiz bəndini idarə edib, qalan 493 şirkət isə daha mülayim artım göstərib.", "Analistlər artıq bazarın qiymətləndirilməsinin tarixən geniş olduğuna diqqət çəkir. S&P 500-ün gözlənilən P/E nisbəti 24.3x səviyyəsindədir - son 20 ilin ortalaması olan 16.8x-in xeyli üzərindədir. Faiz endirimlərinin davam edəcəyi gözləntiləri premium qiymətləndirilməni dəstəkləyir, lakin hər hansı geopolitik sürpriz məqsədi səhv göstərə bilər.", "ABŞ fond bazarının bu performansı Azərbaycan investorları üçün dolaylı implikasiyalar daşıyır. Qlobal kapitalın risk iştahası artdıqca inkişaf etməkdə olan bazarlara axım da artır. Bu, Azərbaycan dövlət istiqrazlarına və özel kapital əməliyyatlarına tələbi gücləndirir. Beynəlxalq investisiya fondlarının radarda Azərbaycana sahib olması üçün doğru vaxtdır."],h_en:"S&P 500 hits record high: crossed 5,800",sum_en:"The US stock market set a new all-time record after the Fed's rate cut decision.",why_en:"The US market bull run is determining the direction of global capital — investors must be watchful.",body_en:["The S&P 500 index set a historic new record, closing at 5,823 following the Fed's rate cut decision. This represents an 18.4% annual gain in the first 6 months of 2026. The technology sector (Magnificent 7) drove 11 percentage points of the gain, with the remaining 493 companies showing more moderate growth.", "Analysts are already drawing attention to the historically wide market valuation. The S&P 500's forward P/E ratio is at 24.3x — well above the 20-year average of 16.8x. Expectations that rate cuts will continue support the premium valuation, but any geopolitical surprise could prove the target wrong.", "The performance of the US stock market carries indirect implications for Azerbaijani investors. As global capital's risk appetite increases, flows into emerging markets also rise. This strengthens demand for Azerbaijani government bonds and private capital transactions. Now is the right time to ensure international investment funds have Azerbaijan on their radar."]},
+  {id:25,cat:'makro',sub:'Makroiqtisadiyyat',country:'Europe',flag:'🇪🇺',src:'FT',t:'6 saat',read:'3 dəq',gundem:false,profs:['CEO','CFO'],h:'Alman iqtisadiyyatı Q2-də 0.4% böyüdü — gözləntinin üstündə',sum:'Almaniya iqtisadiyyatı texniki resessiyanın ardından güclü geri dönüş göstərdi.',why:'Avropanın lokomotivi güclənir — Azərbaycandan ixracatçılar bazarı yenidən dəyərləndirməlidir.',body:["Almaniya Federal İstatistika Ofisi ölkənin 2026-cı ilin ikinci rübündə 0.4% büyüdüyünü açıqladı - konsensus proqnozunun (0.1%) 3 dəfəsi. Bu, Almaniyaya aid texniki resessiyanın (ardıcıl 2 rüb mənfi böyümə) 2025-ci ilin sonunda bitdiyini rəsmən sübut edir.", "Artımın arxasındakı güc istehlakçı xərcləri (0.6% artım), ixrac (0.9% artım) və hökumət kapital xərcləridir. Avtomobil sektoru artan EV tələbi ilə yenidən canlanmışdır. BMW, Mercedes-Benz və Volkswagen birinci yarımillik gəlir proqnozlarını yuxarı revize etdi.", "Avropanın ən böyük iqtisadiyyatının yenidən böyümə ərazisine girməsi Azərbaycandan Avropa bazarlarına yönəlmiş ixracatçılar üçün müsbət xəbərdir. Almaniya Azərbaycanın ən böyük Avropa ticarət ortaqlarından biridir. Bu canlanma Azərbaycan mallarına tələbin artması, həm də ikitərəfli investisiya əməkdaşlığı üçün əlverişli zəmin yaradır."],h_en:"German economy grew 0.4% in Q2 — beats expectations",sum_en:"Germany's economy staged a strong comeback after a technical recession.",why_en:"Europe's locomotive is strengthening — exporters from Azerbaijan should reassess the market.",body_en:["Germany's Federal Statistics Office announced that the country grew 0.4% in Q2 2026 — three times the consensus forecast of 0.1%. This officially confirms that the technical recession (two consecutive quarters of negative growth) that hit Germany ended at the close of 2025.", "The forces behind the growth: consumer spending (up 0.6%), exports (up 0.9%), and government capital expenditure. The automotive sector has revived with increasing EV demand. BMW, Mercedes-Benz, and Volkswagen all revised their first-half earnings forecasts upward.", "Europe's largest economy re-entering growth territory is positive news for exporters from Azerbaijan targeting European markets. Germany is one of Azerbaijan's largest European trade partners. This revival creates favorable ground both for increased demand for Azerbaijani goods and for bilateral investment cooperation."]},
+  {id:26,cat:'bazarlar',sub:'Körfəz Maliyyəsi',country:'UAE & Gulf',flag:'🌟',src:'Gulf News',t:'9 saat',read:'3 dəq',gundem:false,profs:['CEO','Bank & Fintech'],h:'Dubai DIFC maliyyə mərkəzinə yeni 200+ şirkət qeydiyyata alındı',sum:'Dubai Beynəlxalq Maliyyə Mərkəzinə qeydiyyat 2025-dən 34% artdı — region lider mövqeyini möhkəmləndirir.',why:'Körfəz kapitalı Azərbaycana maraq göstərir — bu fürsəti dəyərləndirmək üçün vaxt indi.',body:["Dubai Beynəlxalq Maliyyə Mərkəzinə (DIFC) 2025-ci ildən bu yana 200-dən çox yeni şirkət qeydiyyata alınıb - bu, ildən-ilə 34% artımdır. Qeydiyyatların 43%-i maliyyə xidmətləri, 29%-i texnologiya, 18%-i isə hüquq və məsləhətçilik şirkətlərindən ibarətdir. DIFC indiyə qədər 5,000-dən çox şirkəti barındırır.", "DIFC-nin cazibəsinin arxasında sıfır vergi siyasəti (korporativ vergi yoxdur), güclü hüquq sistemi (İngilis ümumi hüququ), tam mülkiyyət sərbəstliyi (100% xarici mülkiyyəti mümkündür) və Körfəz bölgəsinin mərkəzi coğrafiyası dayanır. 2025-ci ildə Körfəzdəki özəl kapital fondu aktivləri $350 mlrd-ı keçdi.", "Körfəz kapitalı Azərbaycana getdikcə daha çox maraq göstərir. Abu Dabi İnvestisiya Agentliyi (ADIA) və Kuveytin KIA fondu kimi dövlət varlıq fondları Cənubi Qafqazda diversifikasiya axtarır. Bakı bu kapitalı cəlb etmək üçün öz investisiya mühitini, qanunvericiliyini və şəffaflıq məkanizmini gücləndirsə, region üçün əsas regional kapital mərkəzinə çevrilmə potensialı var."],h_en:"Dubai DIFC financial center registers 200+ new companies",sum_en:"Registrations at the Dubai International Financial Centre rose 34% from 2025.",why_en:"Gulf capital is showing interest in Azerbaijan — now is the time to capitalize on this opportunity.",body_en:["More than 200 new companies have registered at the Dubai International Financial Centre (DIFC) since 2025 — a 34% year-on-year increase. Of the registrations, 43% are financial services, 29% technology, and 18% legal and consulting firms. DIFC now hosts more than 5,000 companies.", "Behind DIFC's attractiveness: a zero-tax policy (no corporate tax), a strong legal system (English common law), full ownership freedom (100% foreign ownership possible), and its central geography within the Gulf region. Private capital fund assets in the Gulf exceeded $350bn in 2025.", "Gulf capital is showing growing interest in Azerbaijan. Sovereign wealth funds such as Abu Dhabi Investment Authority (ADIA) and Kuwait's KIA fund are seeking diversification in the South Caucasus. If Baku strengthens its investment environment, legislation, and transparency mechanisms to attract this capital, it has the potential to become the region's primary capital hub."]},
+  {id:27,cat:'corporate',sub:'Daşınmaz Əmlak',country:'Azerbaijan',flag:'🇦🇿',src:'Propert.az',t:'10 saat',read:'3 dəq',gundem:false,profs:['CEO','CFO'],h:'Bakı ofis bazarı: A-sinif ofis kirayəsi 18% baha düşdü',sum:'Bakıda premium ofis sahəsinin tələbi artır. A-sinif məkanda ortalama kirayə 1m² üzrə $28-ə yüksəldi.',why:'Ofis xərclərinin optimizasiyası üçün strategiya dəyişikliyi lazımdır — hybrid iş modeli bazarı transformasiya edir.',body:["Bakı ofis daşınmaz əmlak bazarında A-sinif ofis sahəsinin kirayə qiymətləri son 12 ayda 18% artdı. Hazırda ortalama qiymət aylıq 1m² üçün $28-dir. Bu artımın arxasında xarici şirkətlərin Bakıda regional ofis açmaq iştahının artması, həm də Neft Fondu layihələrinin cəlb etdiyi beynəlxalq konsaltinq şirkətlərinin genişlənməsi dayanır.", "Ən yüksək tələb Dəniz Kənarı Boulevard ətrafında, Port Baku Towers kompleksində və İçərişəhər yaxınlığında koncentrasiyalaşıb. Xəzər Tower, Crystal Plaza və AMAY Towers doluluk dərəcəsi 92%-i keçib. Yeni A-sinif ofis kompleksləri üçün pre-lease (qabaqcadan kirayə) cəlbi sürətlənib.", "Ofis xərclərinin artması şirkətlər üçün fəaliyyət büdcəsinə ciddi yük verir. Buna cavab olaraq hibrid iş modeli həm çevik iş həyatı, həm də ofis sahəsini azaltmaq üçün strategiyaya çevrilir. Azərbaycan şirkətləri üçün bu dönemde uzunmüddətli icarə imzalamadan əvvəl şərtləri diqqətlə müzakirə etmək, coworking alternativlərini dəyərləndirmək tövsiyə edilir."],h_en:"Baku office market: Class-A office rents up 18%",sum_en:"Demand for premium office space in Baku is rising. The average rent has risen to $28/m².",why_en:"Office cost optimization requires a strategy shift — hybrid work is transforming the market.",body_en:["In Baku's office real estate market, Class-A office space rental prices rose 18% over the past 12 months. The current average price is $28 per month per m². Behind this increase are a growing appetite among foreign companies to open regional offices in Baku, as well as the expansion of international consulting firms attracted by Oil Fund projects.", "The highest demand is concentrated around the Caspian Sea Boulevard, the Port Baku Towers complex, and the vicinity of Icherisheher. Khazar Tower, Crystal Plaza, and AMAY Towers have occupancy rates exceeding 92%. Pre-lease attraction for new Class-A office complexes has accelerated.", "Rising office costs place a serious burden on companies' operating budgets. In response, the hybrid work model is becoming a strategy for both flexible work-life and reducing office space. For Azerbaijani companies, it is advisable at this time to negotiate carefully before signing long-term leases and to evaluate coworking alternatives."]},
+  {id:28,cat:'corporate',sub:'Daşınmaz Əmlak',country:'Azerbaijan',flag:'🇦🇿',src:'Tap.az',t:'14 saat',read:'3 dəq',gundem:false,profs:['CFO'],h:'Bakıda mənzil qiymətləri illik 12% artdı — Nəsimi lider',sum:'Bakının mərkəzi rayonlarında mənzil qiymətlərinin artım tempi bölgə ortalamalarını üstələdi.',why:'Daşınmaz əmlak bazarı inflyasiyaya qarşı hedcinq aləti kimi populyarlaşır — investorlar üçün fürsət.',body:["Azərbaycan Daşınmaz Əmlak Assosiasiyasının hesabatına görə, Bakıda mənzil qiymətləri son 12 ayda 12% artıb. Nəsimi rayonunda bu artım 16%-ə çatıb. M2 üzrə ortalama satış qiymətləri Nəsimidə $2,100, Neftçalada $1,400, Suraxanıda $950 səviyyəsindədir.", "Tələbin əsas mühərriki: birinci növbədə əcnəbi mütəxəssislər və repatriantların güclü tələbi, ikincisi yüksək kirayə gəlirliliyinin (gross yield 6-8%) yerli investorları cəlb etməsi, üçüncüsü isə manata olan güvənin artması nəticəsində alternativ kapital qoruma aləti olaraq daşınmaz əmlakın seçilməsidir.", "Bu trend saxlanılarsa, Bakı regionun ən cəlbedici daşınmaz əmlak bazarlarından biri olmağa davam edəcək. CFO-lar şirkət balans hesabatında daşınmaz əmlak aktivlərinin xüsusi çəkisini dəyərləndirsə, bu dövr həm satmaq, həm də yenidən qiymətləndirmək üçün strateji bir pəncərədir. Xüsusilə uzunmüddətli istifadəçi tərəfindən dəyər yaradılması mümkündür."],h_en:"Baku apartment prices up 12% annually — Nasimi leads",sum_en:"Apartment price growth in Baku's central districts has exceeded regional averages.",why_en:"Real estate is gaining popularity as an inflation hedge — an opportunity for investors.",body_en:["According to the Azerbaijan Real Estate Association's report, apartment prices in Baku rose 12% over the past 12 months. In the Nasimi district, this increase reached 16%. Average sale prices per m² are $2,100 in Nasimi, $1,400 in Neftchala, and $950 in Surakhani.", "Key drivers of demand: first, strong demand from foreign specialists and repatriates; second, high rental yields (gross yield 6–8%) attracting local investors; and third, real estate being chosen as an alternative capital protection instrument as confidence in the manat increases.", "If this trend continues, Baku will remain one of the region's most attractive real estate markets. CFOs assessing the specific weight of real estate assets on the company balance sheet will find this period a strategic window for both selling and revaluation. In particular, value creation is possible from the long-term user side."]},
+  {id:29,cat:'tedarik',sub:'Təchizat Zənciri',country:'China',flag:'🇨🇳',src:'Supply Chain Dive',t:'7 saat',read:'3 dəq',gundem:true,profs:['CEO'],h:'Apple Çin istehsalının 20%-ini Hindistana köçürüb',sum:'Apple 2026-a qədər Hindistanda iPhone istehsalını ümumi həcmin 20%-nə çatdırdı.',why:'Qlobal təchizat zəncirinin restrukturizasiyası Azərbaycan tranzit koridoru üçün yeni imkanlar açır.',body:["Apple, Hindistanda iPhone istehsalını genişləndirib: ölkənin Foxconn tərəfindən idarə edilən zavodları artıq bütün dünyaya satılan iPhone-ların 20%-ni istehsal edir - bu, 3 il əvvəl 2% idi. Bu inkişaf, Apple-ın Çin istehsal riskini diversifikasiya etmək üçün həyata keçirdiyi 'Çin+1' strategiyasının nəticəsidir.", "Hindistan 2026-cı ildə elektronika ixracatını $30 mlrd-a çatdırdı - bu, 2023-cü ilə nisbətdə 3 qat artımdır. Hökumət PLI (Production-Linked Incentive) proqramı çərçivəsində istehsal şirkətlərinə vergi güzəştləri təqdim etdi. Bu islahatlar Hindistanı qlobal elektronika zəncirinə inteqrasiya etmək üçün kritik rol oynayır.", "Qlobal təchizat zəncirlərinin Çin-dən çoxqütblü modellərə keçidi Azərbaycanın tranzit koridoru üçün yeni imkanlar açır. Orta Dəhliz (Çin-Orta Asiya-Azərbaycan-Avropa) marşrutu artıq qlobal şirkətlər üçün alternativ lojistik yol kimi ciddi şəkildə nəzərə alınır. ADY və AZƏRAQRARIN bu koridorun inkişafına verdiyi dəstəyin təsiri böyüdükcə Azərbaycanın geoiqtisadi mövqeyi güclənəcək."],h_en:"Apple shifts 20% of China manufacturing to India",sum_en:"Apple has reached its goal of producing 20% of total iPhone output in India by 2026.",why_en:"Global supply chain restructuring opens new opportunities for Azerbaijan's transit corridor.",body_en:["Apple has expanded iPhone manufacturing in India: factories there, managed by Foxconn, now produce 20% of all iPhones sold worldwide — up from just 2% three years ago. This development is the result of Apple's 'China+1' strategy to diversify manufacturing risk away from China.", "India's electronics exports reached $30bn in 2026 — three times the 2023 figure. The government's PLI (Production-Linked Incentive) program provided tax incentives to manufacturing companies. These reforms play a critical role in integrating India into the global electronics supply chain.", "The shift of global supply chains from China to multipolar models is opening new opportunities for Azerbaijan's transit corridor. The Middle Corridor route (China-Central Asia-Azerbaijan-Europe) is now being seriously considered by global companies as an alternative logistics route. As the support given by ADY and AZƏRAQRAR to this corridor's development grows, Azerbaijan's geo-economic position will strengthen."]},
+  {id:30,cat:'tedarik',sub:'Ağıllı İstehsal',country:'Europe',flag:'🇪🇺',src:'Industrie 4.0',t:'11 saat',read:'3 dəq',gundem:false,profs:['CEO','AI & Tech'],h:'Siemens ağıllı fabrika platformasını 80 ölkəyə genişləndirir',sum:'Siemens Industry 4.0 həllərini 80 yeni bazara çıxarmaq planını açıqladı.',why:'İstehsal sektoru rəqəmsallaşmanın sürətləndiyi dövrdədir — geri qalmaq rəqabət üstünlüyünü itirir.',body:["Siemens AG şirkəti öz Industry 4.0 ağıllı fabrika platformasını - Siemens Xcelerator - 80 yeni ölkəyə genişləndirir. Bu xəbər Hannover Messe texnologiya sərgisindəki açılış mərasimindən elan edildi. Platforma 2026-cı ilin sonuna qədər 150 ölkəni əhatə edəcək.", "Xcelerator platforması fabrika avadanlıqlarını IoT sensor texnologiyaları, rəqəmsal əkizlər (digital twins) və AI-əsaslı proqnoz analitikası ilə inteqrasiya edir. İlkin nəticələr istehsal xərclərinin 18%, plansız dayanmaların isə 42% azaldığını göstərir. Platformanı sınaqdan keçirən 200 şirkətin ortalaması illik $3.2 mln qənaət edib.", "Azərbaycan sənaye şirkətlərinin Siemens Xcelerator kimi platformalara keçişi düşünmək üçün vakıt gəlir. AZAL, SOCAR Polimer, Azərbaycan Polad kimi böyük istehsalçılar bu texnologiyadan faydalanmaq potensialına malikdir. Avropaya ixrac edən şirkətlər üçün isə standartlara uyğunluq əlavə rəqabət üstünlüyü verir."],h_en:"Siemens expands smart factory platform to 80 countries",sum_en:"Siemens announced plans to bring its Industry 4.0 solutions to 80 new markets.",why_en:"The manufacturing sector is in a period of accelerating digitalization — falling behind means losing competitive advantage.",body_en:["Siemens AG is expanding its Industry 4.0 smart factory platform — Siemens Xcelerator — to 80 new countries. This news was announced at the opening ceremony of the Hannover Messe technology fair. The platform will cover 150 countries by end of 2026.", "The Xcelerator platform integrates factory equipment with IoT sensor technologies, digital twins, and AI-based predictive analytics. Initial results show manufacturing costs reduced by 18% and unplanned downtime reduced by 42%. The average among 200 companies that piloted the platform has been annual savings of $3.2 million.", "The time has come for Azerbaijani industrial companies to consider transitioning to platforms like Siemens Xcelerator. Large manufacturers such as AZAL, SOCAR Polymer, and Azerbaijan Steel have the potential to benefit from this technology. For companies exporting to Europe, standards compliance also provides an additional competitive advantage."]},
+  {id:31,cat:'texnologiya',sub:'Sağlamlıq & Tech',country:'USA',flag:'🇺🇸',src:'STAT News',t:'8 saat',read:'4 dəq',gundem:false,profs:['CEO','AI & Tech'],h:'OpenAI sağlamlıq üçün xüsusi GPT modeli hazırlayır',sum:'OpenAI tibbi diaqnostika üçün xüsusi ayrılmış GPT-5 modeli üzərində işlədiyini açıqladı.',why:'Sağlamlıq texnologiyasına investisiya 2026-da VC kapitalının ən sürətli böyüyən sektoru olacaq.',body:["OpenAI şirkəti xüsusi tibbi diaqnostika üçün ayrılmış dil modelinin - 'HealthGPT' adlı layihənin - hazırlıq mərhələlərini açıqladı. Model tibbi görüntü analizi, laboratoriya nəticəsi şərhi və həkim qərarını dəstəkləmə üçün xüsusi olaraq optimizasiya edilib. FDA tənzimləmə prosesi 2026-cı ilin III rübündə başlayacaq.", "Tibbi AI sahəsindəki müsabiqə qızışır. Google DeepMind-in Med-Gemini modeli, Microsoft-un Nuance DAX Copilot sistemi və Stanford StartUpların saysız-hesabsız sağlamlıq AI-ları bazar payı üçün rəqabət aparır. VC kapitalının sağlamlıq AI-na axını 2025-ci ildə $18 mlrd-ı keçdi - rekor.", "Azərbaycanda sağlamlıq texnologiyası sektoru hələ erkən mərhələdədir, lakin potensial böyükdür. Yaxın regionda Türkiyə tibbi AI startaplarına ciddi investisiyalar gedir. Azərbaycanda tibbi AI həllərinin tərəfdaşlıq vasitəsilə tətbiqi - TABIB, xəstəxanalar və sağlamlıq sığortası şirkətləriylə işbirliyi - bu sektorun inkişafını sürətləndirə bilər."],h_en:"OpenAI developing dedicated GPT model for healthcare",sum_en:"OpenAI announced it is working on a specialized GPT-5 model dedicated to medical diagnostics.",why_en:"Investment in health technology will be the fastest-growing VC sector in 2026.",body_en:["OpenAI company revealed the preparation stages of a language model dedicated specifically to medical diagnostics — a project called 'HealthGPT.' The model is specially optimized for medical imaging analysis, laboratory result interpretation, and physician decision support. The FDA regulatory process will begin in Q3 2026.", "Competition in the medical AI field is heating up. Google DeepMind's Med-Gemini model, Microsoft's Nuance DAX Copilot system, and countless Stanford startup health AIs are competing for market share. VC capital flowing into health AI exceeded $18bn in 2025 — a record.", "Azerbaijan's health technology sector is still in an early stage, but the potential is large. Serious investments in medical AI startups are happening in neighboring Turkey. Implementing medical AI solutions in Azerbaijan through partnerships — with TABIB, hospitals, and health insurance companies — could accelerate the sector's development."]},
+  {id:32,cat:'makro',sub:'Sağlamlıq Siyasəti',country:'Europe',flag:'🇪🇺',src:'MedCity News',t:'12 saat',read:'3 dəq',gundem:false,profs:['CEO'],h:'Almaniya rəqəmsal sağlamlıq sığortasını hamı üçün icbari edir',sum:'Almaniya hökuməti sağlamlıq sığortası sistemini tam rəqəmsal platformaya keçirən qanun paketi qəbul etdi.',why:'Sağlamlıq sektorunun rəqəmsallaşması dünya üzrə şirkətlər üçün yeni B2G bazarı açır.',body:["Almaniya Federal Parlamenti (Bundestag) sağlamlıq sığortasını tam rəqəmsal platforma üzərinə köçürən qanunlar paketini qəbul etdi. 2027-ci ilin əvvəlindən bütün sığorta müqavilələri, iddialar, reseptlər və tibbi tarix rəqəmsal sağlamlıq pasportu (ePA) üzərindən idarə ediləcək. Kağız əsaslı prosesslər büsbütün ləğv olunacaq.", "Bu islahat Avropa sağlamlıq sistemi üçün əhəmiyyətli bir keçiddir. Müvəffəqiyyəti halında digər ölkələr bu modeli mənimsəyə bilər - Niderland, İskandinav ölkələri və Belçika artıq Almaniyanın rəqəmsal sağlamlıq infrastrukturunu modelə alır. Layihəyə €2.8 mlrd dövlət investisiyas ayrılıb.", "Sağlamlıq sektorunun rəqəmsallaşması B2G (biznesden hökumətə) bazarında böyük imkanlar açır. Azərbaycan sağlamlıq nazirliyi ilə əlaqədar yerli IT şirkətləri bu qlobal trend kontekstindən ruhlanma almalıdır. Xüsusilə Azərbaycanın DOST, İKT nazirliyi layihələri çərçivəsindəki e-Sağlamlıq proqramları bu istiqamətdə bir neçə il ərzindən uçüncü tərəflər üçün imkanlar yarada bilər."],h_en:"Germany makes digital health insurance mandatory for all",sum_en:"Germany's parliament passed a legislative package transitioning the health insurance system fully to a digital platform.",why_en:"The digitalization of the health sector opens a new B2G market for companies worldwide.",body_en:["Germany's Federal Parliament (Bundestag) passed a legislative package transitioning health insurance to a fully digital platform. From the beginning of 2027, all insurance contracts, claims, prescriptions, and medical histories will be managed through a digital health passport (ePA). Paper-based processes will be completely eliminated.", "This reform is a significant transition for the European healthcare system. If successful, other countries could adopt this model — the Netherlands, Scandinavian countries, and Belgium are already taking Germany's digital health infrastructure as a model. €2.8bn in government investment has been allocated to the project.", "The digitalization of the healthcare sector opens great opportunities in the B2G (business-to-government) market. Azerbaijani IT companies related to the Ministry of Health should draw inspiration from this global trend. In particular, e-Health programs within the framework of Azerbaijan's DOST and ICT Ministry projects could create opportunities for third parties over the next few years."]},
+  {id:33,cat:'bazarlar',sub:'Pərakəndə & E-com',country:'USA',flag:'🇺🇸',src:'Bloomberg',t:'6 saat',read:'3 dəq',gundem:false,profs:['CEO','CMO'],h:'Amazon Prime Day 2026: $14.2 mlrd — rekord satış',sum:'Amazon-ın illik Prime Day kampaniyası 2 günlük satışda yeni rekord qırdı.',why:'E-ticarətin global miqyası Azərbaycan pərakəndə sektorunu da dönüşümə sürükləyir.',body:["Amazon-ın illik Prime Day kampaniyası bu il 51 saat davam etdi və 25 ülkədə keçirildi. Cəmi satış $14.2 mlrd - geçen ilin $12.3 mlrd rekordunu 15% üstələdi. Ən çox satılan kateqoriyalar bunlardır: elektronika ($4.1 mlrd), ev əşyaları ($2.3 mlrd), geyim ($1.8 mlrd).", "Bu ilin ən mühüm yeniliyi: Prime Day-in əsas satış kanalı ilk dəfə mobil tətbiq oldu. Sifarişlərin 61%-i smartfon vasitəsilə verildi. Amazon-un AI-əsaslı tövsiyə motoru bu dövrdə 42% daha çox tövsiyəni alışla bitirdi. Ortalama sifariş dəyəri $87-yə çatdı.", "E-ticarətin global miqyası Azərbaycan pərakəndə sektorunu da dönüşümə sürükləyir. Lokal pərakəndə şirkətlər - Bravo, Bizim Market, Bolton Group - üçün onlayn satış kanallarının gücləndirilməsi artıq seçim deyil, zərurətə çevrilib. Amazon-un rəqəmsal marketinq, inventar planlaması və müştəri sadiqliyi strategiyalarının yerli bazara adaptasiyası üçün vaxt itkiləmədən addım atılmalıdır."],h_en:"Amazon Prime Day 2026: $14.2bn — record sales",sum_en:"Amazon's annual Prime Day campaign set a new record in 2-day sales.",why_en:"The global scale of e-commerce is also driving transformation in Azerbaijan's retail sector.",body_en:["Amazon's annual Prime Day campaign lasted 51 hours this year and was held in 25 countries. Total sales reached $14.2bn — surpassing last year's $12.3bn record by 15%. The top-selling categories were: electronics ($4.1bn), home goods ($2.3bn), and clothing ($1.8bn).", "The most significant innovation this year: for the first time, the main sales channel for Prime Day was the mobile app. 61% of orders were placed via smartphone. Amazon's AI-based recommendation engine completed 42% more recommendations with a purchase during this period. Average order value reached $87.", "The global scale of e-commerce is also driving transformation in Azerbaijan's retail sector. For local retail companies — Bravo, Bizim Market, Bolton Group — strengthening online sales channels is no longer a choice but a necessity. There is no time to lose in adapting Amazon's digital marketing, inventory planning, and customer loyalty strategies to the local market."]},
+  {id:34,cat:'makro',sub:'İstehlak & İnflyasiya',country:'Europe',flag:'🇪🇺',src:'Reuters',t:'10 saat',read:'3 dəq',gundem:false,profs:['CEO','CFO'],h:'Avropa ərzaq inflyasiyası 4.1%-ə düşdü — 2 illik minimum',sum:'Avropa Birliyi ərzaq qiymətlərinin artım tempi 2024-ün zirvəsindən xeyli geri çəkildi.',why:'Ərzaq qiymətlərinin enməsi istehlakçı xərclərini azad edir — pərakəndə satışlarda artım gözlənilir.',body:["Avropa Birliyi Ərzaq Təhlükəsizliyi Agentliyinin açıqladığı iyun məlumatlarına görə, Avropada ərzaq qiymətlərinin artımı ildə 4.1%-ə düşdü - bu, 2024-cü ilin iyunundakı 9.2% zirvəsindən əhəmiyyətli düşüşdür. Ən sürətli ucuzlaşan kateqoriyalar yağ-bitki yağları (−3.2%), taxıl məhsulları (−1.4%) və süd məhsullarıdır (0.8% artım).", "Bu normalization prosesinin əsas səbəbləri: Ukrayna tahıl ixracatının qismən bərpası, Avropa çöl bitkiləri hasılatının 2025-ci ildə rekord olması, Qara Dəniz Taxıl Koridoru çərçivəsindəki razılaşmaların saxlanması. Üstəlik, maliyyə bazarlarındakı əmtəə spekulyasiyasının azalması qiymət dalgalanmalarını sabitləşdirdi.", "Ərzaq qiymətlərinin enməsi istehlakçı xərclərini azad edir: Avropa ev xərclərinə görə xərclərin payının azalması digər kategoriyalara - texnologiya, seyahət, əyləncə - tələbi artırır. Bu trend Azərbaycan üçün Avropa turistlərinin xərclərinin artmasına - turizm gəlirlərinin yüksəlməsinə - kəsişməyə işarə edir. Həm ixracatçılar, həm turizm sektoru üçün əlverişli xəbərdir."],h_en:"European food inflation falls to 4.1% — 2-year low",sum_en:"The pace of food price growth in the EU fell significantly from the 2024 peak.",why_en:"Falling food prices free up consumer spending — retail sales growth is expected.",body_en:["According to June data released by the EU Food Safety Agency, food price growth in Europe fell to 4.1% annually — a significant decline from the 9.2% peak in June 2024. The fastest-falling categories were vegetable oils (−3.2%), grain products (−1.4%), and dairy products (0.8% growth).", "Key causes of this normalization process: the partial resumption of Ukrainian grain exports, Europe's crop yield reaching a record in 2025, and the maintenance of agreements under the Black Sea Grain Corridor framework. Additionally, reduced commodity speculation in financial markets has stabilized price fluctuations.", "Falling food prices free up consumer spending: as the share of food spending in European household budgets decreases, demand for other categories — technology, travel, entertainment — increases. This trend signals that Azerbaijani tourism revenues from European tourists will grow. It is positive news for both exporters and the tourism sector."]}
+];
+
+/* REGIONS — Facemark Master Source Database v2 (Country column, sorted by coverage) */
+var REGIONS=[
+  {name:'Global',            flag:'🌍'},
+  {name:'USA',               flag:'🇺🇸'},
+  {name:'UK',                flag:'🇬🇧'},
+  {name:'Türkiye',           flag:'🇹🇷'},
+  {name:'Europe',            flag:'🇪🇺'},
+  {name:'Azerbaijan',        flag:'🇦🇿'},
+  {name:'Russia',            flag:'🇷🇺'},
+  {name:'Americas & Africa', flag:'🌎'},
+  {name:'UAE & Gulf',        flag:'🌟'},
+  {name:'Japan & Korea',     flag:'🌏'},
+  {name:'India',             flag:'🇮🇳'},
+  {name:'Uzbekistan',        flag:'🇺🇿'},
+  {name:'Kazakhstan',        flag:'🇰🇿'},
+  {name:'China',             flag:'🇨🇳'},
+  {name:'Armenia',           flag:'🇦🇲'},
+  {name:'Georgia',           flag:'🇬🇪'},
+  {name:'Saudi Arabia',      flag:'🇸🇦'}
+];
+
+/* PROFESSIONS — Facemark Master Source Database v2 (Fit columns) */
+var ALL_PROFS=['CEO','CFO','CMO','HR','Startap','Bank & Fintech','AI & Tech'];
+
+/* FILTER STATE */
+var activeCat=null,activeProf=null,activeCountry=null,showAllMode=false;
+var SHOW_LIMIT=5;
+
+/* BUILD FILTERS */
+function buildFilterUI(){
+  var el=document.getElementById('filterCats');
+  el.innerHTML=Object.keys(CAT_META).map(function(k){
+    var cnt=ARTICLES.filter(function(a){return a.cat===k;}).length;
+    var cls='flt-btn'+(activeCat===k?' active':'');
+    var label=CAT_META[k].label;
+    return '<button class="'+cls+'" id="cat-'+k+'" title="'+label+'" onclick="clickCat(\''+k+'\',this)">'+label+'<span style="font-size:.57rem;opacity:.45;margin-left:3px">('+cnt+')</span></button>';
+  }).join('');
+}
+
+function buildCountryFilter(){
+  var el=document.getElementById('filterCountries');
+  el.innerHTML=REGIONS.map(function(r){
+    var cnt=ARTICLES.filter(function(a){return a.country===r.name;}).length;
+    var rid='region-'+r.name.replace(/[^a-zA-Z]/g,'-');
+    var cls='flt-btn-c'+(activeCountry===r.name?' active':'');
+    return '<button class="'+cls+'" id="'+rid+'" title="'+r.name+'" onclick="clickCountry(\''+r.name.replace(/'/g,"\\'")+'\')" >'+r.flag+' '+r.name+'<span style="font-size:.57rem;opacity:.45;margin-left:3px">('+cnt+')</span></button>';
+  }).join('');
+}
+
+function buildProfFilter(){
+  var el=document.getElementById('filterProfs');
+  el.innerHTML=ALL_PROFS.map(function(p){
+    var cnt=ARTICLES.filter(function(a){return a.profs&&a.profs.indexOf(p)>-1;}).length;
+    var cls='flt-btn'+(activeProf===p?' active':'');
+    return '<button class="'+cls+'" id="prof-'+p+'" title="'+p+'" onclick="clickProf(\''+p.replace(/'/g,"\\'")+'\')" >'+p+'<span style="font-size:.57rem;opacity:.45;margin-left:3px">('+cnt+')</span></button>';
+  }).join('');
+}
+
+function deactivateAll(){
+  document.querySelectorAll('.flt-btn,.flt-btn-c').forEach(function(b){b.classList.remove('active');});
+}
+
+function updateActiveBtns(){
+  if(activeCat){var b=document.getElementById('cat-'+activeCat);if(b)b.classList.add('active');}
+  if(activeCountry){var cb=document.getElementById('region-'+activeCountry.replace(/[^a-zA-Z]/g,'-'));if(cb)cb.classList.add('active');}
+  if(activeProf){var pb=document.getElementById('prof-'+activeProf);if(pb)pb.classList.add('active');}
+}
+
+function updateFilterLabels(){
+  var lCat=document.getElementById('labelCat');
+  var lReg=document.getElementById('labelReg');
+  var lProf=document.getElementById('labelProf');
+  if(lCat)lCat.classList.toggle('has-active',!!activeCat);
+  if(lReg)lReg.classList.toggle('has-active',!!activeCountry);
+  if(lProf)lProf.classList.toggle('has-active',!!activeProf);
+}
+
+function clickCat(catKey,el){
+  activeCat=(activeCat===catKey)?null:catKey;
+  showAllMode=false;
+  deactivateAll();updateActiveBtns();
+  updateClearBtn();updateFilterLabels();renderFeed();renderActiveTags();
+}
+
+function clickCountry(country){
+  activeCountry=(activeCountry===country)?null:country;
+  showAllMode=false;
+  deactivateAll();updateActiveBtns();
+  updateClearBtn();updateFilterLabels();renderFeed();renderActiveTags();
+}
+
+function clickProf(prof){
+  activeProf=(activeProf===prof)?null:prof;
+  showAllMode=false;
+  deactivateAll();updateActiveBtns();
+  updateClearBtn();updateFilterLabels();renderFeed();renderActiveTags();
+}
+
+function toggleShowAll(){
+  showAllMode=true;renderFeed();
+}
+
+function clearFilters(){
+  activeCat=null;activeProf=null;activeCountry=null;showAllMode=false;
+  deactivateAll();
+  updateClearBtn();updateFilterLabels();renderFeed();renderActiveTags();
+}
+
+function updateClearBtn(){
+  var btn=document.getElementById('filterClearBtn');
+  if(!btn)return;
+  (activeCat||activeProf||activeCountry)?btn.classList.add('visible'):btn.classList.remove('visible');
+}
+
+function getFilteredArticles(){
+  return ARTICLES.filter(function(a){
+    if(activeCat && a.cat!==activeCat) return false;
+    if(activeCountry && a.country!==activeCountry) return false;
+    if(activeProf && (!a.profs||a.profs.indexOf(activeProf)===-1)) return false;
+    return true;
+  });
+}
+
+function renderActiveTags(){
+  var row=document.getElementById('activeTagsRow');
+  var tags=[];
+  if(activeCat&&CAT_META[activeCat]) tags.push('<span class="fat-chip">'+CAT_META[activeCat].label+'<button onclick="clickCat(\''+activeCat+'\',null)">×</button></span>');
+  if(activeCountry) tags.push('<span class="fat-chip">'+activeCountry+'<button onclick="clickCountry(\''+activeCountry.replace(/'/g,"\\'")+'\')" >×</button></span>');
+  if(activeProf) tags.push('<span class="fat-chip">'+activeProf+'<button onclick="clickProf(\''+activeProf.replace(/'/g,"\\'")+'\')" >×</button></span>');
+  if(tags.length>1){
+    tags.push('<button class="fat-clear-btn" onclick="clearFilters()"><span data-az>Filtri Təmizlə</span><span data-en>Clear All</span></button>');
+  }
+  row.innerHTML=tags.join('');
+}
+
+/* RENDER CARD */
+function renderCard(a){
+  var meta=CAT_META[a.cat]||{chip:'chip-neutral',label:a.cat};
+  var gChip=a.gundem?'<span class="chip chip-gundem">'+(_lang==='en'?'TRENDING':'GÜNDƏM')+'</span>':'';
+  var profs=(a.profs||[]).map(function(p){return '<span class="prof-tag">'+p+'</span>';}).join('');
+  var whyLabel=_lang==='en'?'Why it matters:':'Niyə önəmlidir:';
+  var btnLabel=_lang==='en'?'Read full article →':'Tam xəbəri oxu →';
+  return '<div class="news-card" onclick="openArticle('+a.id+')">'
+    +'<div class="card-top">'+gChip+'<span class="chip '+meta.chip+'">'+getCatLabel(meta)+'</span><span class="chip chip-neutral" style="font-size:.57rem">'+getLang(a,'sub')+'</span><span class="card-src">'+a.flag+' '+a.src+' · '+a.t+'</span></div>'
+    +'<div class="card-h">'+getLang(a,'h')+'</div>'
+    +'<div class="card-sum">'+getLang(a,'sum')+'</div>'
+    +'<div class="card-why"><b>'+whyLabel+'</b> '+getLang(a,'why')+'</div>'
+    +'<div class="card-bot"><div class="card-meta"><span>⏱ '+a.read+'</span>'+profs+'</div><button class="card-read-btn">'+btnLabel+'</button></div>'
+    +'</div>';
+}
+
+function renderFeed(){
+  var filtered=getFilteredArticles();
+  var el=document.getElementById('newsFeed');
+  var cEl=document.getElementById('resultsCount');
+  var total=filtered.length;
+  var shown=showAllMode?filtered:filtered.slice(0,SHOW_LIMIT);
+  var labels=[];
+  if(activeCat&&CAT_META[activeCat])labels.push(CAT_META[activeCat].label);
+  if(activeCountry)labels.push(activeCountry);
+  if(activeProf)labels.push(activeProf);
+  if(cEl)cEl.innerHTML='<b>'+total+'</b> xəbər'+(labels.length?' — '+labels.join(' · '):'');
+  if(!total){
+    var emptyMsg=_lang==='en'?'<div class="empty-state"><b>No news found</b>No results for the selected filter.</div>':'<div class="empty-state"><b>Xəbər tapılmadı</b>Seçilmiş filtr üzrə nəticə yoxdur.</div>';
+    el.innerHTML=emptyMsg;return;
+  }
+  var html=shown.map(renderCard).join('');
+  if(!showAllMode&&total>SHOW_LIMIT){
+    var moreCount=total-SHOW_LIMIT;
+    var moreBtn=_lang==='en'
+      ?'See '+(moreCount)+' more articles in this section →'
+      :'Bu bölmədən digər xəbərlərə də bax → ('+moreCount+' xəbər daha)';
+    html+='<div class="see-more-bar"><button class="see-more-btn" onclick="toggleShowAll()">'+moreBtn+'</button></div>';
+  }
+  el.innerHTML=html;
+  requestAnimationFrame(function(){requestAnimationFrame(balanceSidebar);});
+}
+
+/* LATEST NEWS SIDEBAR — time sort & balance */
+function timeToMins(t){
+  var n=parseInt(t)||0;
+  if(t.indexOf('dəq')>-1) return n;
+  if(t.indexOf('saat')>-1) return n*60;
+  return 9999;
+}
+var SORTED_BY_TIME=ARTICLES.slice().sort(function(a,b){return timeToMins(a.t)-timeToMins(b.t);});
+
+/* Əlavə nümunə xəbərlər — sidebar-ı tam doldurmaq üçün */
+var SIDEBAR_EXTRA=[
+  {id:201,h:'Microsoft Copilot+ PC satışları rekord həddə çatdı',cat:'texnologiya',t:'15 saat',src:'The Verge'},
+  {id:202,h:'Avropa Bankı Birliyi yeni tənzimləmə çərçivəsini açıqladı',cat:'bank',t:'16 saat',src:'FT'},
+  {id:203,h:'Amazon AWS yeni data mərkəzini Türkiyədə açır',cat:'texnologiya',t:'17 saat',src:'Reuters'},
+  {id:204,h:'Goldman Sachs 2026 üçün qızıl proqnozunu yüksəltdi',cat:'bazarlar',t:'18 saat',src:'Bloomberg'},
+  {id:205,h:'TikTok ABŞ-da yeni ödəniş funksiyasını sınaqdan keçirir',cat:'marketinqhr',t:'19 saat',src:'WSJ'},
+  {id:206,h:'TOGG Avropa bazarına daxil olmaq üçün sertifikasiya alır',cat:'corporate',t:'20 saat',src:'Reuters'},
+  {id:207,h:'IMF qlobal artım proqnozunu 3.1%-ə qaldırdı',cat:'makro',t:'21 saat',src:'Bloomberg'},
+  {id:208,h:'Bitcoin 75,000$ həddi üzrə konsolidasiya dövründədir',cat:'bazarlar',t:'22 saat',src:'CoinDesk'},
+  {id:209,h:'Nvidia yeni GB300 çipini rəsmən elan etdi',cat:'texnologiya',t:'23 saat',src:'TechCrunch'},
+  {id:210,h:'Yaponiya Mərkəzi Bankı faizi dördüncü rübdə sabit saxladı',cat:'makro',t:'1 gün',src:'Nikkei'},
+  {id:211,h:'SOFAZ aktivləri $56 mlrd-ı keçdi — illik rekord',cat:'makro',t:'1 gün',src:'Trend'},
+  {id:212,h:'Meta AI köməkçisini WhatsApp Business-ə inteqrasiya edir',cat:'texnologiya',t:'1 gün',src:'The Verge'},
+  {id:213,h:'Saudiyyə Aramco 2026 ilk yarısında mənfəəti 8% azaldı',cat:'enerji',t:'1 gün',src:'Reuters'},
+  {id:214,h:'Hindistanın Sensex indeksi ilk dəfə 90,000 həddi aşdı',cat:'bazarlar',t:'1 gün',src:'Bloomberg'},
+  {id:215,h:'UBS Credit Suisse inteqrasiyasını uğurla tamamladı',cat:'bank',t:'1 gün',src:'FT'},
+  {id:216,h:'OpenAI o3 Pro modelini korporativ müştərilər üçün açdı',cat:'texnologiya',t:'1 gün',src:'TechCrunch'},
+  {id:217,h:'SOCAR Türkiyə bazarında yeni yanacaq şəbəkəsi layihəsi',cat:'enerji',t:'1 gün',src:'Trend'},
+  {id:218,h:'Çinin elektrikli avtomobil ixracı aylıq rekord qırdı',cat:'tedarik',t:'1 gün',src:'Reuters'},
+  {id:219,h:'LinkedIn Azərbaycanda 400K aktiv istifadəçini keçdi',cat:'marketinqhr',t:'1 gün',src:'Axios'},
+  {id:220,h:'Starlink Azərbaycanda lisenziya almaq üçün danışıqlar aparır',cat:'texnologiya',t:'2 gün',src:'Trend'},
+  {id:221,h:'Avropa Mərkəzi Bankı aktivlər proqramını yavaşlatdı',cat:'bazarlar',t:'2 gün',src:'Reuters'},
+  {id:222,h:'Çin-ABŞ ticarət görüşmələri yenidən başladı',cat:'tedarik',t:'2 gün',src:'WSJ'},
+  {id:223,h:'Saudi Arabistan $500 mlrd-lıq NEOM şəhər layihəsini sürətləndirir',cat:'corporate',t:'2 gün',src:'Bloomberg'},
+  {id:224,h:'Azərbaycanda maliyyə texnologiyaları startapları üçün akselerator proqramı',cat:'startapvc',t:'2 gün',src:'Trend'},
+  {id:225,h:'Apple iPhone 17 seriyasının istehsalına başladı',cat:'texnologiya',t:'2 gün',src:'Bloomberg'},
+];
+var SIDEBAR_POOL=SORTED_BY_TIME.concat(SIDEBAR_EXTRA);
+
+function balanceSidebar(){
+  var grid=document.querySelector('.main-grid');
+  var leftCol=document.querySelector('.main-grid>div:first-child');
+  var sidebar=document.querySelector('.sidebar');
+  var lnCard=document.getElementById('latestNewsCard');
+  var lnList=document.getElementById('latestNewsItems');
+  if(!grid||!leftCol||!sidebar||!lnCard||!lnList)return;
+
+  /* Use align-items:start to measure natural (non-stretched) heights */
+  grid.style.alignItems='start';
+
+  var leftH=leftCol.offsetHeight;
+
+  lnCard.style.display='none';
+  var sbBaseH=sidebar.offsetHeight;
+  lnCard.style.display='block';
+
+  var availH=leftH-sbBaseH-16;
+  if(availH<80){
+    lnCard.style.display='none';
+    grid.style.alignItems='';
+    return;
+  }
+
+  /* Add items one-by-one until sidebar reaches leftCol height */
+  lnList.innerHTML='';
+  for(var i=0;i<SIDEBAR_POOL.length;i++){
+    var a=SIDEBAR_POOL[i];
+    var div=document.createElement('div');
+    div.className='sb-latest-item';
+    (function(id){
+      var isReal=ARTICLES.some(function(x){return x.id===id;});
+      div.addEventListener('click',function(){
+        if(isReal) openArticle(id);
+        else location.href='business_radar.html';
+      });
+    })(a.id);
+    var catMeta=CAT_META[a.cat];
+    var catLabel=catMeta?getCatLabel(catMeta):a.cat;
+    div.innerHTML='<div class="sbl-time">'+a.t
+      +'<span class="sbl-cat"> · '+catLabel+'</span></div>'
+      +'<div class="sbl-title">'+getLang(a,'h')+'</div>';
+    lnList.appendChild(div);
+    /* Force reflow — stop if we overshoot */
+    if(sidebar.offsetHeight>=leftH){
+      lnList.removeChild(div);
+      break;
+    }
+  }
+
+  grid.style.alignItems='';
+}
+
+var _sbResizeTimer;
+window.addEventListener('resize',function(){
+  clearTimeout(_sbResizeTimer);
+  _sbResizeTimer=setTimeout(balanceSidebar,150);
+});
+
+/* BRIEF */
+function renderBrief(){
+  var briefs=ARTICLES.filter(function(a){return a.gundem;}).slice(0,10);
+  var el=document.getElementById('briefGrid');if(!el)return;
+  el.innerHTML=briefs.map(function(a,i){
+    return '<div class="brief-card" onclick="openArticle('+a.id+')">'
+      +'<div class="bc-num">'+String(i+1).padStart(2,'0')+'</div>'
+      +'<div class="bc-head">'+getLang(a,'h')+'</div>'
+      +'<div class="bc-meta">'+a.src+' · '+a.t+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+/* OPEN ARTICLE */
+function openArticle(id){
+  var a=ARTICLES.find(function(x){return x.id===id;});if(!a)return;
+  var meta=CAT_META[a.cat]||{chip:'chip-neutral',label:a.cat};
+  var whyLabelM=_lang==='en'?'Why it matters:':'Niyə önəmlidir:';
+  var readLabel=_lang==='en'?'min read':' oxunma';
+  var gundLabel=_lang==='en'?'TRENDING':'GÜNDƏM';
+  document.getElementById('mTitle').textContent=getLang(a,'h');
+  document.getElementById('mChips').innerHTML=(a.gundem?'<span class="chip chip-gundem">'+gundLabel+'</span>':'')+'<span class="chip '+meta.chip+'">'+getCatLabel(meta)+'</span><span class="chip chip-neutral">'+getLang(a,'sub')+'</span>';
+  document.getElementById('mSrc').textContent=a.flag+' '+a.src+' · '+a.t+' · '+a.read+readLabel;
+  document.getElementById('mSum').textContent=getLang(a,'sum');
+  document.getElementById('mWhy').innerHTML='<strong>'+whyLabelM+'</strong> '+getLang(a,'why');
+  document.getElementById('mProfs').innerHTML=(a.profs||[]).map(function(p){return '<span class="prof-tag">'+p+'</span>';}).join('');
+  var bodyArr=_lang==='en'?(a.body_en||a.body||[]):(a.body||[]);
+  document.getElementById('mBody').innerHTML=bodyArr.map(function(p){return '<p>'+p+'</p>';}).join('');
+  document.getElementById('articleModal').classList.add('open');
+}
+
+/* TICKER */
+function buildTicker(){
+  var track=document.getElementById('tickerTrack');if(!track)return;
+  var items=SORTED_BY_TIME.map(function(a){
+    var meta=CAT_META[a.cat];
+    return {cat:meta?getCatLabel(meta):a.cat,text:getLang(a,'h'),id:a.id};
+  });
+  var doubled=items.concat(items);
+  track.innerHTML=doubled.map(function(item){
+    return '<span class="ticker-item" onclick="openArticle('+item.id+')">'
+      +'<span class="t-chip">'+item.cat+'</span>'
+      +item.text
+      +'</span><span class="ticker-sep">◆</span>';
+  }).join('');
+  /* scrollWidth-ə görə sürəti tənzimlə — hədəf: 70 px/saniyə */
+  requestAnimationFrame(function(){
+    var w=track.scrollWidth;
+    if(w>0){
+      var dur=Math.round((w*0.5)/70);
+      track.style.animationDuration=dur+'s';
+      /* Digər səhifələr üçün eyni sürəti saxla */
+      try{localStorage.setItem('fmr_ticker_speed',dur);}catch(e){}
+    }
+  });
+  /* Save to localStorage for other pages */
+  try{
+    localStorage.setItem('fmr_ticker_news',JSON.stringify(items.map(function(i){return {cat:i.cat,text:i.text};})));
+  }catch(e){}
+}
+
+/* FOOTER LATEST NEWS */
+function renderFooterNews(){
+  var el=document.getElementById('footerLatestNews');
+  if(!el)return;
+  var top3=SORTED_BY_TIME.slice(0,3);
+  var html=top3.map(function(a){
+    var catLabel=CAT_META[a.cat]?CAT_META[a.cat].label:a.cat;
+    var headline=a.h.length>52?a.h.slice(0,52)+'…':a.h;
+    return '<div class="fnews-item" style="cursor:pointer" onclick="openArticle('+a.id+')">'
+      +'<span>'+headline+'</span>'
+      +'<span style="color:rgba(255,255,255,.3);font-size:.61rem;font-weight:400">'+catLabel+' · '+a.t+'</span>'
+      +'</div>';
+  }).join('');
+  el.innerHTML=html;
+  /* Save for other pages */
+  try{
+    var saveData=top3.map(function(a){
+      return {h:a.h,cat:CAT_META[a.cat]?CAT_META[a.cat].label:a.cat,t:a.t,src:a.src};
+    });
+    localStorage.setItem('fmr_footer_news',JSON.stringify(saveData));
+  }catch(e){}
+}
+
+/* Sidebar compatibility aliases */
+function filterByCountry(c){clickCountry(c);}
+function filterByProf(p){clickProf(p);}
+
+/* INIT */
+buildFilterUI();
+buildCountryFilter();
+buildProfFilter();
+buildTicker();
+renderBrief();
+renderFeed();
+</script>
+</body>
+</html>
