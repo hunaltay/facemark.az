@@ -1027,27 +1027,8 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
         <div class="card-hdr">
           <span class="card-hdr-title">Son Fəaliyyət</span>
         </div>
-        <div class="card-body" style="padding:10px 14px;display:grid;grid-template-columns:repeat(2,1fr);gap:0">
-          <div class="activity-item" style="padding-right:20px">
-            <div class="act-dot" style="background:var(--green)"></div>
-            <span>FMR TV-yə yeni video əlavə edildi</span>
-            <span class="act-time">5 dəq əvvəl</span>
-          </div>
-          <div class="activity-item" style="padding-left:20px;border-left:1px solid var(--border)">
-            <div class="act-dot" style="background:var(--blue)"></div>
-            <span>Biznes Radar-da 3 xəbər yayımlandı</span>
-            <span class="act-time">1 saat</span>
-          </div>
-          <div class="activity-item" style="padding-right:20px;border-bottom:none">
-            <div class="act-dot" style="background:var(--gold)"></div>
-            <span>MMF 2026 üçün yeni spiker əlavə edildi</span>
-            <span class="act-time">3 saat</span>
-          </div>
-          <div class="activity-item" style="padding-left:20px;border-left:1px solid var(--border);border-bottom:none">
-            <div class="act-dot" style="background:var(--muted)"></div>
-            <span>Karyera bölməsinə 2 müraciət daxil oldu</span>
-            <span class="act-time">Dünən</span>
-          </div>
+        <div class="card-body" id="dashboard-activity-list" style="padding:10px 14px;display:grid;grid-template-columns:repeat(2,1fr);gap:0">
+          <div style="grid-column:1/-1;padding:10px;color:var(--muted);font-size:.72rem;text-align:center">Yüklənir...</div>
         </div>
       </div>
 
@@ -1212,8 +1193,8 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
         <div style="margin-left:auto;display:flex;gap:8px">
           <button class="btn btn-outline" onclick="showView('events-list',null)">← Geri</button>
           <button class="btn btn-outline">👁️ Saytda bax</button>
-          <button class="btn btn-dark">Qaralama saxla</button>
-          <button class="btn btn-gold">✓ Yayımla</button>
+          <button class="btn btn-dark" onclick="saveEventBasic()">Qaralama saxla</button>
+          <button class="btn btn-gold" onclick="saveEventBasic()">✓ Yayımla</button>
         </div>
       </div>
 
@@ -1257,19 +1238,19 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
               <div class="form-row">
                 <div class="form-group">
                   <label>Azərbaycanca ad</label>
-                  <input type="text" value="Milli Marketinq Forumu 2026">
+                  <input type="text" id="ev-title-az" value="Milli Marketinq Forumu 2026">
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label>İngiliscə ad</label>
-                  <input type="text" value="National Marketing Forum 2026">
+                  <input type="text" id="ev-title-en" value="National Marketing Forum 2026">
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label>URL Slug</label>
-                  <input type="text" value="mmf-2026">
+                  <input type="text" id="ev-slug" value="mmf-2026">
                   <span class="form-hint">facemark.az/events/mmf-2026</span>
                 </div>
               </div>
@@ -1283,7 +1264,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
               </div>
               <div class="form-group">
                 <label>Azərbaycanca təsvir</label>
-                <textarea style="min-height:100px">Azərbaycanda marketinq sənayesinin ən böyük illik forum tədbiridır. Peşəkarları bir araya gətirir, sənayenin gələcəyini müzakirə edirlər.</textarea>
+                <textarea id="ev-desc-az" style="min-height:100px">Azərbaycanda marketinq sənayesinin ən böyük illik forum tədbiridır. Peşəkarları bir araya gətirir, sənayenin gələcəyini müzakirə edirlər.</textarea>
               </div>
             </div>
 
@@ -1292,11 +1273,11 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
               <div class="form-row cols3">
                 <div class="form-group">
                   <label>Başlanğıc tarixi</label>
-                  <input type="date" value="2026-06-06">
+                  <input type="date" id="ev-date-start" value="2026-06-06">
                 </div>
                 <div class="form-group">
                   <label>Bitmə tarixi</label>
-                  <input type="date" value="2026-06-06">
+                  <input type="date" id="ev-date-end" value="2026-06-06">
                 </div>
                 <div class="form-group">
                   <label>Başlanğıc saatı</label>
@@ -1306,7 +1287,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
               <div class="form-row cols2">
                 <div class="form-group">
                   <label>Məkan adı</label>
-                  <input type="text" value="Bakı Konqres Mərkəzi">
+                  <input type="text" id="ev-venue" value="Bakı Konqres Mərkəzi">
                 </div>
                 <div class="form-group">
                   <label>Məkan ünvanı</label>
@@ -1320,10 +1301,11 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
           <div style="display:flex;flex-direction:column;gap:14px">
             <div class="form-section">
               <div class="form-section-title">Status</div>
-              <select>
-                <option>● Aktiv (Saytda görünür)</option>
-                <option>○ Draft (Yalnız admin)</option>
-                <option>✓ Tamamlandı</option>
+              <select id="ev-status">
+                <option value="active">● Aktiv (Saytda görünür)</option>
+                <option value="upcoming">○ Draft (Yalnız admin)</option>
+                <option value="past">✓ Tamamlandı</option>
+                <option value="partner">🌐 Partnyor tədbiri</option>
               </select>
             </div>
 
@@ -1371,103 +1353,31 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
       <!-- TAB: Agenda -->
       <div id="evtab-agenda" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <div style="font-size:.78rem;color:var(--muted)">Proqram sürüşdürərək sıralana bilər</div>
-          <button class="btn btn-gold">+ Sessiya əlavə et</button>
+          <div style="font-size:.78rem;color:var(--muted)" id="ev-program-sub">Yüklənir...</div>
+          <button class="btn btn-gold" onclick="crudOpen('event_program',null)">+ Sessiya əlavə et</button>
         </div>
-        <div class="agenda-item">
-          <div class="agenda-time">09:00 — 09:30</div>
-          <div class="agenda-dot"></div>
-          <div class="agenda-content">
-            <div class="agenda-title">Qeydiyyat & Qarşılanma</div>
-            <div class="agenda-speaker">Foyedə · Qəhvə ilə</div>
+        <div class="card">
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Gün</th><th>Saat</th><th>Başlıq</th><th>Spiker</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+              <tbody id="event_program-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+            </table>
           </div>
-          <div style="display:flex;gap:4px">
-            <button class="btn btn-sm btn-outline">✏️</button>
-            <button class="btn btn-sm btn-red">🗑</button>
-          </div>
-          <div class="agenda-handle">⣿</div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-time">09:30 — 10:15</div>
-          <div class="agenda-dot"></div>
-          <div class="agenda-content">
-            <div class="agenda-title">Açılış Nitqi</div>
-            <div class="agenda-speaker">🎤 Kənan Məmmədov · Facemark CEO</div>
-          </div>
-          <div style="display:flex;gap:4px">
-            <button class="btn btn-sm btn-outline">✏️</button>
-            <button class="btn btn-sm btn-red">🗑</button>
-          </div>
-          <div class="agenda-handle">⣿</div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-time">10:15 — 11:00</div>
-          <div class="agenda-dot" style="background:var(--blue)"></div>
-          <div class="agenda-content">
-            <div class="agenda-title">Keynote: 2026-da Marketinqin Gələcəyi</div>
-            <div class="agenda-speaker">🎤 Elnur Həsənov · CMO, Kapital Bank</div>
-          </div>
-          <div style="display:flex;gap:4px">
-            <button class="btn btn-sm btn-outline">✏️</button>
-            <button class="btn btn-sm btn-red">🗑</button>
-          </div>
-          <div class="agenda-handle">⣿</div>
-        </div>
-        <div class="agenda-item">
-          <div class="agenda-time">11:00 — 11:30</div>
-          <div class="agenda-dot" style="background:var(--muted)"></div>
-          <div class="agenda-content">
-            <div class="agenda-title">Kofe Fasiləsi & Networking</div>
-            <div class="agenda-speaker">Foyedə</div>
-          </div>
-          <div style="display:flex;gap:4px">
-            <button class="btn btn-sm btn-outline">✏️</button>
-            <button class="btn btn-sm btn-red">🗑</button>
-          </div>
-          <div class="agenda-handle">⣿</div>
-        </div>
-        <div style="border:2px dashed var(--border);border-radius:8px;padding:14px;text-align:center;color:var(--muted);font-size:.7rem;cursor:pointer;margin-top:4px">
-          + Yeni sessiya əlavə et
         </div>
       </div>
 
       <!-- TAB: Speakers -->
       <div id="evtab-speakers" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <div style="font-size:.78rem;color:var(--muted)">8 spiker əlavə edilib</div>
-          <button class="btn btn-gold">+ Spiker əlavə et</button>
+          <div style="font-size:.78rem;color:var(--muted)" id="ev-speakers-sub">Yüklənir...</div>
+          <button class="btn btn-gold" onclick="crudOpen('event_speakers',null)">+ Spiker əlavə et</button>
         </div>
-        <div class="speaker-grid">
-          <div class="speaker-card">
-            <div class="speaker-photo">👩‍💼</div>
-            <div class="speaker-name">Aytən Rüstəmova</div>
-            <div class="speaker-role">CMO · PASHA Holding</div>
-            <div style="display:flex;gap:4px;justify-content:center;margin-top:8px">
-              <button class="btn btn-sm btn-outline">✏️ Redaktə</button>
-              <button class="btn btn-sm btn-red">🗑</button>
-            </div>
-          </div>
-          <div class="speaker-card">
-            <div class="speaker-photo">👨‍💼</div>
-            <div class="speaker-name">Elnur Həsənov</div>
-            <div class="speaker-role">CMO · Kapital Bank</div>
-            <div style="display:flex;gap:4px;justify-content:center;margin-top:8px">
-              <button class="btn btn-sm btn-outline">✏️ Redaktə</button>
-              <button class="btn btn-sm btn-red">🗑</button>
-            </div>
-          </div>
-          <div class="speaker-card">
-            <div class="speaker-photo">👩‍💻</div>
-            <div class="speaker-name">Leyla Məmmədova</div>
-            <div class="speaker-role">Digital Director · Silk Way</div>
-            <div style="display:flex;gap:4px;justify-content:center;margin-top:8px">
-              <button class="btn btn-sm btn-outline">✏️ Redaktə</button>
-              <button class="btn btn-sm btn-red">🗑</button>
-            </div>
-          </div>
-          <div class="speaker-add" onclick="">
-            <div style="font-size:1.5rem;margin-bottom:6px">+</div>
-            Yeni spiker əlavə et
+        <div class="card">
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th style="width:56px">Şəkil</th><th>Ad</th><th>Vəzifə</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+              <tbody id="event_speakers-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -1475,78 +1385,37 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
       <!-- TAB: Sponsors -->
       <div id="evtab-sponsors" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <div style="font-size:.78rem;color:var(--muted)">5 sponsor — 3 səviyyə</div>
-          <button class="btn btn-gold">+ Sponsor əlavə et</button>
+          <div style="font-size:.78rem;color:var(--muted)" id="ev-sponsors-sub">Yüklənir...</div>
+          <button class="btn btn-gold" onclick="crudOpen('event_sponsors',null)">+ Sponsor əlavə et</button>
         </div>
-        <div style="margin-bottom:14px">
-          <div style="font-size:.65rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">🥇 Qızıl Sponsor</div>
-          <table style="width:100%;border:1.5px solid var(--border);border-radius:8px;overflow:hidden">
-            <thead><tr><th>Şirkət</th><th>Logo</th><th>Web</th><th>Görünürlük</th><th></th></tr></thead>
-            <tbody>
-              <tr><td><b>Kapital Bank</b></td><td><span style="font-size:.65rem;color:var(--muted)">kapital-logo.png</span></td><td style="font-size:.68rem">kapitalbank.az</td><td><span class="status-badge status-active">Aktiv</span></td><td><button class="btn btn-sm btn-outline">✏️</button></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div style="margin-bottom:14px">
-          <div style="font-size:.65rem;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">🥈 Gümüş Sponsor</div>
-          <table style="width:100%;border:1.5px solid var(--border);border-radius:8px;overflow:hidden">
-            <thead><tr><th>Şirkət</th><th>Logo</th><th>Web</th><th>Görünürlük</th><th></th></tr></thead>
-            <tbody>
-              <tr><td><b>PASHA Holding</b></td><td><span style="font-size:.65rem;color:var(--muted)">pasha-logo.png</span></td><td style="font-size:.68rem">pasha.az</td><td><span class="status-badge status-active">Aktiv</span></td><td><button class="btn btn-sm btn-outline">✏️</button></td></tr>
-              <tr><td><b>Azərconnect</b></td><td><span style="font-size:.65rem;color:var(--muted)">azcon-logo.png</span></td><td style="font-size:.68rem">azərconnect.az</td><td><span class="status-badge status-active">Aktiv</span></td><td><button class="btn btn-sm btn-outline">✏️</button></td></tr>
-            </tbody>
-          </table>
+        <div class="card">
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th style="width:56px">Logo</th><th>Şirkət</th><th>Səviyyə</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+              <tbody id="event_sponsors-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
       <!-- TAB: Tickets -->
       <div id="evtab-tickets" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <div style="font-size:.78rem;color:var(--muted)">3 bilet növü · Cəmi 420/600 satılıb</div>
-          <button class="btn btn-gold">+ Bilet növü əlavə et</button>
+          <div style="font-size:.78rem;color:var(--muted)" id="ev-tickets-sub">Yüklənir...</div>
+          <button class="btn btn-gold" onclick="crudOpen('event_tickets',null)">+ Bilet növü əlavə et</button>
         </div>
-        <div class="ticket-type">
-          <div class="ticket-color" style="background:var(--muted)"></div>
-          <div class="ticket-info">
-            <div class="ticket-name">Standard</div>
-            <div class="ticket-price">₼ 49 · Fərdi giriş</div>
+        <div class="card">
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Ad</th><th>Qiymət</th><th>Status</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+              <tbody id="event_tickets-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+            </table>
           </div>
-          <div class="ticket-sold">
-            <b>320</b>
-            420 mövcud
-          </div>
-          <div class="prog-bar" style="width:80px;align-self:center"><div class="prog-fill" style="width:76%"></div></div>
-          <button class="btn btn-sm btn-outline">✏️</button>
-        </div>
-        <div class="ticket-type">
-          <div class="ticket-color" style="background:var(--gold)"></div>
-          <div class="ticket-info">
-            <div class="ticket-name">VIP</div>
-            <div class="ticket-price">₼ 149 · Ön cərgə + kofe</div>
-          </div>
-          <div class="ticket-sold">
-            <b>72</b>
-            80 mövcud
-          </div>
-          <div class="prog-bar" style="width:80px;align-self:center"><div class="prog-fill" style="width:90%"></div></div>
-          <button class="btn btn-sm btn-outline">✏️</button>
-        </div>
-        <div class="ticket-type">
-          <div class="ticket-color" style="background:var(--dark)"></div>
-          <div class="ticket-info">
-            <div class="ticket-name">Korporativ (5 nəfər)</div>
-            <div class="ticket-price">₼ 349 · Şirkət adına</div>
-          </div>
-          <div class="ticket-sold">
-            <b>28</b>
-            100 mövcud
-          </div>
-          <div class="prog-bar" style="width:80px;align-self:center"><div class="prog-fill" style="width:28%"></div></div>
-          <button class="btn btn-sm btn-outline">✏️</button>
         </div>
       </div>
 
-      <!-- TAB: Registrations -->
+      
+<!-- TAB: Registrations -->
       <div id="evtab-registrations" style="display:none">
         <div style="display:flex;gap:8px;margin-bottom:14px">
           <button class="btn btn-outline btn-sm">📥 CSV Export</button>
@@ -1573,34 +1442,15 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
       <div class="page-hdr">
         <div>
           <div class="page-title">📰 Biznes Radar — Xəbərlər</div>
-          <div class="page-sub">34 aktiv xəbər · 10 kateqoriya</div>
+          <div class="page-sub" id="news-sub">Yüklənir...</div>
         </div>
-        <div style="margin-left:auto;display:flex;gap:8px">
-          <button class="btn btn-outline">📥 Export</button>
-          <button class="btn btn-gold">+ Yeni Xəbər</button>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
-        <button class="btn btn-dark btn-sm">Hamısı (34)</button>
-        <button class="btn btn-outline btn-sm">Gündəm (8)</button>
-        <button class="btn btn-outline btn-sm">Draft (3)</button>
-        <select style="font-size:.68rem;padding:5px 8px;border:1.5px solid var(--border);border-radius:6px;background:var(--bg)">
-          <option>Bütün kateqoriyalar</option>
-          <option>Şirkətlər & M&A</option>
-          <option>Bazarlar & Maliyyə</option>
-          <option>Texnologiya & AI</option>
-        </select>
+        <div style="margin-left:auto"><button class="btn btn-gold" onclick="crudOpen('news_items',null)">+ Yeni Xəbər</button></div>
       </div>
       <div class="card">
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Başlıq</th><th>Kateqoriya</th><th>Mənbə</th><th>Dil</th><th>Gündəm</th><th>Status</th><th></th></tr></thead>
-            <tbody>
-              <tr><td><b style="font-size:.73rem">Fed faizi 25bp endirdi — qlobal bazarlar reaksiya verdi</b></td><td><span class="status-badge" style="background:rgba(59,130,246,.1);color:var(--blue)">Bazarlar</span></td><td style="font-size:.68rem">Reuters</td><td style="font-size:.68rem">AZ + EN</td><td><span class="status-badge" style="background:rgba(196,151,58,.15);color:var(--gold)">⭐ Gündəm</span></td><td><span class="status-badge status-active">Aktiv</span></td><td style="white-space:nowrap"><button class="btn btn-sm btn-outline">✏️</button> <button class="btn btn-sm btn-red">🗑</button></td></tr>
-              <tr><td><b style="font-size:.73rem">Google $3 mlrd-a Inflection AI-ı aldı</b></td><td><span class="status-badge" style="background:rgba(196,151,58,.12);color:#9a7320">Şirkətlər</span></td><td style="font-size:.68rem">TechCrunch</td><td style="font-size:.68rem">AZ + EN</td><td><span class="status-badge" style="background:rgba(196,151,58,.15);color:var(--gold)">⭐ Gündəm</span></td><td><span class="status-badge status-active">Aktiv</span></td><td style="white-space:nowrap"><button class="btn btn-sm btn-outline">✏️</button> <button class="btn btn-sm btn-red">🗑</button></td></tr>
-              <tr><td><b style="font-size:.73rem">Bakıda ilk unicorn iddiası — AI startap $120M</b></td><td><span class="status-badge" style="background:rgba(28,24,40,.08);color:var(--dark)">Startap & VC</span></td><td style="font-size:.68rem">AZPROMO</td><td style="font-size:.68rem">AZ + EN</td><td><span class="status-badge" style="background:rgba(196,151,58,.15);color:var(--gold)">⭐ Gündəm</span></td><td><span class="status-badge status-active">Aktiv</span></td><td style="white-space:nowrap"><button class="btn btn-sm btn-outline">✏️</button> <button class="btn btn-sm btn-red">🗑</button></td></tr>
-              <tr><td style="color:var(--muted)"><i style="font-size:.72rem">Yeni xəbər qaralamada...</i></td><td>—</td><td>—</td><td>—</td><td>—</td><td><span class="status-badge status-draft">Draft</span></td><td style="white-space:nowrap"><button class="btn btn-sm btn-outline">✏️</button> <button class="btn btn-sm btn-red">🗑</button></td></tr>
-            </tbody>
+            <thead><tr><th>Başlıq</th><th>Çip</th><th>Link</th><th>Status</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+            <tbody id="news-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -1613,35 +1463,15 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
       <div class="page-hdr">
         <div>
           <div class="page-title">📺 FMR TV — Videolar</div>
-          <div class="page-sub">47 video · 6 plylist</div>
+          <div class="page-sub" id="tv-sub">Yüklənir...</div>
         </div>
-        <div style="margin-left:auto;display:flex;gap:8px">
-          <button class="btn btn-outline">+ Plylist yarat</button>
-          <button class="btn btn-gold">+ Video əlavə et</button>
-        </div>
-      </div>
-      <div class="three-col" style="margin-bottom:20px">
-        <div class="card" style="padding:14px;display:flex;gap:10px;align-items:center">
-          <div style="font-size:1.4rem">📺</div>
-          <div><div style="font-size:1.2rem;font-weight:800">47</div><div style="font-size:.65rem;color:var(--muted)">Ümumi video</div></div>
-        </div>
-        <div class="card" style="padding:14px;display:flex;gap:10px;align-items:center">
-          <div style="font-size:1.4rem">👁️</div>
-          <div><div style="font-size:1.2rem;font-weight:800">124K</div><div style="font-size:.65rem;color:var(--muted)">Bu ay baxış</div></div>
-        </div>
-        <div class="card" style="padding:14px;display:flex;gap:10px;align-items:center">
-          <div style="font-size:1.4rem">⭐</div>
-          <div><div style="font-size:1.2rem;font-weight:800">1</div><div style="font-size:.65rem;color:var(--muted)">Öncü video</div></div>
-        </div>
+        <div style="margin-left:auto"><button class="btn btn-gold" onclick="crudOpen('tv_videos',null)">+ Video əlavə et</button></div>
       </div>
       <div class="card">
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Başlıq</th><th>Kateqoriya</th><th>Müddət</th><th>Baxış</th><th>Öncü</th><th>Status</th><th></th></tr></thead>
-            <tbody>
-              <tr><td><div style="display:flex;gap:8px;align-items:center"><div style="width:48px;height:30px;background:var(--bg2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.8rem">▶</div><b style="font-size:.73rem">Elnur Həsənov ilə marketinq söhbəti</b></div></td><td style="font-size:.68rem">Müsahibə</td><td style="font-size:.68rem">28:14</td><td style="font-size:.68rem">3,240</td><td><span class="status-badge" style="background:rgba(196,151,58,.15);color:var(--gold)">⭐ Öncü</span></td><td><span class="status-badge status-active">Aktiv</span></td><td><button class="btn btn-sm btn-outline">✏️</button></td></tr>
-              <tr><td><div style="display:flex;gap:8px;align-items:center"><div style="width:48px;height:30px;background:var(--bg2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.8rem">▶</div><b style="font-size:.73rem">MMF 2025 — Panel müzakirəsi</b></div></td><td style="font-size:.68rem">Forum</td><td style="font-size:.68rem">1:14:30</td><td style="font-size:.68rem">8,100</td><td>—</td><td><span class="status-badge status-active">Aktiv</span></td><td><button class="btn btn-sm btn-outline">✏️</button></td></tr>
-            </tbody>
+            <thead><tr><th>Başlıq</th><th>Kateqoriya</th><th>Video linki</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+            <tbody id="tv-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
           </table>
         </div>
       </div>
@@ -1654,41 +1484,31 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
       <div class="page-hdr">
         <div>
           <div class="page-title">✈️ Marketing Air</div>
-          <div class="page-sub">Xidmət paketləri, portfolio və müştəri idarəetməsi</div>
-        </div>
-        <div style="margin-left:auto;display:flex;gap:8px">
-          <button class="btn btn-gold">+ Xidmət paketi əlavə et</button>
+          <div class="page-sub">Proqramlar və Təlimçilər idarəsi</div>
         </div>
       </div>
-      <div style="display:flex;gap:8px;margin-bottom:14px">
-        <button class="btn btn-dark btn-sm">Xidmətlər (6)</button>
-        <button class="btn btn-outline btn-sm">Portfolio / Case Studies (12)</button>
-        <button class="btn btn-outline btn-sm">Müştərilər (28)</button>
+      <div class="card" style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="card-title">📋 Proqramlar</div>
+          <button class="btn btn-gold btn-sm" onclick="crudOpen('air_programs',null)">+ Proqram əlavə et</button>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Başlıq</th><th>Təsvir</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+            <tbody id="air-programs-tbody"><tr><td colspan="4" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+          </table>
+        </div>
       </div>
-      <div class="three-col">
-        <div class="card" style="padding:16px">
-          <div style="font-size:1rem;margin-bottom:8px">📱</div>
-          <div style="font-weight:700;font-size:.8rem;margin-bottom:4px">Sosial Media İdarəetməsi</div>
-          <div style="font-size:.68rem;color:var(--muted);margin-bottom:10px">Aylıq kontenti planlaşdırma, paylaşma və analiz</div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="status-badge status-active">Aktiv</span>
-            <button class="btn btn-sm btn-outline">✏️ Redaktə</button>
-          </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="card-title">🎓 Təlimçilər</div>
+          <button class="btn btn-gold btn-sm" onclick="crudOpen('air_trainers',null)">+ Təlimçi əlavə et</button>
         </div>
-        <div class="card" style="padding:16px">
-          <div style="font-size:1rem;margin-bottom:8px">🎯</div>
-          <div style="font-weight:700;font-size:.8rem;margin-bottom:4px">Performans Marketinqi</div>
-          <div style="font-size:.68rem;color:var(--muted);margin-bottom:10px">Google Ads, Meta Ads — ROI əsaslı kampaniyalar</div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="status-badge status-active">Aktiv</span>
-            <button class="btn btn-sm btn-outline">✏️ Redaktə</button>
-          </div>
-        </div>
-        <div class="card" style="padding:16px;border:2px dashed var(--border);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted)">
-          <div style="text-align:center">
-            <div style="font-size:1.4rem;margin-bottom:6px">+</div>
-            <div style="font-size:.7rem">Yeni paket əlavə et</div>
-          </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:56px">Şəkil</th><th>Ad</th><th>Vəzifə</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+            <tbody id="air-trainers-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -1914,39 +1734,15 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
     ═══════════════════════════════════════════════════════ -->
     <div class="view" id="view-users">
       <div class="page-hdr">
-        <div><div class="page-title">🔐 İstifadəçilər & Rollar</div><div class="page-sub">4 aktiv istifadəçi · 4 rol</div></div>
-        <div style="margin-left:auto"><button class="btn btn-gold">+ İstifadəçi dəvət et</button></div>
+        <div><div class="page-title">🔐 İstifadəçilər & Rollar</div><div class="page-sub" id="users-sub">Yüklənir...</div></div>
+        <div style="margin-left:auto"><button class="btn btn-gold" onclick="showInqToast('Yeni istifadəçi Supabase Dashboard → Authentication bölməsindən dəvət edilir (təhlükəsizlik səbəbilə bu panel birbaşa dəvət göndərə bilmir). Dəvətdən sonra o, avtomatik profil alacaq və burdan rol təyin edə bilərsiniz.', &#39;var(--dark)&#39;)">+ İstifadəçi dəvət et</button></div>
       </div>
-      <div class="two-col">
-        <div class="card">
-          <div class="card-hdr"><span class="card-hdr-title">İstifadəçilər</span></div>
+      <div class="card">
+        <div class="tbl-wrap">
           <table>
-            <thead><tr><th>İstifadəçi</th><th>Rol</th><th>Son giriş</th><th></th></tr></thead>
-            <tbody>
-              <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="sb-avatar" style="width:24px;height:24px;font-size:.55rem">RH</div><div><div style="font-size:.73rem;font-weight:700">Rafiq Hunaltay</div><div style="font-size:.62rem;color:var(--muted)">rafiq@facemark.az</div></div></div></td><td><span class="status-badge" style="background:var(--dark);color:var(--gold)">Super Admin</span></td><td style="font-size:.68rem;color:var(--muted)">İndi</td><td></td></tr>
-              <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="sb-avatar" style="width:24px;height:24px;font-size:.55rem;background:#3182CE">AH</div><div><div style="font-size:.73rem;font-weight:700">Aytən Həsənova</div><div style="font-size:.62rem;color:var(--muted)">ayten@facemark.az</div></div></div></td><td><span class="status-badge status-new">Event Manager</span></td><td style="font-size:.68rem;color:var(--muted)">2 saat əvvəl</td><td><button class="btn btn-sm btn-outline">Redaktə</button></td></tr>
-              <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="sb-avatar" style="width:24px;height:24px;font-size:.55rem;background:#38A169">EM</div><div><div style="font-size:.73rem;font-weight:700">Elçin Muradov</div><div style="font-size:.62rem;color:var(--muted)">elchin@facemark.az</div></div></div></td><td><span class="status-badge status-active">Content Manager</span></td><td style="font-size:.68rem;color:var(--muted)">Dünən</td><td><button class="btn btn-sm btn-outline">Redaktə</button></td></tr>
-              <tr><td><div style="display:flex;align-items:center;gap:8px"><div class="sb-avatar" style="width:24px;height:24px;font-size:.55rem;background:#DD6B20">LM</div><div><div style="font-size:.73rem;font-weight:700">Lalə Məmmədova</div><div style="font-size:.62rem;color:var(--muted)">lale@facemark.az</div></div></div></td><td><span class="status-badge status-pending">Marketing Team</span></td><td style="font-size:.68rem;color:var(--muted)">3 gün əvvəl</td><td><button class="btn btn-sm btn-outline">Redaktə</button></td></tr>
-            </tbody>
+            <thead><tr><th>İstifadəçi</th><th>E-poçt</th><th>Rol</th><th>Qoşulma tarixi</th></tr></thead>
+            <tbody id="users-tbody"><tr><td colspan="4" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
           </table>
-        </div>
-        <div class="card">
-          <div class="card-hdr"><span class="card-hdr-title">Rol İcazələri</span></div>
-          <div class="card-body">
-            <table>
-              <thead><tr><th>Modul</th><th style="text-align:center">Super</th><th style="text-align:center">Event</th><th style="text-align:center">Content</th><th style="text-align:center">Marketing</th></tr></thead>
-              <tbody>
-                <tr><td style="font-size:.7rem">Dashboard</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td></tr>
-                <tr><td style="font-size:.7rem">Tədbirlər</td><td style="text-align:center">✅</td><td style="text-align:center">✅</td><td style="text-align:center">👁️</td><td style="text-align:center">—</td></tr>
-                <tr><td style="font-size:.7rem">Biznes Radar</td><td style="text-align:center">✅</td><td style="text-align:center">—</td><td style="text-align:center">✅</td><td style="text-align:center">—</td></tr>
-                <tr><td style="font-size:.7rem">FMR TV</td><td style="text-align:center">✅</td><td style="text-align:center">—</td><td style="text-align:center">✅</td><td style="text-align:center">—</td></tr>
-                <tr><td style="font-size:.7rem">Marketing Air</td><td style="text-align:center">✅</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">✅</td></tr>
-                <tr><td style="font-size:.7rem">Komanda</td><td style="text-align:center">✅</td><td style="text-align:center">—</td><td style="text-align:center">👁️</td><td style="text-align:center">—</td></tr>
-                <tr><td style="font-size:.7rem">İstifadəçilər</td><td style="text-align:center">✅</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">—</td></tr>
-                <tr style="border:none"><td style="font-size:.65rem;color:var(--muted)" colspan="5">✅ Tam · 👁️ Yalnız baxmaq · — Giriş yoxdur</td></tr>
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
     </div>
@@ -1964,7 +1760,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
         </div>
         <div style="margin-left:auto;display:flex;gap:8px">
           <button class="btn btn-outline" onclick="window.open('https://facemark.az','_blank')">🔗 Sayta bax</button>
-          <button class="btn btn-gold" onclick="genericSave(this)">Yadda saxla</button>
+          <button class="btn btn-gold" onclick="scSaveView('homepage','homepage',this)">Yadda saxla</button>
         </div>
       </div>
 
@@ -2303,7 +2099,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
         </div>
         <div style="margin-left:auto;display:flex;gap:8px">
           <button class="btn btn-outline" onclick="window.open('https://facemark.az#about','_blank')">🔗 Saytda bax</button>
-          <button class="btn btn-gold" onclick="genericSave(this)">Yadda saxla</button>
+          <button class="btn btn-gold" onclick="scSaveView('about','about',this)">Yadda saxla</button>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 300px;gap:16px">
@@ -2382,7 +2178,7 @@ Facemark <b>fəaliyyət istiqamətlərinə</b> təhsil, maliyyə, insan resursla
           <div><label class="lbl">Alt mətn (AZ)</label><input class="inp" value="Tədbirinizdən əlavə dəyər yaradın — A-dan Z-yə"></div>
         </div>
         <div style="margin-top:10px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
+          <button class="btn btn-gold btn-sm" onclick="scSaveView('services','services',this)">Yadda saxla</button>
         </div>
       </div>
 
@@ -2537,7 +2333,7 @@ VIP biznes görüşləri</textarea>
           <div><label class="lbl">Düymə mətni (EN)</label><input class="inp" value="Send Inquiry"></div>
         </div>
         <div style="margin-top:10px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
+          <button class="btn btn-gold btn-sm" onclick="scSaveView('services','services',this)">Yadda saxla</button>
         </div>
       </div>
 
@@ -2573,779 +2369,61 @@ VIP biznes görüşləri</textarea>
     <div class="view" id="view-partners">
       <div class="page-hdr">
         <div>
-          <div class="page-title">Partnyorlarımız</div>
-          <div class="page-sub">Ana səhifə — 5 kateqoriya + Partnyor Ol CTA + Niyə Partnyor? bölmələrinin idarəsi</div>
+          <div class="page-title">🤝 Partnyorlarımız</div>
+          <div class="page-sub" id="partners-sub">Yüklənir...</div>
         </div>
+        <div style="margin-left:auto"><button class="btn btn-gold" onclick="crudOpen('partners',null)">+ Partnyor əlavə et</button></div>
       </div>
-
-      <!-- ── Category 1: Media ── -->
-      <div class="card" style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="card-title">📺 Media Tərəfdaşları</div>
-          <button class="btn btn-gold btn-sm" onclick="addPartnerLogo('media-logos','media-count')">+ Logo əlavə et</button>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="media-logos">
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/panuSGZxEKqayNqJY2DSYocl8kU353Bh0YnRQYFw.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="ARB TV" placeholder="Alt mətn">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/panuSGZxEKqayNqJY2DSYocl8kU353Bh0YnRQYFw.png" placeholder="Şəkil URL">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/uEi1qDhov0lRIV0xa1vcBvNE8qD9nuUWu2j7B9Fq.webp" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Baku TV" placeholder="Alt mətn">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/uEi1qDhov0lRIV0xa1vcBvNE8qD9nuUWu2j7B9Fq.webp" placeholder="Şəkil URL">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/IIiF4G9rCq0u7UTiAupWvJ69Kc31SjqeHgk8J7R5.webp" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Report.az" placeholder="Alt mətn">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/IIiF4G9rCq0u7UTiAupWvJ69Kc31SjqeHgk8J7R5.webp" placeholder="Şəkil URL">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/QaXRqRGE3paxeoFdS1xa4P14yMnoywQ6zCt081Lk.svg" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="1news.az" placeholder="Alt mətn">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/QaXRqRGE3paxeoFdS1xa4P14yMnoywQ6zCt081Lk.svg" placeholder="Şəkil URL">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/j5IRmAwJBMoDgObnjPpHKlHE0QYNNWXsVcE2qGwB.svg" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Oxu.az" placeholder="Alt mətn">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/j5IRmAwJBMoDgObnjPpHKlHE0QYNNWXsVcE2qGwB.svg" placeholder="Şəkil URL">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/l6ImpEvYOqZ5TQiwXyze8ChthXMyvoBFqGii9MWd.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="ITV" placeholder="Alt mətn">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/l6ImpEvYOqZ5TQiwXyze8ChthXMyvoBFqGii9MWd.png" placeholder="Şəkil URL">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/KrvpD3GspNSTv8pJ0D00onYOCZVGKOwOJ406kxCz.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Araz FM" placeholder="Alt mətn">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/KrvpD3GspNSTv8pJ0D00onYOCZVGKOwOJ406kxCz.png" placeholder="Şəkil URL">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/IPcKKCn3oYirSxrkjINl62cl86YHs3K9wuhPvMGc.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Marja.az" placeholder="Alt mətn">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/IPcKKCn3oYirSxrkjINl62cl86YHs3K9wuhPvMGc.png" placeholder="Şəkil URL">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-        </div>
-        <div style="margin-top:12px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
-        </div>
-      </div>
-
-      <!-- ── Category 2: Rəqəmsal & Tech ── -->
-      <div class="card" style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="card-title">💻 Rəqəmsal & Texnologiya</div>
-          <button class="btn btn-gold btn-sm" onclick="addPartnerLogo('tech-logos','tech-count')">+ Logo əlavə et</button>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="tech-logos">
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/FZlzhkY9hcmIITCiAD0I9OC9Ks000O9XLYObakMj.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="ebiletstore">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/FZlzhkY9hcmIITCiAD0I9OC9Ks000O9XLYObakMj.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/SZ7jfHxs9DzEv7caG7FVcSdHg15cGZs30ysyGseS.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Corpowid">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/SZ7jfHxs9DzEv7caG7FVcSdHg15cGZs30ysyGseS.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/KKbJl4weYL9bCHIifGBZ9oJwxRfBg09KU5ttIdoF.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Figensoft">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/KKbJl4weYL9bCHIifGBZ9oJwxRfBg09KU5ttIdoF.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/ui9z373lFy4gyTf53kOwN6z8TVUQUk9l71WaTSQU.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="New Media">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/ui9z373lFy4gyTf53kOwN6z8TVUQUk9l71WaTSQU.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/JkjliwYnH3cO8boN4pDIcNfAIBwK7Effheqkky1G.webp" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Qmeter">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/JkjliwYnH3cO8boN4pDIcNfAIBwK7Effheqkky1G.webp">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/iQX3SFPd6bAKnh16blHIwl8ZqozMDiTdPMEK5ooI.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Markup.az">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/iQX3SFPd6bAKnh16blHIwl8ZqozMDiTdPMEK5ooI.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/DsqsBTCd4TJtfCwpUQqREUyMGcpvmbUp0h5t0229.webp" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Code.edu.az">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/DsqsBTCd4TJtfCwpUQqREUyMGcpvmbUp0h5t0229.webp">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/rvPWvcfHMipHVvY9V1F9GxCtorIgn8OKblvfO7fr.webp" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Logix">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/rvPWvcfHMipHVvY9V1F9GxCtorIgn8OKblvfO7fr.webp">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-        </div>
-        <div style="margin-top:12px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
-        </div>
-      </div>
-
-      <!-- ── Category 3: PR & Marketinq ── -->
-      <div class="card" style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="card-title">📣 PR & Marketinq</div>
-          <button class="btn btn-gold btn-sm" onclick="addPartnerLogo('pr-logos','pr-count')">+ Logo əlavə et</button>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="pr-logos">
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/FjbfZozUfO5eo89OWHlucVb1XynPv7rj5rKEgxfg.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Admedia">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/FjbfZozUfO5eo89OWHlucVb1XynPv7rj5rKEgxfg.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/kQCeiQihQAACJei1iSA4JnspNi72hsf96l9YSjP5.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Brand Media Group">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/kQCeiQihQAACJei1iSA4JnspNi72hsf96l9YSjP5.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/EURGIWDnyg5kHuEIyF1CIXSM6fDQ9xJcJ1sMmmEx.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="FIL Agency">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/EURGIWDnyg5kHuEIyF1CIXSM6fDQ9xJcJ1sMmmEx.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/YABwAb9QvW367c6KGoRRKf8iypj3v9yy8zQVgLX8.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Operativ MM">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/YABwAb9QvW367c6KGoRRKf8iypj3v9yy8zQVgLX8.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/AdJysHtP1piE7NzEmt8tCzZbmZVZwGEtXQnb3mU3.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Endorphin">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/AdJysHtP1piE7NzEmt8tCzZbmZVZwGEtXQnb3mU3.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/0jo9m9J1Pv1unLKqsEQXTC8L1ceQjZbWm9SVuVyU.webp" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Creatime">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/0jo9m9J1Pv1unLKqsEQXTC8L1ceQjZbWm9SVuVyU.webp">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/v5XVa5Kr6UiiHshKS1pstyTZuxC7QQXJdCLfgULP.webp" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Arter">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/v5XVa5Kr6UiiHshKS1pstyTZuxC7QQXJdCLfgULP.webp">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/04uaiFUWPuNZRFXt61tSn7gIdEOOpsejTGUsWK5s.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Moon Group">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/04uaiFUWPuNZRFXt61tSn7gIdEOOpsejTGUsWK5s.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-        </div>
-        <div style="margin-top:12px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
-        </div>
-      </div>
-
-      <!-- ── Category 4: Maliyyə & Biznes ── -->
-      <div class="card" style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="card-title">💰 Maliyyə & Biznes</div>
-          <button class="btn btn-gold btn-sm" onclick="addPartnerLogo('finance-logos','finance-count')">+ Logo əlavə et</button>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="finance-logos">
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/3q0TCN8ndtjZ5udXbRZGcDStwzlfg0TBQsOHF4PG.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Goodfinance">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/3q0TCN8ndtjZ5udXbRZGcDStwzlfg0TBQsOHF4PG.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/Nv0tBvPQOrgPpNDKZNajmtC1nQicyJO7IvqqqcPn.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="GF Az">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/Nv0tBvPQOrgPpNDKZNajmtC1nQicyJO7IvqqqcPn.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/TQhZR7gXnt0hDhgQ7n89jvzcUovQGRXuhkgGh46t.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Handex">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/TQhZR7gXnt0hDhgQ7n89jvzcUovQGRXuhkgGh46t.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/ozIhnqJy4Lhpp6IoMVetyAWiA7dFNRvQbhuWKnS5.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Roofat">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/ozIhnqJy4Lhpp6IoMVetyAWiA7dFNRvQbhuWKnS5.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/2T75Y2kuE3SSELXhTqKTY9HvVoCsQ1TZtNG15gj7.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Aqualink">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/2T75Y2kuE3SSELXhTqKTY9HvVoCsQ1TZtNG15gj7.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/hpAkYrdkmLlSGTvJo5V3TsJa9540ByrtCuVAWt7P.webp" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="HDC">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/hpAkYrdkmLlSGTvJo5V3TsJa9540ByrtCuVAWt7P.webp">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/Mi5I8YVQsJIrH32ivYH5nZbKlN6wifI3Y71eO7gS.svg" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Başkent">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/Mi5I8YVQsJIrH32ivYH5nZbKlN6wifI3Y71eO7gS.svg">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-        </div>
-        <div style="margin-top:12px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
-        </div>
-      </div>
-
-      <!-- ── Category 5: Təhsil & İnkişaf ── -->
-      <div class="card" style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div class="card-title">📚 Təhsil & İnkişaf</div>
-          <button class="btn btn-gold btn-sm" onclick="addPartnerLogo('edu-logos','edu-count')">+ Logo əlavə et</button>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="edu-logos">
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/7ipxrAsIXPx8GJCb2FT1e6YvYslIUEGU2kdD8fKB.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="FMR Trainings">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/7ipxrAsIXPx8GJCb2FT1e6YvYslIUEGU2kdD8fKB.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/rlIgNgpCYmDQ3Mfm9UQp6nm8ko7H4yJCtaYpAD1v.svg" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Hazircavab">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/rlIgNgpCYmDQ3Mfm9UQp6nm8ko7H4yJCtaYpAD1v.svg">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/TivTRTuncrNn3QpVVyjtXgWhHiUOviCYhVj49Ywa.webp" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="İnci Ünsiyyət">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/TivTRTuncrNn3QpVVyjtXgWhHiUOviCYhVj49Ywa.webp">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <div style="height:36px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#6B6878;margin-bottom:6px">AISA</div>
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="AISA">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" placeholder="Logo URL (mövcud deyil)">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/m5mkKb8fUCDHuaoWxGPJnnUihB293wYnLd9tz37Z.webp" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Adviad">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/m5mkKb8fUCDHuaoWxGPJnnUihB293wYnLd9tz37Z.webp">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/R6y56SXWCg0AgC2QeyWWJtEjgXAxyALVSxSreUav.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Mutfakçı">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/R6y56SXWCg0AgC2QeyWWJtEjgXAxyALVSxSreUav.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/KrvpD3GspNSTv8pJ0D00onYOCZVGKOwOJ406kxCz.png" style="height:36px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="Araz FM">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" value="https://facemark.az/public/storage/images/partners/KrvpD3GspNSTv8pJ0D00onYOCZVGKOwOJ406kxCz.png">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="partner-logo-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <div style="height:36px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#6B6878;margin-bottom:6px">MG+</div>
-            <input class="inp" style="font-size:.65rem;padding:3px 6px" value="MG+">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" placeholder="Logo URL (mövcud deyil)">
-            <button onclick="deleteCard(this,'.partner-logo-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-        </div>
-        <div style="margin-top:12px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
-        </div>
-      </div>
-
-      <!-- ── Partnyor Ol CTA ── -->
-      <div class="card" style="margin-bottom:14px">
-        <div class="card-title" style="margin-bottom:12px">🤝 "Partnyor Ol" CTA Bloku</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
-          <div><label class="lbl">Başlıq</label><input class="inp" value="🤝 Partnyor Ol"></div>
-          <div><label class="lbl">Əlaqə forması açıldığında</label><input class="inp" value="Müraciətiniz qəbul edildi!"></div>
-        </div>
-        <div style="margin-bottom:10px"><label class="lbl">Açıqlama mətni</label><textarea class="inp" rows="2" style="resize:none">Bizlə əməkdaşlıq etmək istəyirsən? Kateqoriyanı seç, bizimlə əlaqə saxla.</textarea></div>
-        <div style="margin-bottom:10px">
-          <label class="lbl">Əməkdaşlıq istiqamətləri (hər sətirdə bir)</label>
-          <textarea class="inp" rows="5" style="resize:vertical;font-size:.72rem">Media tərəfdaşlığı
-Rəqəmsal & Texnologiya
-PR & Marketinq
-Maliyyə & Biznes
-Təhsil & İnkişaf
-Digər</textarea>
-        </div>
-        <div style="text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
-        </div>
-      </div>
-
-      <!-- ── Niyə Partnyor? ── -->
       <div class="card">
-        <div class="card-title" style="margin-bottom:12px">💡 "Niyə Partnyor Olmalısan?" — 4 Kart</div>
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px" id="why-partner-cards">
-          <div style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:12px">
-            <div style="display:grid;grid-template-columns:50px 1fr;gap:8px;margin-bottom:6px">
-              <div><label class="lbl">İkon</label><input class="inp" value="🎯"></div>
-              <div><label class="lbl">Başlıq</label><input class="inp" value="Böyük Müştəri Kütləsinə Çıxış"></div>
-            </div>
-            <label class="lbl">Açıqlama</label>
-            <textarea class="inp" rows="2" style="resize:none;font-size:.72rem">Minlərlə C-level icraçı, sahibkar və qərar qəbuledici birbaşa brendinlə tanış olur.</textarea>
-          </div>
-          <div style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:12px">
-            <div style="display:grid;grid-template-columns:50px 1fr;gap:8px;margin-bottom:6px">
-              <div><label class="lbl">İkon</label><input class="inp" value="📡"></div>
-              <div><label class="lbl">Başlıq</label><input class="inp" value="Media Görünürlüyü"></div>
-            </div>
-            <label class="lbl">Açıqlama</label>
-            <textarea class="inp" rows="2" style="resize:none;font-size:.72rem">TV, onlayn mediya və sosial şəbəkələrdə brendin həm canlı, həm rəqəmsal mediada yer alır.</textarea>
-          </div>
-          <div style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:12px">
-            <div style="display:grid;grid-template-columns:50px 1fr;gap:8px;margin-bottom:6px">
-              <div><label class="lbl">İkon</label><input class="inp" value="🏆"></div>
-              <div><label class="lbl">Başlıq</label><input class="inp" value="Brend Mövqelənməsi"></div>
-            </div>
-            <label class="lbl">Açıqlama</label>
-            <textarea class="inp" rows="2" style="resize:none;font-size:.72rem">Biznes elitasının toplandığı platformada olmaq brendə lider şirkətlər arasında yer qazandırır.</textarea>
-          </div>
-          <div style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:12px">
-            <div style="display:grid;grid-template-columns:50px 1fr;gap:8px;margin-bottom:6px">
-              <div><label class="lbl">İkon</label><input class="inp" value="📈"></div>
-              <div><label class="lbl">Başlıq</label><input class="inp" value="Ölçülə Bilən Satış Artımı"></div>
-            </div>
-            <label class="lbl">Açıqlama</label>
-            <textarea class="inp" rows="2" style="resize:none;font-size:.72rem">Birbaşa təmas, canlı demo və follow-up imkanı — satış hunisini qısaldır, geri dönüş artır.</textarea>
-          </div>
-        </div>
-        <div style="margin-top:12px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:56px">Logo</th><th>Ad</th><th>Kateqoriya</th><th>Veb sayt</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+            <tbody id="partners-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+          </table>
         </div>
       </div>
-
-      <script>
-      function addPartnerLogo(gridId, countId) {
-        var grid = document.getElementById(gridId);
-        var item = document.createElement('div');
-        item.className = 'partner-logo-item';
-        item.style.cssText = 'background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative';
-        item.innerHTML = '<div style="height:36px;background:#eee;border-radius:4px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:#999">Logo</div>' +
-          '<input class="inp" style="font-size:.65rem;padding:3px 6px" placeholder="Ad">' +
-          '<input class="inp" style="font-size:.6rem;padding:3px 6px;margin-top:3px" placeholder="Şəkil URL" oninput="updateLogoPreview(this)">' +
-          '<button onclick="deleteCard(this,\'.partner-logo-item\')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>';
-        grid.appendChild(item);
-      }
-      function updateLogoPreview(inp) {
-        var prev = inp.parentElement.querySelector('div');
-        if(prev && inp.value) {
-          prev.innerHTML = '<img src="' + inp.value + '" style="height:100%;max-width:100%;object-fit:contain">';
-          prev.style.background = 'transparent';
-        }
-      }
-      </script>
-
     </div>
 
     <!-- ══ view: clients ══ -->
     <div class="view" id="view-clients">
       <div class="page-hdr">
         <div>
-          <div class="page-title">Müştərilər & Qurumlar</div>
-          <div class="page-sub">Ana səhifə — Dövlət Qurumları (mətn) + Özəl Şirkətlər (logo) bölmələri</div>
+          <div class="page-title">🏛️ Müştərilər & Qurumlar</div>
+          <div class="page-sub" id="clients-sub">Yüklənir...</div>
         </div>
+        <div style="margin-left:auto"><button class="btn btn-gold" onclick="crudOpen('clients',null)">+ Müştəri əlavə et</button></div>
       </div>
-
-      <!-- Section heading -->
-      <div class="card" style="margin-bottom:14px">
-        <div class="card-title" style="margin-bottom:12px">📝 Bölmə Başlığı</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div><label class="lbl">Başlıq</label><input class="inp" value="Xidmət Göstərdiyimiz Qurum və Şirkətlər"></div>
-          <div><label class="lbl">Alt mətn</label><input class="inp" value="Azərbaycanın aparıcı dövlət qurumları və özəl şirkətlər bizə etibar edir"></div>
-        </div>
-        <div style="margin-top:10px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
-        </div>
-      </div>
-
-      <!-- ── Dövlət Qurumları ── -->
-      <div class="card" style="margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <div>
-            <div class="card-title">🏛️ Dövlət Qurumları və İctimai Təşkilatlar</div>
-            <div style="font-size:.72rem;color:#6B6878;margin-top:3px">Yalnız mətn — logo yoxdur, 8×1 grid</div>
-          </div>
-          <button class="btn btn-gold btn-sm" onclick="addGovItem()">+ Qurum əlavə et</button>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px" id="gov-grid">
-          <div class="gov-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:10px;position:relative">
-            <input class="inp" style="font-weight:700;font-size:.78rem;padding:4px 8px;margin-bottom:4px" value="KOBİA" placeholder="Ad / Abbreviasiya">
-            <input class="inp" style="font-size:.68rem;padding:4px 8px;color:#6B6878" value="Sahibkarlığa Kömək Agentliyi" placeholder="Tam ad / açıqlama">
-            <button onclick="deleteCard(this,'.gov-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="gov-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:10px;position:relative">
-            <input class="inp" style="font-weight:700;font-size:.78rem;padding:4px 8px;margin-bottom:4px" value="AZPROMO" placeholder="Ad / Abbreviasiya">
-            <input class="inp" style="font-size:.68rem;padding:4px 8px;color:#6B6878" value="İxrac və İnvestisiya" placeholder="Tam ad / açıqlama">
-            <button onclick="deleteCard(this,'.gov-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="gov-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:10px;position:relative">
-            <input class="inp" style="font-weight:700;font-size:.78rem;padding:4px 8px;margin-bottom:4px" value="İqtisadiyyat Nazirliyi" placeholder="Ad / Abbreviasiya">
-            <input class="inp" style="font-size:.68rem;padding:4px 8px;color:#6B6878" value="Azərbaycan" placeholder="Tam ad / açıqlama">
-            <button onclick="deleteCard(this,'.gov-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="gov-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:10px;position:relative">
-            <input class="inp" style="font-weight:700;font-size:.78rem;padding:4px 8px;margin-bottom:4px" value="BAPES" placeholder="Ad / Abbreviasiya">
-            <input class="inp" style="font-size:.68rem;padding:4px 8px;color:#6B6878" value="Sahibkarlar İttifaqı" placeholder="Tam ad / açıqlama">
-            <button onclick="deleteCard(this,'.gov-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="gov-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:10px;position:relative">
-            <input class="inp" style="font-weight:700;font-size:.78rem;padding:4px 8px;margin-bottom:4px" value="Gənclər Fondu" placeholder="Ad / Abbreviasiya">
-            <input class="inp" style="font-size:.68rem;padding:4px 8px;color:#6B6878" value="Azərbaycan" placeholder="Tam ad / açıqlama">
-            <button onclick="deleteCard(this,'.gov-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="gov-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:10px;position:relative">
-            <input class="inp" style="font-weight:700;font-size:.78rem;padding:4px 8px;margin-bottom:4px" value="AMPF" placeholder="Ad / Abbreviasiya">
-            <input class="inp" style="font-size:.68rem;padding:4px 8px;color:#6B6878" value="Marketinq Peşəkarları" placeholder="Tam ad / açıqlama">
-            <button onclick="deleteCard(this,'.gov-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="gov-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:10px;position:relative">
-            <input class="inp" style="font-weight:700;font-size:.78rem;padding:4px 8px;margin-bottom:4px" value="HR Azerbaijan" placeholder="Ad / Abbreviasiya">
-            <input class="inp" style="font-size:.68rem;padding:4px 8px;color:#6B6878" value="HR Cəmiyyəti" placeholder="Tam ad / açıqlama">
-            <button onclick="deleteCard(this,'.gov-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="gov-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:10px;position:relative">
-            <input class="inp" style="font-weight:700;font-size:.78rem;padding:4px 8px;margin-bottom:4px" value="AzBA" placeholder="Ad / Abbreviasiya">
-            <input class="inp" style="font-size:.68rem;padding:4px 8px;color:#6B6878" value="Biznes Assosiasiyası" placeholder="Tam ad / açıqlama">
-            <button onclick="deleteCard(this,'.gov-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-        </div>
-        <div style="margin-top:12px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
-        </div>
-      </div>
-
-      <!-- ── Özəl Şirkətlər ── -->
       <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-          <div>
-            <div class="card-title">🏢 Özəl Şirkətlər və Brendlər</div>
-            <div style="font-size:.72rem;color:#6B6878;margin-top:3px">Logo + ad — 8×2 grid (16 şirkət)</div>
-          </div>
-          <button class="btn btn-gold btn-sm" onclick="addPrivateItem()">+ Şirkət əlavə et</button>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px" id="private-grid">
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/Mi5I8YVQsJIrH32ivYH5nZbKlN6wifI3Y71eO7gS.svg" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Başkent" placeholder="Şirkət adı">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/Mi5I8YVQsJIrH32ivYH5nZbKlN6wifI3Y71eO7gS.svg" placeholder="Logo URL">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/v5XVa5Kr6UiiHshKS1pstyTZuxC7QQXJdCLfgULP.webp" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Arter">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/v5XVa5Kr6UiiHshKS1pstyTZuxC7QQXJdCLfgULP.webp">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/04uaiFUWPuNZRFXt61tSn7gIdEOOpsejTGUsWK5s.png" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Moon Group">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/04uaiFUWPuNZRFXt61tSn7gIdEOOpsejTGUsWK5s.png">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/3q0TCN8ndtjZ5udXbRZGcDStwzlfg0TBQsOHF4PG.png" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Good Finance">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/3q0TCN8ndtjZ5udXbRZGcDStwzlfg0TBQsOHF4PG.png">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/7ipxrAsIXPx8GJCb2FT1e6YvYslIUEGU2kdD8fKB.png" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="FMR Trainings">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/7ipxrAsIXPx8GJCb2FT1e6YvYslIUEGU2kdD8fKB.png">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/FZlzhkY9hcmIITCiAD0I9OC9Ks000O9XLYObakMj.png" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="ebiletstore">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/FZlzhkY9hcmIITCiAD0I9OC9Ks000O9XLYObakMj.png">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/ozIhnqJy4Lhpp6IoMVetyAWiA7dFNRvQbhuWKnS5.png" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Roofat">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/ozIhnqJy4Lhpp6IoMVetyAWiA7dFNRvQbhuWKnS5.png">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <div style="height:32px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#6B6878;margin-bottom:6px">KARABAKH GROUP</div>
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Karabakh Group">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" placeholder="Logo URL (mövcud deyil)">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/hpAkYrdkmLlSGTvJo5V3TsJa9540ByrtCuVAWt7P.webp" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="HDC">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/hpAkYrdkmLlSGTvJo5V3TsJa9540ByrtCuVAWt7P.webp">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/rvPWvcfHMipHVvY9V1F9GxCtorIgn8OKblvfO7fr.webp" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Logix">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/rvPWvcfHMipHVvY9V1F9GxCtorIgn8OKblvfO7fr.webp">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/2T75Y2kuE3SSELXhTqKTY9HvVoCsQ1TZtNG15gj7.png" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Aqualink">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/2T75Y2kuE3SSELXhTqKTY9HvVoCsQ1TZtNG15gj7.png">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/TQhZR7gXnt0hDhgQ7n89jvzcUovQGRXuhkgGh46t.png" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Handex">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/TQhZR7gXnt0hDhgQ7n89jvzcUovQGRXuhkgGh46t.png">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/0jo9m9J1Pv1unLKqsEQXTC8L1ceQjZbWm9SVuVyU.webp" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Creatime">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/0jo9m9J1Pv1unLKqsEQXTC8L1ceQjZbWm9SVuVyU.webp">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/AdJysHtP1piE7NzEmt8tCzZbmZVZwGEtXQnb3mU3.png" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Endorphin">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/AdJysHtP1piE7NzEmt8tCzZbmZVZwGEtXQnb3mU3.png">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/SZ7jfHxs9DzEv7caG7FVcSdHg15cGZs30ysyGseS.png" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Corpowid">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/SZ7jfHxs9DzEv7caG7FVcSdHg15cGZs30ysyGseS.png">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-          <div class="private-item" style="background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative">
-            <img src="https://facemark.az/public/storage/images/partners/KKbJl4weYL9bCHIifGBZ9oJwxRfBg09KU5ttIdoF.png" style="height:32px;object-fit:contain;display:block;margin:0 auto 6px">
-            <input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" value="Figensoft">
-            <input class="inp" style="font-size:.6rem;padding:3px 6px" value="https://facemark.az/public/storage/images/partners/KKbJl4weYL9bCHIifGBZ9oJwxRfBg09KU5ttIdoF.png">
-            <button onclick="deleteCard(this,'.private-item')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>
-          </div>
-        </div>
-        <div style="margin-top:12px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:56px">Logo</th><th>Ad</th><th>Kateqoriya</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+            <tbody id="clients-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+          </table>
         </div>
       </div>
-
-      <script>
-      function addGovItem() {
-        var grid = document.getElementById('gov-grid');
-        var item = document.createElement('div');
-        item.className = 'gov-item';
-        item.style.cssText = 'background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:10px;position:relative';
-        item.innerHTML = '<input class="inp" style="font-weight:700;font-size:.78rem;padding:4px 8px;margin-bottom:4px" placeholder="Ad / Abbreviasiya">' +
-          '<input class="inp" style="font-size:.68rem;padding:4px 8px;color:#6B6878" placeholder="Tam ad / açıqlama">' +
-          '<button onclick="deleteCard(this,\'.gov-item\')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>';
-        grid.appendChild(item);
-      }
-      function addPrivateItem() {
-        var grid = document.getElementById('private-grid');
-        var item = document.createElement('div');
-        item.className = 'private-item';
-        item.style.cssText = 'background:#F9F7F3;border:1.5px solid #e8e2d8;border-radius:8px;padding:8px;position:relative';
-        item.innerHTML = '<div style="height:32px;background:#eee;border-radius:4px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:#999">Logo</div>' +
-          '<input class="inp" style="font-size:.65rem;padding:3px 6px;margin-bottom:3px" placeholder="Şirkət adı">' +
-          '<input class="inp" style="font-size:.6rem;padding:3px 6px" placeholder="Logo URL">' +
-          '<button onclick="deleteCard(this,\'.private-item\')" style="position:absolute;top:4px;right:4px;background:#fee;border:1px solid #fcc;border-radius:4px;font-size:.6rem;cursor:pointer;color:#c00;padding:1px 5px">✕</button>';
-        grid.appendChild(item);
-      }
-      </script>
-
     </div>
 
     <!-- ══ view: testimonials ══ -->
     <div class="view" id="view-testimonials">
       <div class="page-hdr">
         <div>
-          <div class="page-title">Rəylər</div>
-          <div class="page-sub">Ana səhifə — Tərəfdaşlarımızın Rəyləri bölməsi (auto-scroll carousel)</div>
+          <div class="page-title">💬 Rəylər</div>
+          <div class="page-sub" id="testi-sub">Yüklənir...</div>
         </div>
-        <button class="btn btn-gold" onclick="addTestiCard()">+ Rəy əlavə et</button>
+        <div style="margin-left:auto"><button class="btn btn-gold" onclick="crudOpen('testimonials',null)">+ Rəy əlavə et</button></div>
       </div>
-
-      <!-- Section heading -->
-      <div class="card" style="margin-bottom:14px">
-        <div class="card-title" style="margin-bottom:10px">📝 Bölmə Başlığı</div>
-        <div><label class="lbl">Başlıq</label><input class="inp" value="Tərəfdaşlarımızın Rəyləri"></div>
-        <div style="margin-top:10px;text-align:right">
-          <button class="btn btn-gold btn-sm" onclick="genericSave(this)">Yadda saxla</button>
+      <div class="card">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th style="width:56px">Şəkil</th><th>Ad</th><th>Vəzifə / Şirkət</th><th>Rəy (AZ)</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead>
+            <tbody id="testimonials-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody>
+          </table>
         </div>
       </div>
-
-      <!-- Preview hint -->
-      <div style="background:rgba(196,151,58,.08);border:1px solid rgba(196,151,58,.25);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:.75rem;color:#C4973A">
-        💡 Rəylər karouseldə sağa-sola avtomatik sürüşür. Hər kart: şirkət logosu + italic sitat + şirkət adı.
-      </div>
-
-      <!-- Testimonial cards list -->
-      <div style="display:flex;flex-direction:column;gap:12px" id="testi-list">
-
-        <!-- Card 1: Başkent -->
-        <div class="card testi-card-item" style="display:grid;grid-template-columns:180px 1fr auto;gap:14px;align-items:start">
-          <div>
-            <label class="lbl">Logo URL</label>
-            <input class="inp" style="font-size:.7rem" value="https://facemark.az/public/storage/images/partners/Mi5I8YVQsJIrH32ivYH5nZbKlN6wifI3Y71eO7gS.svg">
-            <img src="https://facemark.az/public/storage/images/partners/Mi5I8YVQsJIrH32ivYH5nZbKlN6wifI3Y71eO7gS.svg" style="height:28px;object-fit:contain;margin-top:6px;display:block">
-          </div>
-          <div>
-            <label class="lbl">Sitat (italic mətn)</label>
-            <textarea class="inp" rows="3" style="resize:vertical;font-style:italic;font-size:.74rem">"Facemark ilə illərdir əməkdaşlıq edirik. Həm dəyərli networking imkanları qazandırır, həm də şirkətimizin tanıtımına mühüm töhfə verir."</textarea>
-            <label class="lbl" style="margin-top:6px">Şirkət adı</label>
-            <input class="inp" value="Başkent Restoranlar Şəbəkəsi">
-          </div>
-          <button onclick="deleteCard(this,'.testi-card-item')" style="background:#fee;border:1px solid #fcc;border-radius:6px;padding:4px 8px;font-size:.72rem;cursor:pointer;color:#c00;white-space:nowrap;margin-top:18px">Sil</button>
-        </div>
-
-        <!-- Card 2: Arter -->
-        <div class="card testi-card-item" style="display:grid;grid-template-columns:180px 1fr auto;gap:14px;align-items:start">
-          <div>
-            <label class="lbl">Logo URL</label>
-            <input class="inp" style="font-size:.7rem" value="https://facemark.az/public/storage/images/partners/v5XVa5Kr6UiiHshKS1pstyTZuxC7QQXJdCLfgULP.webp">
-            <img src="https://facemark.az/public/storage/images/partners/v5XVa5Kr6UiiHshKS1pstyTZuxC7QQXJdCLfgULP.webp" style="height:28px;object-fit:contain;margin-top:6px;display:block">
-          </div>
-          <div>
-            <label class="lbl">Sitat</label>
-            <textarea class="inp" rows="3" style="resize:vertical;font-style:italic;font-size:.74rem">"5 ildir ki davamlı əməkdaşlıq edirik. Hər il trend mövzular və peşəkar təşkilatçılıqla biznes mühitini maarifləndirirlər."</textarea>
-            <label class="lbl" style="margin-top:6px">Şirkət adı</label>
-            <input class="inp" value="Arter">
-          </div>
-          <button onclick="deleteCard(this,'.testi-card-item')" style="background:#fee;border:1px solid #fcc;border-radius:6px;padding:4px 8px;font-size:.72rem;cursor:pointer;color:#c00;white-space:nowrap;margin-top:18px">Sil</button>
-        </div>
-
-        <!-- Card 3: Karabakh Group -->
-        <div class="card testi-card-item" style="display:grid;grid-template-columns:180px 1fr auto;gap:14px;align-items:start">
-          <div>
-            <label class="lbl">Logo URL</label>
-            <input class="inp" style="font-size:.7rem" placeholder="Logo yoxdur — mətn görünür">
-            <div style="height:28px;display:flex;align-items:center;font-size:.65rem;font-weight:700;color:#6B6878;margin-top:6px">KARABAKH GROUP</div>
-          </div>
-          <div>
-            <label class="lbl">Sitat</label>
-            <textarea class="inp" rows="3" style="resize:vertical;font-style:italic;font-size:.74rem">"Peşəkar yanaşma və yüksək səviyyəli təşkilatçılıq üçün Facemark komandasına təşəkkürümüzü bildiririk."</textarea>
-            <label class="lbl" style="margin-top:6px">Şirkət adı</label>
-            <input class="inp" value="Karabakh Group">
-          </div>
-          <button onclick="deleteCard(this,'.testi-card-item')" style="background:#fee;border:1px solid #fcc;border-radius:6px;padding:4px 8px;font-size:.72rem;cursor:pointer;color:#c00;white-space:nowrap;margin-top:18px">Sil</button>
-        </div>
-
-        <!-- Card 4: Moon Group -->
-        <div class="card testi-card-item" style="display:grid;grid-template-columns:180px 1fr auto;gap:14px;align-items:start">
-          <div>
-            <label class="lbl">Logo URL</label>
-            <input class="inp" style="font-size:.7rem" value="https://facemark.az/public/storage/images/partners/04uaiFUWPuNZRFXt61tSn7gIdEOOpsejTGUsWK5s.png">
-            <img src="https://facemark.az/public/storage/images/partners/04uaiFUWPuNZRFXt61tSn7gIdEOOpsejTGUsWK5s.png" style="height:28px;object-fit:contain;margin-top:6px;display:block">
-          </div>
-          <div>
-            <label class="lbl">Sitat</label>
-            <textarea class="inp" rows="3" style="resize:vertical;font-style:italic;font-size:.74rem">"Komandanın tədbirləri planlı şəkildə təşkil etməsi və dinamik mühit yaratması diqqətəlayiqdir."</textarea>
-            <label class="lbl" style="margin-top:6px">Şirkət adı</label>
-            <input class="inp" value="Moon Group">
-          </div>
-          <button onclick="deleteCard(this,'.testi-card-item')" style="background:#fee;border:1px solid #fcc;border-radius:6px;padding:4px 8px;font-size:.72rem;cursor:pointer;color:#c00;white-space:nowrap;margin-top:18px">Sil</button>
-        </div>
-
-        <!-- Card 5: Good Finance -->
-        <div class="card testi-card-item" style="display:grid;grid-template-columns:180px 1fr auto;gap:14px;align-items:start">
-          <div>
-            <label class="lbl">Logo URL</label>
-            <input class="inp" style="font-size:.7rem" value="https://facemark.az/public/storage/images/partners/3q0TCN8ndtjZ5udXbRZGcDStwzlfg0TBQsOHF4PG.png">
-            <img src="https://facemark.az/public/storage/images/partners/3q0TCN8ndtjZ5udXbRZGcDStwzlfg0TBQsOHF4PG.png" style="height:28px;object-fit:contain;margin-top:6px;display:block">
-          </div>
-          <div>
-            <label class="lbl">Sitat</label>
-            <textarea class="inp" rows="3" style="resize:vertical;font-style:italic;font-size:.74rem">"Facemark tədbirlərinin keyfiyyəti və peşəkarlığı sektorda fərqli mövqe tutur. Hər il iştirakımız davam edir."</textarea>
-            <label class="lbl" style="margin-top:6px">Şirkət adı</label>
-            <input class="inp" value="Good Finance">
-          </div>
-          <button onclick="deleteCard(this,'.testi-card-item')" style="background:#fee;border:1px solid #fcc;border-radius:6px;padding:4px 8px;font-size:.72rem;cursor:pointer;color:#c00;white-space:nowrap;margin-top:18px">Sil</button>
-        </div>
-
-        <!-- Card 6: FMR Trainings -->
-        <div class="card testi-card-item" style="display:grid;grid-template-columns:180px 1fr auto;gap:14px;align-items:start">
-          <div>
-            <label class="lbl">Logo URL</label>
-            <input class="inp" style="font-size:.7rem" value="https://facemark.az/public/storage/images/partners/7ipxrAsIXPx8GJCb2FT1e6YvYslIUEGU2kdD8fKB.png">
-            <img src="https://facemark.az/public/storage/images/partners/7ipxrAsIXPx8GJCb2FT1e6YvYslIUEGU2kdD8fKB.png" style="height:28px;object-fit:contain;margin-top:6px;display:block">
-          </div>
-          <div>
-            <label class="lbl">Sitat</label>
-            <textarea class="inp" rows="3" style="resize:vertical;font-style:italic;font-size:.74rem">"Biznes tədbirlərinin keçirilməsində etibarlı tərəfdaş. Əməkdaşlığımız məhsuldar davam edir."</textarea>
-            <label class="lbl" style="margin-top:6px">Şirkət adı</label>
-            <input class="inp" value="FMR Trainings">
-          </div>
-          <button onclick="deleteCard(this,'.testi-card-item')" style="background:#fee;border:1px solid #fcc;border-radius:6px;padding:4px 8px;font-size:.72rem;cursor:pointer;color:#c00;white-space:nowrap;margin-top:18px">Sil</button>
-        </div>
-
-      </div><!-- end testi-list -->
-
-      <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center">
-        <div style="font-size:.75rem;color:#6B6878">Toplam: <strong id="testi-count">6</strong> rəy</div>
-        <button class="btn btn-gold" onclick="saveAllTesti(this)">Hamısını Yadda Saxla</button>
-      </div>
-
-      <script>
-      function addTestiCard() {
-        var list = document.getElementById('testi-list');
-        var item = document.createElement('div');
-        item.className = 'card testi-card-item';
-        item.style.cssText = 'display:grid;grid-template-columns:180px 1fr auto;gap:14px;align-items:start';
-        item.innerHTML = '<div><label class="lbl">Logo URL</label>' +
-          '<input class="inp" style="font-size:.7rem" placeholder="https://..." oninput="previewLogo(this)">' +
-          '<div class="logo-preview" style="height:28px;margin-top:6px;display:flex;align-items:center;font-size:.65rem;color:#999">Şəkil URL daxil edin</div></div>' +
-          '<div><label class="lbl">Sitat</label>' +
-          '<textarea class="inp" rows="3" style="resize:vertical;font-style:italic;font-size:.74rem" placeholder="\"Rəy mətni buraya...\"">' +
-          '</textarea><label class="lbl" style="margin-top:6px">Şirkət adı</label>' +
-          '<input class="inp" placeholder="Şirkət adı"></div>' +
-          '<button onclick="deleteCard(this,\'.testi-card-item\')" style="background:#fee;border:1px solid #fcc;border-radius:6px;padding:4px 8px;font-size:.72rem;cursor:pointer;color:#c00;white-space:nowrap;margin-top:18px">Sil</button>';
-        list.appendChild(item);
-        updateTestiCount();
-      }
-      function previewLogo(inp) {
-        var prev = inp.nextElementSibling;
-        if(inp.value) {
-          prev.innerHTML = '<img src="' + inp.value + '" style="height:100%;object-fit:contain">';
-        }
-      }
-      function updateTestiCount() {
-        var count = document.querySelectorAll('.testi-card-item').length;
-        var el = document.getElementById('testi-count');
-        if(el) el.textContent = count;
-      }
-      function saveAllTesti(btn) {
-        btn.textContent = '✓ Saxlanıldı';
-        setTimeout(function(){btn.textContent='Hamısını Yadda Saxla';},2000);
-      }
-      </script>
-
     </div>
 
-    <div class="view" id="view-team">
+    
+<div class="view" id="view-team">
       <div class="page-hdr">
         <div>
           <div class="page-title">👥 Komanda</div>
@@ -3430,9 +2508,19 @@ function showView(id, el){
     if(id==='services'){ setTimeout(function(){ filterServices(''); },50); }
   if(id==='inquiries'){ setTimeout(function(){ renderInquiries(); },50); }
   if(id==='events-list'){ setTimeout(function(){ renderEventsList(); },50); }
-  if(id==='dashboard'){ setTimeout(function(){ renderDashboardStats(); },50); }
+  if(id==='dashboard'){ setTimeout(function(){ renderDashboardStats(); renderDashboardActivity(); },50); }
   if(id==='team'){ setTimeout(function(){ renderTeamList(); },50); }
   if(id==='careers'){ setTimeout(function(){ renderJobsList(); },50); }
+  if(id==='partners'){ setTimeout(function(){ crudRenderList('partners'); },50); }
+  if(id==='clients'){ setTimeout(function(){ crudRenderList('clients'); },50); }
+  if(id==='testimonials'){ setTimeout(function(){ crudRenderList('testimonials'); },50); }
+  if(id==='radar'){ setTimeout(function(){ crudRenderList('news_items'); },50); }
+  if(id==='fmr-tv'){ setTimeout(function(){ crudRenderList('tv_videos'); },50); }
+  if(id==='marketing'){ setTimeout(function(){ crudRenderList('air_programs'); crudRenderList('air_trainers'); },50); }
+  if(id==='homepage'){ setTimeout(function(){ scLoadView('homepage','homepage'); },50); }
+  if(id==='about'){ setTimeout(function(){ scLoadView('about','about'); },50); }
+  if(id==='services'){ setTimeout(function(){ scLoadView('services','services'); },50); }
+  if(id==='users'){ setTimeout(function(){ renderUsersList(); },50); }
 
   document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active')});
   if(el&&el.classList&&el.classList.contains('sb-item'))el.classList.add('active');
@@ -3517,6 +2605,7 @@ function openPanel(id){
   document.querySelectorAll('.settings-overlay').forEach(function(o){o.classList.remove('open')});
   var el=document.getElementById('panel-'+id);
   if(el)el.classList.add('open');
+  if(id==='activity') renderActivityPanel();
 }
 function closePanel(id){
   var el=document.getElementById('panel-'+id);
@@ -3923,7 +3012,7 @@ async function renderEventsList(){
         '<td><span style="font-size:.65rem;color:var(--muted)">—</span></td>'+
         '<td>'+(badgeHtml[ev.status]||_escHtml(ev.status))+'</td>'+
         '<td><div style="display:flex;gap:4px">'+
-          '<button class="btn btn-sm btn-outline" onclick="showView(\'event-new\',event)">✏️</button>'+
+          '<button class="btn btn-sm btn-outline" onclick=\'openEventEdit('+JSON.stringify(ev).replace(/'/g,"&#39;")+')\'>✏️</button>'+
           '<button class="btn btn-sm btn-outline">👁️</button>'+
         '</div></td>'+
       '</tr>';
@@ -4098,6 +3187,7 @@ async function sendInqReply() {
     alert('Xəta: ' + error.message);
     return;
   }
+  logActivity('Müraciət statusu yeniləndi: '+(_inqCurrent.name||'')+' — '+newStatus);
   if (body) {
     body.innerHTML =
       '<div style="text-align:center;padding:32px 16px">' +
@@ -4557,69 +3647,80 @@ function filterEvents(status, btn) {
 // ══════════════════════════════════════════════════════════════════
 var mediaCurrentFilter = '';
 var mediaSearchQ = '';
-var mediaCurrentPath = []; // breadcrumb stack
+var mediaFiles = []; // real Supabase Storage ('media' bucket) faylları
 
-var mediaItems = [
-  { id:1, type:'folder', name:'MMF 2026',        count:34, date:'04.07.2026' },
-  { id:2, type:'folder', name:'HR Forum 2026',    count:18, date:'02.07.2026' },
-  { id:3, type:'folder', name:'Bloger Forum',     count:22, date:'01.07.2026' },
-  { id:4, type:'folder', name:'Logolar',          count:12, date:'28.06.2026' },
-  { id:5, type:'image',  name:'mmf-hero.jpg',     size:'1.2 MB', dim:'1920×1080', date:'06.07.2026', icon:'🖼️' },
-  { id:6, type:'image',  name:'logo-dark.png',    size:'42 KB',  dim:'SVG',       date:'05.07.2026', icon:'🖼️' },
-  { id:7, type:'doc',    name:'sponsor-kit.pdf',  size:'2.4 MB', dim:'PDF',       date:'04.07.2026', icon:'📄' },
-  { id:8, type:'image',  name:'speaker-aytən.jpg',size:'380 KB', dim:'400×400',   date:'03.07.2026', icon:'🖼️' },
-  { id:9, type:'video',  name:'mmf-highlights.mp4',size:'84 MB', dim:'1080p',     date:'07.06.2026', icon:'🎬' },
-  { id:10,type:'image',  name:'banner-radar.jpg', size:'560 KB', dim:'1200×628',  date:'02.06.2026', icon:'🖼️' },
-  { id:11,type:'doc',    name:'program-2026.pdf', size:'1.1 MB', dim:'PDF',       date:'01.06.2026', icon:'📄' },
-  { id:12,type:'video',  name:'promo-bloger.mp4', size:'62 MB',  dim:'1080p',     date:'30.05.2026', icon:'🎬' },
-];
+function _mediaFileType(name){
+  var ext = (name.split('.').pop()||'').toLowerCase();
+  if(['jpg','jpeg','png','gif','svg','webp'].indexOf(ext)>=0) return 'image';
+  if(['mp4','mov','avi','webm'].indexOf(ext)>=0) return 'video';
+  return 'doc';
+}
+function _mediaFileIcon(t){ return t==='image'?'🖼️':t==='video'?'🎬':'📄'; }
+function _mediaFileBg(t){ return t==='image'?'rgba(49,130,206,.07)':t==='video'?'rgba(229,62,62,.07)':'rgba(124,58,237,.07)'; }
 
-function mediaRender() {
+async function mediaRender() {
   var grid = document.getElementById('media-grid');
   var empty = document.getElementById('media-empty');
   if (!grid) return;
-
-  var filtered = mediaItems.filter(function(item) {
-    var typeMatch = !mediaCurrentFilter || item.type === mediaCurrentFilter;
-    var nameMatch = !mediaSearchQ || item.name.toLowerCase().indexOf(mediaSearchQ.toLowerCase()) !== -1;
+  grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--muted);font-size:.78rem">Yüklənir...</div>';
+  var res = await supabaseClient.storage.from('media').list('', { limit:200, sortBy:{column:'created_at',order:'desc'} });
+  if (res.error) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--muted);font-size:.78rem">Yüklənmə xətası: '+_tjEsc(res.error.message)+'</div>';
+    return;
+  }
+  var allFiles = (res.data||[]).filter(function(f){ return f.name !== '.emptyFolderPlaceholder'; });
+  var filtered = allFiles.filter(function(f){
+    if (mediaCurrentFilter === 'folder') return false; // qovluqlar hələ dəstəklənmir
+    var t = _mediaFileType(f.name);
+    var typeMatch = !mediaCurrentFilter || t === mediaCurrentFilter;
+    var nameMatch = !mediaSearchQ || f.name.toLowerCase().indexOf(mediaSearchQ.toLowerCase()) !== -1;
     return typeMatch && nameMatch;
   });
+  mediaFiles = filtered;
 
   if (filtered.length === 0) {
     grid.innerHTML = '';
     if (empty) empty.style.display = '';
-    return;
-  }
-  if (empty) empty.style.display = 'none';
-
-  grid.innerHTML = filtered.map(function(item) {
-    if (item.type === 'folder') {
-      return '<div class="media-item" onclick="mediaOpenFolder('+item.id+')">' +
-        '<div style="height:80px;background:rgba(196,151,58,.08);display:flex;align-items:center;justify-content:center;font-size:2rem">📁</div>' +
-        '<div style="padding:8px 10px">' +
-          '<div style="font-size:.72rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+item.name+'</div>' +
-          '<div style="font-size:.62rem;color:var(--muted);margin-top:2px">'+item.count+' fayl · '+item.date+'</div>' +
-        '</div>' +
-      '</div>';
-    } else {
-      var bg = item.type==='image'?'rgba(49,130,206,.07)':item.type==='video'?'rgba(229,62,62,.07)':'rgba(124,58,237,.07)';
+  } else {
+    if (empty) empty.style.display = 'none';
+    grid.innerHTML = filtered.map(function(f, i) {
+      var t = _mediaFileType(f.name);
+      var pub = supabaseClient.storage.from('media').getPublicUrl(f.name).data.publicUrl;
+      var sizeKB = (f.metadata && f.metadata.size) ? (f.metadata.size/1024) : 0;
+      var sizeStr = sizeKB > 1024 ? (sizeKB/1024).toFixed(1)+' MB' : Math.round(sizeKB)+' KB';
+      var thumb = t==='image' ? ('<img src="'+_tjEsc(pub)+'" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\'">') : '';
       return '<div class="media-item">' +
-        '<div style="height:80px;background:'+bg+';display:flex;align-items:center;justify-content:center;font-size:2rem">'+item.icon+'</div>' +
+        '<div style="height:80px;background:'+_mediaFileBg(t)+';display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer" onclick="mediaCopyUrl('+i+')" title="Linki kopyala">'+(thumb||_mediaFileIcon(t))+'</div>' +
         '<div style="padding:8px 10px">' +
-          '<div style="font-size:.68rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="'+item.name+'">'+item.name+'</div>' +
-          '<div style="font-size:.6rem;color:var(--muted);margin-top:2px">'+item.dim+' · '+item.size+'</div>' +
+          '<div style="font-size:.68rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="'+_tjEsc(f.name)+'">'+_tjEsc(f.name)+'</div>' +
+          '<div style="font-size:.6rem;color:var(--muted);margin-top:2px;display:flex;justify-content:space-between;align-items:center"><span>'+sizeStr+'</span><span style="cursor:pointer;color:var(--red)" onclick="event.stopPropagation();mediaDelete('+i+')">🗑️</span></div>' +
         '</div>' +
       '</div>';
-    }
-  }).join('');
-
-  // Update sub text
-  var sub = document.getElementById('media-sub');
-  if (sub) {
-    var total = mediaItems.length;
-    var files = mediaItems.filter(function(i){ return i.type!=='folder'; }).length;
-    sub.textContent = total + ' element · ' + files + ' fayl';
+    }).join('');
   }
+
+  var sub = document.getElementById('media-sub');
+  if (sub) sub.textContent = allFiles.length + ' fayl';
+}
+
+function mediaCopyUrl(i){
+  var f = mediaFiles[i];
+  if(!f) return;
+  var pub = supabaseClient.storage.from('media').getPublicUrl(f.name).data.publicUrl;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(pub).then(function(){ showInqToast('Link kopyalandı ✓', 'var(--green)'); }).catch(function(){ showInqToast(pub, 'var(--dark)'); });
+  } else {
+    showInqToast(pub, 'var(--dark)');
+  }
+}
+async function mediaDelete(i){
+  var f = mediaFiles[i];
+  if(!f) return;
+  if(!confirm('"'+f.name+'" faylını silmək istədiyinizə əminsiniz?')) return;
+  var res = await supabaseClient.storage.from('media').remove([f.name]);
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
+  logActivity('Media fayl silindi: '+f.name);
+  mediaRender();
 }
 
 function filterMedia(type, btn) {
@@ -4636,19 +3737,7 @@ function searchMedia(q) {
   mediaRender();
 }
 
-function mediaOpenFolder(id) {
-  var folder = mediaItems.find(function(i){ return i.id===id; });
-  if (!folder) return;
-  showInqToast('📁 "' + folder.name + '" qovluğu açıldı', 'var(--dark)');
-  // Update breadcrumb
-  var bc = document.getElementById('media-breadcrumb');
-  if (bc) {
-    bc.innerHTML = '<span style="cursor:pointer;color:var(--muted)" onclick="mediaGoRoot()">Media Kitabxanası</span>' +
-      '<span style="margin:0 4px;color:var(--muted)">/</span>' +
-      '<span style="font-weight:700;color:var(--dark)">' + folder.name + '</span>';
-  }
-}
-
+function mediaOpenFolder(id) { /* qovluqlar hələ dəstəklənmir */ }
 function mediaGoRoot() {
   var bc = document.getElementById('media-breadcrumb');
   if (bc) {
@@ -4657,7 +3746,7 @@ function mediaGoRoot() {
   mediaRender();
 }
 
-// ── Create Folder ──────────────────────────────────────────────────
+// ── Qovluq (hələ real dəstək yoxdur) ────────────────────────────────
 function openCreateFolder() {
   var inp = document.getElementById('folder-name-input');
   var err = document.getElementById('folder-name-err');
@@ -4670,28 +3759,11 @@ function closeCreateFolder() {
   document.getElementById('create-folder-overlay').classList.remove('open');
 }
 function confirmCreateFolder() {
-  var inp = document.getElementById('folder-name-input');
-  var err = document.getElementById('folder-name-err');
-  var name = inp ? inp.value.trim() : '';
-  if (!name) {
-    if (err) err.style.display = '';
-    if (inp) inp.focus();
-    return;
-  }
-  // Add to mediaItems
-  var newId = Date.now();
-  mediaItems.unshift({ id:newId, type:'folder', name:name, count:0, date:new Date().toLocaleDateString('az-AZ') });
   closeCreateFolder();
-  // Reset filter to show all so folder is visible
-  mediaCurrentFilter = '';
-  document.querySelectorAll('.media-ftab').forEach(function(b){ b.classList.remove('active','btn-dark'); b.classList.add('btn-outline'); });
-  var allBtn = document.querySelector('.media-ftab');
-  if (allBtn) { allBtn.classList.add('active','btn-dark'); allBtn.classList.remove('btn-outline'); }
-  mediaRender();
-  showInqToast('📁 "' + name + '" qovluğu yaradıldı', 'var(--green)');
+  showInqToast('Qovluqlar hələ dəstəklənmir — fayllar birbaşa kitabxanaya yüklənir.', 'var(--orange)');
 }
 
-// ── Upload ─────────────────────────────────────────────────────────
+// ── Yükləmə — real Supabase Storage ────────────────────────────────
 var uploadQueue = [];
 function openUploadPanel() {
   uploadQueue = [];
@@ -4712,9 +3784,8 @@ function handleMediaDrop(e) {
 function handleMediaFiles(files) {
   if (!files || files.length === 0) return;
   Array.from(files).forEach(function(file) {
-    // Prevent duplicates by name
     if (uploadQueue.find(function(f){ return f.name===file.name; })) return;
-    uploadQueue.push({ name:file.name, size:file.size, file:file, progress:0, done:false });
+    uploadQueue.push({ name:file.name, size:file.size, file:file, progress:0, done:false, error:null });
   });
   renderUploadQueue();
   document.getElementById('upload-start-btn').disabled = uploadQueue.length === 0;
@@ -4724,21 +3795,23 @@ function renderUploadQueue() {
   if (!q) return;
   if (uploadQueue.length === 0) { q.innerHTML = ''; return; }
   q.innerHTML = uploadQueue.map(function(f, i) {
-    var ext = f.name.split('.').pop().toLowerCase();
+    var ext = (f.name.split('.').pop()||'').toLowerCase();
     var icon = ['jpg','jpeg','png','gif','svg','webp'].indexOf(ext)>=0?'🖼️':['mp4','mov','avi'].indexOf(ext)>=0?'🎬':'📄';
     var sizeMB = (f.size/1024/1024).toFixed(1);
-    var statusHtml = f.done
+    var statusHtml = f.error
+      ? '<span style="font-size:.62rem;color:var(--red);font-weight:700">✕ Xəta</span>'
+      : f.done
       ? '<span style="font-size:.68rem;color:var(--green);font-weight:700">✓ Hazır</span>'
       : f.progress>0
-        ? '<div style="background:var(--bg2);border-radius:4px;height:4px;flex:1"><div style="background:var(--gold);height:4px;border-radius:4px;width:'+f.progress+'%;transition:width .3s"></div></div>'
+        ? '<span style="font-size:.62rem;color:var(--muted)">Yüklənir...</span>'
         : '<span style="font-size:.62rem;color:var(--muted)">Gözləyir</span>';
     return '<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">' +
       '<span style="font-size:1.1rem">' + icon + '</span>' +
       '<div style="flex:1;min-width:0">' +
-        '<div style="font-size:.72rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + f.name + '</div>' +
+        '<div style="font-size:.72rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + _tjEsc(f.name) + '</div>' +
         '<div style="font-size:.62rem;color:var(--muted)">' + sizeMB + ' MB</div>' +
       '</div>' +
-      '<div style="display:flex;align-items:center;gap:8px;min-width:120px">' + statusHtml + '</div>' +
+      '<div style="display:flex;align-items:center;gap:8px;min-width:90px">' + statusHtml + '</div>' +
       (!f.done && f.progress===0 ? '<button onclick="removeUploadItem('+i+')" style="background:none;border:none;cursor:pointer;font-size:.75rem;color:var(--muted)">✕</button>' : '') +
     '</div>';
   }).join('');
@@ -4748,49 +3821,31 @@ function removeUploadItem(i) {
   renderUploadQueue();
   document.getElementById('upload-start-btn').disabled = uploadQueue.length === 0;
 }
-function startUpload() {
+async function startUpload() {
   if (uploadQueue.length === 0) return;
   var btn = document.getElementById('upload-start-btn');
   btn.disabled = true;
   btn.textContent = '⏳ Yüklənir...';
-
   var remaining = uploadQueue.filter(function(f){ return !f.done; });
-  var i = 0;
-  function uploadNext() {
-    if (i >= remaining.length) {
-      // All done — add to mediaItems
-      remaining.forEach(function(f) {
-        var ext = f.name.split('.').pop().toLowerCase();
-        var type = ['jpg','jpeg','png','gif','svg','webp'].indexOf(ext)>=0?'image':['mp4','mov','avi'].indexOf(ext)>=0?'video':'doc';
-        var icon = type==='image'?'🖼️':type==='video'?'🎬':'📄';
-        var sizeMB = (f.size/1024/1024).toFixed(1)+' MB';
-        mediaItems.unshift({ id:Date.now()+Math.random(), type:type, name:f.name, size:sizeMB, dim:ext.toUpperCase(), date:new Date().toLocaleDateString('az-AZ'), icon:icon });
-      });
-      btn.textContent = '✅ Tamamlandı!';
-      setTimeout(function(){
-        closeUploadPanel();
-        btn.textContent = '↑ Yüklənməyə başla';
-        btn.disabled = false;
-        mediaRender();
-        showInqToast('✅ ' + remaining.length + ' fayl uğurla yükləndi', 'var(--green)');
-      }, 900);
-      return;
-    }
-    var file = remaining[i];
-    var interval = setInterval(function() {
-      file.progress = Math.min(100, file.progress + Math.random()*22 + 8);
-      renderUploadQueue();
-      if (file.progress >= 100) {
-        clearInterval(interval);
-        file.progress = 100;
-        file.done = true;
-        renderUploadQueue();
-        i++;
-        setTimeout(uploadNext, 250);
-      }
-    }, 120);
+  for (var i = 0; i < remaining.length; i++) {
+    var f = remaining[i];
+    f.progress = 50;
+    renderUploadQueue();
+    var res = await supabaseClient.storage.from('media').upload(f.name, f.file, { upsert:true });
+    if (res.error) { f.error = res.error.message; }
+    else { f.progress = 100; f.done = true; }
+    renderUploadQueue();
   }
-  uploadNext();
+  var okCount = remaining.filter(function(f){ return f.done; }).length;
+  if (okCount) logActivity(okCount+' media fayl yükləndi');
+  btn.textContent = '✅ Tamamlandı!';
+  setTimeout(function(){
+    closeUploadPanel();
+    btn.textContent = '↑ Yüklənməyə başla';
+    btn.disabled = false;
+    mediaRender();
+    showInqToast('✅ ' + okCount + ' fayl uğurla yükləndi', 'var(--green)');
+  }, 900);
 }
 
 // Init media grid on first load of media view
@@ -5756,15 +4811,8 @@ function saveClientEdit() {
       <button class="sp-close" onclick="closePanel('activity')">✕</button>
     </div>
     <div class="sp-body">
-      <div style="font-size:.65rem;color:var(--muted);margin-bottom:12px">Son 30 günün fəaliyyəti · Rafiq Hunaltay</div>
-      <div class="log-item"><div class="log-dot" style="background:var(--green)"></div><div class="log-action"><b>Giriş edildi</b><div class="log-meta">Chrome · Bakı, AZ · 185.x.x.x</div></div><span class="log-time">Bu gün · 08:44</span></div>
-      <div class="log-item"><div class="log-dot" style="background:var(--gold)"></div><div class="log-action"><b>Tədbir yeniləndi:</b> MMF 2026 — VIP bilet sayı 80-ə qaldırıldı<div class="log-meta">Tədbirlər modulu</div></div><span class="log-time">Dünən · 17:12</span></div>
-      <div class="log-item"><div class="log-dot" style="background:var(--blue)"></div><div class="log-action"><b>Yeni istifadəçi əlavə edildi:</b> Aytən Həsənova — Event Manager<div class="log-meta">İstifadəçilər modulu</div></div><span class="log-time">Dünən · 14:30</span></div>
-      <div class="log-item"><div class="log-dot" style="background:var(--muted)"></div><div class="log-action"><b>Biznes Radar:</b> 3 xəbər yayımlandı<div class="log-meta">Məzmun modulu</div></div><span class="log-time">03.07 · 11:20</span></div>
-      <div class="log-item"><div class="log-dot" style="background:var(--orange)"></div><div class="log-action"><b>Müraciət cavablandı:</b> Nigar Əliyeva — qrup bilet<div class="log-meta">Müraciətlər modulu</div></div><span class="log-time">02.07 · 16:05</span></div>
-      <div class="log-item"><div class="log-dot" style="background:var(--green)"></div><div class="log-action"><b>Sponsor əlavə edildi:</b> PASHA Holding — Gümüş<div class="log-meta">MMF 2026 · Sponsorlar</div></div><span class="log-time">01.07 · 10:44</span></div>
-      <div class="log-item"><div class="log-dot" style="background:var(--muted)"></div><div class="log-action"><b>Çıxış edildi</b><div class="log-meta">Chrome · Bakı, AZ</div></div><span class="log-time">30.06 · 19:52</span></div>
-      <div class="log-item"><div class="log-dot" style="background:var(--green)"></div><div class="log-action"><b>Giriş edildi</b><div class="log-meta">Chrome · Bakı, AZ</div></div><span class="log-time">30.06 · 09:01</span></div>
+      <div style="font-size:.65rem;color:var(--muted);margin-bottom:12px">Son fəaliyyət (real qeydlər)</div>
+      <div id="activity-log-list"><div style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</div></div>
     </div>
     <div class="sp-footer">
       <button class="btn btn-outline btn-sm">📥 Loqu yüklə (CSV)</button>
@@ -6253,6 +5301,7 @@ async function saveTeamMember(){
   btn.disabled = false; btn.textContent = '✓ Saxla';
   if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
   showInqToast('Saxlanıldı ✓', 'var(--green)');
+  logActivity((_teamEditId?'Komanda üzvü yeniləndi':'Yeni komanda üzvü əlavə edildi')+': '+name);
   closeTeamEdit();
   renderTeamList();
 }
@@ -6261,6 +5310,7 @@ async function deleteTeamMember(id){
   var res = await supabaseClient.from('team_members').delete().eq('id', id);
   if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
   showInqToast('Silindi', 'var(--dark)');
+  logActivity('Komanda üzvü silindi');
   renderTeamList();
 }
 
@@ -6348,6 +5398,7 @@ async function saveJobOpening(){
   btn.disabled = false; btn.textContent = '✓ Saxla';
   if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
   showInqToast('Saxlanıldı ✓', 'var(--green)');
+  logActivity((_jobEditId?'Vakansiya yeniləndi':'Yeni vakansiya əlavə edildi')+': '+titleAz);
   closeJobEdit();
   renderJobsList();
 }
@@ -6356,12 +5407,556 @@ async function deleteJobOpening(id){
   var res = await supabaseClient.from('job_openings').delete().eq('id', id);
   if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
   showInqToast('Silindi', 'var(--dark)');
+  logActivity('Vakansiya silindi');
   renderJobsList();
 }
 async function toggleJobActive(id, current){
   var res = await supabaseClient.from('job_openings').update({is_active: !current}).eq('id', id);
   if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
   renderJobsList();
+}
+</script>
+
+
+<!-- ══ Generic CRUD redaktə overlay (Partnyor/Müştəri/Rəy/Xəbər/Video/Proqram/Təlimçi) ══ -->
+<div class="fd-overlay" id="crud-edit-overlay" onclick="crudClose()">
+  <div class="fd-panel" style="width:480px" onclick="event.stopPropagation()">
+    <div class="fd-header">
+      <span style="font-size:1rem" id="crud-edit-icon">📝</span>
+      <span class="fd-title" id="crud-edit-title">Redaktə</span>
+      <button class="fd-close" onclick="crudClose()">✕</button>
+    </div>
+    <div class="fd-body" id="crud-edit-body"></div>
+    <div style="padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0">
+      <button class="btn btn-outline" onclick="crudClose()">Ləğv et</button>
+      <button class="btn btn-gold" id="crud-save-btn" onclick="crudSave()">✓ Saxla</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// GENERIC CRUD ENGINE — partners/clients/testimonials/news_items/
+// tv_videos/air_programs/air_trainers
+// ══════════════════════════════════════════════════════════════════
+var _crudKey = null, _crudId = null;
+var _currentEventId = null;
+
+var CRUD_CONFIGS = {
+  partners: {
+    table:'partners', tbody:'partners-tbody', sub:'partners-sub', icon:'🤝', title:'Partnyor', colspan:6,
+    order:{col:'sort_order',asc:true},
+    fields:[
+      {key:'name', label:'Ad', req:true},
+      {key:'category', label:'Kateqoriya (məs: media, dövlət, özəl, beynəlxalq)'},
+      {key:'logo_url', label:'Logo URL'},
+      {key:'website_url', label:'Veb sayt URL'},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      var logo = r.logo_url ? '<img src="'+_tjEsc(r.logo_url)+'" style="width:36px;height:36px;border-radius:8px;object-fit:contain;background:var(--bg2)" onerror="this.style.visibility=\'hidden\'">' : '<div style="width:36px;height:36px;border-radius:8px;background:var(--bg2)"></div>';
+      return '<tr><td>'+logo+'</td><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.name)+'</td>'+
+        '<td style="font-size:.72rem">'+_tjEsc(r.category||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.website_url?('<a href="'+_tjEsc(r.website_url)+'" target="_blank" style="color:var(--blue)">🔗</a>'):'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('partners', r)+'</tr>';
+    }
+  },
+  clients: {
+    table:'clients', tbody:'clients-tbody', sub:'clients-sub', icon:'🏛️', title:'Müştəri', colspan:5,
+    order:{col:'sort_order',asc:true},
+    fields:[
+      {key:'name', label:'Ad', req:true},
+      {key:'category', label:'Kateqoriya (məs: Dövlət Qurumları, Özəl Şirkətlər)'},
+      {key:'logo_url', label:'Logo URL'},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      var logo = r.logo_url ? '<img src="'+_tjEsc(r.logo_url)+'" style="width:36px;height:36px;border-radius:8px;object-fit:contain;background:var(--bg2)" onerror="this.style.visibility=\'hidden\'">' : '<div style="width:36px;height:36px;border-radius:8px;background:var(--bg2)"></div>';
+      return '<tr><td>'+logo+'</td><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.name)+'</td>'+
+        '<td style="font-size:.72rem">'+_tjEsc(r.category||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('clients', r)+'</tr>';
+    }
+  },
+  testimonials: {
+    table:'testimonials', tbody:'testimonials-tbody', sub:'testi-sub', icon:'💬', title:'Rəy', colspan:6,
+    order:{col:'sort_order',asc:true},
+    fields:[
+      {key:'author_name', label:'Ad Soyad', req:true},
+      {key:'author_role', label:'Vəzifə'},
+      {key:'author_company', label:'Şirkət'},
+      {key:'quote_az', label:'Rəy mətni (AZ)', type:'textarea'},
+      {key:'quote_en', label:'Rəy mətni (EN)', type:'textarea'},
+      {key:'avatar_url', label:'Şəkil URL'},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      var img = r.avatar_url ? '<img src="'+_tjEsc(r.avatar_url)+'" style="width:36px;height:36px;border-radius:50%;object-fit:cover" onerror="this.style.visibility=\'hidden\'">' : '<div style="width:36px;height:36px;border-radius:50%;background:var(--bg2)"></div>';
+      return '<tr><td>'+img+'</td><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.author_name)+'</td>'+
+        '<td style="font-size:.72rem">'+_tjEsc([r.author_role,r.author_company].filter(Boolean).join(' — ')||'—')+'</td>'+
+        '<td style="font-size:.7rem;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+_tjEsc(r.quote_az||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('testimonials', r)+'</tr>';
+    }
+  },
+  news_items: {
+    table:'news_items', tbody:'news-tbody', sub:'news-sub', icon:'📰', title:'Xəbər', colspan:6,
+    order:{col:'sort_order',asc:true},
+    fields:[
+      {key:'title_az', label:'Başlıq (AZ)', req:true},
+      {key:'title_en', label:'Başlıq (EN)'},
+      {key:'chip_label', label:'Çip / kateqoriya etiketi'},
+      {key:'url', label:'Xəbər linki (URL)'},
+      {key:'is_active', label:'', type:'checkbox', default:true},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      var statusBadge = r.is_active ? '<span class="status-badge status-active">● Aktiv</span>' : '<span class="status-badge" style="background:rgba(107,104,120,.1);color:var(--muted)">○ Deaktiv</span>';
+      return '<tr><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.title_az)+'</td>'+
+        '<td style="font-size:.72rem">'+_tjEsc(r.chip_label||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.url?('<a href="'+_tjEsc(r.url)+'" target="_blank" style="color:var(--blue)">🔗</a>'):'—')+'</td>'+
+        '<td>'+statusBadge+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('news_items', r)+'</tr>';
+    }
+  },
+  tv_videos: {
+    table:'tv_videos', tbody:'tv-tbody', sub:'tv-sub', icon:'📺', title:'Video', colspan:5,
+    order:{col:'sort_order',asc:true},
+    fields:[
+      {key:'title_az', label:'Başlıq (AZ)', req:true},
+      {key:'title_en', label:'Başlıq (EN)'},
+      {key:'category', label:'Kateqoriya'},
+      {key:'video_url', label:'Video linki (URL)'},
+      {key:'thumbnail_url', label:'Şəkil (thumbnail) URL'},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      return '<tr><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.title_az)+'</td>'+
+        '<td style="font-size:.72rem">'+_tjEsc(r.category||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.video_url?('<a href="'+_tjEsc(r.video_url)+'" target="_blank" style="color:var(--blue)">▶ Bax</a>'):'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('tv_videos', r)+'</tr>';
+    }
+  },
+  air_programs: {
+    table:'air_programs', tbody:'air-programs-tbody', sub:null, icon:'📋', title:'Proqram', colspan:4,
+    order:{col:'sort_order',asc:true},
+    fields:[
+      {key:'title_az', label:'Başlıq (AZ)', req:true},
+      {key:'title_en', label:'Başlıq (EN)'},
+      {key:'description_az', label:'Təsvir (AZ)', type:'textarea'},
+      {key:'description_en', label:'Təsvir (EN)', type:'textarea'},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      return '<tr><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.title_az)+'</td>'+
+        '<td style="font-size:.7rem;max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+_tjEsc(r.description_az||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('air_programs', r)+'</tr>';
+    }
+  },
+  air_trainers: {
+    table:'air_trainers', tbody:'air-trainers-tbody', sub:null, icon:'🎓', title:'Təlimçi', colspan:5,
+    order:{col:'sort_order',asc:true},
+    fields:[
+      {key:'name', label:'Ad Soyad', req:true},
+      {key:'role_az', label:'Vəzifə (AZ)'},
+      {key:'role_en', label:'Vəzifə (EN)'},
+      {key:'photo_url', label:'Şəkil URL'},
+      {key:'bio_az', label:'Bio (AZ)', type:'textarea'},
+      {key:'bio_en', label:'Bio (EN)', type:'textarea'},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      var photo = r.photo_url ? '<img src="'+_tjEsc(r.photo_url)+'" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.style.visibility=\'hidden\'">' : '<div style="width:36px;height:36px;border-radius:8px;background:var(--bg2)"></div>';
+      return '<tr><td>'+photo+'</td><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.name)+'</td>'+
+        '<td style="font-size:.72rem">'+_tjEsc(r.role_az||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('air_trainers', r)+'</tr>';
+    }
+  },
+  event_program: {
+    table:'event_program', tbody:'event_program-tbody', sub:'ev-program-sub', icon:'📋', title:'Proqram sessiyası', colspan:6,
+    order:{col:'sort_order',asc:true},
+    filter:function(q){ return q.eq('event_id', _currentEventId); },
+    fixedFields:function(){ return {event_id:_currentEventId}; },
+    fields:[
+      {key:'day_label', label:'Gün (məs: 1-ci gün)'},
+      {key:'time_label', label:'Saat (məs: 09:00–09:30)'},
+      {key:'title_az', label:'Başlıq', req:true},
+      {key:'title_en', label:'Başlıq (EN)'},
+      {key:'speaker_name', label:'Spiker adı'},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      return '<tr><td style="font-size:.72rem">'+_tjEsc(r.day_label||'—')+'</td>'+
+        '<td style="font-size:.72rem;white-space:nowrap">'+_tjEsc(r.time_label||'—')+'</td>'+
+        '<td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.title_az)+'</td>'+
+        '<td style="font-size:.72rem">'+_tjEsc(r.speaker_name||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('event_program', r)+'</tr>';
+    }
+  },
+  event_speakers: {
+    table:'event_speakers', tbody:'event_speakers-tbody', sub:'ev-speakers-sub', icon:'🎤', title:'Spiker', colspan:5,
+    order:{col:'sort_order',asc:true},
+    filter:function(q){ return q.eq('event_id', _currentEventId); },
+    fixedFields:function(){ return {event_id:_currentEventId}; },
+    fields:[
+      {key:'name', label:'Ad Soyad', req:true},
+      {key:'title_az', label:'Vəzifə (AZ)'},
+      {key:'title_en', label:'Vəzifə (EN)'},
+      {key:'photo_url', label:'Şəkil URL'},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      var photo = r.photo_url ? '<img src="'+_tjEsc(r.photo_url)+'" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.style.visibility=\'hidden\'">' : '<div style="width:36px;height:36px;border-radius:8px;background:var(--bg2)"></div>';
+      return '<tr><td>'+photo+'</td><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.name)+'</td>'+
+        '<td style="font-size:.72rem">'+_tjEsc(r.title_az||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('event_speakers', r)+'</tr>';
+    }
+  },
+  event_sponsors: {
+    table:'event_sponsors', tbody:'event_sponsors-tbody', sub:'ev-sponsors-sub', icon:'🏆', title:'Sponsor', colspan:5,
+    order:{col:'sort_order',asc:true},
+    filter:function(q){ return q.eq('event_id', _currentEventId); },
+    fixedFields:function(){ return {event_id:_currentEventId}; },
+    fields:[
+      {key:'name', label:'Şirkət adı', req:true},
+      {key:'logo_url', label:'Logo URL'},
+      {key:'tier', label:'Səviyyə (məs: Qızıl, Gümüş, Bürünc)'},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      var logo = r.logo_url ? '<img src="'+_tjEsc(r.logo_url)+'" style="width:36px;height:36px;border-radius:8px;object-fit:contain;background:var(--bg2)" onerror="this.style.visibility=\'hidden\'">' : '<div style="width:36px;height:36px;border-radius:8px;background:var(--bg2)"></div>';
+      return '<tr><td>'+logo+'</td><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.name)+'</td>'+
+        '<td style="font-size:.72rem">'+_tjEsc(r.tier||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('event_sponsors', r)+'</tr>';
+    }
+  },
+  event_tickets: {
+    table:'event_tickets', tbody:'event_tickets-tbody', sub:'ev-tickets-sub', icon:'🎫', title:'Bilet növü', colspan:5,
+    order:{col:'sort_order',asc:true},
+    filter:function(q){ return q.eq('event_id', _currentEventId); },
+    fixedFields:function(){ return {event_id:_currentEventId}; },
+    fields:[
+      {key:'name_az', label:'Ad (AZ)', req:true},
+      {key:'name_en', label:'Ad (EN)'},
+      {key:'price', label:'Qiymət', type:'number'},
+      {key:'currency', label:'Valyuta', default:'AZN'},
+      {key:'perks_az', label:'Üstünlüklər (AZ)', type:'textarea'},
+      {key:'perks_en', label:'Üstünlüklər (EN)', type:'textarea'},
+      {key:'is_active', label:'', type:'checkbox', default:true},
+      {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
+    ],
+    row:function(r){
+      var statusBadge = r.is_active ? '<span class="status-badge status-active">● Aktiv</span>' : '<span class="status-badge" style="background:rgba(107,104,120,.1);color:var(--muted)">○ Deaktiv</span>';
+      return '<tr><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.name_az)+'</td>'+
+        '<td style="font-size:.72rem">'+(r.price!=null?(r.price+' '+(r.currency||'AZN')):'—')+'</td>'+
+        '<td>'+statusBadge+'</td>'+
+        '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
+        crudActionsCell('event_tickets', r)+'</tr>';
+    }
+  }
+};
+
+function crudActionsCell(key, r){
+  return '<td><div style="display:flex;gap:4px">'+
+    '<button class="btn btn-sm btn-outline" onclick=\'crudOpen("'+key+'",'+JSON.stringify(r).replace(/'/g,"&#39;")+')\'>✏️</button>'+
+    '<button class="btn btn-sm btn-outline" onclick="crudDelete(\''+key+'\',\''+r.id+'\')">🗑️</button>'+
+  '</div></td>';
+}
+
+function openEventEdit(ev){
+  _currentEventId = ev.id;
+  showView('event-new', null);
+  var titleEl = document.querySelector('#view-event-new .page-title');
+  var subEl = document.querySelector('#view-event-new .page-sub');
+  if(titleEl) titleEl.textContent = '🎪 ' + (ev.title_az || 'Tədbir');
+  if(subEl) subEl.textContent = 'Redaktə edir: ' + (ev.slug || '');
+  var setVal = function(id, val){ var el = document.getElementById(id); if(el) el.value = (val==null?'':val); };
+  setVal('ev-title-az', ev.title_az);
+  setVal('ev-title-en', ev.title_en);
+  setVal('ev-slug', ev.slug);
+  setVal('ev-desc-az', ev.description_az);
+  setVal('ev-date-start', ev.date_start);
+  setVal('ev-date-end', ev.date_end);
+  setVal('ev-venue', ev.venue);
+  setVal('ev-status', ev.status || 'upcoming');
+  crudRenderList('event_program');
+  crudRenderList('event_speakers');
+  crudRenderList('event_sponsors');
+  crudRenderList('event_tickets');
+}
+async function saveEventBasic(){
+  if(!_currentEventId){ showInqToast('Redaktə olunan tədbir tapılmadı.', 'var(--red)'); return; }
+  var getVal = function(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  var titleAz = getVal('ev-title-az');
+  if(!titleAz){ showInqToast('Tədbir adı məcburidir.', 'var(--red)'); return; }
+  var payload = {
+    title_az: titleAz,
+    title_en: getVal('ev-title-en') || null,
+    slug: getVal('ev-slug') || null,
+    description_az: getVal('ev-desc-az') || null,
+    date_start: getVal('ev-date-start') || null,
+    date_end: getVal('ev-date-end') || null,
+    venue: getVal('ev-venue') || null,
+    status: getVal('ev-status') || 'upcoming'
+  };
+  var res = await supabaseClient.from('events').update(payload).eq('id', _currentEventId);
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
+  showInqToast('Tədbir saxlanıldı ✓', 'var(--green)');
+  logActivity('Tədbir yeniləndi: '+titleAz);
+}
+
+async function crudRenderList(key){
+  var cfg = CRUD_CONFIGS[key];
+  if(!cfg) return;
+  var tbody = document.getElementById(cfg.tbody);
+  if(!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="'+cfg.colspan+'" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr>';
+  var q = supabaseClient.from(cfg.table).select('*');
+  if(cfg.filter) q = cfg.filter(q);
+  q = q.order(cfg.order.col,{ascending:cfg.order.asc});
+  var res = await q;
+  var data = res.data, error = res.error;
+  var subEl = cfg.sub ? document.getElementById(cfg.sub) : null;
+  if(error){
+    tbody.innerHTML = '<tr><td colspan="'+cfg.colspan+'" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənmə xətası: '+_tjEsc(error.message)+'</td></tr>';
+    if(subEl) subEl.textContent = 'Xəta';
+    return;
+  }
+  data = data || [];
+  if(subEl) subEl.textContent = data.length + ' qeyd';
+  if(!data.length){
+    tbody.innerHTML = '<tr><td colspan="'+cfg.colspan+'" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Hələ qeyd əlavə olunmayıb.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.map(cfg.row).join('');
+}
+
+function crudOpen(key, item){
+  var cfg = CRUD_CONFIGS[key];
+  if(!cfg) return;
+  _crudKey = key; _crudId = item ? item.id : null;
+  document.getElementById('crud-edit-icon').textContent = cfg.icon || '📝';
+  document.getElementById('crud-edit-title').textContent = item ? (cfg.title+'ni redaktə et') : ('Yeni '+cfg.title);
+  var html = '';
+  cfg.fields.forEach(function(f){
+    var val = item ? item[f.key] : (f.default!==undefined?f.default:'');
+    html += _tjField(f.label, 'cf-'+f.key, val, {type:f.type||'text', req:f.req});
+  });
+  document.getElementById('crud-edit-body').innerHTML = html;
+  document.getElementById('crud-edit-overlay').classList.add('open');
+}
+function crudClose(){
+  document.getElementById('crud-edit-overlay').classList.remove('open');
+  _crudKey = null; _crudId = null;
+}
+async function crudSave(){
+  var cfg = CRUD_CONFIGS[_crudKey];
+  if(!cfg) return;
+  var localKey = _crudKey;
+  var payload = {};
+  var missing = false;
+  cfg.fields.forEach(function(f){
+    var el = document.getElementById('cf-'+f.key);
+    if(!el) return;
+    var v;
+    if(f.type==='checkbox'){ v = el.checked; }
+    else if(f.type==='number'){ v = el.value===''?0:(f.key==='sort_order'?(parseInt(el.value,10)||0):parseFloat(el.value)); }
+    else { v = el.value.trim(); if(v==='') v = null; }
+    if(f.req && !v){ missing = true; el.style.borderColor='var(--red)'; }
+    payload[f.key] = v;
+  });
+  if(missing){ showInqToast('Məcburi sahələri doldurun.', 'var(--red)'); return; }
+  if(cfg.fixedFields){
+    var ff = typeof cfg.fixedFields === 'function' ? cfg.fixedFields() : cfg.fixedFields;
+    Object.assign(payload, ff);
+  }
+  var btn = document.getElementById('crud-save-btn');
+  btn.disabled = true; btn.textContent = '⏳ Saxlanılır...';
+  var res = _crudId ? await supabaseClient.from(cfg.table).update(payload).eq('id', _crudId)
+                     : await supabaseClient.from(cfg.table).insert([payload]);
+  btn.disabled = false; btn.textContent = '✓ Saxla';
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
+  showInqToast('Saxlanıldı ✓', 'var(--green)');
+  logActivity((_crudId?'Yeniləndi':'Əlavə edildi')+': '+cfg.title+' — '+(payload.name||payload.title_az||payload.author_name||payload.name_az||''));
+  crudClose();
+  crudRenderList(localKey);
+}
+async function crudDelete(key, id){
+  if(!confirm('Silmək istədiyinizə əminsiniz?')) return;
+  var cfg = CRUD_CONFIGS[key];
+  if(!cfg) return;
+  var res = await supabaseClient.from(cfg.table).delete().eq('id', id);
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
+  showInqToast('Silindi', 'var(--dark)');
+  logActivity(cfg.title+' silindi');
+  crudRenderList(key);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// SITE_CONTENT — Ana Səhifə / Haqqımızda / Xidmətlərimiz mətn saxlama
+// (mövcud sahələr mövqeyinə/ID-sinə görə açar alır, real vaxt saytı
+// hələ bu cədvəldən oxumur — admin daxilində redaktə+saxlama işləyir)
+// ══════════════════════════════════════════════════════════════════
+function scAutoKeys(viewId){
+  var view = document.getElementById('view-'+viewId);
+  if(!view) return;
+  var els = view.querySelectorAll('input.form-control, textarea.form-control, input.inp, textarea.inp');
+  els.forEach(function(el, i){
+    if(!el.hasAttribute('data-sc-key')){
+      el.setAttribute('data-sc-key', el.id ? el.id : ('f'+i));
+    }
+  });
+}
+async function scLoadView(viewId, section){
+  scAutoKeys(viewId);
+  var view = document.getElementById('view-'+viewId);
+  if(!view) return;
+  var res = await supabaseClient.from('site_content').select('content_az').eq('section', section).maybeSingle();
+  if(res.error || !res.data || !res.data.content_az) return;
+  var content = res.data.content_az;
+  view.querySelectorAll('[data-sc-key]').forEach(function(el){
+    var k = el.getAttribute('data-sc-key');
+    if(content[k] !== undefined){
+      if(el.type === 'checkbox') el.checked = !!content[k];
+      else el.value = content[k];
+    }
+  });
+}
+async function scSaveView(viewId, section, btn){
+  scAutoKeys(viewId);
+  var view = document.getElementById('view-'+viewId);
+  if(!view) return;
+  var content = {};
+  view.querySelectorAll('[data-sc-key]').forEach(function(el){
+    var k = el.getAttribute('data-sc-key');
+    content[k] = el.type === 'checkbox' ? el.checked : el.value;
+  });
+  var orig = btn ? btn.textContent : null;
+  if(btn){ btn.disabled = true; btn.textContent = '⏳ Saxlanılır...'; }
+  var res = await supabaseClient.from('site_content').upsert(
+    { section: section, content_az: content, updated_at: new Date().toISOString() },
+    { onConflict: 'section' }
+  );
+  if(btn){ btn.disabled = false; btn.textContent = orig; }
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); return; }
+  showInqToast('Saxlanıldı ✓', 'var(--green)');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// FƏALİYYƏT LOQU (activity_log) — real qeydlər
+// ══════════════════════════════════════════════════════════════════
+async function logActivity(action, meta){
+  try{
+    var sessRes = await supabaseClient.auth.getSession();
+    var adminId = sessRes && sessRes.data && sessRes.data.session ? sessRes.data.session.user.id : null;
+    await supabaseClient.from('activity_log').insert([{ admin_id: adminId, action: action, meta: meta || null }]);
+  }catch(e){ /* loqlama əsas əməliyyatı bloklamasın */ }
+}
+function _activityDotColor(action){
+  if(/sil/i.test(action)) return 'var(--red)';
+  if(/yenilə|redaktə|saxlan/i.test(action)) return 'var(--gold)';
+  if(/əlavə/i.test(action)) return 'var(--green)';
+  return 'var(--muted)';
+}
+function _activityTimeAgo(iso){
+  var d = new Date(iso);
+  var diffMs = Date.now() - d.getTime();
+  var mins = Math.floor(diffMs/60000);
+  if(mins < 1) return 'indicə';
+  if(mins < 60) return mins+' dəq əvvəl';
+  var hrs = Math.floor(mins/60);
+  if(hrs < 24) return hrs+' saat əvvəl';
+  var days = Math.floor(hrs/24);
+  if(days === 1) return 'Dünən';
+  if(days < 7) return days+' gün əvvəl';
+  return d.toLocaleDateString('az-AZ');
+}
+async function renderActivityPanel(){
+  var container = document.getElementById('activity-log-list');
+  if(!container) return;
+  container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</div>';
+  var res = await supabaseClient.from('activity_log').select('*').order('created_at',{ascending:false}).limit(30);
+  if(res.error){
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Xəta: '+_tjEsc(res.error.message)+'</div>';
+    return;
+  }
+  var data = res.data || [];
+  if(!data.length){
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Hələ heç bir fəaliyyət qeydə alınmayıb.</div>';
+    return;
+  }
+  container.innerHTML = data.map(function(r){
+    return '<div class="log-item"><div class="log-dot" style="background:'+_activityDotColor(r.action)+'"></div>'+
+      '<div class="log-action"><b>'+_tjEsc(r.action)+'</b></div>'+
+      '<span class="log-time">'+_activityTimeAgo(r.created_at)+'</span></div>';
+  }).join('');
+}
+async function renderDashboardActivity(){
+  var container = document.getElementById('dashboard-activity-list');
+  if(!container) return;
+  var res = await supabaseClient.from('activity_log').select('*').order('created_at',{ascending:false}).limit(4);
+  if(res.error || !res.data || !res.data.length){
+    container.innerHTML = '<div style="grid-column:1/-1;padding:10px;color:var(--muted);font-size:.72rem;text-align:center">Hələ fəaliyyət qeydə alınmayıb.</div>';
+    return;
+  }
+  container.innerHTML = res.data.map(function(r, i){
+    var borderStyle = (i%2===0) ? 'padding-right:20px' : 'padding-left:20px;border-left:1px solid var(--border)';
+    return '<div class="activity-item" style="'+borderStyle+'"><div class="act-dot" style="background:'+_activityDotColor(r.action)+'"></div>'+
+      '<span>'+_tjEsc(r.action)+'</span><span class="act-time">'+_activityTimeAgo(r.created_at)+'</span></div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// İSTİFADƏÇİLƏR & ROLLAR (profiles) — real data, rol dəyişikliyi
+// ══════════════════════════════════════════════════════════════════
+async function renderUsersList(){
+  var tbody = document.getElementById('users-tbody');
+  if(!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr>';
+  var res = await supabaseClient.from('profiles').select('*').order('created_at',{ascending:true});
+  var data = res.data, error = res.error;
+  var sub = document.getElementById('users-sub');
+  if(error){
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənmə xətası: '+_tjEsc(error.message)+'</td></tr>';
+    if(sub) sub.textContent = 'Xəta';
+    return;
+  }
+  data = data || [];
+  if(sub) sub.textContent = data.length + ' istifadəçi';
+  if(!data.length){
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">İstifadəçi tapılmadı.</td></tr>';
+    return;
+  }
+  var sessRes = await supabaseClient.auth.getSession();
+  var myId = sessRes && sessRes.data && sessRes.data.session ? sessRes.data.session.user.id : null;
+  tbody.innerHTML = data.map(function(u){
+    var initials = (u.full_name||u.email||'?').trim().split(/\s+/).map(function(w){return w[0]||'';}).slice(0,2).join('').toUpperCase();
+    var isMe = u.id === myId;
+    return '<tr>'+
+      '<td><div style="display:flex;align-items:center;gap:8px"><div class="sb-avatar" style="width:24px;height:24px;font-size:.55rem">'+_tjEsc(initials)+'</div>'+
+        '<div><div style="font-size:.73rem;font-weight:700">'+_tjEsc(u.full_name||'(Ad təyin edilməyib)')+(isMe?' <span style="color:var(--muted);font-weight:400">(siz)</span>':'')+'</div></div></div></td>'+
+      '<td style="font-size:.72rem">'+_tjEsc(u.email||'—')+'</td>'+
+      '<td><select onchange="changeUserRole(\''+u.id+'\',this.value)" style="font-size:.72rem;padding:4px 8px;border:1.5px solid var(--border);border-radius:6px;background:var(--bg)">'+
+        '<option value="admin"'+(u.role==='admin'?' selected':'')+'>Admin</option>'+
+        '<option value="editor"'+(u.role==='editor'?' selected':'')+'>Editor</option>'+
+      '</select></td>'+
+      '<td style="font-size:.68rem;color:var(--muted)">'+(u.created_at?new Date(u.created_at).toLocaleDateString('az-AZ'):'—')+'</td>'+
+    '</tr>';
+  }).join('');
+}
+async function changeUserRole(id, newRole){
+  var res = await supabaseClient.from('profiles').update({role:newRole}).eq('id', id);
+  if(res.error){ showInqToast('Xəta: '+res.error.message, 'var(--red)'); renderUsersList(); return; }
+  showInqToast('Rol yeniləndi ✓', 'var(--green)');
+  logActivity('İstifadəçi rolu dəyişdirildi: '+newRole);
 }
 </script>
 
