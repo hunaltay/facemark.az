@@ -332,12 +332,24 @@ img{display:block;max-width:100%}
 .clients-cats{display:flex;flex-direction:column;gap:16px}
 .clients-cat-label{font-size:.67rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .clients-cat-label::after{content:'';flex:1;height:1px;background:var(--border)}
-.clients-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}
-.cl-box{background:var(--card);border:1.5px solid var(--border);border-radius:8px;aspect-ratio:2/1;display:flex;align-items:center;justify-content:center;padding:10px 12px;transition:var(--tr);cursor:default}
+.clients-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px}
+.cl-box{background:var(--card);border:1.5px solid var(--border);border-radius:8px;height:50px;display:flex;align-items:center;justify-content:center;padding:6px 10px;transition:var(--tr);cursor:default;overflow:hidden}
 .cl-box:hover{border-color:var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-1px)}
-.cl-box img{max-width:100%;max-height:100%;object-fit:contain}
-.cl-box-name{font-size:.68rem;font-weight:700;color:var(--text);text-align:center;line-height:1.3}
-.cl-box-sub{font-size:.58rem;color:var(--muted);text-align:center;margin-top:2px}
+.cl-box img{max-width:100%;max-height:36px;object-fit:contain}
+.cl-box-name{font-size:.66rem;font-weight:700;color:var(--text);text-align:center;line-height:1.25}
+.cl-box-sub{font-size:.57rem;color:var(--muted);text-align:center;margin-top:2px}
+/* Clients ticker – özəl şirkətlər */
+.cl-ticker-wrap{overflow:hidden;position:relative}
+.cl-ticker-wrap::before,.cl-ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:48px;z-index:2;pointer-events:none}
+.cl-ticker-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.cl-ticker-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+.cl-ticker{display:flex;gap:6px;width:max-content;animation:clScroll 32s linear infinite}
+.cl-ticker:hover{animation-play-state:paused}
+@keyframes clScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.cl-chip{background:var(--card);border:1.5px solid var(--border);border-radius:8px;height:50px;min-width:96px;display:flex;align-items:center;justify-content:center;padding:6px 14px;flex-shrink:0;transition:border-color .2s,box-shadow .2s}
+.cl-chip:hover{border-color:var(--gold);box-shadow:0 3px 10px rgba(0,0,0,.07)}
+.cl-chip img{max-height:32px;max-width:88px;object-fit:contain}
+.cl-chip-name{font-size:.64rem;font-weight:700;color:var(--text);text-align:center;white-space:nowrap}
 
 /* ══ MOBILE ══ */
 @media(max-width:768px){
@@ -357,7 +369,7 @@ img{display:block;max-width:100%}
   .partners-head{flex-direction:column;align-items:flex-start}
   .testi-card{min-width:220px;max-width:220px}
   .footer-in{grid-template-columns:1fr 1fr}
-  .clients-grid{grid-template-columns:repeat(4,1fr)}
+  .clients-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}
   .hero-stats{gap:12px}
   .bilet-drop{right:auto;left:0;min-width:260px}
   .hero-bilet-wrap .bilet-tip{min-width:240px}
@@ -366,7 +378,7 @@ img{display:block;max-width:100%}
 }
 @media(max-width:480px){
   .port-grid{grid-template-columns:repeat(2,1fr)}
-  .clients-grid{grid-template-columns:repeat(3,1fr)}
+  .clients-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr))}
   .footer-in{grid-template-columns:1fr}
   .hero h1{font-size:1.5rem}
   .nav-links{display:none}
@@ -612,7 +624,7 @@ html.lang-az [data-en]{display:none!important}
   <!-- Aktiv (3 events) -->
   <div class="ev-pan on" id="pan-aktiv">
     <div class="ev-grid">
-      <div class="ec">
+      <div class="ec" data-slug="mmf-2026">
         <div class="ec-img">
           <img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" alt="MMF 2026" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="ec-img-bg" style="background:linear-gradient(135deg,#1C3020,#2D4A30);display:none">📢</div>
@@ -628,7 +640,7 @@ html.lang-az [data-en]{display:none!important}
           </div>
         </div>
       </div>
-      <div class="ec">
+      <div class="ec" data-slug="hr-forumu-2026">
         <div class="ec-img">
           <img src="https://facemark.az/public/storage/images/projects/UWCyfigkXq3JJBEOUt5sWxX8jROOIaC6nYEExwl9.jpg" alt="MIRF 2026" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="ec-img-bg" style="background:linear-gradient(135deg,#0D1C30,#1A2E4A);display:none">👥</div>
@@ -644,7 +656,7 @@ html.lang-az [data-en]{display:none!important}
           </div>
         </div>
       </div>
-      <div class="ec">
+      <div class="ec" data-slug="interyer-forumu-2026">
         <div class="ec-img">
           <img src="https://facemark.az/public/storage/images/projects/mABejLatcbLQmv03jsUzyV3nX94Fw6SSkU1mULSE.jpg" alt="İnteryer Forum" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="ec-img-bg" style="background:linear-gradient(135deg,#1A2A0D,#2A3F1A);display:none">🏗️</div>
@@ -666,7 +678,7 @@ html.lang-az [data-en]{display:none!important}
   <!-- Yaxınlaşan -->
   <div class="ev-pan" id="pan-yaxin">
     <div class="ev-grid">
-      <div class="ec">
+      <div class="ec" data-slug="bloger-forumu-2026">
         <div class="ec-img">
           <img src="https://facemark.az/public/storage/images/projects/kYPb1xqzYAMlhwvAMFo7sGgqTVsmtgpDJjzNsnbC.jpg" style="width:100%;height:100%;object-fit:cover;filter:hue-rotate(280deg)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1A0A20,#2D1540);display:none">📱</div>
           <span class="ec-badge badge-soon"><span data-az>Yaxınlaşır</span><span data-en>Coming Soon</span></span>
@@ -684,7 +696,7 @@ html.lang-az [data-en]{display:none!important}
   <!-- Partnyor -->
   <div class="ev-pan" id="pan-partner">
     <div class="ev-grid">
-      <div class="ec">
+      <div class="ec" data-slug="worldef-dubai">
         <div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/UWCyfigkXq3JJBEOUt5sWxX8jROOIaC6nYEExwl9.jpg" alt="WORLDEF"></div>
         <div class="ec-body">
           <div class="ec-title">WORLDEF Dubai</div>
@@ -693,7 +705,7 @@ html.lang-az [data-en]{display:none!important}
           <div class="ec-foot"><a href="https://facemark.az/tedbirler/worldef-dubai" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div>
         </div>
       </div>
-      <div class="ec">
+      <div class="ec" data-slug="brand-week-istanbul-2024">
         <div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/kYPb1xqzYAMlhwvAMFo7sGgqTVsmtgpDJjzNsnbC.jpg" alt="Brand Week"></div>
         <div class="ec-body">
           <div class="ec-title">Brand Week Istanbul 2024</div>
@@ -702,7 +714,7 @@ html.lang-az [data-en]{display:none!important}
           <div class="ec-foot"><a href="https://facemark.az/tedbirler/brand-week-istanbul-2024" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div>
         </div>
       </div>
-      <div class="ec">
+      <div class="ec" data-slug="istanbul-tech-week">
         <div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/mABejLatcbLQmv03jsUzyV3nX94Fw6SSkU1mULSE.jpg" alt="Istanbul Tech"></div>
         <div class="ec-body">
           <div class="ec-title">Istanbul Tech Week</div>
@@ -717,12 +729,12 @@ html.lang-az [data-en]{display:none!important}
   <!-- Ümumi -->
   <div class="ev-pan" id="pan-umumi">
     <div class="ev-grid" id="umumiGrid">
-      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1C3020,#2D4A30);display:none">📢</div><span class="ec-badge badge-active"><span data-az>Aktiv</span><span data-en>Active</span></span></div><div class="ec-body"><div class="ec-title">MMF 2026</div><div class="ec-meta"><span>📅 <span data-az>6 İyun 2026</span><span data-en>June 6, 2026</span></span></div><div class="ec-foot"><a href="mmf_v5.html#tickets" class="btn ec-bilet" style="flex:1">🎫 <span data-az>Bilet Al</span><span data-en>Get Tickets</span></a></div></div></div>
-      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/kYPb1xqzYAMlhwvAMFo7sGgqTVsmtgpDJjzNsnbC.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1A0D0D,#3A1A1A);display:none">💰</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Vergi və Mühasibatlıq Zirvəsi 2025</span><span data-en>Tax & Accounting Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>1 Mart 2025</span><span data-en>March 1, 2025</span></span></div><div class="ec-foot"><a href="https://vmz.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
-      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/mABejLatcbLQmv03jsUzyV3nX94Fw6SSkU1mULSE.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D1A2A,#1A2E4A);display:none">⛓️</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Təchizat Zənciri Zirvəsi 2025</span><span data-en>Supply Chain Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>15 Noyabr 2025</span><span data-en>November 15, 2025</span></span></div><div class="ec-foot"><a href="https://sclforum.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
-      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover;filter:hue-rotate(200deg)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1A0A1A,#300D30);display:none">🤖</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title">Data, ERP & AI <span data-az>Zirvəsi 2025</span><span data-en>Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>20 Noyabr 2025</span><span data-en>November 20, 2025</span></span></div><div class="ec-foot"><a href="https://aidesummit.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
-      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/UWCyfigkXq3JJBEOUt5sWxX8jROOIaC6nYEExwl9.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D1A2A,#1A2E4A);display:none">👩‍💼</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Qadın Liderləri Zirvəsi 2025</span><span data-en>Women Leaders Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>4 Mart 2025</span><span data-en>March 4, 2025</span></span></div><div class="ec-foot"><a href="https://qlz.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
-      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(.85)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D2010,#1A3820);display:none">📊</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Milli Marketinq Forumu 2025</span><span data-en>National Marketing Forum 2025</span></div><div class="ec-meta"><span>📅 <span data-az>9–11 May 2025</span><span data-en>May 9–11, 2025</span></span></div><div class="ec-foot"><a href="https://millimarketinqforumu.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
+      <div class="ec" data-slug="mmf-2026"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1C3020,#2D4A30);display:none">📢</div><span class="ec-badge badge-active"><span data-az>Aktiv</span><span data-en>Active</span></span></div><div class="ec-body"><div class="ec-title">MMF 2026</div><div class="ec-meta"><span>📅 <span data-az>6 İyun 2026</span><span data-en>June 6, 2026</span></span></div><div class="ec-foot"><a href="mmf_v5.html#tickets" class="btn ec-bilet" style="flex:1">🎫 <span data-az>Bilet Al</span><span data-en>Get Tickets</span></a></div></div></div>
+      <div class="ec" data-slug="vergi-muhasibatliq-zirvesi-2025"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/kYPb1xqzYAMlhwvAMFo7sGgqTVsmtgpDJjzNsnbC.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1A0D0D,#3A1A1A);display:none">💰</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Vergi və Mühasibatlıq Zirvəsi 2025</span><span data-en>Tax & Accounting Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>1 Mart 2025</span><span data-en>March 1, 2025</span></span></div><div class="ec-foot"><a href="https://vmz.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
+      <div class="ec" data-slug="techizat-zenciri-zirvesi-2025"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/mABejLatcbLQmv03jsUzyV3nX94Fw6SSkU1mULSE.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D1A2A,#1A2E4A);display:none">⛓️</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Təchizat Zənciri Zirvəsi 2025</span><span data-en>Supply Chain Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>15 Noyabr 2025</span><span data-en>November 15, 2025</span></span></div><div class="ec-foot"><a href="https://sclforum.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
+      <div class="ec" data-slug="data-erp-ai-zirvesi-2025"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover;filter:hue-rotate(200deg)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1A0A1A,#300D30);display:none">🤖</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title">Data, ERP & AI <span data-az>Zirvəsi 2025</span><span data-en>Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>20 Noyabr 2025</span><span data-en>November 20, 2025</span></span></div><div class="ec-foot"><a href="https://aidesummit.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
+      <div class="ec" data-slug="qadin-liderleri-zirvesi-2025"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/UWCyfigkXq3JJBEOUt5sWxX8jROOIaC6nYEExwl9.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D1A2A,#1A2E4A);display:none">👩‍💼</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Qadın Liderləri Zirvəsi 2025</span><span data-en>Women Leaders Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>4 Mart 2025</span><span data-en>March 4, 2025</span></span></div><div class="ec-foot"><a href="https://qlz.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
+      <div class="ec" data-slug="milli-marketinq-forumu-2025"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(.85)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D2010,#1A3820);display:none">📊</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Milli Marketinq Forumu 2025</span><span data-en>National Marketing Forum 2025</span></div><div class="ec-meta"><span>📅 <span data-az>9–11 May 2025</span><span data-en>May 9–11, 2025</span></span></div><div class="ec-foot"><a href="https://millimarketinqforumu.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
     </div>
   </div>
 </div>
@@ -912,72 +924,35 @@ html.lang-az [data-en]{display:none!important}
       <!-- Şirkətlər -->
       <div>
         <div class="clients-cat-label">🏢 <span data-az>Özəl Şirkətlər və Brendlər</span><span data-en>Private Companies & Brands</span></div>
-        <div class="clients-grid">
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/Mi5I8YVQsJIrH32ivYH5nZbKlN6wifI3Y71eO7gS.svg" alt="Başkent" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Başkent</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/v5XVa5Kr6UiiHshKS1pstyTZuxC7QQXJdCLfgULP.webp" alt="Arter" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Arter</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/04uaiFUWPuNZRFXt61tSn7gIdEOOpsejTGUsWK5s.png" alt="Moon Group" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Moon Group</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/3q0TCN8ndtjZ5udXbRZGcDStwzlfg0TBQsOHF4PG.png" alt="Good Finance" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Good Finance</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/7ipxrAsIXPx8GJCb2FT1e6YvYslIUEGU2kdD8fKB.png" alt="FMR Trainings" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">FMR Trainings</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/FZlzhkY9hcmIITCiAD0I9OC9Ks000O9XLYObakMj.png" alt="ebilet" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">ebiletstore</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/ozIhnqJy4Lhpp6IoMVetyAWiA7dFNRvQbhuWKnS5.png" alt="Roofat" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Roofat</div>
-          </div>
-          <div class="cl-box">
-            <div><div class="cl-box-name">Karabakh Group</div></div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/hpAkYrdkmLlSGTvJo5V3TsJa9540ByrtCuVAWt7P.webp" alt="HDC" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">HDC</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/rvPWvcfHMipHVvY9V1F9GxCtorIgn8OKblvfO7fr.webp" alt="Logix" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Logix</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/2T75Y2kuE3SSELXhTqKTY9HvVoCsQ1TZtNG15gj7.png" alt="Aqualink" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Aqualink</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/TQhZR7gXnt0hDhgQ7n89jvzcUovQGRXuhkgGh46t.png" alt="Handex" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Handex</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/0jo9m9J1Pv1unLKqsEQXTC8L1ceQjZbWm9SVuVyU.webp" alt="Creatime" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Creatime</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/AdJysHtP1piE7NzEmt8tCzZbmZVZwGEtXQnb3mU3.png" alt="Endorphin" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Endorphin</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/SZ7jfHxs9DzEv7caG7FVcSdHg15cGZs30ysyGseS.png" alt="Corpowid" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Corpowid</div>
-          </div>
-          <div class="cl-box">
-            <img src="https://facemark.az/public/storage/images/partners/KKbJl4weYL9bCHIifGBZ9oJwxRfBg09KU5ttIdoF.png" alt="Figensoft" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-            <div class="cl-box-name" style="display:none">Figensoft</div>
+        <div class="cl-ticker-wrap">
+          <div class="cl-ticker" id="cl-ticker">
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/Mi5I8YVQsJIrH32ivYH5nZbKlN6wifI3Y71eO7gS.svg" alt="Başkent" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Başkent</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/v5XVa5Kr6UiiHshKS1pstyTZuxC7QQXJdCLfgULP.webp" alt="Arter" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Arter</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/04uaiFUWPuNZRFXt61tSn7gIdEOOpsejTGUsWK5s.png" alt="Moon Group" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Moon Group</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/3q0TCN8ndtjZ5udXbRZGcDStwzlfg0TBQsOHF4PG.png" alt="Good Finance" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Good Finance</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/7ipxrAsIXPx8GJCb2FT1e6YvYslIUEGU2kdD8fKB.png" alt="FMR Trainings" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">FMR Trainings</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/FZlzhkY9hcmIITCiAD0I9OC9Ks000O9XLYObakMj.png" alt="ebiletstore" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">ebiletstore</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/ozIhnqJy4Lhpp6IoMVetyAWiA7dFNRvQbhuWKnS5.png" alt="Roofat" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Roofat</div></div>
+          <div class="cl-chip"><div class="cl-chip-name">Karabakh Group</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/hpAkYrdkmLlSGTvJo5V3TsJa9540ByrtCuVAWt7P.webp" alt="HDC" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">HDC</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/rvPWvcfHMipHVvY9V1F9GxCtorIgn8OKblvfO7fr.webp" alt="Logix" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Logix</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/2T75Y2kuE3SSELXhTqKTY9HvVoCsQ1TZtNG15gj7.png" alt="Aqualink" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Aqualink</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/TQhZR7gXnt0hDhgQ7n89jvzcUovQGRXuhkgGh46t.png" alt="Handex" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Handex</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/0jo9m9J1Pv1unLKqsEQXTC8L1ceQjZbWm9SVuVyU.webp" alt="Creatime" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Creatime</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/AdJysHtP1piE7NzEmt8tCzZbmZVZwGEtXQnb3mU3.png" alt="Endorphin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Endorphin</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/SZ7jfHxs9DzEv7caG7FVcSdHg15cGZs30ysyGseS.png" alt="Corpowid" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Corpowid</div></div>
+          <div class="cl-chip"><img src="https://facemark.az/public/storage/images/partners/KKbJl4weYL9bCHIifGBZ9oJwxRfBg09KU5ttIdoF.png" alt="Figensoft" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cl-chip-name" style="display:none">Figensoft</div></div>
           </div>
         </div>
       </div>
+      <script>
+      (function(){
+        var t=document.getElementById('cl-ticker');
+        if(!t)return;
+        var orig=t.innerHTML;
+        t.innerHTML=orig+orig; // seamless duplicate
+      })();
+      </script>
 
     </div>
   </div>
@@ -1053,17 +1028,15 @@ html.lang-az [data-en]{display:none!important}
   <div class="modal">
     <h3 id="modalTitle"><span data-az>Müraciət Et</span><span data-en>Send Inquiry</span></h3>
     <input type="text" placeholder="Ad Soyad *" data-az-placeholder="Ad Soyad *" data-en-placeholder="Full Name *" id="mName">
-    <input type="text" placeholder="Şirkət adı" data-az-placeholder="Şirkət adı" data-en-placeholder="Company name" id="mCompany">
-    <input type="text" placeholder="Telefon *" data-az-placeholder="Telefon *" data-en-placeholder="Phone *" id="mPhone">
-    <input type="email" placeholder="E-poçt" data-az-placeholder="E-poçt" data-en-placeholder="Email" id="mEmail">
+    <input type="text" placeholder="Şirkət adı" data-az-placeholder="Şirkət adı" data-en-placeholder="Company name">
+    <input type="text" placeholder="Telefon *" data-az-placeholder="Telefon *" data-en-placeholder="Phone *">
+    <input type="email" placeholder="E-poçt" data-az-placeholder="E-poçt" data-en-placeholder="Email">
     <select id="mType"><option value=""><span data-az>Xidmət / Mövzu seçin</span><span data-en>Select service / topic</span></option><option><span data-az>Tədbirlərin Təşkili</span><span data-en>Event Organization</span></option><option><span data-az>Korporativ Tədbirlər</span><span data-en>Corporate Events</span></option><option><span data-az>Netvorkinq Görüşləri</span><span data-en>Networking Events</span></option><option><span data-az>Sponsorluq</span><span data-en>Sponsorship</span></option><option><span data-az>Digər</span><span data-en>Other</span></option></select>
-    <textarea placeholder="Əlavə qeydlər..." data-az-placeholder="Əlavə qeydlər..." data-en-placeholder="Additional notes..." id="mMessage"></textarea>
-    <div class="modal-btns"><button class="m-cancel" onclick="closeModal()"><span data-az>İptal</span><span data-en>Cancel</span></button><button class="m-send" id="mSendBtn" onclick="submitInquiry()"><span data-az>Göndər →</span><span data-en>Send →</span></button></div>
+    <textarea placeholder="Əlavə qeydlər..." data-az-placeholder="Əlavə qeydlər..." data-en-placeholder="Additional notes..."></textarea>
+    <div class="modal-btns"><button class="m-cancel" onclick="closeModal()"><span data-az>İptal</span><span data-en>Cancel</span></button><button class="m-send" onclick="closeModal();alert(_lang==='en'?'Your request has been received!':'Müraciətiniz qəbul edildi!')"><span data-az>Göndər →</span><span data-en>Send →</span></button></div>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="assets/supabase-client.js"></script>
 <script>
 let hIdx=0;
 const hSlides=document.querySelectorAll('.hslide');
@@ -1122,32 +1095,6 @@ function openModal(type,label){
   document.getElementById('modalBg').classList.add('open');
 }
 function closeModal(){document.getElementById('modalBg').classList.remove('open');}
-async function submitInquiry(){
-  var btn=document.getElementById('mSendBtn');
-  var name=document.getElementById('mName').value.trim();
-  var phone=document.getElementById('mPhone').value.trim();
-  if(!name||!phone){
-    alert(_lang==='en'?'Full name and phone are required.':'Ad Soyad və Telefon vacibdir.');
-    return;
-  }
-  btn.disabled=true;
-  try{
-    await submitApplication({
-      form_type:'contact',
-      full_name:name,
-      phone:phone,
-      email:document.getElementById('mEmail').value.trim()||null,
-      subject:document.getElementById('mType').value||document.getElementById('mCompany').value||null,
-      message:document.getElementById('mMessage').value.trim()||null
-    });
-    closeModal();
-    alert(_lang==='en'?'Your request has been received!':'Müraciətiniz qəbul edildi!');
-  }catch(err){
-    alert(_lang==='en'?'Submission failed. Please try again.':'Göndərmə alınmadı. Yenidən cəhd edin.');
-  }finally{
-    btn.disabled=false;
-  }
-}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 // ── Count-up for hero stats ──
 function runCountUp(el) {
@@ -1267,6 +1214,7 @@ function runSiteSearch(q){
 <script>
 /* ── Biznes Radar localStorage sinxronizasiyası ── */
 (function(){
+
   /* TICKER — business_radar ilə eyni məzmun, eyni sürət */
   try{
     var td=JSON.parse(localStorage.getItem('fmr_ticker_news')||'[]');
@@ -1299,6 +1247,121 @@ function runSiteSearch(q){
     }
   }catch(e){}
 })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="assets/supabase-client.js"></script>
+<script>
+// ══════════════════════════════════════════════════════════════════
+// Supabase-dən real data sinxronizasiyası (tədbirlər / müştərilər /
+// rəylər) — mövcud statik (dizayner) HTML-i əsas kimi saxlayır,
+// bazada olub səhifədə YOXDUR olan qeydləri əlavə edir.
+// ══════════════════════════════════════════════════════════════════
+function _fmEsc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function _evBuildCard(ev){
+  var badgeMap = {
+    active: '<span class="ec-badge badge-active"><span data-az>Aktiv</span><span data-en>Active</span></span>',
+    upcoming: '<span class="ec-badge badge-soon"><span data-az>Yaxınlaşır</span><span data-en>Coming Soon</span></span>',
+    past: '<span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span>',
+    partner: ''
+  };
+  var img = ev.banner_url ? ('<img src="'+_fmEsc(ev.banner_url)+'" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">') : '';
+  var dateStr = '';
+  if(ev.date_start){
+    var d1 = new Date(ev.date_start+'T00:00:00');
+    var months=['Yan','Fev','Mar','Apr','May','İyun','İyul','Avq','Sen','Okt','Noy','Dek'];
+    dateStr = '📅 '+d1.getDate()+' '+months[d1.getMonth()]+' '+d1.getFullYear();
+  }
+  var venueStr = ev.venue ? ('📍 '+_fmEsc(ev.venue)) : '';
+  var isInternal = ev.external_url && ev.external_url.indexOf('http')!==0;
+  var linkAttrs = ev.external_url ? ('href="'+_fmEsc(ev.external_url)+'"'+(isInternal?'':' target="_blank"')) : '';
+  var footHtml = ev.external_url ?
+    '<div class="ec-foot"><a '+linkAttrs+' class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div>' :
+    '<div class="ec-foot"><button class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></button></div>';
+  return '<div class="ec" data-slug="'+_fmEsc(ev.slug)+'">'+
+    '<div class="ec-img">'+img+'<div class="ec-img-bg" style="background:linear-gradient(135deg,#2A2A2A,#1A1A1A);display:'+(ev.banner_url?'none':'flex')+'">🎪</div>'+(badgeMap[ev.status]||'')+'</div>'+
+    '<div class="ec-body"><div class="ec-title">'+_fmEsc(ev.title_az||ev.title_en||'')+'</div>'+
+    '<div class="ec-meta">'+(dateStr?('<span>'+dateStr+'</span>'):'')+(venueStr?('<span>'+venueStr+'</span>'):'')+'</div>'+
+    footHtml+
+    '</div></div>';
+}
+async function syncEventsFromDB(){
+  if(typeof supabaseClient === 'undefined') return;
+  var res = await supabaseClient.from('events').select('*');
+  if(res.error || !res.data) return;
+  var panMap = { active:'pan-aktiv', upcoming:'pan-yaxin', partner:'pan-partner' };
+  res.data.forEach(function(ev){
+    var panId = panMap[ev.status];
+    if(panId){
+      var pan = document.getElementById(panId);
+      if(pan){
+        var grid = pan.querySelector('.ev-grid');
+        if(grid && !grid.querySelector('[data-slug="'+ev.slug+'"]')){
+          grid.insertAdjacentHTML('beforeend', _evBuildCard(ev));
+        }
+      }
+    }
+    var umumiGrid = document.getElementById('umumiGrid');
+    if(umumiGrid && !umumiGrid.querySelector('[data-slug="'+ev.slug+'"]')){
+      umumiGrid.insertAdjacentHTML('beforeend', _evBuildCard(ev));
+    }
+  });
+}
+
+function _clBoxHtml(c){
+  var img = c.logo_url ? ('<img src="'+_fmEsc(c.logo_url)+'" alt="'+_fmEsc(c.name)+'" style="max-width:100%;max-height:100%;object-fit:contain" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'">') : '';
+  return '<div class="cl-box" data-cl-name="'+_fmEsc(c.name)+'">'+img+'<div class="cl-box-name" style="'+(c.logo_url?'display:none':'')+'">'+_fmEsc(c.name)+'</div></div>';
+}
+function _clChipHtml(c){
+  var img = c.logo_url ? ('<img src="'+_fmEsc(c.logo_url)+'" alt="'+_fmEsc(c.name)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">') : '';
+  return '<div class="cl-chip" data-cl-name="'+_fmEsc(c.name)+'">'+img+'<div class="cl-chip-name" style="'+(c.logo_url?'display:none':'')+'">'+_fmEsc(c.name)+'</div></div>';
+}
+async function syncClientsFromDB(){
+  if(typeof supabaseClient === 'undefined') return;
+  var res = await supabaseClient.from('clients').select('*').order('sort_order');
+  if(res.error || !res.data) return;
+  var govGrid = document.querySelector('.clients-grid');
+  var ticker = document.getElementById('cl-ticker');
+  res.data.forEach(function(c){
+    if(c.category === 'Dövlət qurumları'){
+      if(govGrid && !govGrid.querySelector('[data-cl-name="'+CSS.escape(c.name)+'"]')){
+        govGrid.insertAdjacentHTML('beforeend', _clBoxHtml(c));
+      }
+    } else {
+      if(ticker && !ticker.querySelector('[data-cl-name="'+CSS.escape(c.name)+'"]')){
+        ticker.insertAdjacentHTML('beforeend', _clChipHtml(c));
+      }
+    }
+  });
+}
+
+function _testiCardHtml(t){
+  var img = t.avatar_url ? ('<img src="'+_fmEsc(t.avatar_url)+'" alt="'+_fmEsc(t.author_name)+'" onerror="this.style.display=\'none\'">') : '<span style="font-size:.72rem;font-weight:700;color:var(--muted)">'+_fmEsc(t.author_name.toUpperCase())+'</span>';
+  return '<div class="testi-card" data-testi-name="'+_fmEsc(t.author_name)+'"><div class="testi-logo">'+img+'</div><div class="testi-text">'+_fmEsc(t.quote_az)+'</div><div class="testi-name">'+_fmEsc(t.author_name)+'</div></div>';
+}
+async function syncTestimonialsFromDB(){
+  if(typeof supabaseClient === 'undefined') return;
+  var res = await supabaseClient.from('testimonials').select('*').order('sort_order');
+  if(res.error || !res.data) return;
+  var track = document.getElementById('testiTrack');
+  if(!track) return;
+  res.data.forEach(function(t){
+    if(!track.querySelector('[data-testi-name="'+CSS.escape(t.author_name)+'"]')){
+      track.insertAdjacentHTML('beforeend', _testiCardHtml(t));
+    }
+  });
+}
+
+function _fmInit(){
+  syncEventsFromDB();
+  syncClientsFromDB();
+  syncTestimonialsFromDB();
+}
+if(document.readyState === 'complete' || document.readyState === 'interactive'){
+  _fmInit();
+} else {
+  document.addEventListener('DOMContentLoaded', _fmInit);
+}
 </script>
 </body>
 </html>
