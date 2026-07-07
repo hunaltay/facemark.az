@@ -5532,20 +5532,33 @@ var CRUD_CONFIGS = {
     }
   },
   tv_videos: {
-    table:'tv_videos', tbody:'tv-tbody', sub:'tv-sub', icon:'📺', title:'Video', colspan:5,
+    table:'tv_videos', tbody:'tv-tbody', sub:'tv-sub', icon:'📺', title:'Video', colspan:6,
     order:{col:'sort_order',asc:true},
     fields:[
       {key:'title_az', label:'Başlıq (AZ)', req:true},
       {key:'title_en', label:'Başlıq (EN)'},
+      {key:'slug', label:'URL slug (məs: milli-marketinq-forumu-2026) — boş olsa avtomatik yaranır'},
       {key:'category', label:'Kateqoriya'},
-      {key:'video_url', label:'Video linki (URL)'},
+      {key:'video_url', label:'YouTube embed linki (https://www.youtube.com/embed/VIDEO_ID)', req:true},
       {key:'thumbnail_url', label:'Şəkil (thumbnail) URL'},
+      {key:'description_az', label:'Video haqqında (AZ)', type:'textarea'},
+      {key:'description_en', label:'Video haqqında (EN)', type:'textarea'},
       {key:'sort_order', label:'Sıra nömrəsi', type:'number', default:0}
     ],
+    beforeSave:function(payload){
+      if(!payload.slug || !payload.slug.trim()){
+        payload.slug = (payload.title_az||'').toLowerCase()
+          .replace(/ə/g,'e').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ü/g,'u').replace(/ş/g,'s').replace(/ç/g,'c').replace(/ğ/g,'g')
+          .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+      }
+      if(!payload.published_at) payload.published_at = new Date().toISOString();
+      return payload;
+    },
     row:function(r){
       return '<tr><td style="font-weight:700;font-size:.78rem">'+_tjEsc(r.title_az)+'</td>'+
         '<td style="font-size:.72rem">'+_tjEsc(r.category||'—')+'</td>'+
-        '<td style="font-size:.72rem">'+(r.video_url?('<a href="'+_tjEsc(r.video_url)+'" target="_blank" style="color:var(--blue)">▶ Bax</a>'):'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.slug?('<a href="https://facemark.site/fmr_tv.html?video='+_tjEsc(r.slug)+'" target="_blank" style="color:var(--blue)">▶ Bax</a>'):'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.published_at?new Date(r.published_at).toLocaleDateString('az-AZ'):'—')+'</td>'+
         '<td style="font-size:.72rem">'+(r.sort_order||0)+'</td>'+
         crudActionsCell('tv_videos', r)+'</tr>';
     }
@@ -5788,6 +5801,7 @@ async function crudSave(){
     var ff = typeof cfg.fixedFields === 'function' ? cfg.fixedFields() : cfg.fixedFields;
     Object.assign(payload, ff);
   }
+  if(typeof cfg.beforeSave === 'function'){ payload = cfg.beforeSave(payload) || payload; }
   var btn = document.getElementById('crud-save-btn');
   btn.disabled = true; btn.textContent = '⏳ Saxlanılır...';
   var res = _crudId ? await supabaseClient.from(cfg.table).update(payload).eq('id', _crudId)

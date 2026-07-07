@@ -344,6 +344,23 @@ html.lang-az [data-en]{display:none!important}
 
 <!-- HERO -->
 <div class="tv-hero-wrap">
+<!-- ══ VIDEO DETAİL (video xəbər səhifəsi) ══ -->
+<div id="videoDetailView" style="display:none;max-width:900px;margin:0 auto;padding:28px 20px 60px">
+  <a href="fmr_tv.html" style="display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--gold);text-decoration:none;margin-bottom:18px"><span data-az>← FMR TV-yə qayıt</span><span data-en>← Back to FMR TV</span></a>
+  <div id="vd-cat" style="display:inline-block;background:var(--goldBg);color:var(--gold);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:4px 12px;border-radius:20px;margin-bottom:10px"></div>
+  <h1 id="vd-title" style="font-size:1.5rem;font-weight:800;line-height:1.3;margin-bottom:10px;color:var(--text)"></h1>
+  <div id="vd-date" style="font-size:.78rem;color:var(--muted);margin-bottom:18px"></div>
+  <div style="position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)">
+    <iframe id="vd-iframe" src="" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <p id="vd-desc" style="font-size:.92rem;line-height:1.8;color:var(--text);margin-top:24px;white-space:pre-line"></p>
+  <div style="margin-top:36px">
+    <div style="font-size:.85rem;font-weight:800;margin-bottom:14px;color:var(--text)"><span data-az>Digər videolar</span><span data-en>Other videos</span></div>
+    <div id="vd-related" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px"></div>
+  </div>
+</div>
+
+<div id="fmrListingWrap">
 <section class="tv-hero">
   <div class="hero-inner">
     <div class="hero-left">
@@ -1480,6 +1497,7 @@ html.lang-az [data-en]{display:none!important}
     </div>
   </div>
 </section>
+</div><!-- /fmrListingWrap -->
 
 <!-- FOOTER -->
 <footer class="foot" id="contact">
@@ -1730,9 +1748,8 @@ function _ytIdFromUrl(u){
 }
 function _tvCardHtml(v){
   var img = v.thumbnail_url ? _fmEsc(v.thumbnail_url) : '';
-  var yid = _ytIdFromUrl(v.video_url);
-  var clickAttr = yid ? ("onclick=\"event.preventDefault();openFmrVideo('"+yid.replace(/'/g,"")+"');return false;\"") : '';
-  return '<a class="vid-card" href="'+_fmEsc(v.video_url)+'" data-video-url="'+_fmEsc(v.video_url)+'" '+clickAttr+'>'+
+  var href = v.slug ? ('fmr_tv.html?video='+_fmEsc(v.slug)) : _fmEsc(v.video_url);
+  return '<a class="vid-card" href="'+href+'" data-slug="'+_fmEsc(v.slug||'')+'">'+
     '<div class="vid-thumb"><img src="'+img+'" alt="" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>\'"><div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div></div>'+
     '<div class="vid-body"><div class="vid-event">'+_fmEsc(v.title_az||v.title_en||'')+'</div>'+
     '<div class="vid-type">'+_fmEsc(v.category||'')+'</div>'+
@@ -1741,12 +1758,12 @@ function _tvCardHtml(v){
 }
 async function loadVideosFromDB(){
   if(typeof supabaseClient === 'undefined') return;
-  var res = await supabaseClient.from('tv_videos').select('*').order('sort_order');
+  var res = await supabaseClient.from('tv_videos').select('*').eq('category','Festivallar').order('sort_order');
   if(res.error || !res.data) return;
   var grid = document.getElementById('latestVidGrid');
   if(!grid) return;
   res.data.forEach(function(v){
-    if(!grid.querySelector('a[href="'+CSS.escape(v.video_url)+'"]')){
+    if(!grid.querySelector('a[data-slug="'+CSS.escape(v.slug||'')+'"]') && !grid.querySelector('a[href*="'+CSS.escape(v.video_url)+'"]')){
       grid.insertAdjacentHTML('beforeend', _tvCardHtml(v));
     }
   });
@@ -1759,84 +1776,118 @@ if(document.readyState === 'complete' || document.readyState === 'interactive'){
 </script>
 <script>
 // ══════════════════════════════════════════════════════════════════
-// FMR TV videoları artıq fmrtv.facemark.az-a çıxmır — real YouTube
-// embed ID-ləri ilə birbaşa bu saytda modal daxilində oynadılır.
+// FMR TV videoları artıq fmrtv.facemark.az-a çıxmır — hər video real
+// facemark.site/fmr_tv.html?video=slug səhifəsi kimi açılır (öz
+// başlıq/tarix/təsvir/YouTube playerı ilə), data Supabase-dən gəlir.
 // ══════════════════════════════════════════════════════════════════
-var FMR_YT_MAP = {
-  'https://fmrtv.facemark.az/marketing/video/Milli-Insan-Resurslari-Forumu-2026--Icmal-video':'5OI3y2TXYRM',
-  'http://fmrtv.facemark.az/marketing/video/Milli-Insan-Resurslari-Forumu-2026--Icmal-video':'5OI3y2TXYRM',
-  'https://fmrtv.facemark.az/marketing/video/Interyer-Insaat-Memarliq-Mebel-Forumu-2026--Icmal-video':'d4lD6Z6quvo',
-  'http://fmrtv.facemark.az/marketing/video/Interyer-Insaat-Memarliq-Mebel-Forumu-2026--Icmal-video':'d4lD6Z6quvo',
-  'https://fmrtv.facemark.az/marketing/video/Qadin-Liderleri-Zirvesi-2026--Icmal-video':'SdtEn7jOzQ0',
-  'http://fmrtv.facemark.az/marketing/video/Qadin-Liderleri-Zirvesi-2026--Icmal-video':'SdtEn7jOzQ0',
-  'https://fmrtv.facemark.az/marketing/video/Data-ERP-ve-Suni-Intellekt-Zirvesi-2025--Icmal-video':'zXohlPJpE6Q',
-  'http://fmrtv.facemark.az/marketing/video/Data-ERP-ve-Suni-Intellekt-Zirvesi-2025--Icmal-video':'zXohlPJpE6Q',
-  'https://fmrtv.facemark.az/marketing/video/Techizat-Zenciri-Liderleri-Zirvesi-2025--Icmal-video':'sJ0m6vtxpWA',
-  'http://fmrtv.facemark.az/marketing/video/Techizat-Zenciri-Liderleri-Zirvesi-2025--Icmal-video':'sJ0m6vtxpWA',
-  'https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2025--Icmal-video':'X8qKz56SnbA',
-  'http://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2025--Icmal-video':'X8qKz56SnbA',
-  'https://fmrtv.facemark.az/marketing/video/Occupational-Aesthetic-Congress-2025--Icmal-video':'AhdwfwsbD7U',
-  'http://fmrtv.facemark.az/marketing/video/Occupational-Aesthetic-Congress-2025--Icmal-video':'AhdwfwsbD7U',
-  'https://fmrtv.facemark.az/marketing/video/Maliyye-Investisiya-Forumu-2025--Icmal-videosu':'KiytGMKMH0k',
-  'http://fmrtv.facemark.az/marketing/video/Maliyye-Investisiya-Forumu-2025--Icmal-videosu':'KiytGMKMH0k',
-  'https://fmrtv.facemark.az/marketing/video/Biznes-Liderleri-Zirvesi-2026-l-Icmal-Video':'aMkr4nb6Q7w',
-  'http://fmrtv.facemark.az/marketing/video/Biznes-Liderleri-Zirvesi-2026-l-Icmal-Video':'aMkr4nb6Q7w',
-  'https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2026-l-Icmal-Video':'MISm0C9u6Bo',
-  'http://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2026-l-Icmal-Video':'MISm0C9u6Bo',
-  'https://fmrtv.facemark.az/marketing/video/Bloger-ve-Influenserler-Forumu-2026-l-Icmal-Video':'blPHbuXRWCQ',
-  'http://fmrtv.facemark.az/marketing/video/Bloger-ve-Influenserler-Forumu-2026-l-Icmal-Video':'blPHbuXRWCQ',
-  'https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2025--Icmal-video':'GLg9kBlcBE0',
-  'http://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2025--Icmal-video':'GLg9kBlcBE0',
-  'https://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesi-2025--Icmal-videosu':'DNkcXi63iUY',
-  'http://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesi-2025--Icmal-videosu':'DNkcXi63iUY',
-  'https://fmrtv.facemark.az/marketing/video/Qadin-Liderler-Zirvesi-2025--Icmal-videosu':'8MtP4GxN6xs',
-  'http://fmrtv.facemark.az/marketing/video/Qadin-Liderler-Zirvesi-2025--Icmal-videosu':'8MtP4GxN6xs',
-  'https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--30-iyun-III-gun--Icmal-video':'lKhv-RsVC0Y',
-  'http://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--30-iyun-III-gun--Icmal-video':'lKhv-RsVC0Y',
-  'https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--29-iyun-II-gun--Icmal-video':'_XOfITetFYI',
-  'http://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--29-iyun-II-gun--Icmal-video':'_XOfITetFYI',
-  'https://fmrtv.facemark.az/marketing/video/Beynelxalq-Investisiya-ve-Emlak-Zirvesi--Icmal-video':'pqYAf-_N8RE',
-  'http://fmrtv.facemark.az/marketing/video/Beynelxalq-Investisiya-ve-Emlak-Zirvesi--Icmal-video':'pqYAf-_N8RE',
-  'https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2023':'ye8LedGdxY4',
-  'http://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2023':'ye8LedGdxY4',
-  'https://fmrtv.facemark.az/marketing/video/MIRF-2023de-bizi-neler-gozleyir-CANLI':'1ppGhoqcNhE',
-  'http://fmrtv.facemark.az/marketing/video/MIRF-2023de-bizi-neler-gozleyir-CANLI':'1ppGhoqcNhE',
-  'https://fmrtv.facemark.az/marketing/video/Biznes-Verilis-Idareciliyi':'-dnMfy-qX1g',
-  'http://fmrtv.facemark.az/marketing/video/Biznes-Verilis-Idareciliyi':'-dnMfy-qX1g',
-  'https://fmrtv.facemark.az/marketing/video/Sirketlerde-auditin-vacibliyi':'wGpjHohv73o',
-  'http://fmrtv.facemark.az/marketing/video/Sirketlerde-auditin-vacibliyi':'wGpjHohv73o',
-  'https://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesinin-Teskilatcilari-ile-canli-yayim':'zQ9bPN5AV2E',
-  'http://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesinin-Teskilatcilari-ile-canli-yayim':'zQ9bPN5AV2E'
+var FMR_SLUG_MAP = {
+  'https://fmrtv.facemark.az/marketing/video/Milli-Insan-Resurslari-Forumu-2026--Icmal-video':'milli-insan-resurslari-forumu-2026',
+  'http://fmrtv.facemark.az/marketing/video/Milli-Insan-Resurslari-Forumu-2026--Icmal-video':'milli-insan-resurslari-forumu-2026',
+  'https://fmrtv.facemark.az/marketing/video/Interyer-Insaat-Memarliq-Mebel-Forumu-2026--Icmal-video':'interyer-insaat-memarliq-mebel-forumu-2026',
+  'http://fmrtv.facemark.az/marketing/video/Interyer-Insaat-Memarliq-Mebel-Forumu-2026--Icmal-video':'interyer-insaat-memarliq-mebel-forumu-2026',
+  'https://fmrtv.facemark.az/marketing/video/Qadin-Liderleri-Zirvesi-2026--Icmal-video':'qadin-liderleri-zirvesi-2026',
+  'http://fmrtv.facemark.az/marketing/video/Qadin-Liderleri-Zirvesi-2026--Icmal-video':'qadin-liderleri-zirvesi-2026',
+  'https://fmrtv.facemark.az/marketing/video/Data-ERP-ve-Suni-Intellekt-Zirvesi-2025--Icmal-video':'data-erp-suni-intellekt-zirvesi-2025',
+  'http://fmrtv.facemark.az/marketing/video/Data-ERP-ve-Suni-Intellekt-Zirvesi-2025--Icmal-video':'data-erp-suni-intellekt-zirvesi-2025',
+  'https://fmrtv.facemark.az/marketing/video/Techizat-Zenciri-Liderleri-Zirvesi-2025--Icmal-video':'techizat-zenciri-liderleri-zirvesi-2025',
+  'http://fmrtv.facemark.az/marketing/video/Techizat-Zenciri-Liderleri-Zirvesi-2025--Icmal-video':'techizat-zenciri-liderleri-zirvesi-2025',
+  'https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2025--Icmal-video':'xezer-su-innovasiya-forumu-2025',
+  'http://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2025--Icmal-video':'xezer-su-innovasiya-forumu-2025',
+  'https://fmrtv.facemark.az/marketing/video/Occupational-Aesthetic-Congress-2025--Icmal-video':'occupational-aesthetic-congress-2025',
+  'http://fmrtv.facemark.az/marketing/video/Occupational-Aesthetic-Congress-2025--Icmal-video':'occupational-aesthetic-congress-2025',
+  'https://fmrtv.facemark.az/marketing/video/Maliyye-Investisiya-Forumu-2025--Icmal-videosu':'maliyye-investisiya-forumu-2025',
+  'http://fmrtv.facemark.az/marketing/video/Maliyye-Investisiya-Forumu-2025--Icmal-videosu':'maliyye-investisiya-forumu-2025',
+  'https://fmrtv.facemark.az/marketing/video/Biznes-Liderleri-Zirvesi-2026-l-Icmal-Video':'biznes-liderleri-zirvesi-2026',
+  'http://fmrtv.facemark.az/marketing/video/Biznes-Liderleri-Zirvesi-2026-l-Icmal-Video':'biznes-liderleri-zirvesi-2026',
+  'https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2026-l-Icmal-Video':'milli-marketinq-forumu-2026',
+  'http://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2026-l-Icmal-Video':'milli-marketinq-forumu-2026',
+  'https://fmrtv.facemark.az/marketing/video/Bloger-ve-Influenserler-Forumu-2026-l-Icmal-Video':'bloger-ve-influenserler-forumu-2026',
+  'http://fmrtv.facemark.az/marketing/video/Bloger-ve-Influenserler-Forumu-2026-l-Icmal-Video':'bloger-ve-influenserler-forumu-2026',
+  'https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2025--Icmal-video':'milli-marketinq-forumu-2025',
+  'http://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2025--Icmal-video':'milli-marketinq-forumu-2025',
+  'https://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesi-2025--Icmal-videosu':'vergi-ve-muhasibatliq-zirvesi-2025',
+  'http://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesi-2025--Icmal-videosu':'vergi-ve-muhasibatliq-zirvesi-2025',
+  'https://fmrtv.facemark.az/marketing/video/Qadin-Liderler-Zirvesi-2025--Icmal-videosu':'qadin-liderler-zirvesi-2025',
+  'http://fmrtv.facemark.az/marketing/video/Qadin-Liderler-Zirvesi-2025--Icmal-videosu':'qadin-liderler-zirvesi-2025',
+  'https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--30-iyun-III-gun--Icmal-video':'milli-marketinq-forumu-2024-3-gun',
+  'http://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--30-iyun-III-gun--Icmal-video':'milli-marketinq-forumu-2024-3-gun',
+  'https://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--29-iyun-II-gun--Icmal-video':'milli-marketinq-forumu-2024-2-gun',
+  'http://fmrtv.facemark.az/marketing/video/Milli-Marketinq-Forumu-2024--29-iyun-II-gun--Icmal-video':'milli-marketinq-forumu-2024-2-gun',
+  'https://fmrtv.facemark.az/marketing/video/Beynelxalq-Investisiya-ve-Emlak-Zirvesi--Icmal-video':'beynelxalq-investisiya-ve-emlak-zirvesi',
+  'http://fmrtv.facemark.az/marketing/video/Beynelxalq-Investisiya-ve-Emlak-Zirvesi--Icmal-video':'beynelxalq-investisiya-ve-emlak-zirvesi',
+  'https://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2023':'xezer-su-innovasiya-forumu-2023-musahibe',
+  'http://fmrtv.facemark.az/marketing/video/Xezer-Su-Innovasiya-Forumu-2023':'xezer-su-innovasiya-forumu-2023-musahibe',
+  'https://fmrtv.facemark.az/marketing/video/MIRF-2023de-bizi-neler-gozleyir-CANLI':'mirf-2023-de-bizi-neler-gozleyir-canli',
+  'http://fmrtv.facemark.az/marketing/video/MIRF-2023de-bizi-neler-gozleyir-CANLI':'mirf-2023-de-bizi-neler-gozleyir-canli',
+  'https://fmrtv.facemark.az/marketing/video/Biznes-Verilis-Idareciliyi':'biznes-verilis-idareciliyi',
+  'http://fmrtv.facemark.az/marketing/video/Biznes-Verilis-Idareciliyi':'biznes-verilis-idareciliyi',
+  'https://fmrtv.facemark.az/marketing/video/Sirketlerde-auditin-vacibliyi':'sirketlerde-auditin-vacibliyi',
+  'http://fmrtv.facemark.az/marketing/video/Sirketlerde-auditin-vacibliyi':'sirketlerde-auditin-vacibliyi',
+  'https://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesinin-Teskilatcilari-ile-canli-yayim':'vmz-teskilatcilari-ile-canli-yayim',
+  'http://fmrtv.facemark.az/marketing/video/Vergi-ve-Muhasibatliq-Zirvesinin-Teskilatcilari-ile-canli-yayim':'vmz-teskilatcilari-ile-canli-yayim'
 };
-function openFmrVideo(youtubeId){
-  document.getElementById('fmrVideoFrame').src = 'https://www.youtube.com/embed/'+youtubeId+'?autoplay=1';
-  document.getElementById('fmrVideoModal').style.display='flex';
-  document.body.style.overflow='hidden';
-}
-function closeFmrVideo(){
-  document.getElementById('fmrVideoModal').style.display='none';
-  document.getElementById('fmrVideoFrame').src='';
-  document.body.style.overflow='';
-}
 function fmrCardClick(ev, href){
-  // href fmrtv.facemark.az-a aid videosuysa -> in-site modal; başqa linklərsə (facemark.az/mirf kimi) normal davransın
-  if(href && href.indexOf('youtube.com/embed/') !== -1){
-    var idm = href.match(/embed\/([^?&]+)/);
-    if(idm){ ev.preventDefault(); openFmrVideo(idm[1]); return false; }
-  }
-  var yid = FMR_YT_MAP[href];
-  if(yid){ ev.preventDefault(); openFmrVideo(yid); return false; }
+  var slug = FMR_SLUG_MAP[href];
+  if(slug){ ev.preventDefault(); window.location.href = 'fmr_tv.html?video='+slug; return false; }
   return true;
 }
 document.addEventListener('DOMContentLoaded', function(){
   document.querySelectorAll('a.vid-card').forEach(function(a){
     var href = a.getAttribute('href');
-    if(FMR_YT_MAP[href] || (href && href.indexOf('youtube.com/embed/')!==-1)){
+    if(FMR_SLUG_MAP[href]){
       a.setAttribute('target','_self');
       a.addEventListener('click', function(ev){ fmrCardClick(ev, href); });
     }
   });
 });
+
+// ── Video xəbər səhifəsi (?video=slug) ──────────────────────────────
+function _vdEsc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function _vdRelatedCard(v){
+  var img = v.thumbnail_url ? _vdEsc(v.thumbnail_url) : '';
+  return '<a href="fmr_tv.html?video='+_vdEsc(v.slug)+'" style="display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:var(--tr)">'+
+    '<div style="width:100%;padding-top:56.25%;position:relative;background:#1C1828">'+(img?'<img src="'+img+'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">':'')+'</div>'+
+    '<div style="padding:10px 12px;font-size:.74rem;font-weight:700;line-height:1.4">'+_vdEsc(v.title_az||v.title_en||'')+'</div>'+
+    '</a>';
+}
+async function loadVideoDetail(slug){
+  if(typeof supabaseClient === 'undefined') return;
+  var res = await supabaseClient.from('tv_videos').select('*').eq('slug', slug).maybeSingle();
+  if(res.error || !res.data){
+    document.getElementById('vd-title').textContent = 'Video tapılmadı';
+    document.getElementById('videoDetailView').style.display = 'block';
+    document.getElementById('fmrListingWrap').style.display = 'none';
+    return;
+  }
+  var v = res.data;
+  document.title = (v.title_az||'FMR TV') + ' | FMR TV';
+  document.getElementById('vd-cat').textContent = v.category || 'FMR TV';
+  document.getElementById('vd-title').textContent = v.title_az || v.title_en || '';
+  var d = v.published_at ? new Date(v.published_at) : null;
+  document.getElementById('vd-date').textContent = d ? d.toLocaleDateString('az-AZ',{year:'numeric',month:'long',day:'numeric'}) : '';
+  var idm = (v.video_url||'').match(/embed\/([^?&]+)/);
+  document.getElementById('vd-iframe').src = idm ? ('https://www.youtube.com/embed/'+idm[1]) : (v.video_url||'');
+  document.getElementById('vd-desc').textContent = v.description_az || '';
+  document.getElementById('videoDetailView').style.display = 'block';
+  document.getElementById('fmrListingWrap').style.display = 'none';
+  window.scrollTo(0,0);
+
+  var relRes = await supabaseClient.from('tv_videos').select('*').neq('slug', slug).order('sort_order').limit(4);
+  if(!relRes.error && relRes.data && relRes.data.length){
+    document.getElementById('vd-related').innerHTML = relRes.data.map(_vdRelatedCard).join('');
+  }
+}
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var slug = params.get('video');
+  if(slug){
+    if(document.readyState === 'complete' || document.readyState === 'interactive'){
+      loadVideoDetail(slug);
+    } else {
+      document.addEventListener('DOMContentLoaded', function(){ loadVideoDetail(slug); });
+    }
+  }
+})();
 </script>
 </body>
 </html>
