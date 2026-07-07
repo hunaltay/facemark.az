@@ -18,9 +18,7 @@ section,footer{scroll-margin-top:68px}
 body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
-cd "/Users/hunaltay/Library/Application Support/Claude/local-agent-mode-sessions/77241fa5-f0a0-417a-a819-9f2b271b50e8/58b6ea97-da97-443c-a793-8ca9460d30df/local_51879ed4-5159-4708-97ed-5cc06e854da2/outputs/facemark-deploy"
-git init && git remote add origin https://github.com/hunaltay/facemark.az.git
-git add 01_homepage.html && git commit -m "fix: clients section compact layout" && git push -u origin main
+
 /* ══ NAV ══ */
 .nav{background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;backdrop-filter:blur(12px);box-shadow:0 1px 8px rgba(0,0,0,.05)}
 .nav-in{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:6px;height:56px}
@@ -264,7 +262,7 @@ git add 01_homepage.html && git commit -m "fix: clients section compact layout" 
 .news-dot{color:rgba(255,255,255,.2);padding:0 6px}
 
 /* ══ TESTIMONIALS ══ */
-.testi{background:var(--bg);padding:24px 20px;overflow:hidden;position:relative;isolation:isolate;z-index:1}
+.testi{background:var(--bg);padding:24px 20px;overflow:hidden}
 .testi-in{max-width:1200px;margin:0 auto}
 .testi-in h2{font-size:1rem;font-weight:800;margin-bottom:14px}
 .testi-track-wrap{overflow:hidden;mask-image:linear-gradient(to right,transparent 0%,#000 6%,#000 94%,transparent 100%)}
@@ -326,7 +324,7 @@ git add 01_homepage.html && git commit -m "fix: clients section compact layout" 
 .chat-btn:hover{transform:scale(1.1)}
 
 /* ══ CLIENTS SECTION ══ */
-.clients-section{background:var(--bg);border-bottom:1px solid var(--border);padding:28px 20px 36px;position:relative;isolation:isolate;z-index:1}
+.clients-section{background:var(--bg);border-bottom:1px solid var(--border);padding:28px 20px}
 .clients-in{max-width:1200px;margin:0 auto}
 .clients-head{margin-bottom:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .clients-head h2{font-size:1rem;font-weight:800;white-space:nowrap}
@@ -334,7 +332,7 @@ git add 01_homepage.html && git commit -m "fix: clients section compact layout" 
 .clients-cats{display:flex;flex-direction:column;gap:16px}
 .clients-cat-label{font-size:.67rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .clients-cat-label::after{content:'';flex:1;height:1px;background:var(--border)}
-.clients-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;align-content:start}
+.clients-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}
 .cl-box{background:var(--card);border:1.5px solid var(--border);border-radius:8px;aspect-ratio:2/1;display:flex;align-items:center;justify-content:center;padding:10px 12px;transition:var(--tr);cursor:default}
 .cl-box:hover{border-color:var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-1px)}
 .cl-box img{max-width:100%;max-height:100%;object-fit:contain}
@@ -614,7 +612,7 @@ html.lang-az [data-en]{display:none!important}
   <!-- Aktiv (3 events) -->
   <div class="ev-pan on" id="pan-aktiv">
     <div class="ev-grid">
-      <div class="ec" data-slug="mmf-2026">
+      <div class="ec">
         <div class="ec-img">
           <img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" alt="MMF 2026" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="ec-img-bg" style="background:linear-gradient(135deg,#1C3020,#2D4A30);display:none">📢</div>
@@ -630,7 +628,7 @@ html.lang-az [data-en]{display:none!important}
           </div>
         </div>
       </div>
-      <div class="ec" data-slug="hr-forumu-2026">
+      <div class="ec">
         <div class="ec-img">
           <img src="https://facemark.az/public/storage/images/projects/UWCyfigkXq3JJBEOUt5sWxX8jROOIaC6nYEExwl9.jpg" alt="MIRF 2026" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="ec-img-bg" style="background:linear-gradient(135deg,#0D1C30,#1A2E4A);display:none">👥</div>
@@ -646,7 +644,7 @@ html.lang-az [data-en]{display:none!important}
           </div>
         </div>
       </div>
-      <div class="ec" data-slug="interyer-forumu-2026">
+      <div class="ec">
         <div class="ec-img">
           <img src="https://facemark.az/public/storage/images/projects/mABejLatcbLQmv03jsUzyV3nX94Fw6SSkU1mULSE.jpg" alt="İnteryer Forum" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="ec-img-bg" style="background:linear-gradient(135deg,#1A2A0D,#2A3F1A);display:none">🏗️</div>
@@ -668,7 +666,7 @@ html.lang-az [data-en]{display:none!important}
   <!-- Yaxınlaşan -->
   <div class="ev-pan" id="pan-yaxin">
     <div class="ev-grid">
-      <div class="ec" data-slug="bloger-forumu-2026">
+      <div class="ec">
         <div class="ec-img">
           <img src="https://facemark.az/public/storage/images/projects/kYPb1xqzYAMlhwvAMFo7sGgqTVsmtgpDJjzNsnbC.jpg" style="width:100%;height:100%;object-fit:cover;filter:hue-rotate(280deg)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1A0A20,#2D1540);display:none">📱</div>
           <span class="ec-badge badge-soon"><span data-az>Yaxınlaşır</span><span data-en>Coming Soon</span></span>
@@ -686,7 +684,7 @@ html.lang-az [data-en]{display:none!important}
   <!-- Partnyor -->
   <div class="ev-pan" id="pan-partner">
     <div class="ev-grid">
-      <div class="ec" data-slug="worldef-dubai">
+      <div class="ec">
         <div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/UWCyfigkXq3JJBEOUt5sWxX8jROOIaC6nYEExwl9.jpg" alt="WORLDEF"></div>
         <div class="ec-body">
           <div class="ec-title">WORLDEF Dubai</div>
@@ -695,7 +693,7 @@ html.lang-az [data-en]{display:none!important}
           <div class="ec-foot"><a href="https://facemark.az/tedbirler/worldef-dubai" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div>
         </div>
       </div>
-      <div class="ec" data-slug="brand-week-istanbul-2024">
+      <div class="ec">
         <div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/kYPb1xqzYAMlhwvAMFo7sGgqTVsmtgpDJjzNsnbC.jpg" alt="Brand Week"></div>
         <div class="ec-body">
           <div class="ec-title">Brand Week Istanbul 2024</div>
@@ -704,7 +702,7 @@ html.lang-az [data-en]{display:none!important}
           <div class="ec-foot"><a href="https://facemark.az/tedbirler/brand-week-istanbul-2024" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div>
         </div>
       </div>
-      <div class="ec" data-slug="istanbul-tech-week">
+      <div class="ec">
         <div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/mABejLatcbLQmv03jsUzyV3nX94Fw6SSkU1mULSE.jpg" alt="Istanbul Tech"></div>
         <div class="ec-body">
           <div class="ec-title">Istanbul Tech Week</div>
@@ -719,12 +717,12 @@ html.lang-az [data-en]{display:none!important}
   <!-- Ümumi -->
   <div class="ev-pan" id="pan-umumi">
     <div class="ev-grid" id="umumiGrid">
-      <div class="ec" data-slug="mmf-2026"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1C3020,#2D4A30);display:none">📢</div><span class="ec-badge badge-active"><span data-az>Aktiv</span><span data-en>Active</span></span></div><div class="ec-body"><div class="ec-title">MMF 2026</div><div class="ec-meta"><span>📅 <span data-az>6 İyun 2026</span><span data-en>June 6, 2026</span></span></div><div class="ec-foot"><a href="mmf_v5.html#tickets" class="btn ec-bilet" style="flex:1">🎫 <span data-az>Bilet Al</span><span data-en>Get Tickets</span></a></div></div></div>
-      <div class="ec" data-slug="vergi-muhasibatliq-zirvesi-2025"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/kYPb1xqzYAMlhwvAMFo7sGgqTVsmtgpDJjzNsnbC.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1A0D0D,#3A1A1A);display:none">💰</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Vergi və Mühasibatlıq Zirvəsi 2025</span><span data-en>Tax & Accounting Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>1 Mart 2025</span><span data-en>March 1, 2025</span></span></div><div class="ec-foot"><a href="https://vmz.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
-      <div class="ec" data-slug="techizat-zenciri-zirvesi-2025"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/mABejLatcbLQmv03jsUzyV3nX94Fw6SSkU1mULSE.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D1A2A,#1A2E4A);display:none">⛓️</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Təchizat Zənciri Zirvəsi 2025</span><span data-en>Supply Chain Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>15 Noyabr 2025</span><span data-en>November 15, 2025</span></span></div><div class="ec-foot"><a href="https://sclforum.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
-      <div class="ec" data-slug="data-erp-ai-zirvesi-2025"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover;filter:hue-rotate(200deg)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1A0A1A,#300D30);display:none">🤖</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title">Data, ERP & AI <span data-az>Zirvəsi 2025</span><span data-en>Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>20 Noyabr 2025</span><span data-en>November 20, 2025</span></span></div><div class="ec-foot"><a href="https://aidesummit.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
-      <div class="ec" data-slug="qadin-liderleri-zirvesi-2025"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/UWCyfigkXq3JJBEOUt5sWxX8jROOIaC6nYEExwl9.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D1A2A,#1A2E4A);display:none">👩‍💼</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Qadın Liderləri Zirvəsi 2025</span><span data-en>Women Leaders Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>4 Mart 2025</span><span data-en>March 4, 2025</span></span></div><div class="ec-foot"><a href="https://qlz.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
-      <div class="ec" data-slug="milli-marketinq-forumu-2025"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(.85)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D2010,#1A3820);display:none">📊</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Milli Marketinq Forumu 2025</span><span data-en>National Marketing Forum 2025</span></div><div class="ec-meta"><span>📅 <span data-az>9–11 May 2025</span><span data-en>May 9–11, 2025</span></span></div><div class="ec-foot"><a href="https://millimarketinqforumu.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
+      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1C3020,#2D4A30);display:none">📢</div><span class="ec-badge badge-active"><span data-az>Aktiv</span><span data-en>Active</span></span></div><div class="ec-body"><div class="ec-title">MMF 2026</div><div class="ec-meta"><span>📅 <span data-az>6 İyun 2026</span><span data-en>June 6, 2026</span></span></div><div class="ec-foot"><a href="mmf_v5.html#tickets" class="btn ec-bilet" style="flex:1">🎫 <span data-az>Bilet Al</span><span data-en>Get Tickets</span></a></div></div></div>
+      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/kYPb1xqzYAMlhwvAMFo7sGgqTVsmtgpDJjzNsnbC.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1A0D0D,#3A1A1A);display:none">💰</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Vergi və Mühasibatlıq Zirvəsi 2025</span><span data-en>Tax & Accounting Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>1 Mart 2025</span><span data-en>March 1, 2025</span></span></div><div class="ec-foot"><a href="https://vmz.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
+      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/mABejLatcbLQmv03jsUzyV3nX94Fw6SSkU1mULSE.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D1A2A,#1A2E4A);display:none">⛓️</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Təchizat Zənciri Zirvəsi 2025</span><span data-en>Supply Chain Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>15 Noyabr 2025</span><span data-en>November 15, 2025</span></span></div><div class="ec-foot"><a href="https://sclforum.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
+      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover;filter:hue-rotate(200deg)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#1A0A1A,#300D30);display:none">🤖</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title">Data, ERP & AI <span data-az>Zirvəsi 2025</span><span data-en>Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>20 Noyabr 2025</span><span data-en>November 20, 2025</span></span></div><div class="ec-foot"><a href="https://aidesummit.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
+      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/projects/UWCyfigkXq3JJBEOUt5sWxX8jROOIaC6nYEExwl9.jpg" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D1A2A,#1A2E4A);display:none">👩‍💼</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Qadın Liderləri Zirvəsi 2025</span><span data-en>Women Leaders Summit 2025</span></div><div class="ec-meta"><span>📅 <span data-az>4 Mart 2025</span><span data-en>March 4, 2025</span></span></div><div class="ec-foot"><a href="https://qlz.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
+      <div class="ec"><div class="ec-img"><img src="https://facemark.az/public/storage/images/banner/BEsElGFH4lDVGHs87C5nXt2tzHPkXWfcFrjYxXTR.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(.85)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ec-img-bg" style="background:linear-gradient(135deg,#0D2010,#1A3820);display:none">📊</div><span class="ec-badge badge-past"><span data-az>Keçmiş</span><span data-en>Past</span></span></div><div class="ec-body"><div class="ec-title"><span data-az>Milli Marketinq Forumu 2025</span><span data-en>National Marketing Forum 2025</span></div><div class="ec-meta"><span>📅 <span data-az>9–11 May 2025</span><span data-en>May 9–11, 2025</span></span></div><div class="ec-foot"><a href="https://millimarketinqforumu.az" target="_blank" class="btn ec-detail" style="flex:1"><span data-az>Ətraflı Bax →</span><span data-en>View Details →</span></a></div></div></div>
     </div>
   </div>
 </div>
@@ -1055,17 +1053,15 @@ html.lang-az [data-en]{display:none!important}
   <div class="modal">
     <h3 id="modalTitle"><span data-az>Müraciət Et</span><span data-en>Send Inquiry</span></h3>
     <input type="text" placeholder="Ad Soyad *" data-az-placeholder="Ad Soyad *" data-en-placeholder="Full Name *" id="mName">
-    <input type="text" placeholder="Şirkət adı" data-az-placeholder="Şirkət adı" data-en-placeholder="Company name" id="mCompany">
-    <input type="text" placeholder="Telefon *" data-az-placeholder="Telefon *" data-en-placeholder="Phone *" id="mPhone">
-    <input type="email" placeholder="E-poçt" data-az-placeholder="E-poçt" data-en-placeholder="Email" id="mEmail">
+    <input type="text" placeholder="Şirkət adı" data-az-placeholder="Şirkət adı" data-en-placeholder="Company name">
+    <input type="text" placeholder="Telefon *" data-az-placeholder="Telefon *" data-en-placeholder="Phone *">
+    <input type="email" placeholder="E-poçt" data-az-placeholder="E-poçt" data-en-placeholder="Email">
     <select id="mType"><option value=""><span data-az>Xidmət / Mövzu seçin</span><span data-en>Select service / topic</span></option><option><span data-az>Tədbirlərin Təşkili</span><span data-en>Event Organization</span></option><option><span data-az>Korporativ Tədbirlər</span><span data-en>Corporate Events</span></option><option><span data-az>Netvorkinq Görüşləri</span><span data-en>Networking Events</span></option><option><span data-az>Sponsorluq</span><span data-en>Sponsorship</span></option><option><span data-az>Digər</span><span data-en>Other</span></option></select>
-    <textarea placeholder="Əlavə qeydlər..." data-az-placeholder="Əlavə qeydlər..." data-en-placeholder="Additional notes..." id="mMessage"></textarea>
-    <div class="modal-btns"><button class="m-cancel" onclick="closeModal()"><span data-az>İptal</span><span data-en>Cancel</span></button><button class="m-send" id="mSendBtn" onclick="submitInquiry()"><span data-az>Göndər →</span><span data-en>Send →</span></button></div>
+    <textarea placeholder="Əlavə qeydlər..." data-az-placeholder="Əlavə qeydlər..." data-en-placeholder="Additional notes..."></textarea>
+    <div class="modal-btns"><button class="m-cancel" onclick="closeModal()"><span data-az>İptal</span><span data-en>Cancel</span></button><button class="m-send" onclick="closeModal();alert(_lang==='en'?'Your request has been received!':'Müraciətiniz qəbul edildi!')"><span data-az>Göndər →</span><span data-en>Send →</span></button></div>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="assets/supabase-client.js"></script>
 <script>
 let hIdx=0;
 const hSlides=document.querySelectorAll('.hslide');
@@ -1092,61 +1088,6 @@ function switchTab(id,btn){
   btn.classList.add('on');
 }
 function filterEvents(q){const qq=q.toLowerCase();document.querySelectorAll('.ec').forEach(c=>{const t=c.querySelector('.ec-title')?.textContent.toLowerCase()||'';c.style.display=t.includes(qq)?'':'none';});}
-
-// ── Bazadan (Supabase) yeni/əskik tədbirləri əlavə etmək ──────────────
-function _evEsc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function _evBuildCard(ev){
-  var badgeMap = {
-    active: '<span class="ec-badge badge-active">Aktiv</span>',
-    upcoming: '<span class="ec-badge badge-soon">Yaxınlaşır</span>',
-    past: '<span class="ec-badge badge-past">Keçmiş</span>',
-    partner: ''
-  };
-  var img = ev.banner_url ? ('<img src="'+_evEsc(ev.banner_url)+'" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">') : '';
-  var dateStr = '';
-  if(ev.date_start){
-    var d1 = new Date(ev.date_start+'T00:00:00');
-    var months=['Yan','Fev','Mar','Apr','May','İyun','İyul','Avq','Sen','Okt','Noy','Dek'];
-    dateStr = '📅 '+d1.getDate()+' '+months[d1.getMonth()]+' '+d1.getFullYear();
-  }
-  var venueStr = ev.venue ? ('📍 '+_evEsc(ev.venue)) : '';
-  var isInternal = ev.external_url && ev.external_url.indexOf('http')!==0;
-  var linkAttrs = ev.external_url ? ('href="'+_evEsc(ev.external_url)+'"'+(isInternal?'':' target="_blank"')) : '';
-  var footHtml = ev.external_url ?
-    '<div class="ec-foot"><a '+linkAttrs+' class="btn ec-detail" style="flex:1">Ətraflı Bax →</a></div>' :
-    '<div class="ec-foot"><button class="btn ec-detail" style="flex:1">Ətraflı Bax →</button></div>';
-  return '<div class="ec" data-slug="'+_evEsc(ev.slug)+'">'+
-    '<div class="ec-img">'+img+'<div class="ec-img-bg" style="background:linear-gradient(135deg,#2A2A2A,#1A1A1A);display:'+(ev.banner_url?'none':'flex')+'">🎪</div>'+(badgeMap[ev.status]||'')+'</div>'+
-    '<div class="ec-body"><div class="ec-title">'+_evEsc(ev.title_az||ev.title_en||'')+'</div>'+
-    '<div class="ec-meta">'+(dateStr?('<span>'+dateStr+'</span>'):'')+(venueStr?('<span>'+venueStr+'</span>'):'')+'</div>'+
-    footHtml+
-    '</div></div>';
-}
-async function syncEventsFromDB(){
-  if(typeof supabaseClient === 'undefined') return;
-  var res = await supabaseClient.from('events').select('*');
-  if(res.error || !res.data) return;
-  var panMap = { active:'pan-aktiv', upcoming:'pan-yaxin', partner:'pan-partner' };
-  res.data.forEach(function(ev){
-    // status-uyğun tab-a əlavə et (əgər artıq yoxdursa)
-    var panId = panMap[ev.status];
-    if(panId){
-      var pan = document.getElementById(panId);
-      if(pan && !pan.querySelector('.ec[data-slug="'+ev.slug+'"]')){
-        var grid = pan.querySelector('.ev-grid');
-        if(grid) grid.insertAdjacentHTML('beforeend', _evBuildCard(ev));
-      }
-    }
-    // "Ümumi" (bütün tədbirlər) tabına əlavə et (əgər artıq yoxdursa)
-    var umumiGrid = document.getElementById('umumiGrid');
-    if(umumiGrid && !umumiGrid.querySelector('.ec[data-slug="'+ev.slug+'"]')){
-      umumiGrid.insertAdjacentHTML('beforeend', _evBuildCard(ev));
-    }
-  });
-}
-document.addEventListener('DOMContentLoaded', function(){ syncEventsFromDB(); });
-if(document.readyState==='complete' || document.readyState==='interactive'){ syncEventsFromDB(); }
-
 
 // Portfolio filter
 function switchPort(cat,btn){
@@ -1179,32 +1120,6 @@ function openModal(type,label){
   document.getElementById('modalBg').classList.add('open');
 }
 function closeModal(){document.getElementById('modalBg').classList.remove('open');}
-async function submitInquiry(){
-  var btn=document.getElementById('mSendBtn');
-  var name=document.getElementById('mName').value.trim();
-  var phone=document.getElementById('mPhone').value.trim();
-  if(!name||!phone){
-    alert(_lang==='en'?'Full name and phone are required.':'Ad Soyad və Telefon vacibdir.');
-    return;
-  }
-  btn.disabled=true;
-  try{
-    await submitApplication({
-      form_type:'contact',
-      full_name:name,
-      phone:phone,
-      email:document.getElementById('mEmail').value.trim()||null,
-      subject:document.getElementById('mType').value||document.getElementById('mCompany').value||null,
-      message:document.getElementById('mMessage').value.trim()||null
-    });
-    closeModal();
-    alert(_lang==='en'?'Your request has been received!':'Müraciətiniz qəbul edildi!');
-  }catch(err){
-    alert(_lang==='en'?'Submission failed. Please try again.':'Göndərmə alınmadı. Yenidən cəhd edin.');
-  }finally{
-    btn.disabled=false;
-  }
-}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 // ── Count-up for hero stats ──
 function runCountUp(el) {
@@ -1324,6 +1239,8 @@ function runSiteSearch(q){
 <script>
 /* ── Biznes Radar localStorage sinxronizasiyası ── */
 (function(){
+  }catch(e){}
+
   /* TICKER — business_radar ilə eyni məzmun, eyni sürət */
   try{
     var td=JSON.parse(localStorage.getItem('fmr_ticker_news')||'[]');
