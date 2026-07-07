@@ -5362,8 +5362,13 @@ function openJobEdit(j){
   html += _tjField('Departament', 'jf-dept', j?j.department:'');
   html += _tjField('Yer', 'jf-location', j?j.location:'');
   html += _tjField('İş növü (məs: Tam ştat)', 'jf-emptype', j?j.employment_type:'');
+  html += _tjField('Kateqoriya (marketing/operations/design/admin)', 'jf-category', j?j.category:'');
   html += _tjField('Təsvir (AZ)', 'jf-desc-az', j?j.description_az:'', {type:'textarea'});
   html += _tjField('Təsvir (EN)', 'jf-desc-en', j?j.description_en:'', {type:'textarea'});
+  html += _tjField('Vəzifə öhdəlikləri (AZ, hər sətirdə bir)', 'jf-duties-az', (j&&j.duties_az)?j.duties_az.join('\n'):'', {type:'textarea'});
+  html += _tjField('Vəzifə öhdəlikləri (EN, hər sətirdə bir)', 'jf-duties-en', (j&&j.duties_en)?j.duties_en.join('\n'):'', {type:'textarea'});
+  html += _tjField('Tələblər (AZ, hər sətirdə bir)', 'jf-reqs-az', (j&&j.reqs_az)?j.reqs_az.join('\n'):'', {type:'textarea'});
+  html += _tjField('Tələblər (EN, hər sətirdə bir)', 'jf-reqs-en', (j&&j.reqs_en)?j.reqs_en.join('\n'):'', {type:'textarea'});
   html += _tjField('Sıra nömrəsi', 'jf-sort', j?j.sort_order:0, {type:'number'});
   html += _tjField('', 'jf-active', j?j.is_active:true, {type:'checkbox'});
   document.getElementById('job-edit-body').innerHTML = html;
@@ -5382,8 +5387,13 @@ async function saveJobOpening(){
     department: document.getElementById('jf-dept').value.trim() || null,
     location: document.getElementById('jf-location').value.trim() || null,
     employment_type: document.getElementById('jf-emptype').value.trim() || null,
+    category: document.getElementById('jf-category').value.trim() || null,
     description_az: document.getElementById('jf-desc-az').value.trim() || null,
     description_en: document.getElementById('jf-desc-en').value.trim() || null,
+    duties_az: document.getElementById('jf-duties-az').value.split('\n').map(function(s){return s.trim();}).filter(Boolean),
+    duties_en: document.getElementById('jf-duties-en').value.split('\n').map(function(s){return s.trim();}).filter(Boolean),
+    reqs_az: document.getElementById('jf-reqs-az').value.split('\n').map(function(s){return s.trim();}).filter(Boolean),
+    reqs_en: document.getElementById('jf-reqs-en').value.split('\n').map(function(s){return s.trim();}).filter(Boolean),
     sort_order: parseInt(document.getElementById('jf-sort').value,10) || 0,
     is_active: document.getElementById('jf-active').checked
   };

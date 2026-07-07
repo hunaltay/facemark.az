@@ -352,7 +352,7 @@ img{display:block;max-width:100%}
       <div class="sec-title"><span data-az>Facemark komandası</span><span data-en>The Facemark team</span></div>
       <div class="sec-sub"><span data-az>Dizayndan satışa, sosial mediadan mühasibatlığa — hər sahədə öz işinin ustası olan həmkarlarımız.</span><span data-en>From design to sales, from social media to accounting — colleagues who are masters of their craft.</span></div>
     </div>
-    <div class="team-grid">
+    <div class="team-grid" id="teamGrid">
 
       <div class="team-card">
         <div class="team-photo">
@@ -844,6 +844,28 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeApplyMo
     }).join('');
   }catch(e){}
 })();
+</script>
+<script>
+function _tmCardHtml(m){
+  var fallback = (m.name||'').split(' ').map(function(w){return w[0]||'';}).slice(0,2).join('').toUpperCase();
+  var img = m.photo_url ? ('<img src="'+m.photo_url.replace(/"/g,'&quot;')+'" alt="'+m.name.replace(/"/g,'&quot;')+'" onerror="this.outerHTML=\'<div class=&quot;av-fallback&quot;>'+fallback+'</div>\'">') : ('<div class="av-fallback">'+fallback+'</div>');
+  var role = m.role_en ? ('<span data-az>'+(m.role_az||'')+'</span><span data-en>'+m.role_en+'</span>') : (m.role_az||'');
+  return '<div class="team-card"><div class="team-photo">'+img+'<div class="team-photo-overlay"></div></div><div class="team-info"><div class="team-name">'+(m.name||'')+'</div><div class="team-role">'+role+'</div></div></div>';
+}
+async function loadTeamFromDB(){
+  if(typeof supabaseClient === 'undefined') return;
+  var res = await supabaseClient.from('team_members').select('*').order('sort_order');
+  if(res.error || !res.data || !res.data.length) return;
+  var grid = document.getElementById('teamGrid');
+  if(!grid) return;
+  grid.innerHTML = res.data.map(_tmCardHtml).join('');
+  if(typeof applyLangToElement === 'function') applyLangToElement(grid);
+}
+if(document.readyState === 'complete' || document.readyState === 'interactive'){
+  loadTeamFromDB();
+} else {
+  document.addEventListener('DOMContentLoaded', loadTeamFromDB);
+}
 </script>
 </body>
 </html>

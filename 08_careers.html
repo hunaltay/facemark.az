@@ -673,85 +673,7 @@ function runSiteSearch(q){
 }
 
 /* ── JOBS DATA ── */
-var JOBS=[
-  {id:'mk1',cat:'marketing',
-   title_az:'Marketinq Mütəxəssisi',title_en:'Marketing Specialist',
-   type_az:'Tam ştat',type_en:'Full-time',loc:'Bakı / Baku',
-   duties_az:['Marketinq kampaniyalarının planlaşdırılması və icrasının həyata keçirilməsi','Tədbirlərin tanıtım materiallarının hazırlanması','Sosial media, e-poçt və reklam kanalları üzrə fəaliyyət','Rəqəmsal analitika alətlərindən istifadə edərək kampaniya nəticələrinin izlənilməsi','Kreativ komanda ilə birlikdə kontent strategiyasının inkişaf etdirilməsi'],
-   duties_en:['Planning and executing marketing campaigns','Preparing event promotion materials','Activities across social media, email and advertising channels','Tracking campaign results using digital analytics tools','Developing content strategy together with the creative team'],
-   reqs_az:['Ali təhsil (Marketinq, İqtisadiyyat və ya əlaqəli sahə)','Minimum 1 il marketinq sahəsində iş təcrübəsi','Google Analytics, Meta Ads Meneceri kimi alətlərlə tanışlıq','Azərbaycan dilində mükəmməl yazılı kommunikasiya bacarığı','Komandada işləmə qabiliyyəti'],
-   reqs_en:['Higher education (Marketing, Economics or related field)','Minimum 1 year of experience in marketing','Familiarity with tools like Google Analytics, Meta Ads Manager','Excellent written communication skills in Azerbaijani','Ability to work in a team']},
-  {id:'mk2',cat:'marketing',
-   title_az:'Rəqəmsal Marketinq Mütəxəssisi',title_en:'Digital Marketing Specialist',
-   type_az:'Tam ştat',type_en:'Full-time',loc:'Bakı / Baku',
-   duties_az:['SEO/SEM strategiyalarının işlənib hazırlanması','Google Ads, Meta Ads kampaniyalarının idarə olunması','Sayt trafikinin analizi və optimallaşdırma tövsiyələri','E-poçt marketinq kampaniyalarının qurulması','ROI hesabatları hazırlamaq'],
-   duties_en:['Developing SEO/SEM strategies','Managing Google Ads, Meta Ads campaigns','Analyzing website traffic and providing optimization recommendations','Setting up email marketing campaigns','Preparing ROI reports'],
-   reqs_az:['Rəqəmsal marketinq sahəsində minimum 2 il iş təcrübəsi','Google Ads Sertifikatı üstünlük sayılacaq','Analitik düşüncə tərzi','Excel / Google Sheets üzrə bacarıq'],
-   reqs_en:['Minimum 2 years of digital marketing experience','Google Ads Certification is an advantage','Analytical mindset','Proficiency in Excel / Google Sheets']},
-  {id:'mk3',cat:'marketing',
-   title_az:'Sosial Media Meneceri',title_en:'Social Media Manager',
-   type_az:'Tam ştat',type_en:'Full-time',loc:'Bakı / Baku',
-   duties_az:['Instagram, LinkedIn, Facebook, TikTok kanallarının idarə olunması','Həftəlik kontent planının hazırlanması','Foto, video, Reels kimi formatlar üçün brifinq hazırlanması','İzləyicilərlə aktiv kommunikasiya','SMM analitika hesabatları'],
-   duties_en:['Managing Instagram, LinkedIn, Facebook, TikTok channels','Preparing weekly content plans','Briefing for formats like photos, videos, Reels','Active communication with followers','SMM analytics reports'],
-   reqs_az:['SMM sahəsində minimum 1 il iş təcrübəsi','Kreativ yazı bacarığı (Azərbaycan dilində)','Canva, CapCut kimi alətlər ilə iş bacarığı','Tədbirlər sektoru ilə maraq üstünlük sayılır'],
-   reqs_en:['Minimum 1 year of SMM experience','Creative writing skills (in Azerbaijani)','Proficiency in tools like Canva, CapCut','Interest in the events sector is an advantage']},
-  {id:'op1',cat:'operations',
-   title_az:'Layihə Koordinatoru',title_en:'Project Coordinator',
-   type_az:'Tam ştat',type_en:'Full-time',loc:'Bakı / Baku',
-   duties_az:['Layihə cədvəllərinin tərtibi və izlənilməsi','Komanda üzvləri arasında koordinasiyanın təmin edilməsi','Tedbirlərə hazırlıq prosesinin idarə olunması','Müştərilər və partnyorlarla ünsiyyətin saxlanılması','Hesabat sənədlərinin hazırlanması'],
-   duties_en:['Drafting and tracking project schedules','Ensuring coordination between team members','Managing event preparation processes','Maintaining communication with clients and partners','Preparing reporting documents'],
-   reqs_az:['Ali təhsil','Layihə koordinasiyası sahəsində minimum 1 il iş təcrübəsi','MS Office (Excel, PowerPoint) ilə mükəmməl iş bacarığı','Güclü ünsiyyət bacarıqları','Çoxsaylı tapşırıqları eyni vaxtda yerinə yetirə bilmə qabiliyyəti'],
-   reqs_en:['Higher education','Minimum 1 year of project coordination experience','Excellent proficiency in MS Office (Excel, PowerPoint)','Strong communication skills','Ability to handle multiple tasks simultaneously']},
-  {id:'op2',cat:'operations',
-   title_az:'Layihə Meneceri üzrə Təcrübəçi',title_en:'Project Manager Intern',
-   type_az:'Təcrübə',type_en:'Internship',loc:'Bakı / Baku',
-   duties_az:['Layihə planlaşdırma proseslərinə dəstək göstərilməsi','Toplantıların protokollaşdırılması','Müxtəlif şöbələrlə koordinasiya','Sənəd idarəetməsi','Sərgi, forum və konfranslarda iştirak'],
-   duties_en:['Supporting project planning processes','Documenting meeting minutes','Coordination with various departments','Document management','Participating in exhibitions, forums and conferences'],
-   reqs_az:['Son kurs tələbəsi və ya məzun','Təşkil etmə və planlaşdırma bacarığı','Məsuliyyətli, dəqiq və ardıcıl iş tərzi','Azərbaycan dilini mükəmməl bilmə'],
-   reqs_en:['Final year student or graduate','Organizational and planning skills','Responsible, precise and consistent work style','Excellent knowledge of Azerbaijani']},
-  {id:'op3',cat:'operations',
-   title_az:'Call-center Əməkdaşı',title_en:'Call Center Employee',
-   type_az:'Tam ştat',type_en:'Full-time',loc:'Bakı / Baku',
-   duties_az:['Daxil olan zənglərin qəbul edilməsi və müştərilərə məlumat verilməsi','Tədbirlər haqqında sorğulara cavab verilməsi','Bilet rezervasiyası və satış üzrə dəstək','CRM sisteminə məlumatların daxil edilməsi','Müştəri şikayətlərinin ilkin emalı'],
-   duties_en:['Answering incoming calls and providing information to customers','Responding to inquiries about events','Support for ticket reservations and sales','Entering data into CRM system','Initial processing of customer complaints'],
-   reqs_az:['Orta ixtisas və ya ali təhsil','Aydın danışıq tərzi','Azərbaycan dilini mükəmməl bilmə (rus dili üstünlük sayılır)','Stressə davamlı olmaq','CRM sistemləri ilə iş üstünlük sayılır'],
-   reqs_en:['Secondary specialized or higher education','Clear speaking manner','Excellent Azerbaijani (Russian is an advantage)','Stress resistance','Experience with CRM systems is an advantage']},
-  {id:'op4',cat:'operations',
-   title_az:'CRM Mütəxəssisi',title_en:'CRM Specialist',
-   type_az:'Tam ştat',type_en:'Full-time',loc:'Bakı / Baku',
-   duties_az:['CRM platformasının idarə edilməsi və optimallaşdırılması','Müştəri bazasının segmentasiyası','Avtomatik e-poçt axışlarının qurulması','Müştəri davranışı ilə bağlı analitik hesabatların hazırlanması','Satış komandası ilə birgə iş'],
-   duties_en:['Managing and optimizing the CRM platform','Customer database segmentation','Setting up automated email flows','Preparing analytical reports on customer behavior','Working together with the sales team'],
-   reqs_az:['CRM sistemlərindən istifadə təcrübəsi (Bitrix24, HubSpot və s.)','Analitik düşüncə','Excel / Google Sheets üzrə güclü bacarıq','Minimum 1 il iş təcrübəsi'],
-   reqs_en:['Experience with CRM systems (Bitrix24, HubSpot, etc.)','Analytical mindset','Strong Excel / Google Sheets skills','Minimum 1 year of experience']},
-  {id:'dz1',cat:'design',
-   title_az:'Junior Dizayner',title_en:'Junior Designer',
-   type_az:'Tam ştat',type_en:'Full-time',loc:'Bakı / Baku',
-   duties_az:['Tədbirlər üçün vizual materialların (banner, flyer, poster) hazırlanması','Sosial media üçün kontent qrafiklərinin dizaynı','Brendinq elementlərinin inkişaf etdirilməsinə dəstək','Çap materiallarının hazırlanması','Kreativ direktiv altında işləmə'],
-   duties_en:['Creating visual materials (banners, flyers, posters) for events','Designing content graphics for social media','Supporting the development of branding elements','Preparing print materials','Working under creative direction'],
-   reqs_az:['Adobe Photoshop, Illustrator və ya Figma üzrə iş bacarığı','Portflio tələb olunur','Estetik zövq və rəng duyumu','Takım çalışması'],
-   reqs_en:['Proficiency in Adobe Photoshop, Illustrator or Figma','Portfolio required','Aesthetic taste and color sense','Teamwork']},
-  {id:'dz2',cat:'design',
-   title_az:'Dizayner Təcrübəçi',title_en:'Design Intern',
-   type_az:'Təcrübə',type_en:'Internship',loc:'Bakı / Baku',
-   duties_az:['Dizayn şöbəsinə sosial media materiallarında kömək','Şablonların yenilənməsi','Marka kitabçasına uyğun materialların hazırlanması','Brifinqlərə əsasən konseptlərin hazırlanması'],
-   duties_en:['Assisting the design team with social media materials','Updating templates','Preparing materials in line with the brand book','Developing concepts based on briefs'],
-   reqs_az:['Canva, Figma və ya Adobe proqramlarından biri üzrə iş bacarığı','Dizayn sahəsinin tələbəsi (üstünlük)','Öyrənməyə hazır olmaq','Nümunə işlər (portflio) tələb olunur'],
-   reqs_en:['Proficiency in Canva, Figma, or any Adobe program','Design student (preferred)','Willingness to learn','Portfolio required']},
-  {id:'ad1',cat:'admin',
-   title_az:'CEO Assistant',title_en:'CEO Assistant',
-   type_az:'Tam ştat',type_en:'Full-time',loc:'Bakı / Baku',
-   duties_az:['CEO-nun iş cədvəlinin planlaşdırılması və idarə olunması','Görüşlərə hazırlıq, brifinq sənədlərinin hazırlanması','Korporativ yazışmaların idarəsi','Xarici və daxili ünsiyyət kanallarının koordinasiyası','Müxtəlif inzibati tapşırıqların yerinə yetirilməsi'],
-   duties_en:['Planning and managing the CEO\'s schedule','Meeting preparation and briefing documents','Managing corporate correspondence','Coordinating external and internal communication channels','Carrying out various administrative tasks'],
-   reqs_az:['Ali təhsil','Güclü inzibati bacarıqlar','Azərbaycan, Rus və İngilis dillərini bilmək üstünlük sayılır','Gizlilik prinsipinə riayət etmək','Çoxsaylı işləri koordinasiya etmə qabiliyyəti'],
-   reqs_en:['Higher education','Strong administrative skills','Knowledge of Azerbaijani, Russian and English is an advantage','Adherence to confidentiality principle','Ability to coordinate multiple tasks']},
-  {id:'ad2',cat:'admin',
-   title_az:'Mühasib Köməkçisi',title_en:'Accounting Assistant',
-   type_az:'Tam ştat',type_en:'Full-time',loc:'Bakı / Baku',
-   duties_az:['Birincili mühasibat sənədlərinin hazırlanması və emalı','Gəlir-xərc sənədlərinin sistemləşdirilməsi','Bank çıxarışlarının yoxlanılması','Baş mühasiblə birgə aylıq hesabatların hazırlanması','Sənəd arxivinin saxlanılması'],
-   duties_en:['Preparing and processing primary accounting documents','Systematizing income-expense documents','Reconciling bank statements','Preparing monthly reports together with the chief accountant','Maintaining document archives'],
-   reqs_az:['Mühasibat, maliyyə ixtisası üzrə ali/orta ixtisas təhsili','1C proqramı ilə iş üstünlük sayılır','Hesablama dəqiqliyi','Mühasibat sənəd dövriyyəsi haqqında anlayış'],
-   reqs_en:['Higher/secondary specialized education in accounting or finance','Experience with 1C program is an advantage','Calculation accuracy','Understanding of accounting document flow']}
-];
+var JOBS=[];
 
 function renderJobs(cat){
   var list=document.getElementById('jobList');
@@ -885,8 +807,40 @@ async function submitForm(e){
   }
 }
 
+// Bazadan real vakansiyaları yüklə
+var _typeEnMap = {'Tam ştat':'Full-time','Təcrübə':'Internship','Part-time':'Part-time'};
+async function loadJobsFromDB(){
+  if(typeof supabaseClient === 'undefined'){ renderJobs('all'); return; }
+  var res = await supabaseClient.from('job_openings').select('*').eq('is_active',true).order('sort_order');
+  if(res.error || !res.data || !res.data.length){ renderJobs('all'); return; }
+  JOBS = res.data.map(function(j){
+    return {
+      id: j.id,
+      cat: j.category || 'operations',
+      title_az: j.title_az, title_en: j.title_en || j.title_az,
+      type_az: j.employment_type || 'Tam ştat',
+      type_en: _typeEnMap[j.employment_type] || j.employment_type || 'Full-time',
+      loc: j.location || 'Bakı / Baku',
+      duties_az: j.duties_az || [], duties_en: j.duties_en || [],
+      reqs_az: j.reqs_az || [], reqs_en: j.reqs_en || []
+    };
+  });
+  var activeBtn=document.querySelector('.f-btn.active');
+  var cat = activeBtn ? (activeBtn.getAttribute('data-cat')||'all') : 'all';
+  renderJobs('all');
+  document.getElementById('openCount').textContent=JOBS.length;
+  document.querySelectorAll('.f-btn').forEach(function(b){
+    var c=b.getAttribute('onclick')||'';
+    var m=c.match(/filterJobs\(this,'([a-z]+)'\)/);
+    if(!m) return;
+    var cc=m[1];
+    var n = cc==='all' ? JOBS.length : JOBS.filter(function(j){return j.cat===cc;}).length;
+    var fc=b.querySelector('.f-count');
+    if(fc) fc.textContent=n;
+  });
+}
 // İlkin yükləmə
-renderJobs('all');
+loadJobsFromDB();
 </script>
 <script>
 (function(){

@@ -363,7 +363,7 @@ html.lang-az [data-en]{display:none!important}
       </div>
     </div>
 
-    <div class="vid-grid show" data-cat="latest" style="display:grid">
+    <div class="vid-grid show" data-cat="latest" style="display:grid" id="latestVidGrid">
       <a class="vid-card" href="https://fmrtv.facemark.az/marketing/video/Milli-Insan-Resurslari-Forumu-2026--Icmal-video" target="_blank">
         <div class="vid-thumb">
           <img src="https://fmrtv.facemark.az/images/slider/2026-05-19_12-39-39.jpg" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>'">
@@ -1707,6 +1707,37 @@ function runSiteSearch(q){
     var act=m.action?(m.action+';'):'';
     return '<a class="site-search-result" href="'+m.url+'" onclick="'+act+'document.getElementById(\'siteSearchBox\').classList.remove(\'open\')">'+title+'<div class="ssr-cat">'+cat+'</div></a>';
   }).join('');
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="assets/supabase-client.js"></script>
+<script>
+function _fmEsc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function _tvCardHtml(v){
+  var img = v.thumbnail_url ? _fmEsc(v.thumbnail_url) : '';
+  return '<a class="vid-card" href="'+_fmEsc(v.video_url)+'" target="_blank" data-video-url="'+_fmEsc(v.video_url)+'">'+
+    '<div class="vid-thumb"><img src="'+img+'" alt="" onerror="this.src=\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231C1828%22 width=%2216%22 height=%229%22/></svg>\'"><div class="vid-play"><div class="vid-play-btn"><span>▶</span></div></div></div>'+
+    '<div class="vid-body"><div class="vid-event">'+_fmEsc(v.title_az||v.title_en||'')+'</div>'+
+    '<div class="vid-type">'+_fmEsc(v.category||'')+'</div>'+
+    '<div class="vid-meta-row"><span class="vid-meta-cat">'+_fmEsc(v.category||'')+'</span></div>'+
+    '</div></a>';
+}
+async function loadVideosFromDB(){
+  if(typeof supabaseClient === 'undefined') return;
+  var res = await supabaseClient.from('tv_videos').select('*').order('sort_order');
+  if(res.error || !res.data) return;
+  var grid = document.getElementById('latestVidGrid');
+  if(!grid) return;
+  res.data.forEach(function(v){
+    if(!grid.querySelector('a[href="'+CSS.escape(v.video_url)+'"]')){
+      grid.insertAdjacentHTML('beforeend', _tvCardHtml(v));
+    }
+  });
+}
+if(document.readyState === 'complete' || document.readyState === 'interactive'){
+  loadVideosFromDB();
+} else {
+  document.addEventListener('DOMContentLoaded', loadVideosFromDB);
 }
 </script>
 </body>
