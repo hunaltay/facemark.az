@@ -205,380 +205,19 @@ img{display:block;max-width:100%}
 .btn-dark-nav:hover{background:#2D2840}
 </style>
 </head>
-<body>
-
-<!-- NAV -->
-<header class="nav">
-  <div class="nav-in">
-    <a href="/" class="logo" style="display:flex;align-items:center">
-      <svg height="32" viewBox="0 0 180 38" xmlns="http://www.w3.org/2000/svg">
-        <text x="0" y="27" font-family="Georgia,'Times New Roman',serif" font-size="22" font-weight="700" fill="#1C1828" letter-spacing="-0.5">facemark</text>
-        <text x="107" y="29" font-family="Georgia,'Times New Roman',serif" font-size="26" font-weight="400" font-style="italic" fill="#1C1828" letter-spacing="-0.5">15il</text>
-      </svg>
-    </a>
-    <nav class="nav-links">
-      <div class="nav-dd-wrap">
-        <a style="color:var(--gold);font-weight:700"><span data-az>Bizi Tanı ▾</span><span data-en>About Us ▾</span></a>
-        <div class="nav-dd">
-          <div class="nav-dd-inner">
-            <a href="/haqqimizda/"><span data-az>Haqqımızda</span><span data-en>About Us</span></a>
-            <a href="/komanda/" class="active"><span data-az>Komandamız</span><span data-en>Our Team</span></a>
-            <a href="/karyera/"><span data-az>Karyera</span><span data-en>Careers</span></a>
-          </div>
-        </div>
-      </div>
-      <a href="/#events"><span data-az>Tədbirlər</span><span data-en>Events</span></a>
-      <a href="/#services"><span data-az>Xidmətlər</span><span data-en>Services</span></a>
-      <a href="/radar/"><span data-az>Biznes Radar</span><span data-en>Business Radar</span></a>
-      <a href="/fmrtv/" style="color:var(--gold);font-weight:700">FMR TV</a>
-    </nav>
-    <div class="spacer"></div>
-    <div class="site-search" id="siteSearch">
-      <button class="site-search-btn" type="button" onclick="toggleSiteSearch()" aria-label="Axtar">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      </button>
-      <div class="site-search-box" id="siteSearchBox">
-        <input type="text" id="siteSearchInput" oninput="runSiteSearch(this.value)" placeholder="Saytda axtar...">
-        <div class="site-search-results" id="siteSearchResults"></div>
-      </div>
-    </div>
-    <div class="lang-sw">
-      <button class="on" id="btn-az" onclick="setLang('az')">AZ</button>
-      <button id="btn-en" onclick="setLang('en')">EN</button>
-    </div>
-    <!-- Sponsor Ol -->
-    <div class="bilet-wrap" id="sponsorWrap">
-      <button class="btn btn-outline" onclick="toggleDrop('sponsorWrap')">🤝 <span data-az>Sponsor Ol ▾</span><span data-en>Become a Sponsor ▾</span></button>
-      <div class="bilet-drop">
-        <div class="bilet-drop-title"><span data-az>Sponsor olmaq istədiyin tədbiri seç</span><span data-en>Choose the event you want to sponsor</span></div>
-        <div class="bilet-item" onclick="location.href='/#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli Marketinq Forumu 2026</span><span data-en>National Marketing Forum 2026</span></div><div class="bilet-date"><span data-az>6 İyun 2026 · Bakı Konqres Mərkəzi</span><span data-en>June 6, 2026 · Baku Congress Center</span></div></div></div>
-        <div class="bilet-item" onclick="location.href='/#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli İnsan Resursları Forumu 2026</span><span data-en>National HR Forum 2026</span></div><div class="bilet-date"><span data-az>16 May 2026 · Baku Marriott Hotel</span></div></div></div>
-        <div class="bilet-item" onclick="location.href='/#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Bloger və İnfluenserlər Forumu 2026</span><span data-en>Blogger & Influencer Forum 2026</span></div><div class="bilet-date"><span data-az>10–11 İyun 2026 · Dreamland Baku</span></div></div></div>
-        <div class="bilet-cta"><a href="/#events"><span data-az>Bütün tədbirləri gör →</span><span data-en>See all events →</span></a></div>
-      </div>
-    </div>
-    <!-- Bilet Al -->
-    <div class="bilet-wrap" id="biletWrap">
-      <button class="btn btn-gold" onclick="toggleDrop('biletWrap')">🎫 <span data-az>Bilet Al ▾</span><span data-en>Get Tickets ▾</span></button>
-      <div class="bilet-drop">
-        <div class="bilet-drop-title"><span data-az>Aktiv tədbirlər</span><span data-en>Active events</span></div>
-        <div class="bilet-item" onclick="location.href='mmf_inner_page_FINAL.html'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli Marketinq Forumu 2026</span><span data-en>National Marketing Forum 2026</span></div><div class="bilet-date"><span data-az>6 İyun 2026 · Bakı Konqres Mərkəzi</span><span data-en>June 6, 2026 · Baku Congress Center</span></div></div></div>
-        <div class="bilet-item" onclick="location.href='/#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli İnsan Resursları Forumu 2026</span><span data-en>National HR Forum 2026</span></div><div class="bilet-date"><span data-az>16 May 2026 · Baku Marriott Hotel</span></div></div></div>
-        <div class="bilet-item" onclick="location.href='/#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Bloger və İnfluenserlər Forumu 2026</span><span data-en>Blogger & Influencer Forum 2026</span></div><div class="bilet-date"><span data-az>10–11 İyun 2026 · Dreamland Baku</span></div></div></div>
-        <div class="bilet-cta"><a href="/#events"><span data-az>Bütün tədbirlərə bax →</span><span data-en>View all events →</span></a></div>
-      </div>
-    </div>
-    <!-- Müraciət Et -->
-    <button class="btn-dark-nav" onclick="document.getElementById('kmApplyModal').classList.add('open');document.body.style.overflow='hidden'">📩 <span data-az>Müraciət Et</span><span data-en>Send Inquiry</span></button>
-  </div>
-</header>
-
-<!-- BREADCRUMB -->
-<div class="breadcrumb">
-  <div class="breadcrumb-in">
-    <a href="/"><span data-az>Ana Səhifə</span><span data-en>Home</span></a>
-    <span class="breadcrumb-sep">›</span>
-    <a href="/haqqimizda/"><span data-az>Haqqımızda</span><span data-en>About Us</span></a>
-    <span class="breadcrumb-sep">›</span>
-    <span><span data-az>Komandamız</span><span data-en>Our Team</span></span>
-  </div>
-</div>
-
-<!-- HERO -->
-<section class="team-hero">
-  <div class="team-hero-in">
-    <div class="hero-label"><span data-az>Komandamız</span><span data-en>Our Team</span></div>
-    <h1><span data-az>Hər tədbirin arxasında dayanan <em>insanlar</em></span><span data-en>The <em>people</em> behind every event</span></h1>
-    <p class="team-hero-desc"><span data-az>Facemark-ı 15 ildən artıqdır irəliyə aparan komanda — strategiyadan yaradıcı icraya, satışdan texniki dəstəyə qədər hər addımda yanınızdayıq. Tanış olun: ideyalarımızı reallığa çevirən insanlar.</span><span data-en>The team that has driven Facemark forward for over 15 years — from strategy to creative execution, from sales to technical support, we're with you at every step. Meet the people who turn our ideas into reality.</span></p>
-    <div class="team-stats">
-      <div class="team-stat"><b>15+</b><span><span data-az>İl təcrübə</span><span data-en>Years experience</span></span></div>
-      <div class="team-stat"><b>15</b><span><span data-az>Komanda üzvü</span><span data-en>Team members</span></span></div>
-      <div class="team-stat"><b>116+</b><span><span data-az>Keçirilmiş tədbir</span><span data-en>Events delivered</span></span></div>
-      <div class="team-stat"><b>3</b><span><span data-az>Media platforması</span><span data-en>Media platforms</span></span></div>
-    </div>
-  </div>
-</section>
-
-<!-- BODY -->
-<section class="team-body">
-  <div class="tb-in">
-
-    <!-- LEADERSHIP -->
-    <div class="sec-head">
-      <div class="sec-label" style="justify-content:center"><span data-az>Rəhbərlik</span><span data-en>Leadership</span></div>
-      <div class="sec-title"><span data-az>Komandaya rəhbərlik edənlər</span><span data-en>Those who lead the team</span></div>
-      <div class="sec-sub"><span data-az>Strategiyadan icraya qədər bütün prosesləri əlaqələndirən əsas simalar.</span><span data-en>The key figures coordinating everything from strategy to execution.</span></div>
-    </div>
-    <div class="lead-grid">
-
-      <div class="lead-card">
-        <div class="lead-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/envato-labs-image-edit%20(8)%20(1)_1764937231.webp" alt="Rafiq Hunaltay" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;RH&lt;/div&gt;'">
-          <div class="lead-overlay">
-            <div class="lead-name">Rafiq Hunaltay</div>
-            <div class="lead-role"><span data-az>Təsisçi</span><span data-en>Founder</span></div>
-          </div>
-        </div>
-        <div class="lead-tag"><span data-az>Facemark — Təsisçi</span><span data-en>Facemark — Founder</span></div>
-      </div>
-
-      <div class="lead-card">
-        <div class="lead-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/IMG_0806_1764919047.jpg" alt="Nigar Həsənova" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;NH&lt;/div&gt;'">
-          <div class="lead-overlay">
-            <div class="lead-name">Nigar Həsənova</div>
-            <div class="lead-role"><span data-az>Direktor</span><span data-en>Director</span></div>
-          </div>
-        </div>
-        <div class="lead-tag"><span data-az>Facemark — Direktor</span><span data-en>Facemark — Director</span></div>
-      </div>
-
-      <div class="lead-card">
-        <div class="lead-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/X%C9%99dic%C9%99%20C%C6%8Fbray%C4%B1lova_1764914638.webp" alt="Xədicə Cəbrayılova" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;XC&lt;/div&gt;'">
-          <div class="lead-overlay">
-            <div class="lead-name">Xədicə Cəbrayılova</div>
-            <div class="lead-role"><span data-az>Layihə rəhbəri</span><span data-en>Project Lead</span></div>
-          </div>
-        </div>
-        <div class="lead-tag"><span data-az>Facemark — Layihə rəhbəri</span><span data-en>Facemark — Project Lead</span></div>
-      </div>
-
-    </div>
-
-    <!-- TEAM GRID -->
-    <div class="sec-head">
-      <div class="sec-label" style="justify-content:center"><span data-az>Heyət</span><span data-en>Team</span></div>
-      <div class="sec-title"><span data-az>Facemark komandası</span><span data-en>The Facemark team</span></div>
-      <div class="sec-sub"><span data-az>Dizayndan satışa, sosial mediadan mühasibatlığa — hər sahədə öz işinin ustası olan həmkarlarımız.</span><span data-en>From design to sales, from social media to accounting — colleagues who are masters of their craft.</span></div>
-    </div>
-    <div class="team-grid" id="teamGrid">
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/K%C9%99nan%20%C6%8Fli_1764915982_1777897897.webp" alt="Kənan Əli" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;KƏ&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Kənan Əli</div>
-          <div class="team-role"><span data-az>Texniki direktor</span><span data-en>Technical Director</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202025-12-05%20at%2010.52.45_1764931739.webp" alt="Namid Karim" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;NK&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Namid Karim</div>
-          <div class="team-role"><span data-az>Bədii və Kreativ Direktor</span><span data-en>Art &amp; Creative Director</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202026-04-23%20at%2015.46.15_1776945159.webp" alt="Aynur Məmmədova" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;AM&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Aynur Məmmədova</div>
-          <div class="team-role"><span data-az>Layihə Meneceri</span><span data-en>Project Manager</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/mobile_file_2025-10-31_06-28-58_1764916065_1777897955.webp" alt="İbrahim Vəliyev" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;İV&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">İbrahim Vəliyev</div>
-          <div class="team-role"><span data-az>Layihə meneceri</span><span data-en>Project Manager</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202025-03-10%20at%2016.27.06%20(1)_1764918621.webp" alt="Nazim İbrahimov" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;Nİ&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Nazim İbrahimov</div>
-          <div class="team-role"><span data-az>Rəqəmsal marketinq mütəxəssisi</span><span data-en>Digital Marketing Specialist</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202026-04-14%20at%2010.29.31_1776148207.webp" alt="Aydan Mehdiyeva" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;AM&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Aydan Mehdiyeva</div>
-          <div class="team-role"><span data-az>Korporativ Satış Meneceri</span><span data-en>Corporate Sales Manager</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202026-06-01%20at%2012.37.02%20(1)_1780303153.webp" alt="Rəqsanə Mirzəyeva" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;RM&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Rəqsanə Mirzəyeva</div>
-          <div class="team-role"><span data-az>Satış mütəxəssisi</span><span data-en>Sales Specialist</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202026-04-14%20at%2010.55.12_1776149812.webp" alt="Zəhra Abbaszadə" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;ZA&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Zəhra Abbaszadə</div>
-          <div class="team-role"><span data-az>Sosial Media Meneceri</span><span data-en>Social Media Manager</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/Ads%C4%B1z%20tasar%C4%B1m%20(73)_1776156819.webp" alt="Aytac Həsənova" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;AH&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Aytac Həsənova</div>
-          <div class="team-role"><span data-az>Sosial Media Meneceri</span><span data-en>Social Media Manager</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202025-10-30%20at%2015.31.46_1764917966.webp" alt="Fidan Rasulzada" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;FR&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Fidan Rasulzada</div>
-          <div class="team-role"><span data-az>Dizayner</span><span data-en>Designer</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/Minaxan%C4%B1m_1764917779.webp" alt="Minaxanım Umudova" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;MU&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Minaxanım Umudova</div>
-          <div class="team-role"><span data-az>Dizayner</span><span data-en>Designer</span></div>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-photo">
-          <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202025-08-08%20at%2015.46.37_d6c12a0e_1764918148.webp" alt="Həmidə Məmmədli" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;HM&lt;/div&gt;'">
-          <div class="team-photo-overlay"></div>
-        </div>
-        <div class="team-info">
-          <div class="team-name">Həmidə Məmmədli</div>
-          <div class="team-role"><span data-az>Mühasib</span><span data-en>Accountant</span></div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- VALUES -->
-    <div class="values-wrap">
-      <div class="sec-head" style="margin-bottom:28px">
-        <div class="sec-label" style="justify-content:center"><span data-az>Dəyərlərimiz</span><span data-en>Our Values</span></div>
-        <div class="sec-title"><span data-az>Komandamızı birləşdirən prinsiplər</span><span data-en>The principles that unite our team</span></div>
-      </div>
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="value-icon">💡</div>
-          <div class="value-title"><span data-az>Yaradıcılıq</span><span data-en>Creativity</span></div>
-          <div class="value-desc"><span data-az>Hər layihəyə təzə baxış və orijinal həllərlə yanaşırıq.</span><span data-en>We bring a fresh perspective and original solutions to every project.</span></div>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">🤝</div>
-          <div class="value-title"><span data-az>Etibarlılıq</span><span data-en>Reliability</span></div>
-          <div class="value-desc"><span data-az>15 ildir verdiyimiz sözün arxasında dururuq.</span><span data-en>For 15 years, we've stood behind our word.</span></div>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">⚡</div>
-          <div class="value-title"><span data-az>Komanda ruhu</span><span data-en>Team spirit</span></div>
-          <div class="value-desc"><span data-az>Birgə işləyir, birgə öyrənir, birgə uğur qazanırıq.</span><span data-en>We work, learn, and succeed together.</span></div>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">🚀</div>
-          <div class="value-title"><span data-az>İnnovasiya</span><span data-en>Innovation</span></div>
-          <div class="value-desc"><span data-az>Yeni texnologiyaları və AI-ı işimizə inteqrasiya edirik.</span><span data-en>We integrate new technologies and AI into our work.</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CTA JOIN -->
-    <div class="cta-join">
-      <div class="cta-join-in">
-        <h2><span data-az>Komandamıza qoşulmaq istəyirsiniz?</span><span data-en>Want to join our team?</span></h2>
-        <p><span data-az>Facemark-da daim yeni istedadlar axtarırıq. CV-nizi bizə göndərin, uyğun vakansiya yarandıqda sizinlə əlaqə saxlayaq.</span><span data-en>We're always looking for new talent at Facemark. Send us your CV and we'll get in touch when a suitable vacancy opens up.</span></p>
-        <button class="btn-cta-gold" onclick="openApplyModal()"><span data-az>CV göndər →</span><span data-en>Send your CV →</span></button>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="foot" id="contact">
-  <div class="foot-in">
-    <div class="fgrid">
-      <div class="fcol">
-        <div class="flogo"><img src="https://facemark.az/public/storage/images/ACGaivoyKw8HE5IwOGZwzjHlZVJgLSb36XNJBXnr.png" alt="Facemark" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none;font-size:.95rem;font-weight:800;font-style:italic;color:var(--gold)">facemark</span></div>
-        <p class="fcol-desc"><span data-az>Azərbaycanda biznes tədbirlərinin aparıcı platforması. 15 ildən artıq təcrübə.</span><span data-en>The leading business events platform in Azerbaijan. Over 15 years of experience.</span></p>
-        <div class="f-socials">
-          <a href="https://facebook.com/facemark.az" target="_blank" class="fsoc" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg></a>
-          <a href="https://www.instagram.com/_facemark?igsh=YmJkYjNieWYwZnJh" target="_blank" class="fsoc" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-          <a href="https://www.linkedin.com/company/facemark/" target="_blank" class="fsoc" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-          <a href="https://www.youtube.com/channel/UCC3A17lgWFY3PPpU7tBNydg" target="_blank" class="fsoc" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.499 6.203a3.008 3.008 0 00-2.089-2.089c-1.87-.501-9.4-.501-9.4-.501s-7.509-.01-9.399.501A3.008 3.008 0 00.5 6.203a31.45 31.45 0 00-.5 5.799 31.45 31.45 0 00.501 5.783 3.008 3.008 0 002.088 2.088c1.868.502 9.4.502 9.4.502s7.509 0 9.399-.502a3.008 3.008 0 002.089-2.088 31.45 31.45 0 00.5-5.783 31.45 31.45 0 00-.478-5.799zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
-          <a href="https://www.tiktok.com/@__facemark" target="_blank" class="fsoc" title="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg></a>
-        </div>
-      </div>
-      <div class="fcol">
-        <h4><span data-az>Şirkət</span><span data-en>Company</span></h4>
-        <a href="/haqqimizda/"><span data-az>Haqqımızda</span><span data-en>About Us</span></a>
-        <a href="#events"><span data-az>Tədbirlər</span><span data-en>Events</span></a>
-        <a href="/komanda/"><span data-az>Komandamız</span><span data-en>Our Team</span></a>
-        <a href="/fmrtv/" style="color:var(--gold);font-weight:700">FMR TV</a>
-        <a href="/karyera/"><span data-az>Karyera</span><span data-en>Careers</span></a>
-      </div>
-      <div class="fcol">
-        <h4><span data-az>Tədbirlər</span><span data-en>Events</span></h4>
-        <a href="#events"><span data-az>Aktiv Tədbirlər</span><span data-en>Active Events</span></a>
-        <a href="#events"><span data-az>Yaxınlaşan</span><span data-en>Upcoming</span></a>
-        <a href="#events"><span data-az>Keçmiş Tədbirlər</span><span data-en>Past Events</span></a>
-        <a href="#events"><span data-az>Partnyor Tədbirləri</span><span data-en>Partner Events</span></a>
-        <a href="#events"><span data-az>Ümumi Siyahı</span><span data-en>Full List</span></a>
-      </div>
-      <div class="fcol">
-        <h4><span data-az>Tədbirlərdən Məlumatlı Ol</span><span data-en>Stay Informed About Events</span></h4>
-        <p style="font-size:.68rem;color:rgba(255,255,255,.3);margin-bottom:7px"><span data-az>Yeni tədbirlərdən ilk sən xəbər al</span><span data-en>Be the first to hear about new events</span></p>
-        <div class="f-sub"><input type="email" placeholder="E-poçt ünvanın" data-az-placeholder="E-poçt ünvanın" data-en-placeholder="Your email address"><button><span data-az>Abunə</span><span data-en>Subscribe</span></button></div>
-        <div style="margin-top:8px;font-size:.68rem;color:rgba(255,255,255,.32)"><a href="tel:+994502161636" style="color:var(--gold);display:block;margin-bottom:2px">+994 50 216 16 36</a><a href="mailto:info@facemark.az" style="color:var(--gold);display:block">info@facemark.az</a></div>
-      </div>
-    </div>
-    <div class="fbot">
-            <div><span data-az>© 2026 Facemark LLC. Bütün hüquqlar qorunur.</span><span data-en>© 2026 Facemark LLC. All rights reserved.</span></div>
-      <div class="fstats"><span class="fst"><b>116+</b> <span data-az>Tədbir</span><span data-en>Events</span></span><span class="fst"><b>15</b> <span data-az>İl</span><span data-en>Years</span></span><span class="fst"><b>100K+</b> <span data-az>İştirakçı</span><span data-en>Attendees</span></span></div>
-      <div style="display:flex;gap:12px"><a href="#" style="color:rgba(255,255,255,.25)"><span data-az>Məxfilik</span><span data-en>Privacy</span></a><a href="#" style="color:rgba(255,255,255,.25)"><span data-az>Şərtlər</span><span data-en>Terms</span></a></div>
-    </div>
-  </div>
+<body> <!-- NAV -->
+<header class="nav"> <div class="nav-in"> <a href="/" class="logo" style="display:flex;align-items:center"> <svg height="32" viewBox="0 0 180 38" xmlns="http://www.w3.org/2000/svg"> <text x="0" y="27" font-family="Georgia,'Times New Roman',serif" font-size="22" font-weight="700" fill="#1C1828" letter-spacing="-0.5">facemark</text> <text x="107" y="29" font-family="Georgia,'Times New Roman',serif" font-size="26" font-weight="400" font-style="italic" fill="#1C1828" letter-spacing="-0.5">15il</text> </svg> </a> <nav class="nav-links"> <div class="nav-dd-wrap"> <a style="color:var(--gold);font-weight:700"><span data-az>Bizi Tanı ▾</span><span data-en>About Us ▾</span></a> <div class="nav-dd"> <div class="nav-dd-inner"> <a href="/haqqimizda/"><span data-az>Haqqımızda</span><span data-en>About Us</span></a> <a href="/komanda/" class="active"><span data-az>Komandamız</span><span data-en>Our Team</span></a> <a href="/karyera/"><span data-az>Karyera</span><span data-en>Careers</span></a> </div> </div> </div> <a href="/#events"><span data-az>Tədbirlər</span><span data-en>Events</span></a> <a href="/#services"><span data-az>Xidmətlər</span><span data-en>Services</span></a> <a href="/radar/"><span data-az>Biznes Radar</span><span data-en>Business Radar</span></a> <a href="/fmrtv/" style="color:var(--gold);font-weight:700">FMR TV</a> </nav> <div class="spacer"></div> <div class="site-search" id="siteSearch"> <button class="site-search-btn" type="button" onclick="toggleSiteSearch()" aria-label="Axtar"> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> </button> <div class="site-search-box" id="siteSearchBox"> <input type="text" id="siteSearchInput" oninput="runSiteSearch(this.value)" placeholder="Saytda axtar..."> <div class="site-search-results" id="siteSearchResults"></div> </div> </div> <div class="lang-sw"> <button class="on" id="btn-az" onclick="setLang('az')">AZ</button> <button id="btn-en" onclick="setLang('en')">EN</button> </div> <!-- Sponsor Ol --> <div class="bilet-wrap" id="sponsorWrap"> <button class="btn btn-outline" onclick="toggleDrop('sponsorWrap')"> <span data-az>Sponsor Ol ▾</span><span data-en>Become a Sponsor ▾</span></button> <div class="bilet-drop"> <div class="bilet-drop-title"><span data-az>Sponsor olmaq istədiyin tədbiri seç</span><span data-en>Choose the event you want to sponsor</span></div> <div class="bilet-item" onclick="location.href='/#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli Marketinq Forumu 2026</span><span data-en>National Marketing Forum 2026</span></div><div class="bilet-date"><span data-az>6 İyun 2026 · Bakı Konqres Mərkəzi</span><span data-en>June 6, 2026 · Baku Congress Center</span></div></div></div> <div class="bilet-item" onclick="location.href='/#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli İnsan Resursları Forumu 2026</span><span data-en>National HR Forum 2026</span></div><div class="bilet-date"><span data-az>16 May 2026 · Baku Marriott Hotel</span></div></div></div> <div class="bilet-item" onclick="location.href='/#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Bloger və İnfluenserlər Forumu 2026</span><span data-en>Blogger & Influencer Forum 2026</span></div><div class="bilet-date"><span data-az>10–11 İyun 2026 · Dreamland Baku</span></div></div></div> <div class="bilet-cta"><a href="/#events"><span data-az>Bütün tədbirləri gör →</span><span data-en>See all events →</span></a></div> </div> </div> <!-- Bilet Al --> <div class="bilet-wrap" id="biletWrap"> <button class="btn btn-gold" onclick="toggleDrop('biletWrap')"> <span data-az>Bilet Al ▾</span><span data-en>Get Tickets ▾</span></button> <div class="bilet-drop"> <div class="bilet-drop-title"><span data-az>Aktiv tədbirlər</span><span data-en>Active events</span></div> <div class="bilet-item" onclick="location.href='mmf_inner_page_FINAL.html'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli Marketinq Forumu 2026</span><span data-en>National Marketing Forum 2026</span></div><div class="bilet-date"><span data-az>6 İyun 2026 · Bakı Konqres Mərkəzi</span><span data-en>June 6, 2026 · Baku Congress Center</span></div></div></div> <div class="bilet-item" onclick="location.href='/#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Milli İnsan Resursları Forumu 2026</span><span data-en>National HR Forum 2026</span></div><div class="bilet-date"><span data-az>16 May 2026 · Baku Marriott Hotel</span></div></div></div> <div class="bilet-item" onclick="location.href='/#events'"><div class="bilet-dot"></div><div><div class="bilet-name"><span data-az>Bloger və İnfluenserlər Forumu 2026</span><span data-en>Blogger & Influencer Forum 2026</span></div><div class="bilet-date"><span data-az>10–11 İyun 2026 · Dreamland Baku</span></div></div></div> <div class="bilet-cta"><a href="/#events"><span data-az>Bütün tədbirlərə bax →</span><span data-en>View all events →</span></a></div> </div> </div> <!-- Müraciət Et --> <button class="btn-dark-nav" onclick="document.getElementById('kmApplyModal').classList.add('open');document.body.style.overflow='hidden'"> <span data-az>Müraciət Et</span><span data-en>Send Inquiry</span></button> </div>
+</header> <!-- BREADCRUMB -->
+<div class="breadcrumb"> <div class="breadcrumb-in"> <a href="/"><span data-az>Ana Səhifə</span><span data-en>Home</span></a> <span class="breadcrumb-sep">›</span> <a href="/haqqimizda/"><span data-az>Haqqımızda</span><span data-en>About Us</span></a> <span class="breadcrumb-sep">›</span> <span><span data-az>Komandamız</span><span data-en>Our Team</span></span> </div>
+</div> <!-- HERO -->
+<section class="team-hero"> <div class="team-hero-in"> <div class="hero-label"><span data-az>Komandamız</span><span data-en>Our Team</span></div> <h1><span data-az>Hər tədbirin arxasında dayanan <em>insanlar</em></span><span data-en>The <em>people</em> behind every event</span></h1> <p class="team-hero-desc"><span data-az>Facemark-ı 15 ildən artıqdır irəliyə aparan komanda — strategiyadan yaradıcı icraya, satışdan texniki dəstəyə qədər hər addımda yanınızdayıq. Tanış olun: ideyalarımızı reallığa çevirən insanlar.</span><span data-en>The team that has driven Facemark forward for over 15 years — from strategy to creative execution, from sales to technical support, we're with you at every step. Meet the people who turn our ideas into reality.</span></p> <div class="team-stats"> <div class="team-stat"><b>15+</b><span><span data-az>İl təcrübə</span><span data-en>Years experience</span></span></div> <div class="team-stat"><b>15</b><span><span data-az>Komanda üzvü</span><span data-en>Team members</span></span></div> <div class="team-stat"><b>116+</b><span><span data-az>Keçirilmiş tədbir</span><span data-en>Events delivered</span></span></div> <div class="team-stat"><b>3</b><span><span data-az>Media platforması</span><span data-en>Media platforms</span></span></div> </div> </div>
+</section> <!-- BODY -->
+<section class="team-body"> <div class="tb-in"> <!-- LEADERSHIP --> <div class="sec-head"> <div class="sec-label" style="justify-content:center"><span data-az>Rəhbərlik</span><span data-en>Leadership</span></div> <div class="sec-title"><span data-az>Komandaya rəhbərlik edənlər</span><span data-en>Those who lead the team</span></div> <div class="sec-sub"><span data-az>Strategiyadan icraya qədər bütün prosesləri əlaqələndirən əsas simalar.</span><span data-en>The key figures coordinating everything from strategy to execution.</span></div> </div> <div class="lead-grid"> <div class="lead-card"> <div class="lead-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/envato-labs-image-edit%20(8)%20(1)_1764937231.webp" alt="Rafiq Hunaltay" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;RH&lt;/div&gt;'"> <div class="lead-overlay"> <div class="lead-name">Rafiq Hunaltay</div> <div class="lead-role"><span data-az>Təsisçi</span><span data-en>Founder</span></div> </div> </div> <div class="lead-tag"><span data-az>Facemark — Təsisçi</span><span data-en>Facemark — Founder</span></div> </div> <div class="lead-card"> <div class="lead-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/IMG_0806_1764919047.jpg" alt="Nigar Həsənova" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;NH&lt;/div&gt;'"> <div class="lead-overlay"> <div class="lead-name">Nigar Həsənova</div> <div class="lead-role"><span data-az>Direktor</span><span data-en>Director</span></div> </div> </div> <div class="lead-tag"><span data-az>Facemark — Direktor</span><span data-en>Facemark — Director</span></div> </div> <div class="lead-card"> <div class="lead-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/X%C9%99dic%C9%99%20C%C6%8Fbray%C4%B1lova_1764914638.webp" alt="Xədicə Cəbrayılova" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;XC&lt;/div&gt;'"> <div class="lead-overlay"> <div class="lead-name">Xədicə Cəbrayılova</div> <div class="lead-role"><span data-az>Layihə rəhbəri</span><span data-en>Project Lead</span></div> </div> </div> <div class="lead-tag"><span data-az>Facemark — Layihə rəhbəri</span><span data-en>Facemark — Project Lead</span></div> </div> </div> <!-- TEAM GRID --> <div class="sec-head"> <div class="sec-label" style="justify-content:center"><span data-az>Heyət</span><span data-en>Team</span></div> <div class="sec-title"><span data-az>Facemark komandası</span><span data-en>The Facemark team</span></div> <div class="sec-sub"><span data-az>Dizayndan satışa, sosial mediadan mühasibatlığa — hər sahədə öz işinin ustası olan həmkarlarımız.</span><span data-en>From design to sales, from social media to accounting — colleagues who are masters of their craft.</span></div> </div> <div class="team-grid" id="teamGrid"> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/K%C9%99nan%20%C6%8Fli_1764915982_1777897897.webp" alt="Kənan Əli" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;KƏ&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Kənan Əli</div> <div class="team-role"><span data-az>Texniki direktor</span><span data-en>Technical Director</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202025-12-05%20at%2010.52.45_1764931739.webp" alt="Namid Karim" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;NK&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Namid Karim</div> <div class="team-role"><span data-az>Bədii və Kreativ Direktor</span><span data-en>Art &amp; Creative Director</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202026-04-23%20at%2015.46.15_1776945159.webp" alt="Aynur Məmmədova" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;AM&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Aynur Məmmədova</div> <div class="team-role"><span data-az>Layihə Meneceri</span><span data-en>Project Manager</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/mobile_file_2025-10-31_06-28-58_1764916065_1777897955.webp" alt="İbrahim Vəliyev" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;İV&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">İbrahim Vəliyev</div> <div class="team-role"><span data-az>Layihə meneceri</span><span data-en>Project Manager</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202025-03-10%20at%2016.27.06%20(1)_1764918621.webp" alt="Nazim İbrahimov" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;Nİ&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Nazim İbrahimov</div> <div class="team-role"><span data-az>Rəqəmsal marketinq mütəxəssisi</span><span data-en>Digital Marketing Specialist</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202026-04-14%20at%2010.29.31_1776148207.webp" alt="Aydan Mehdiyeva" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;AM&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Aydan Mehdiyeva</div> <div class="team-role"><span data-az>Korporativ Satış Meneceri</span><span data-en>Corporate Sales Manager</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202026-06-01%20at%2012.37.02%20(1)_1780303153.webp" alt="Rəqsanə Mirzəyeva" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;RM&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Rəqsanə Mirzəyeva</div> <div class="team-role"><span data-az>Satış mütəxəssisi</span><span data-en>Sales Specialist</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202026-04-14%20at%2010.55.12_1776149812.webp" alt="Zəhra Abbaszadə" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;ZA&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Zəhra Abbaszadə</div> <div class="team-role"><span data-az>Sosial Media Meneceri</span><span data-en>Social Media Manager</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/Ads%C4%B1z%20tasar%C4%B1m%20(73)_1776156819.webp" alt="Aytac Həsənova" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;AH&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Aytac Həsənova</div> <div class="team-role"><span data-az>Sosial Media Meneceri</span><span data-en>Social Media Manager</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202025-10-30%20at%2015.31.46_1764917966.webp" alt="Fidan Rasulzada" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;FR&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Fidan Rasulzada</div> <div class="team-role"><span data-az>Dizayner</span><span data-en>Designer</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/Minaxan%C4%B1m_1764917779.webp" alt="Minaxanım Umudova" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;MU&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Minaxanım Umudova</div> <div class="team-role"><span data-az>Dizayner</span><span data-en>Designer</span></div> </div> </div> <div class="team-card"> <div class="team-photo"> <img src="https://millimarketinqforumu.az/assets/storage/images/Teams/WhatsApp%20Image%202025-08-08%20at%2015.46.37_d6c12a0e_1764918148.webp" alt="Həmidə Məmmədli" onerror="this.outerHTML='&lt;div class=&quot;av-fallback&quot;&gt;HM&lt;/div&gt;'"> <div class="team-photo-overlay"></div> </div> <div class="team-info"> <div class="team-name">Həmidə Məmmədli</div> <div class="team-role"><span data-az>Mühasib</span><span data-en>Accountant</span></div> </div> </div> </div> <!-- VALUES --> <div class="values-wrap"> <div class="sec-head" style="margin-bottom:28px"> <div class="sec-label" style="justify-content:center"><span data-az>Dəyərlərimiz</span><span data-en>Our Values</span></div> <div class="sec-title"><span data-az>Komandamızı birləşdirən prinsiplər</span><span data-en>The principles that unite our team</span></div> </div> <div class="values-grid"> <div class="value-card"> <div class="value-icon"></div> <div class="value-title"><span data-az>Yaradıcılıq</span><span data-en>Creativity</span></div> <div class="value-desc"><span data-az>Hər layihəyə təzə baxış və orijinal həllərlə yanaşırıq.</span><span data-en>We bring a fresh perspective and original solutions to every project.</span></div> </div> <div class="value-card"> <div class="value-icon"></div> <div class="value-title"><span data-az>Etibarlılıq</span><span data-en>Reliability</span></div> <div class="value-desc"><span data-az>15 ildir verdiyimiz sözün arxasında dururuq.</span><span data-en>For 15 years, we've stood behind our word.</span></div> </div> <div class="value-card"> <div class="value-icon"></div> <div class="value-title"><span data-az>Komanda ruhu</span><span data-en>Team spirit</span></div> <div class="value-desc"><span data-az>Birgə işləyir, birgə öyrənir, birgə uğur qazanırıq.</span><span data-en>We work, learn, and succeed together.</span></div> </div> <div class="value-card"> <div class="value-icon"></div> <div class="value-title"><span data-az>İnnovasiya</span><span data-en>Innovation</span></div> <div class="value-desc"><span data-az>Yeni texnologiyaları və AI-ı işimizə inteqrasiya edirik.</span><span data-en>We integrate new technologies and AI into our work.</span></div> </div> </div> </div> <!-- CTA JOIN --> <div class="cta-join"> <div class="cta-join-in"> <h2><span data-az>Komandamıza qoşulmaq istəyirsiniz?</span><span data-en>Want to join our team?</span></h2> <p><span data-az>Facemark-da daim yeni istedadlar axtarırıq. CV-nizi bizə göndərin, uyğun vakansiya yarandıqda sizinlə əlaqə saxlayaq.</span><span data-en>We're always looking for new talent at Facemark. Send us your CV and we'll get in touch when a suitable vacancy opens up.</span></p> <button class="btn-cta-gold" onclick="openApplyModal()"><span data-az>CV göndər →</span><span data-en>Send your CV →</span></button> </div> </div> </div>
+</section> <!-- FOOTER -->
+<footer class="foot" id="contact"> <div class="foot-in"> <div class="fgrid"> <div class="fcol"> <div class="flogo"><img src="https://facemark.az/public/storage/images/ACGaivoyKw8HE5IwOGZwzjHlZVJgLSb36XNJBXnr.png" alt="Facemark" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none;font-size:.95rem;font-weight:800;font-style:italic;color:var(--gold)">facemark</span></div> <p class="fcol-desc"><span data-az>Azərbaycanda biznes tədbirlərinin aparıcı platforması. 15 ildən artıq təcrübə.</span><span data-en>The leading business events platform in Azerbaijan. Over 15 years of experience.</span></p> <div class="f-socials"> <a href="https://facebook.com/facemark.az" target="_blank" class="fsoc" title="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/></svg></a> <a href="https://www.instagram.com/_facemark?igsh=YmJkYjNieWYwZnJh" target="_blank" class="fsoc" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a> <a href="https://www.linkedin.com/company/facemark/" target="_blank" class="fsoc" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a> <a href="https://www.youtube.com/channel/UCC3A17lgWFY3PPpU7tBNydg" target="_blank" class="fsoc" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.499 6.203a3.008 3.008 0 00-2.089-2.089c-1.87-.501-9.4-.501-9.4-.501s-7.509-.01-9.399.501A3.008 3.008 0 00.5 6.203a31.45 31.45 0 00-.5 5.799 31.45 31.45 0 00.501 5.783 3.008 3.008 0 002.088 2.088c1.868.502 9.4.502 9.4.502s7.509 0 9.399-.502a3.008 3.008 0 002.089-2.088 31.45 31.45 0 00.5-5.783 31.45 31.45 0 00-.478-5.799zM9.609 15.601V8.408l6.264 3.602z"/></svg></a> <a href="https://www.tiktok.com/@__facemark" target="_blank" class="fsoc" title="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg></a> </div> </div> <div class="fcol"> <h4><span data-az>Şirkət</span><span data-en>Company</span></h4> <a href="/haqqimizda/"><span data-az>Haqqımızda</span><span data-en>About Us</span></a> <a href="#events"><span data-az>Tədbirlər</span><span data-en>Events</span></a> <a href="/komanda/"><span data-az>Komandamız</span><span data-en>Our Team</span></a> <a href="/fmrtv/" style="color:var(--gold);font-weight:700">FMR TV</a> <a href="/karyera/"><span data-az>Karyera</span><span data-en>Careers</span></a> </div> <div class="fcol"> <h4><span data-az>Tədbirlər</span><span data-en>Events</span></h4> <a href="#events"><span data-az>Aktiv Tədbirlər</span><span data-en>Active Events</span></a> <a href="#events"><span data-az>Yaxınlaşan</span><span data-en>Upcoming</span></a> <a href="#events"><span data-az>Keçmiş Tədbirlər</span><span data-en>Past Events</span></a> <a href="#events"><span data-az>Partnyor Tədbirləri</span><span data-en>Partner Events</span></a> <a href="#events"><span data-az>Ümumi Siyahı</span><span data-en>Full List</span></a> </div> <div class="fcol"> <h4><span data-az>Tədbirlərdən Məlumatlı Ol</span><span data-en>Stay Informed About Events</span></h4> <p style="font-size:.68rem;color:rgba(255,255,255,.3);margin-bottom:7px"><span data-az>Yeni tədbirlərdən ilk sən xəbər al</span><span data-en>Be the first to hear about new events</span></p> <div class="f-sub"><input type="email" placeholder="E-poçt ünvanın" data-az-placeholder="E-poçt ünvanın" data-en-placeholder="Your email address"><button><span data-az>Abunə</span><span data-en>Subscribe</span></button></div> <div style="margin-top:8px;font-size:.68rem;color:rgba(255,255,255,.32)"><a href="tel:+994502161636" style="color:var(--gold);display:block;margin-bottom:2px">+994 50 216 16 36</a><a href="mailto:info@facemark.az" style="color:var(--gold);display:block">info@facemark.az</a></div> </div> </div> <div class="fbot"> <div><span data-az>© 2026 Facemark LLC. Bütün hüquqlar qorunur.</span><span data-en>© 2026 Facemark LLC. All rights reserved.</span></div> <div class="fstats"><span class="fst"><b>116+</b> <span data-az>Tədbir</span><span data-en>Events</span></span><span class="fst"><b>15</b> <span data-az>İl</span><span data-en>Years</span></span><span class="fst"><b>100K+</b> <span data-az>İştirakçı</span><span data-en>Attendees</span></span></div> <div style="display:flex;gap:12px"><a href="#" style="color:rgba(255,255,255,.25)"><span data-az>Məxfilik</span><span data-en>Privacy</span></a><a href="#" style="color:rgba(255,255,255,.25)"><span data-az>Şərtlər</span><span data-en>Terms</span></a></div> </div> </div>
 </footer>
 <!-- WhatsApp -->
-<a href="https://wa.me/994502161636" target="_blank" class="chat-btn" title="WhatsApp">💬</a>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<a href="https://wa.me/994502161636" target="_blank" class="chat-btn" title="WhatsApp"></a> <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="../assets/supabase-client.js"></script>
 <script>
 var _lang = 'az';
@@ -645,9 +284,7 @@ var SITE_INDEX = [
   {az:'Həmidə Məmmədli',en:'Həmidə Məmmədli',cat_az:'Komanda — Mühasib',cat_en:'Team — Accountant',url:'/komanda/'}
 
 ];
-</script>
-
-<script>
+</script> <script>
 function toggleSiteSearch(){
   var box=document.getElementById('siteSearchBox');
   box.classList.toggle('open');
@@ -688,9 +325,7 @@ function runSiteSearch(q){
   }).join('');
 }
 </script>
-<a href="https://wa.me/994502161636" target="_blank" class="chat-btn" title="WhatsApp">💬</a>
-
-<!-- MÜRACİƏT MODALI -->
+<a href="https://wa.me/994502161636" target="_blank" class="chat-btn" title="WhatsApp"></a> <!-- MÜRACİƏT MODALI -->
 <style>
 .km-modal-overlay{position:fixed;inset:0;background:rgba(28,24,40,.55);z-index:400;display:none;align-items:center;justify-content:center;padding:20px}
 .km-modal-overlay.open{display:flex}
@@ -719,59 +354,7 @@ function runSiteSearch(q){
 .km-btn-sub{font-size:.72rem;font-weight:700;padding:7px 20px;border-radius:7px;border:none;background:#1C1828;color:#fff;cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif}
 .km-btn-sub:hover{background:#C4973A}
 </style>
-<div class="km-modal-overlay" id="kmApplyModal" onclick="if(event.target===this)closeApplyModal()">
-  <div class="km-modal">
-    <div class="km-modal-hdr">
-      <div>
-        <div class="km-modal-title"><span data-az>Açıq Müraciət</span><span data-en>Open Application</span></div>
-        <div class="km-modal-sub"><span data-az>Bütün sahələr üzrə</span><span data-en>All departments</span></div>
-      </div>
-      <button class="km-modal-close" onclick="closeApplyModal()">×</button>
-    </div>
-    <div class="km-modal-body">
-      <form onsubmit="submitApplyForm(event)" id="teamApplyForm" enctype="multipart/form-data">
-        <input type="hidden" name="form_type" value="team">
-        <div class="km-form-row2">
-          <div class="km-form-g">
-            <label class="km-form-lbl"><span data-az>Ad</span><span data-en>First name</span> <span class="req">*</span></label>
-            <input class="km-form-inp" type="text" name="first_name" id="kmFirstName" required>
-          </div>
-          <div class="km-form-g">
-            <label class="km-form-lbl"><span data-az>Soyad</span><span data-en>Last name</span> <span class="req">*</span></label>
-            <input class="km-form-inp" type="text" name="last_name" id="kmLastName" required>
-          </div>
-        </div>
-        <div class="km-form-g">
-          <label class="km-form-lbl">Email <span class="req">*</span></label>
-          <input class="km-form-inp" type="email" name="email" id="kmEmail" placeholder="email@example.com" required>
-        </div>
-        <div class="km-form-g">
-          <label class="km-form-lbl"><span data-az>Telefon</span><span data-en>Phone</span> <span class="req">*</span></label>
-          <input class="km-form-inp" type="tel" name="phone" id="kmPhone" placeholder="+994 50 XXX XX XX" required>
-        </div>
-        <div class="km-form-g">
-          <label class="km-form-lbl"><span data-az>Müraciətin istiqaməti</span><span data-en>Application direction</span> <span class="req">*</span></label>
-          <input class="km-form-inp" type="text" name="direction" id="kmDirection" required>
-        </div>
-        <div class="km-form-g">
-          <label class="km-form-lbl"><span data-az>Özünü qısa təqdim et</span><span data-en>Briefly introduce yourself</span> <span class="req">*</span></label>
-          <textarea class="km-form-ta" name="message" id="kmMessage" placeholder="..." required></textarea>
-        </div>
-        <div class="km-form-g">
-          <label class="km-form-lbl"><span data-az>CV yüklə</span><span data-en>Upload CV</span> <span style="font-size:.65rem;color:#6B6878;font-weight:400">(<span data-az>istəyə bağlı</span><span data-en>optional</span>)</span></label>
-          <label class="km-file-zone">
-            <input type="file" name="cv" id="kmCvFile" accept=".pdf,.doc,.docx" style="display:none" onchange="kmFileChosen(this)">
-            <span class="fz-icon">📄</span>
-            <span id="kmFileLabel">PDF, DOC — <b><span data-az>seç</span><span data-en>browse</span></b></span>
-          </label>
-        </div>
-        <div class="km-modal-ftr" style="margin:0 -20px -20px">
-          <button type="button" class="km-btn-cancel" onclick="closeApplyModal()"><span data-az>Ləğv et</span><span data-en>Cancel</span></button>
-          <button type="submit" class="km-btn-sub" id="kmSubmitBtn"><span data-az>Göndər →</span><span data-en>Submit →</span></button>
-        </div>
-      </form>
-    </div>
-  </div>
+<div class="km-modal-overlay" id="kmApplyModal" onclick="if(event.target===this)closeApplyModal()"> <div class="km-modal"> <div class="km-modal-hdr"> <div> <div class="km-modal-title"><span data-az>Açıq Müraciət</span><span data-en>Open Application</span></div> <div class="km-modal-sub"><span data-az>Bütün sahələr üzrə</span><span data-en>All departments</span></div> </div> <button class="km-modal-close" onclick="closeApplyModal()">×</button> </div> <div class="km-modal-body"> <form onsubmit="submitApplyForm(event)" id="teamApplyForm" enctype="multipart/form-data"> <input type="hidden" name="form_type" value="team"> <div class="km-form-row2"> <div class="km-form-g"> <label class="km-form-lbl"><span data-az>Ad</span><span data-en>First name</span> <span class="req">*</span></label> <input class="km-form-inp" type="text" name="first_name" id="kmFirstName" required> </div> <div class="km-form-g"> <label class="km-form-lbl"><span data-az>Soyad</span><span data-en>Last name</span> <span class="req">*</span></label> <input class="km-form-inp" type="text" name="last_name" id="kmLastName" required> </div> </div> <div class="km-form-g"> <label class="km-form-lbl">Email <span class="req">*</span></label> <input class="km-form-inp" type="email" name="email" id="kmEmail" placeholder="email@example.com" required> </div> <div class="km-form-g"> <label class="km-form-lbl"><span data-az>Telefon</span><span data-en>Phone</span> <span class="req">*</span></label> <input class="km-form-inp" type="tel" name="phone" id="kmPhone" placeholder="+994 50 XXX XX XX" required> </div> <div class="km-form-g"> <label class="km-form-lbl"><span data-az>Müraciətin istiqaməti</span><span data-en>Application direction</span> <span class="req">*</span></label> <input class="km-form-inp" type="text" name="direction" id="kmDirection" required> </div> <div class="km-form-g"> <label class="km-form-lbl"><span data-az>Özünü qısa təqdim et</span><span data-en>Briefly introduce yourself</span> <span class="req">*</span></label> <textarea class="km-form-ta" name="message" id="kmMessage" placeholder="..." required></textarea> </div> <div class="km-form-g"> <label class="km-form-lbl"><span data-az>CV yüklə</span><span data-en>Upload CV</span> <span style="font-size:.65rem;color:#6B6878;font-weight:400">(<span data-az>istəyə bağlı</span><span data-en>optional</span>)</span></label> <label class="km-file-zone"> <input type="file" name="cv" id="kmCvFile" accept=".pdf,.doc,.docx" style="display:none" onchange="kmFileChosen(this)"> <span class="fz-icon"></span> <span id="kmFileLabel">PDF, DOC — <b><span data-az>seç</span><span data-en>browse</span></b></span> </label> </div> <div class="km-modal-ftr" style="margin:0 -20px -20px"> <button type="button" class="km-btn-cancel" onclick="closeApplyModal()"><span data-az>Ləğv et</span><span data-en>Cancel</span></button> <button type="submit" class="km-btn-sub" id="kmSubmitBtn"><span data-az>Göndər →</span><span data-en>Submit →</span></button> </div> </form> </div> </div>
 </div>
 <script>
 function openApplyModal(){
@@ -811,7 +394,7 @@ async function submitApplyForm(e){
       message:formData.get('message'),
       cv_url:cv_url
     });
-    btn.textContent=isEn?'Submitted ✓':'Göndərildi ✓';
+    btn.textContent=isEn?'Submitted ':'Göndərildi ';
     btn.style.background='#16A34A';
     setTimeout(function(){
       closeApplyModal();
