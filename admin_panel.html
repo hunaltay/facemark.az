@@ -3414,6 +3414,12 @@ async function crudRenderList(key){
   var res = await q;
   var data = res.data, error = res.error;
   var subEl = cfg.sub ? document.getElementById(cfg.sub) : null;
+  // Update event tab badge (.ev-tab-num) with real DB count
+  var _evBadgeMap = {event_program:'agenda',event_speakers:'speakers',event_sponsors:'sponsors',event_tickets:'tickets'};
+  if (_evBadgeMap[key] && data) {
+    var _btn = document.querySelector('.ev-tab[onclick*="\'' + _evBadgeMap[key] + '\'"]');
+    if (_btn) { var _bdg = _btn.querySelector('.ev-tab-num'); if(_bdg) _bdg.textContent = data.length; }
+  }
   if(error){
     tbody.innerHTML = '<tr><td colspan="'+cfg.colspan+'" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənmə xətası: '+_tjEsc(error.message)+'</td></tr>';
     if(subEl) subEl.textContent = 'Xəta';
