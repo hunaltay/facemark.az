@@ -518,9 +518,11 @@ const heroStatsObs = new IntersectionObserver(entries => {
       document.querySelectorAll('.hs-n[data-target]').forEach(runCountUp);
     }
   });
-}, { threshold: 0.4 });
+}, { threshold: 0 });
 const heroStatsEl = document.querySelector('.hero-stats');
 if (heroStatsEl) heroStatsObs.observe(heroStatsEl);
+// Fallback: run immediately for elements already visible on load
+setTimeout(() => { document.querySelectorAll('.hs-n[data-target]').forEach(runCountUp); }, 200);
 
 // ── Language switch ──
 var _lang = 'az';
