@@ -24,7 +24,8 @@ create table profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   full_name text,
   role text not null default 'editor' check (role in ('admin','editor')),
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  email text
 );
 
 -- Yeni auth.users qeydiyyatinda avtomatik profil yaratmaq
@@ -74,6 +75,7 @@ create table events (
   date_end date,
   banner_url text,
   external_url text,
+  venue text,
   sort_order int not null default 0,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -189,7 +191,7 @@ create table job_openings (
 -- ------------------------------------------------------------
 create table applications (
   id uuid primary key default gen_random_uuid(),
-  form_type text not null check (form_type in ('career','team','contact','sponsorship')),
+  form_type text not null check (form_type in ('career','team','contact','sponsorship','partner','subscribe')),
   full_name text not null,
   email text,
   phone text,
@@ -257,6 +259,46 @@ create table activity_log (
   created_at timestamptz not null default now()
 );
 
+-- ------------------------------------------------------------
+-- 9) NOTIFICATIONS — admin panelde "Bildirisler" paneli
+-- ------------------------------------------------------------
+create table notifications (
+  id uuid primary key default gen_random_uuid(),
+  type text not null,
+  title text not null,
+  body text,
+  link text,
+  is_read boolean not null default false,
+  created_at timestamptz not null default now()
+);
+
+-- Yeni muraciet (applications) daxil olanda avtomatik bildiris yaradir
+create or replace function notify_new_application()
+returns trigger as $$
+begin
+  insert into public.notifications(type, title, body, link)
+  values (
+    'application',
+    case new.form_type
+      when 'career' then 'Yeni karyera müraciəti'
+      when 'team' then 'Yeni komanda müraciəti'
+      when 'sponsorship' then 'Yeni sponsorluq müraciəti'
+      when 'partner' then 'Yeni partnyorluq müraciəti'
+      when 'contact' then 'Yeni əlaqə mesajı'
+      when 'subscribe' then 'Yeni abunəçi'
+      else 'Yeni müraciət'
+    end,
+    trim(both ' — ' from coalesce(new.full_name,'') || case when new.email is not null then ' — ' || new.email else '' end),
+    '#inquiries'
+  );
+  return new;
+end;
+$$ language plpgsql security definer set search_path = public;
+
+create trigger trg_notify_new_application
+  after insert on applications
+  for each row execute function notify_new_application();
+
 -- ============================================================
 -- RLS — hamisinda aktiv edirik
 -- ============================================================
@@ -278,6 +320,7 @@ alter table tv_videos enable row level security;
 alter table air_programs enable row level security;
 alter table air_trainers enable row level security;
 alter table activity_log enable row level security;
+alter table notifications enable row level security;
 
 -- Komekci: cari istifadecinin admin/editor olub-olmadigini yoxlamaq
 create or replace function is_staff()
@@ -326,3 +369,6 @@ create policy "staff write" on air_programs for all using (is_staff()) with chec
 create policy "staff write" on air_trainers for all using (is_staff()) with check (is_staff());
 create policy "staff read log" on activity_log for select using (is_staff());
 create policy "staff insert log" on activity_log for insert with check (is_staff());
+create policy "staff read" on notifications for select using (is_staff());
+create policy "staff update" on notifications for update using (is_staff()) with check (is_staff());
+create policy "staff insert" on notifications for insert with check (is_staff());

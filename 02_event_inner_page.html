@@ -599,6 +599,8 @@ html.lang-az [data-en]{display:none!important}
 </div> <!-- SPONSOR POPUP -->
 <div class="ov" id="sp-popup" onclick="if(event.target===this)closeSpPopup()"> <div class="modal" style="max-width:340px"> <div class="modal-hdr"> <span class="modal-title" id="spp-name">Sponsor</span> <button class="modal-close" onclick="closeSpPopup()"></button> </div> <div class="modal-body"> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <div style="background:#fff;border-radius:8px;padding:8px 12px;display:flex;align-items:center;justify-content:center;min-width:80px;height:52px;flex-shrink:0"> <img id="spp-img" src="" style="height:36px;max-width:100px;object-fit:contain;filter:none"> </div> <div> <div id="spp-tier" style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px"></div> <div id="spp-url-wrap"><a id="spp-url" href="#" target="_blank" style="font-size:.76rem;color:var(--elec);font-weight:600;text-decoration:none">Sayta keçid →</a></div> </div> </div> <p id="spp-desc" style="font-size:.82rem;color:var(--muted);line-height:1.7;margin:0"></p> </div> </div>
 </div> <!-- SPEAKER MODALS (sample — aysel) --> <!-- Generic Speaker Modal Template (other speakers get same layout) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="assets/supabase-client.js"></script>
 <script>
 const SPEAKERS = {
   aysel:{name:"Aysel Süleymanova",co:"Bakcell · Kommunikasiya Direktoru",role:"MODERATOR",panel:"I Panel: AI işığında brendlər",img:"Members/Adsız tasarım (77)_1776232647.webp",bio:"Bakcell-də Kommunikasiya direktoru olaraq çalışan Aysel Süleymanova, telekommunikasiya sektorunda brend kommunikasiyası sahəsində geniş təcrübəyə malikdir.",linkedin:"https://linkedin.com",topic:"Telekommunikasiya sektorunda brend kommunikasiyası: Bakcell nümunəsi"},
@@ -881,12 +883,31 @@ function closeSponsModal(){
   document.getElementById('spons-ov').classList.remove('open');
   document.body.style.overflow='';
 }
-function submitSpons(){
+async function submitSpons(){
   const sirket = document.getElementById('sp-sirket').value.trim();
+  const pers = document.getElementById('sp-pers').value.trim();
   const email = document.getElementById('sp-email').value.trim();
+  const tel = document.getElementById('sp-tel').value.trim();
+  const pkgEl = document.getElementById('sp-pkg');
   if(!sirket||!email){alert('Zəhmət olmasa şirkət adı və e-poçt daxil edin.');return;}
-  alert(' Müraciətiniz qəbul edildi!\nYaxın 24 saat ərzində sizinlə əlaqə saxlayacağıq.\n\ne-poçt: '+email);
-  closeSponsModal();
+  try{
+    await submitApplication({
+      form_type: 'sponsorship',
+      full_name: pers || sirket,
+      email: email,
+      phone: tel || null,
+      subject: sirket + ' — ' + pkgEl.options[pkgEl.selectedIndex].text + ' (MMF 2026)'
+    });
+    alert(' Müraciətiniz qəbul edildi!\nYaxın 24 saat ərzində sizinlə əlaqə saxlayacağıq.\n\ne-poçt: '+email);
+    document.getElementById('sp-sirket').value='';
+    document.getElementById('sp-pers').value='';
+    document.getElementById('sp-email').value='';
+    document.getElementById('sp-tel').value='';
+    pkgEl.selectedIndex = 0;
+    closeSponsModal();
+  } catch(err){
+    alert('Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.');
+  }
 }
 function downloadSponsPdf(){
   alert('Sponsor paketi PDF hazırlanır...\n(Real sistemdə fayl yüklənərdi)');

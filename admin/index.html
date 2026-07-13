@@ -572,7 +572,7 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
 #authGate button:hover{background:#E8B84B;color:#1C1828}
 #authGate button:disabled{opacity:.6;cursor:default}
 #authGate .ag-err{color:#f87171;font-size:.72rem;margin-bottom:10px;display:none}
-#appRoot{display:none}
+#appRoot{display:none;width:100%;height:100vh}
 </style>
 </head>
 <body> <div id="authGate"> <div class="ag-box"> <div class="ag-logo">facemark <em>admin</em></div> <div class="ag-sub">Davam etmək üçün daxil olun</div> <div class="ag-err" id="agErr"></div> <input type="email" id="agEmail" placeholder="E-poçt" autocomplete="username"> <input type="password" id="agPass" placeholder="Şifrə" autocomplete="current-password"> <button id="agBtn" onclick="agLogin()">Daxil ol</button> </div>
@@ -580,53 +580,53 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
 <!-- ══════════════════════════════════════════════════════════
      SIDEBAR
 ═══════════════════════════════════════════════════════════ -->
-<aside class="sidebar"> <div class="sb-brand"> <svg height="26" viewBox="0 0 192 38" xmlns="http://www.w3.org/2000/svg" style="display:block;flex-shrink:0"> <text x="0" y="27" font-family="Georgia,'Times New Roman',serif" font-size="22" font-weight="700" fill="#ffffff" letter-spacing="-0.5">facemark</text> <text x="109" y="29" font-family="Georgia,'Times New Roman',serif" font-size="26" font-weight="400" font-style="italic" fill="#C4973A" letter-spacing="-0.5">15il</text> </svg> <span class="sb-admin-badge">Admin</span> </div> <!-- Active role selector --> <div style="padding:10px 12px;border-bottom:1px solid var(--border2)"> <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.25);margin-bottom:6px">Aktiv rol</div> <div style="display:flex;gap:4px;flex-wrap:wrap"> <button onclick="setRole('super')"      id="role-super"      class="role-btn active" style="font-size:.58rem;padding:3px 7px;background:var(--gold);color:#fff;border-color:var(--gold)">Super Admin</button> <button onclick="setRole('redaktor')"   id="role-redaktor"   class="role-btn" style="font-size:.58rem;padding:3px 7px">Kontent Redaktoru</button> <button onclick="setRole('moderator')"  id="role-moderator"  class="role-btn" style="font-size:.58rem;padding:3px 7px">Moderator</button> <button onclick="setRole('analitik')"   id="role-analitik"   class="role-btn" style="font-size:.58rem;padding:3px 7px">Analitik</button> <button onclick="setRole('musahideci')" id="role-musahideci" class="role-btn" style="font-size:.58rem;padding:3px 7px">Müşahidəçi</button> </div> </div> <!-- User --> <div class="sb-user"> <div class="sb-avatar">RH</div> <div> <div class="sb-uname" id="sb-uname-text">Rafiq Hunaltay</div> <div class="sb-urole" id="sb-urole-text">Super Administrator</div> </div> </div> <!-- Nav --> <div class="sb-section-label">Ümumi</div> <div class="sb-item active" onclick="showView('dashboard',this)"> <span class="sb-icon"></span> Dashboard
-  </div> <div class="sb-item" onclick="showView('inquiries',this)"> <span class="sb-icon"></span> Müraciətlər
-    <span class="sb-badge">7</span> </div> <div class="sb-item" onclick="showView('media',this)"> <span class="sb-icon"></span> Media Kitabxanası
-  </div> <div class="sb-section-label" id="sbl-events">Tədbirlər</div> <div class="sb-item" onclick="showView('events-list',this)" id="sbm-events"> <span class="sb-icon"></span> Tədbirlər
-  </div> <div class="sb-sub" onclick="showView('events-list',null)">Bütün tədbirlər</div> <div class="sb-sub" onclick="showView('event-new',null)">+ Yeni tədbir</div> <div class="sb-sub" onclick="showSubView('event-new','agenda')">Proqram / Agenda</div> <div class="sb-sub" onclick="showSubView('event-new','speakers')">Spikerlər</div> <div class="sb-sub" onclick="showSubView('event-new','sponsors')">Sponsorlar</div> <div class="sb-sub" onclick="showSubView('event-new','tickets')">Biletlər</div> <div class="sb-section-label" id="sbl-content">Məzmun</div> <div class="sb-item" onclick="showView('radar',this)" id="sbm-radar"> <span class="sb-icon"></span> Biznes Radar
-    <span class="sb-badge gold">3</span> </div> <div class="sb-sub" onclick="showView('radar',null)">Xəbərlər</div> <div class="sb-sub">Kateqoriyalar</div> <div class="sb-item" onclick="showView('fmr-tv',this)" id="sbm-fmr"> <span class="sb-icon"></span> FMR TV
-  </div> <div class="sb-sub" onclick="showView('fmr-tv',null)">Videolar</div> <div class="sb-sub">Plylistlər</div> <div class="sb-item" onclick="showView('marketing',this)" id="sbm-marketing"> <span class="sb-icon"></span> Marketing Air
-  </div> <div class="sb-sub" onclick="showView('marketing',null)">Xidmətlər</div> <div class="sb-sub">Portfolio / Case Studies</div> <div class="sb-sub">Müştərilər</div> <div class="sb-section-label" id="sbl-site">Sayt</div> <div class="sb-item" onclick="showView('homepage',this)" id="sbm-homepage"> <span class="sb-icon"></span> Ana Səhifə
-  </div> <div class="sb-item" onclick="showView('about',this)" id="sbm-about"> <span class="sb-icon"></span> Haqqımızda
-  </div> <div class="sb-item" onclick="showView('services',this)" id="sbm-services"> <span class="sb-icon"></span> Xidmətlərimiz
-  </div> <div class="sb-item" onclick="showView('partners',this)" id="sbm-partners"> <span class="sb-icon"></span> Partnyorlarımız
-  </div> <div class="sb-item" onclick="showView('clients',this)" id="sbm-clients"> <span class="sb-icon"></span> Müştərilər & Qurumlar
-  </div> <div class="sb-item" onclick="showView('testimonials',this)" id="sbm-testimonials"> <span class="sb-icon"></span> Rəylər
-  </div> <div class="sb-item" onclick="showView('team',this)" id="sbm-team"> <span class="sb-icon"></span> Komanda
-  </div> <div class="sb-item" onclick="showView('careers',this)" id="sbm-careers"> <span class="sb-icon"></span> Karyera
-  </div> <div class="sb-sub">Vakansiyalar</div> <div class="sb-sub">Müraciətlər <span class="sb-badge" style="position:static;margin-left:auto">4</span></div> <div class="sb-section-label" id="sbl-admin">Admin</div> <div class="sb-item" onclick="showView('users',this)" id="sbm-users"> <span class="sb-icon"></span> İstifadəçilər & Rollar
-  </div> <div class="sb-item" id="sbm-settings"> <span class="sb-icon"></span> Tənzimləmələr
-  </div> <div class="sb-bottom"> <div class="sb-item danger"> <span class="sb-icon"></span> Çıxış
+<aside class="sidebar"> <div class="sb-brand"> <svg height="26" viewBox="0 0 192 38" xmlns="http://www.w3.org/2000/svg" style="display:block;flex-shrink:0"> <text x="0" y="27" font-family="Georgia,'Times New Roman',serif" font-size="22" font-weight="700" fill="#ffffff" letter-spacing="-0.5">facemark</text> <text x="109" y="29" font-family="Georgia,'Times New Roman',serif" font-size="26" font-weight="400" font-style="italic" fill="#C4973A" letter-spacing="-0.5">15il</text> </svg> <span class="sb-admin-badge">Admin</span> </div> <!-- Active role selector --> <div style="padding:10px 12px;border-bottom:1px solid var(--border2)"> <div style="font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.25);margin-bottom:6px">Aktiv rol</div> <div style="display:flex;gap:4px;flex-wrap:wrap"> <button onclick="setRole('super')"      id="role-super"      class="role-btn active" style="font-size:.58rem;padding:3px 7px;background:var(--gold);color:#fff;border-color:var(--gold)">Super Admin</button> <button onclick="setRole('redaktor')"   id="role-redaktor"   class="role-btn" style="font-size:.58rem;padding:3px 7px">Kontent Redaktoru</button> <button onclick="setRole('moderator')"  id="role-moderator"  class="role-btn" style="font-size:.58rem;padding:3px 7px">Moderator</button> <button onclick="setRole('analitik')"   id="role-analitik"   class="role-btn" style="font-size:.58rem;padding:3px 7px">Analitik</button> <button onclick="setRole('musahideci')" id="role-musahideci" class="role-btn" style="font-size:.58rem;padding:3px 7px">Müşahidəçi</button> </div> </div> <!-- User --> <div class="sb-user"> <div class="sb-avatar" id="sb-avatar-el">RH</div> <div> <div class="sb-uname" id="sb-uname-text">Rafiq Hunaltay</div> <div class="sb-urole" id="sb-urole-text">Super Administrator</div> </div> </div> <!-- Nav --> <div class="sb-section-label">Ümumi</div> <div class="sb-item active" onclick="showView('dashboard',this)"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span> Dashboard
+  </div> <div class="sb-item" onclick="showView('inquiries',this)"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></span> Müraciətlər
+    <span class="sb-badge">7</span> </div> <div class="sb-item" onclick="showView('media',this)"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span> Media Kitabxanası
+  </div> <div class="sb-section-label" id="sbl-events">Tədbirlər</div> <div class="sb-item" onclick="showView('events-list',this)" id="sbm-events"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg></span> Tədbirlər
+  </div> <div class="sb-sub" onclick="showView('events-list',null)">Bütün tədbirlər</div> <div class="sb-sub" onclick="openEventNew()">+ Yeni tədbir</div> <div class="sb-sub" onclick="showSubView('event-new','agenda')">Proqram / Agenda</div> <div class="sb-sub" onclick="showSubView('event-new','speakers')">Spikerlər</div> <div class="sb-sub" onclick="showSubView('event-new','sponsors')">Sponsorlar</div> <div class="sb-sub" onclick="showSubView('event-new','tickets')">Biletlər</div> <div class="sb-section-label" id="sbl-content">Məzmun</div> <div class="sb-item" onclick="showView('radar',this)" id="sbm-radar"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span> Biznes Radar
+    <span class="sb-badge gold">3</span> </div> <div class="sb-sub" onclick="showView('radar',null)">Xəbərlər</div> <div class="sb-sub">Kateqoriyalar</div> <div class="sb-item" onclick="showView('fmr-tv',this)" id="sbm-fmr"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg></span> FMR TV
+  </div> <div class="sb-sub" onclick="showView('fmr-tv',null)">Videolar</div> <div class="sb-sub">Plylistlər</div> <div class="sb-item" onclick="showView('marketing',this)" id="sbm-marketing"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg></span> Marketing Air
+  </div> <div class="sb-sub" onclick="showView('marketing',null)">Xidmətlər</div> <div class="sb-sub">Portfolio / Case Studies</div> <div class="sb-sub">Müştərilər</div> <div class="sb-section-label" id="sbl-site">Sayt</div> <div class="sb-item" onclick="showView('homepage',this)" id="sbm-homepage"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span> Ana Səhifə
+  </div> <div class="sb-item" onclick="showView('about',this)" id="sbm-about"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span> Haqqımızda
+  </div> <div class="sb-item" onclick="showView('services',this)" id="sbm-services"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span> Xidmətlərimiz
+  </div> <div class="sb-item" onclick="showView('partners',this)" id="sbm-partners"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span> Partnyorlarımız
+  </div> <div class="sb-item" onclick="showView('clients',this)" id="sbm-clients"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="7" x2="9" y2="7.01"/><line x1="15" y1="7" x2="15" y2="7.01"/><line x1="9" y1="11" x2="9" y2="11.01"/><line x1="15" y1="11" x2="15" y2="11.01"/><line x1="9" y1="15" x2="9" y2="15.01"/><line x1="15" y1="15" x2="15" y2="15.01"/></svg></span> Müştərilər & Qurumlar
+  </div> <div class="sb-item" onclick="showView('testimonials',this)" id="sbm-testimonials"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span> Rəylər
+  </div> <div class="sb-item" onclick="showView('team',this)" id="sbm-team"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Komanda
+  </div> <div class="sb-item" onclick="showView('careers',this)" id="sbm-careers"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></span> Karyera
+  </div> <div class="sb-sub">Vakansiyalar</div> <div class="sb-sub">Müraciətlər <span class="sb-badge" style="position:static;margin-left:auto">4</span></div> <div class="sb-section-label" id="sbl-admin">Admin</div> <div class="sb-item" onclick="showView('users',this)" id="sbm-users"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span> İstifadəçilər & Rollar
+  </div> <div class="sb-item" id="sbm-settings"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Tənzimləmələr
+  </div> <div class="sb-bottom"> <div class="sb-item danger"> <span class="sb-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span> Çıxış
     </div> </div>
 </aside> <!-- ══════════════════════════════════════════════════════════
      MAIN
 ═══════════════════════════════════════════════════════════ -->
-<div class="main"> <!-- Top bar --> <div class="topbar"> <div class="topbar-breadcrumb"> <span>Facemark</span> <span class="topbar-sep">›</span> <span class="cur" id="breadcrumb-text">Dashboard</span> </div> <div class="topbar-right"> <div class="tb-search" style="position:relative"> <span style="color:var(--muted);font-size:.8rem"></span> <input type="text" id="search-input" placeholder="Axtarış..." autocomplete="off" oninput="doSearch(this.value)" onkeydown="searchKeyNav(event)" onfocus="showSearchResults()" style="outline:none"> <!-- Search results dropdown --> <div id="search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.12);z-index:999;max-height:320px;overflow-y:auto;min-width:320px"></div> </div> <div class="tb-icon-btn" id="notif-btn" title="Bildirişlər" onclick="toggleNotifPanel(event)" style="cursor:pointer"> <span class="tb-notif-dot"></span> </div> <div class="tb-icon-btn" id="refresh-btn" title="Yenilə" onclick="doRefresh(this)" style="cursor:pointer"></div> <div class="tb-user" onclick="toggleUserDropdown(event)"> <div class="tb-avatar">RH</div> <span class="tb-uname">Rafiq H.</span> <span style="color:var(--muted);font-size:.7rem" id="ud-arrow">▾</span> <!-- User dropdown panel --> <div class="user-dropdown" id="user-dropdown" onclick="event.stopPropagation()"> <div class="ud-header"> <div class="ud-avatar">RH</div> <div> <div class="ud-name">Rafiq Hunaltay</div> <div class="ud-email">rafiq@facemark.az</div> <div class="ud-role-chip">Super Admin</div> </div> </div> <div class="ud-body"> <div class="ud-item" onclick="openPanel('profile');closeAllDropdowns()"> <span class="ud-icon"></span> Profilim
-            </div> <div class="ud-item" onclick="openPanel('account');closeAllDropdowns()"> <span class="ud-icon"></span> Hesab Parametrləri
-            </div> <div class="ud-item" onclick="openPanel('password');closeAllDropdowns()"> <span class="ud-icon"></span> Şifrəni Dəyiş
-            </div> <div class="ud-item" onclick="toggleLang();closeAllDropdowns()"> <span class="ud-icon"></span> Dili Dəyiş
-              <span id="lang-label" style="margin-left:auto;font-size:.65rem;color:var(--muted);background:var(--bg2);border-radius:4px;padding:1px 6px;font-weight:700">AZ</span> </div> <div class="ud-item" onclick="openPanel('notif-settings');closeAllDropdowns()"> <span class="ud-icon"></span> Bildiriş Parametrləri
-            </div> <hr class="ud-divider"> <div class="ud-item" onclick="openPanel('activity');closeAllDropdowns()"> <span class="ud-icon"></span> Fəaliyyət Logu
-            </div> <div class="ud-item" onclick="openPanel('help');closeAllDropdowns()"> <span class="ud-icon"></span> Yardım & Dəstək
-            </div> <hr class="ud-divider"> <div class="ud-item ud-danger" onclick="openLogout();closeAllDropdowns()"> <span class="ud-icon"></span> Çıxış
+<div class="main"> <!-- Top bar --> <div class="topbar"> <div class="topbar-breadcrumb"> <span>Facemark</span> <span class="topbar-sep">›</span> <span class="cur" id="breadcrumb-text">Dashboard</span> </div> <div class="topbar-right"> <div class="tb-search" style="position:relative"> <span style="color:var(--muted);font-size:.8rem"></span> <input type="text" id="search-input" placeholder="Axtarış..." autocomplete="off" oninput="doSearch(this.value)" onkeydown="searchKeyNav(event)" onfocus="showSearchResults()" style="outline:none"> <!-- Search results dropdown --> <div id="search-results" style="display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.12);z-index:999;max-height:320px;overflow-y:auto;min-width:320px"></div> </div> <div class="tb-icon-btn" id="notif-btn" title="Bildirişlər" onclick="toggleNotifPanel(event)" style="cursor:pointer"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> <span class="tb-notif-dot"></span> </div> <div class="tb-icon-btn" id="refresh-btn" title="Yenilə" onclick="doRefresh(this)" style="cursor:pointer"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div> <div class="tb-user" onclick="toggleUserDropdown(event)"> <div class="tb-avatar" id="tb-avatar-el">RH</div> <span class="tb-uname" id="tb-uname-el">Rafiq H.</span> <span style="color:var(--muted);font-size:.7rem" id="ud-arrow">▾</span> <!-- User dropdown panel --> <div class="user-dropdown" id="user-dropdown" onclick="event.stopPropagation()"> <div class="ud-header"> <div class="ud-avatar" id="ud-avatar-el">RH</div> <div> <div class="ud-name" id="ud-name-el">Rafiq Hunaltay</div> <div class="ud-email" id="ud-email-el">rafiq@facemark.az</div> <div class="ud-role-chip" id="ud-role-el">Super Admin</div> </div> </div> <div class="ud-body"> <div class="ud-item" onclick="openPanel('profile');closeAllDropdowns()"> <span class="ud-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span> Profilim
+            </div> <div class="ud-item" onclick="openPanel('account');closeAllDropdowns()"> <span class="ud-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span> Hesab Parametrləri
+            </div> <div class="ud-item" onclick="openPanel('password');closeAllDropdowns()"> <span class="ud-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span> Şifrəni Dəyiş
+            </div> <div class="ud-item" onclick="toggleLang();closeAllDropdowns()"> <span class="ud-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span> Dili Dəyiş
+              <span id="lang-label" style="margin-left:auto;font-size:.65rem;color:var(--muted);background:var(--bg2);border-radius:4px;padding:1px 6px;font-weight:700">AZ</span> </div> <div class="ud-item" onclick="openPanel('notif-settings');closeAllDropdowns()"> <span class="ud-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span> Bildiriş Parametrləri
+            </div> <hr class="ud-divider"> <div class="ud-item" onclick="openPanel('activity');closeAllDropdowns()"> <span class="ud-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span> Fəaliyyət Logu
+            </div> <div class="ud-item" onclick="openPanel('help');closeAllDropdowns()"> <span class="ud-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span> Yardım & Dəstək
+            </div> <hr class="ud-divider"> <div class="ud-item ud-danger" onclick="openLogout();closeAllDropdowns()"> <span class="ud-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span> Çıxış
             </div> </div> </div> </div> </div> </div> <!-- Content --> <div class="content"> <!-- ════════════════════════════════════════════════════
          DASHBOARD
-    ═══════════════════════════════════════════════════════ --> <div class="view active" id="view-dashboard"> <div class="page-hdr"> <div> <div class="page-title">Salam, Rafiq</div> <div class="page-sub">Bugün 5 iyul 2026 · Cümə axşamı</div> </div> <div style="margin-left:auto;display:flex;gap:8px"> <button class="btn btn-outline" onclick="openHesabatPanel()">Hesabat al</button> <button class="btn btn-gold" onclick="openYeniElave()">+ Yeni əlavə et</button> </div> </div> <!-- Stats --> <!-- ── 6 Əsas Metrik Kart (2×3) ───────────────────────── --> <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px"> <!-- 1. Aktiv Tədbirlər --> <div class="stat-card" style="border-left:3px solid var(--gold);display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Aktiv Tədbirlər</div> <div class="stat-val" id="stat-active-events" style="font-size:1.45rem">—</div> <div class="stat-delta up" id="stat-active-events-sub" style="margin-top:2px">Yüklənir...</div> </div> </div> <!-- 2. Bilet Satışı --> <div class="stat-card" style="border-left:3px solid var(--blue);display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Bilet Satışı</div> <div style="display:flex;align-items:baseline;gap:8px"> <div class="stat-val" style="font-size:1.45rem">1,247</div> <div style="font-size:.72rem;font-weight:700;color:var(--green)">₼ 93,230</div> </div> <div class="stat-delta up" style="margin-top:2px">▲ +18% ötən ilə nəzərən</div> </div> </div> <!-- 3. Yeni Müraciət --> <div class="stat-card" style="border-left:3px solid var(--orange);display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Yeni Müraciət</div> <div class="stat-val" id="stat-new-inquiries" style="font-size:1.45rem">—</div> <div class="stat-delta" style="color:var(--orange);margin-top:2px"> Cavablanmamış</div> </div> </div> <!-- 4. Aktiv Təlimlər üzrə Satış --> <div class="stat-card" style="border-left:3px solid #8B5CF6;display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Aktiv Təlimlər üzrə Satış</div> <div style="display:flex;align-items:baseline;gap:8px"> <div class="stat-val" style="font-size:1.45rem">186</div> <div style="font-size:.72rem;font-weight:700;color:var(--green)">₼ 14,880</div> </div> <div class="stat-delta up" style="margin-top:2px">▲ +24 bu ay</div> </div> </div> <!-- 5. FMR TV Video Sayı --> <div class="stat-card" style="border-left:3px solid #E53E3E;display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:#E53E3E;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">FMR TV Video Sayı</div> <div class="stat-val" style="font-size:1.45rem">47</div> <div class="stat-delta up" style="margin-top:2px">▲ +3 bu həftə</div> </div> </div> <!-- 6. Biznes Radar Xəbər Sayı --> <div class="stat-card" style="border-left:3px solid #7C3AED;display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Biznes Radar Xəbər Sayı</div> <div class="stat-val" style="font-size:1.45rem">34</div> <div class="stat-delta up" style="margin-top:2px">▲ +3 bu həftə</div> </div> </div> </div> <!-- ── Forma & Abunə Məlumatları ─────────────────────── --> <div style="margin-bottom:20px"> <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"> <div> <div style="font-size:.8rem;font-weight:800">Forma Girişləri & Abunələr</div> <div style="font-size:.65rem;color:var(--muted);margin-top:2px">Saytdakı bütün formalar üzrə cəmi</div> </div> <button class="btn btn-outline btn-sm"> Export CSV</button> </div> <!-- 5 stat cards --> <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:14px"> <!-- 1. Müraciət et --> <div class="stat-card" style="border-top:3px solid var(--blue);border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('inquiries')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.04em">Müraciətlər</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px">247</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Cəmi müraciət et formu</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700">▲ +42 bu ay</span> <span style="font-size:.6rem;color:var(--muted)">7 cavabsız</span> </div> </div> <!-- 2. Partnyor müraciətləri --> <div class="stat-card" style="border-top:3px solid var(--gold);border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('partner')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.04em">Partnyorlar</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px">83</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Cəmi partnyor müraciəti</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700">▲ +11 bu ay</span> <span style="font-size:.6rem;color:var(--muted)">3 cavabsız</span> </div> </div> <!-- 3. Tədbirlər abunə --> <div class="stat-card" style="border-top:3px solid var(--green);border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('subscribe')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.04em">Tədbir Abunəsi</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px">1,840</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Footer e-poçt abunəsi</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700">▲ +128 bu ay</span> <span style="font-size:.6rem;color:var(--muted)">98% aktiv</span> </div> </div> <!-- 4. CV göndərənlər --> <div class="stat-card" style="border-top:3px solid var(--orange);border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('cv')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.04em">CV Göndərişlər</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px">62</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Karyera & Komandamız formu</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700">▲ +8 bu ay</span> <span style="font-size:.6rem;color:var(--muted)">4 yeni</span> </div> </div> <!-- 5. Biznes Radar abunə --> <div class="stat-card" style="border-top:3px solid #7C3AED;border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('radar-sub')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:.04em">Radar Abunəsi</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px">3,217</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Biznes Radar xəbər abunəsi</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700">▲ +204 bu ay</span> <span style="font-size:.6rem;color:var(--muted)">94% aktiv</span> </div> </div> <!-- 6. Sponsor müraciətləri --> <div class="stat-card" style="border-top:3px solid #0891B2;border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('sponsor')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:#0891B2;text-transform:uppercase;letter-spacing:.04em">Sponsor</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px">38</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Sponsor ol formu müraciəti</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700">▲ +6 bu ay</span> <span style="font-size:.6rem;color:var(--muted)">2 cavabsız</span> </div> </div> </div> </div> <!-- ── Aktiv tədbirlər üzrə bilet satışları ────────── --> <div class="card" style="margin-bottom:20px"> <div class="card-hdr"> <span class="card-hdr-title">Aktiv tədbirlər üzrə bilet satışları</span> <div style="display:flex;gap:6px;align-items:center"> <span style="font-size:.65rem;color:var(--muted)">Cəmi gəlir:</span> <span style="font-size:.78rem;font-weight:800;color:var(--green)">₼ 93,230</span> <button class="btn btn-sm btn-outline" onclick="showView('events-list',null)">Hamısına bax →</button> </div> </div> <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0"> <!-- MMF 2026 --> <div style="padding:18px 20px;border-right:1px solid var(--border);cursor:pointer" onclick="showView('event-new',null)"> <div style="font-size:.73rem;font-weight:800;margin-bottom:3px">Milli Marketinq Forumu 2026</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:10px">Bakı Konqres Mərkəzi · 6 İyun 2026</div> <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px"> <div style="font-size:1.5rem;font-weight:800">420</div> <div style="font-size:.72rem;color:var(--muted)">/ 600 bilet</div> <div style="font-size:.82rem;font-weight:800;color:var(--green);margin-left:auto">₼ 36,180</div> </div> <div class="prog-bar" style="height:6px;margin-bottom:4px"><div class="prog-fill" style="width:70%"></div></div> <div style="display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted)"> <span>70% dolub</span><span>180 yer qalıb</span> </div> </div> <!-- HR Forum --> <div style="padding:18px 20px;border-right:1px solid var(--border);cursor:pointer" onclick="showView('events-list',null)"> <div style="font-size:.73rem;font-weight:800;margin-bottom:3px">Milli İnsan Resursları Forumu 2026</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:10px">Baku Marriott Hotel · 16 May 2026</div> <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px"> <div style="font-size:1.5rem;font-weight:800">310</div> <div style="font-size:.72rem;color:var(--muted)">/ 400 bilet</div> <div style="font-size:.82rem;font-weight:800;color:var(--green);margin-left:auto">₼ 18,190</div> </div> <div class="prog-bar" style="height:6px;margin-bottom:4px"><div class="prog-fill" style="width:77%"></div></div> <div style="display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted)"> <span>77% dolub</span><span>90 yer qalıb</span> </div> </div> <!-- Blogger Forum --> <div style="padding:18px 20px;cursor:pointer" onclick="showView('events-list',null)"> <div style="font-size:.73rem;font-weight:800;margin-bottom:3px">Bloger & İnfluenser Forumu 2026</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:10px">Dreamland Baku · 10–11 İyun 2026</div> <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px"> <div style="font-size:1.5rem;font-weight:800">517</div> <div style="font-size:.72rem;color:var(--muted)">/ 800 bilet</div> <div style="font-size:.82rem;font-weight:800;color:var(--green);margin-left:auto">₼ 33,960</div> </div> <div class="prog-bar" style="height:6px;margin-bottom:4px"><div class="prog-fill" style="width:65%"></div></div> <div style="display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted)"> <span>65% dolub</span><span>283 yer qalıb</span> </div> </div> </div> </div> <!-- ── Son Fəaliyyət ──────────────────────────────────── --> <div class="card" style="margin-bottom:20px"> <div class="card-hdr"> <span class="card-hdr-title">Son Fəaliyyət</span> </div> <div class="card-body" id="dashboard-activity-list" style="padding:10px 14px;display:grid;grid-template-columns:repeat(2,1fr);gap:0"> <div style="grid-column:1/-1;padding:10px;color:var(--muted);font-size:.72rem;text-align:center">Yüklənir...</div> </div> </div> <!-- ── Son Forma Girişləri ──────────────────────────── --> <div class="card" style="margin-bottom:20px"> <div class="card-hdr"> <span class="card-hdr-title">Son Forma Girişləri</span> <div style="display:flex;gap:6px;align-items:center"> <span id="forma-count" style="font-size:.65rem;color:var(--muted)">10 giriş</span> <select id="forma-filter" onchange="filterFormEntries(this.value)"
-              style="font-size:.65rem;padding:4px 8px;border:1.5px solid var(--border);border-radius:6px;background:var(--bg);color:var(--dark);outline:none;cursor:pointer"> <option value="">Bütün növlər</option> <option value="Müraciət">Müraciət</option> <option value="Partnyor">Partnyor</option> <option value="Sponsor">Sponsor</option> <option value="Abunə">Abunə</option> <option value="Radar Abunəsi">Radar Abunəsi</option> <option value="CV">CV</option> </select> </div> </div> <div class="tbl-wrap"> <table> <thead><tr> <th>Ad / Email</th><th>Forma növü</th><th>Mənbə səhifə</th><th>Tarix</th><th>Status</th><th></th> </tr></thead> <tbody id="forma-tbody"> <tr data-type="Müraciət"> <td><div style="font-size:.73rem;font-weight:700">Kamran İsmayılov</div><div style="font-size:.62rem;color:var(--muted)">kamran@kapital.az</div></td> <td><span class="status-badge" style="background:rgba(49,130,206,.1);color:var(--blue)">Müraciət</span></td> <td style="font-size:.68rem;color:var(--muted)">Marketing Air</td> <td style="font-size:.68rem;color:var(--muted)">Bu gün · 09:14</td> <td><span class="status-badge status-new">Yeni</span></td> <td><button class="btn btn-sm btn-gold" onclick="openEntryDetail(0)">Bax</button></td> </tr> <tr data-type="Abunə"> <td><div style="font-size:.73rem;font-weight:700">leyla.m@mail.ru</div><div style="font-size:.62rem;color:var(--muted)">—</div></td> <td><span class="status-badge" style="background:rgba(56,161,105,.1);color:var(--green)">Abunə</span></td> <td style="font-size:.68rem;color:var(--muted)">Ana səhifə footer</td> <td style="font-size:.68rem;color:var(--muted)">Bu gün · 08:52</td> <td><span class="status-badge status-active">Aktiv</span></td> <td><button class="btn btn-sm btn-outline" style="opacity:.4;cursor:default">—</button></td> </tr> <tr data-type="CV"> <td><div style="font-size:.73rem;font-weight:700">Rauf Əlizadə</div><div style="font-size:.62rem;color:var(--muted)">rauf.a@gmail.com</div></td> <td><span class="status-badge" style="background:rgba(221,107,32,.1);color:var(--orange)">CV</span></td> <td style="font-size:.68rem;color:var(--muted)">Karyera səhifəsi</td> <td style="font-size:.68rem;color:var(--muted)">Dünən · 17:30</td> <td><span class="status-badge status-pending">Baxılır</span></td> <td><button class="btn btn-sm btn-outline" onclick="openEntryDetail(2)">Bax</button></td> </tr> <tr data-type="Sponsor"> <td><div style="font-size:.73rem;font-weight:700">Kamran İsmayılov</div><div style="font-size:.62rem;color:var(--muted)">kamran@kapital.az</div></td> <td><span class="status-badge" style="background:rgba(8,145,178,.1);color:#0891B2">Sponsor</span></td> <td style="font-size:.68rem;color:var(--muted)">Tədbirlər / Sponsor ol</td> <td style="font-size:.68rem;color:var(--muted)">Dünən · 15:30</td> <td><span class="status-badge status-new">Yeni</span></td> <td><button class="btn btn-sm btn-gold" onclick="openEntryDetail(3)">Bax</button></td> </tr> <tr data-type="Partnyor"> <td><div style="font-size:.73rem;font-weight:700">Azərsu ASC</div><div style="font-size:.62rem;color:var(--muted)">info@azersu.az</div></td> <td><span class="status-badge" style="background:rgba(196,151,58,.1);color:var(--gold)">Partnyor</span></td> <td style="font-size:.68rem;color:var(--muted)">Haqqımızda</td> <td style="font-size:.68rem;color:var(--muted)">Dünən · 14:11</td> <td><span class="status-badge status-pending">Gözləyir</span></td> <td><button class="btn btn-sm btn-outline" onclick="openEntryDetail(4)">Bax</button></td> </tr> <tr data-type="Radar Abunəsi"> <td><div style="font-size:.73rem;font-weight:700">radar.user@biz.az</div><div style="font-size:.62rem;color:var(--muted)">—</div></td> <td><span class="status-badge" style="background:rgba(124,58,237,.1);color:#7C3AED">Radar Abunəsi</span></td> <td style="font-size:.68rem;color:var(--muted)">Biznes Radar</td> <td style="font-size:.68rem;color:var(--muted)">Dünən · 11:48</td> <td><span class="status-badge status-active">Aktiv</span></td> <td><button class="btn btn-sm btn-outline" style="opacity:.4;cursor:default">—</button></td> </tr> <tr data-type="CV"> <td><div style="font-size:.73rem;font-weight:700">Günel Rəsulova</div><div style="font-size:.62rem;color:var(--muted)">gunel@startup.az</div></td> <td><span class="status-badge" style="background:rgba(221,107,32,.1);color:var(--orange)">CV</span></td> <td style="font-size:.68rem;color:var(--muted)">Komandamız səhifəsi</td> <td style="font-size:.68rem;color:var(--muted)">02.07 · 10:05</td> <td><span class="status-badge status-new">Yeni</span></td> <td><button class="btn btn-sm btn-outline" onclick="openEntryDetail(6)">Bax</button></td> </tr> <tr data-type="Müraciət"> <td><div style="font-size:.73rem;font-weight:700">Nigar Əliyeva</div><div style="font-size:.62rem;color:var(--muted)">nigar@mail.ru</div></td> <td><span class="status-badge" style="background:rgba(49,130,206,.1);color:var(--blue)">Müraciət</span></td> <td style="font-size:.68rem;color:var(--muted)">Əlaqə səhifəsi</td> <td style="font-size:.68rem;color:var(--muted)">01.07 · 16:22</td> <td><span class="status-badge status-pending">Gözləyir</span></td> <td><button class="btn btn-sm btn-outline" onclick="openEntryDetail(0)">Bax</button></td> </tr> <tr data-type="Abunə"> <td><div style="font-size:.73rem;font-weight:700">anar.b@gmail.com</div><div style="font-size:.62rem;color:var(--muted)">—</div></td> <td><span class="status-badge" style="background:rgba(56,161,105,.1);color:var(--green)">Abunə</span></td> <td style="font-size:.68rem;color:var(--muted)">Tədbirlər səhifəsi</td> <td style="font-size:.68rem;color:var(--muted)">01.07 · 12:44</td> <td><span class="status-badge status-active">Aktiv</span></td> <td><button class="btn btn-sm btn-outline" style="opacity:.4;cursor:default">—</button></td> </tr> <tr data-type="Partnyor"> <td><div style="font-size:.73rem;font-weight:700">Bakcell MMC</div><div style="font-size:.62rem;color:var(--muted)">partner@bakcell.az</div></td> <td><span class="status-badge" style="background:rgba(196,151,58,.1);color:var(--gold)">Partnyor</span></td> <td style="font-size:.68rem;color:var(--muted)">Tədbirlər / Sponsor ol</td> <td style="font-size:.68rem;color:var(--muted)">30.06 · 10:18</td> <td><span class="status-badge status-new">Yeni</span></td> <td><button class="btn btn-sm btn-outline" onclick="openEntryDetail(4)">Bax</button></td> </tr> </tbody> </table> </div> </div> </div> <!-- ════════════════════════════════════════════════════
+    ═══════════════════════════════════════════════════════ --> <div class="view active" id="view-dashboard"> <div class="page-hdr"> <div> <div class="page-title" id="dashboard-greeting">Salam</div> <div class="page-sub">Bugün 5 iyul 2026 · Cümə axşamı</div> </div> <div style="margin-left:auto;display:flex;gap:8px"> <button class="btn btn-outline" onclick="openHesabatPanel()">Hesabat al</button> <button class="btn btn-gold" onclick="openYeniElave()">+ Yeni əlavə et</button> </div> </div> <!-- Stats --> <!-- ── 6 Əsas Metrik Kart (2×3) ───────────────────────── --> <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px"> <!-- 1. Aktiv Tədbirlər --> <div class="stat-card" style="border-left:3px solid var(--gold);display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Aktiv Tədbirlər</div> <div class="stat-val" id="stat-active-events" style="font-size:1.45rem">—</div> <div class="stat-delta up" id="stat-active-events-sub" style="margin-top:2px">Yüklənir...</div> </div> </div> <!-- 2. Bilet Satışı --> <div class="stat-card" style="border-left:3px solid var(--blue);display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Bilet Satışı</div> <div class="stat-val" style="font-size:1.05rem;color:var(--muted)">Gözlənilir</div> <div class="stat-delta" style="margin-top:2px;color:var(--muted)">Fintech ödəniş API inteqrasiyası</div> </div> </div> <!-- 3. Yeni Müraciət --> <div class="stat-card" style="border-left:3px solid var(--orange);display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Yeni Müraciət</div> <div class="stat-val" id="stat-new-inquiries" style="font-size:1.45rem">—</div> <div class="stat-delta" style="color:var(--orange);margin-top:2px"> Cavablanmamış</div> </div> </div> <!-- 4. Aktiv Təlimlər üzrə Satış --> <div class="stat-card" style="border-left:3px solid #8B5CF6;display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:#8B5CF6;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Aktiv Təlimlər üzrə Satış</div> <div class="stat-val" style="font-size:1.05rem;color:var(--muted)">Gözlənilir</div> <div class="stat-delta" style="margin-top:2px;color:var(--muted)">Fintech ödəniş API inteqrasiyası</div> </div> </div> <!-- 5. FMR TV Video Sayı --> <div class="stat-card" style="border-left:3px solid #E53E3E;display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:#E53E3E;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">FMR TV Video Sayı</div> <div class="stat-val" id="stat-tv-count" style="font-size:1.45rem">—</div> <div class="stat-delta" id="stat-tv-sub" style="margin-top:2px">Yüklənir...</div> </div> </div> <!-- 6. Biznes Radar Xəbər Sayı --> <div class="stat-card" style="border-left:3px solid #7C3AED;display:flex;align-items:center;padding:14px 18px"> <div style="flex:1"> <div style="font-size:.6rem;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px">Biznes Radar Xəbər Sayı</div> <div class="stat-val" style="font-size:1.05rem;color:var(--muted)">—</div> <div class="stat-delta" style="margin-top:2px;color:var(--muted)">2-ci mərhələdə (Biznes Radar)</div> </div> </div> </div> <!-- ── Forma & Abunə Məlumatları ─────────────────────── --> <div style="margin-bottom:20px"> <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"> <div> <div style="font-size:.8rem;font-weight:800">Forma Girişləri & Abunələr</div> <div style="font-size:.65rem;color:var(--muted);margin-top:2px">Saytdakı bütün formalar üzrə cəmi</div> </div> <button class="btn btn-outline btn-sm"> Export CSV</button> </div> <!-- 5 stat cards --> <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:14px"> <!-- 1. Müraciət et --> <div class="stat-card" style="border-top:3px solid var(--blue);border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('inquiries')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.04em">Müraciətlər</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px" id="fg-inquiries-total">—</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Cəmi müraciət et formu</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700" id="fg-inquiries-month">—</span> <span style="font-size:.6rem;color:var(--muted)" id="fg-inquiries-new">—</span> </div> </div> <!-- 2. Partnyor müraciətləri --> <div class="stat-card" style="border-top:3px solid var(--gold);border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('partner')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.04em">Partnyorlar</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px" id="fg-partner-total">—</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Cəmi partnyor müraciəti</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700" id="fg-partner-month">—</span> <span style="font-size:.6rem;color:var(--muted)" id="fg-partner-new">—</span> </div> </div> <!-- 3. Tədbirlər abunə --> <div class="stat-card" style="border-top:3px solid var(--green);border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('subscribe')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.04em">Tədbir Abunəsi</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px" id="fg-subscribe-total">—</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Footer e-poçt abunəsi</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700" id="fg-subscribe-month">—</span> <span style="font-size:.6rem;color:var(--muted)"></span> </div> </div> <!-- 4. CV göndərənlər --> <div class="stat-card" style="border-top:3px solid var(--orange);border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('cv')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.04em">CV Göndərişlər</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px" id="fg-cv-total">—</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Karyera & Komandamız formu</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700" id="fg-cv-month">—</span> <span style="font-size:.6rem;color:var(--muted)" id="fg-cv-new">—</span> </div> </div> <!-- 5. Biznes Radar abunə --> <div class="stat-card" style="border-top:3px solid #7C3AED;border-left:none;padding:14px;opacity:.6"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:.04em">Radar Abunəsi</div> </div> <div style="font-size:1.05rem;font-weight:800;line-height:1;margin-bottom:3px;color:var(--muted)">—</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">2-ci mərhələdə (Biznes Radar)</div> </div> <!-- 6. Sponsor müraciətləri --> <div class="stat-card" style="border-top:3px solid #0891B2;border-left:none;padding:14px;cursor:pointer" onclick="openFormDetail('sponsor')"> <div style="margin-bottom:8px"> <div style="font-size:.6rem;font-weight:700;color:#0891B2;text-transform:uppercase;letter-spacing:.04em">Sponsor</div> </div> <div style="font-size:1.6rem;font-weight:800;line-height:1;margin-bottom:3px" id="fg-sponsor-total">—</div> <div style="font-size:.62rem;color:var(--muted);margin-bottom:8px">Sponsor ol formu müraciəti</div> <div style="border-top:1px solid var(--border);padding-top:7px;display:flex;justify-content:space-between;align-items:center"> <span style="font-size:.62rem;color:var(--green);font-weight:700" id="fg-sponsor-month">—</span> <span style="font-size:.6rem;color:var(--muted)" id="fg-sponsor-new">—</span> </div> </div> </div> </div> <!-- ── Aktiv tədbirlər ────────── --> <div class="card" style="margin-bottom:20px"> <div class="card-hdr"> <span class="card-hdr-title">Aktiv tədbirlər</span> <div style="display:flex;gap:6px;align-items:center"> <span style="font-size:.65rem;color:var(--muted)">Bilet satışı/gəlir: Fintech API gözlənilir</span> <button class="btn btn-sm btn-outline" onclick="showView('events-list',null)">Hamısına bax →</button> </div> </div> <div id="dashboard-active-events" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0"> <div style="grid-column:1/-1;padding:18px 20px;color:var(--muted);font-size:.72rem;text-align:center">Yüklənir...</div> </div> </div> <!-- ── Son Fəaliyyət ──────────────────────────────────── --> <div class="card" style="margin-bottom:20px"> <div class="card-hdr"> <span class="card-hdr-title">Son Fəaliyyət</span> </div> <div class="card-body" id="dashboard-activity-list" style="padding:10px 14px;display:grid;grid-template-columns:repeat(2,1fr);gap:0"> <div style="grid-column:1/-1;padding:10px;color:var(--muted);font-size:.72rem;text-align:center">Yüklənir...</div> </div> </div> <!-- ── Son Forma Girişləri ──────────────────────────── --> <div class="card" style="margin-bottom:20px"> <div class="card-hdr"> <span class="card-hdr-title">Son Forma Girişləri</span> <div style="display:flex;gap:6px;align-items:center"> <span id="forma-count" style="font-size:.65rem;color:var(--muted)">10 giriş</span> <select id="forma-filter" onchange="filterFormEntries(this.value)"
+              style="font-size:.65rem;padding:4px 8px;border:1.5px solid var(--border);border-radius:6px;background:var(--bg);color:var(--dark);outline:none;cursor:pointer"> <option value="">Bütün növlər</option> <option value="Müraciət">Müraciət</option> <option value="Partnyor">Partnyor</option> <option value="Sponsor">Sponsor</option> <option value="Abunə">Abunə</option> <option value="CV">CV</option> </select> </div> </div> <div class="tbl-wrap"> <table> <thead><tr> <th>Ad / Email</th><th>Forma növü</th><th>Mənbə səhifə</th><th>Tarix</th><th>Status</th><th></th> </tr></thead> <tbody id="forma-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- ════════════════════════════════════════════════════
          EVENTS LIST
-    ═══════════════════════════════════════════════════════ --> <div class="view" id="view-events-list"> <div class="page-hdr"> <div> <div class="page-title"> Tədbirlər</div> <div class="page-sub">2026-cı ildə cəmi 8 tədbir planlaşdırılıb</div> </div> <div style="margin-left:auto;display:flex;gap:8px"> <button class="btn btn-outline"> Export</button> <button class="btn btn-gold" onclick="showView('event-new',null)">+ Yeni Tədbir</button> </div> </div> <!-- Filter tabs --> <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap" id="events-tabs"> <button class="btn btn-dark btn-sm ev-tab-btn active" onclick="filterEvents('',this)">Hamısı <span class="inq-cnt">8</span></button> <button class="btn btn-outline btn-sm ev-tab-btn" onclick="filterEvents('aktiv',this)">● Aktiv <span class="inq-cnt">3</span></button> <button class="btn btn-outline btn-sm ev-tab-btn" onclick="filterEvents('draft',this)">○ Draft <span class="inq-cnt">2</span></button> <button class="btn btn-outline btn-sm ev-tab-btn" onclick="filterEvents('tamamlandi',this)"> Tamamlandı <span class="inq-cnt">3</span></button> </div> <!-- Events sub count line --> <div id="events-sub-line" style="font-size:.72rem;color:var(--muted);margin-bottom:10px"></div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr> <th>Tədbir adı</th><th>Tarix</th><th>Yer</th> <th>Bilet növü</th><th>Qeydiyyat</th><th>Status</th><th>Əməliyyat</th> </tr></thead> <tbody id="events-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- ════════════════════════════════════════════════════
+    ═══════════════════════════════════════════════════════ --> <div class="view" id="view-events-list"> <div class="page-hdr"> <div> <div class="page-title"> Tədbirlər</div> <div class="page-sub">2026-cı ildə cəmi 8 tədbir planlaşdırılıb</div> </div> <div style="margin-left:auto;display:flex;gap:8px"> <button class="btn btn-outline"> Export</button> <button class="btn btn-gold" onclick="openEventNew()">+ Yeni Tədbir</button> </div> </div> <!-- Filter tabs --> <div style="display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap" id="events-tabs"> <button class="btn btn-dark btn-sm ev-tab-btn active" onclick="filterEvents('',this)">Hamısı <span class="inq-cnt">8</span></button> <button class="btn btn-outline btn-sm ev-tab-btn" onclick="filterEvents('aktiv',this)">● Aktiv <span class="inq-cnt">3</span></button> <button class="btn btn-outline btn-sm ev-tab-btn" onclick="filterEvents('draft',this)">○ Draft <span class="inq-cnt">2</span></button> <button class="btn btn-outline btn-sm ev-tab-btn" onclick="filterEvents('tamamlandi',this)"> Tamamlandı <span class="inq-cnt">3</span></button> </div> <!-- Events sub count line --> <div id="events-sub-line" style="font-size:.72rem;color:var(--muted);margin-bottom:10px"></div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr> <th>Tədbir adı</th><th>Tarix</th><th>Yer</th> <th>Bilet növü</th><th>Qeydiyyat</th><th>Status</th><th>Əməliyyat</th> </tr></thead> <tbody id="events-tbody"><tr><td colspan="7" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- ════════════════════════════════════════════════════
          EVENT EDIT/NEW — Multi-tab form
     ═══════════════════════════════════════════════════════ --> <div class="view" id="view-event-new"> <div class="page-hdr"> <div> <div class="page-title"> Milli Marketinq Forumu 2026</div> <div class="page-sub">Redaktə edir: mmf-2026</div> </div> <div style="margin-left:auto;display:flex;gap:8px"> <button class="btn btn-outline" onclick="showView('events-list',null)">← Geri</button> <button class="btn btn-outline"> Saytda bax</button> <button class="btn btn-dark" onclick="saveEventBasic()">Qaralama saxla</button> <button class="btn btn-gold" onclick="saveEventBasic()"> Yayımla</button> </div> </div> <!-- Event tabs --> <div class="ev-tabs"> <div class="ev-tab active" onclick="switchEvTab('basic',this)"> Əsas Məlumat
         </div> <div class="ev-tab" onclick="switchEvTab('agenda',this)"> Proqram
-          <span class="ev-tab-num">12</span> </div> <div class="ev-tab" onclick="switchEvTab('speakers',this)"> Spikerlər
-          <span class="ev-tab-num">8</span> </div> <div class="ev-tab" onclick="switchEvTab('sponsors',this)"> Sponsorlar
-          <span class="ev-tab-num">5</span> </div> <div class="ev-tab" onclick="switchEvTab('tickets',this)"> Biletlər
-          <span class="ev-tab-num">3</span> </div> <div class="ev-tab" onclick="switchEvTab('registrations',this)"> Qeydiyyatlar
-          <span class="ev-tab-num">420</span> </div> </div> <!-- TAB: Basic info --> <div id="evtab-basic"> <div style="display:grid;grid-template-columns:1fr 300px;gap:16px"> <div> <div class="form-section"> <div class="form-section-title">Tədbir adı</div> <div class="lang-tabs"> <button class="lang-tab active"> AZ</button> <button class="lang-tab"> EN</button> </div> <div class="form-row"> <div class="form-group"> <label>Azərbaycanca ad</label> <input type="text" id="ev-title-az" value="Milli Marketinq Forumu 2026"> </div> </div> <div class="form-row"> <div class="form-group"> <label>İngiliscə ad</label> <input type="text" id="ev-title-en" value="National Marketing Forum 2026"> </div> </div> <div class="form-row"> <div class="form-group"> <label>URL Slug</label> <input type="text" id="ev-slug" value="mmf-2026"> <span class="form-hint">facemark.az/events/mmf-2026</span> </div> </div> </div> <div class="form-section"> <div class="form-section-title">Təsvir</div> <div class="lang-tabs"> <button class="lang-tab active"> AZ</button> <button class="lang-tab"> EN</button> </div> <div class="form-group"> <label>Azərbaycanca təsvir</label> <textarea id="ev-desc-az" style="min-height:100px">Azərbaycanda marketinq sənayesinin ən böyük illik forum tədbiridır. Peşəkarları bir araya gətirir, sənayenin gələcəyini müzakirə edirlər.</textarea> </div> </div> <div class="form-section"> <div class="form-section-title">Tarix & Yer</div> <div class="form-row cols3"> <div class="form-group"> <label>Başlanğıc tarixi</label> <input type="date" id="ev-date-start" value="2026-06-06"> </div> <div class="form-group"> <label>Bitmə tarixi</label> <input type="date" id="ev-date-end" value="2026-06-06"> </div> <div class="form-group"> <label>Başlanğıc saatı</label> <input type="text" value="09:00"> </div> </div> <div class="form-row cols2"> <div class="form-group"> <label>Məkan adı</label> <input type="text" id="ev-venue" value="Bakı Konqres Mərkəzi"> </div> <div class="form-group"> <label>Məkan ünvanı</label> <input type="text" value="H. Əliyev pr., Bakı"> </div> </div> </div> </div> <!-- Right panel --> <div style="display:flex;flex-direction:column;gap:14px"> <div class="form-section"> <div class="form-section-title">Status</div> <select id="ev-status"> <option value="active">● Aktiv (Saytda görünür)</option> <option value="upcoming">○ Draft (Yalnız admin)</option> <option value="past"> Tamamlandı</option> <option value="partner"> Partnyor tədbiri</option> </select> </div> <div class="form-section"> <div class="form-section-title">Kateqoriya</div> <select> <option>Marketinq & Reklam</option> <option>İnsan Resursları</option> <option>Texnologiya & İT</option> <option>Maliyyə & Biznes</option> <option>Media & Bloger</option> </select> </div> <div class="form-section"> <div class="form-section-title">Üz şəkli</div> <div class="upload-box"> <div class="upload-icon"></div> <div class="upload-text">Şəkil sürüşdür və ya<br><b>yüklə</b></div> <div style="font-size:.6rem;color:var(--muted);margin-top:4px">1920×1080 · JPG/PNG</div> </div> </div> <div class="form-section"> <div class="form-section-title">Tənzimləmələr</div> <div style="display:flex;flex-direction:column;gap:10px"> <div style="display:flex;align-items:center;gap:8px;font-size:.72rem"> <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label> Bilet satışı aktiv
+          <span class="ev-tab-num">—</span> </div> <div class="ev-tab" onclick="switchEvTab('speakers',this)"> Spikerlər
+          <span class="ev-tab-num">—</span> </div> <div class="ev-tab" onclick="switchEvTab('sponsors',this)"> Sponsorlar
+          <span class="ev-tab-num">—</span> </div> <div class="ev-tab" onclick="switchEvTab('tickets',this)"> Biletlər
+          <span class="ev-tab-num">—</span> </div> <div class="ev-tab" onclick="switchEvTab('registrations',this)"> Qeydiyyatlar
+          <span class="ev-tab-num">—</span> </div> </div> <!-- TAB: Basic info --> <div id="evtab-basic"> <div style="display:grid;grid-template-columns:1fr 300px;gap:16px"> <div> <div class="form-section"> <div class="form-section-title">Tədbir adı</div> <div class="lang-tabs"> <button class="lang-tab active"> AZ</button> <button class="lang-tab"> EN</button> </div> <div class="form-row"> <div class="form-group"> <label>Azərbaycanca ad</label> <input type="text" id="ev-title-az" value="Milli Marketinq Forumu 2026"> </div> </div> <div class="form-row"> <div class="form-group"> <label>İngiliscə ad</label> <input type="text" id="ev-title-en" value="National Marketing Forum 2026"> </div> </div> <div class="form-row"> <div class="form-group"> <label>URL Slug</label> <input type="text" id="ev-slug" value="mmf-2026"> <span class="form-hint">facemark.az/events/mmf-2026</span> </div> </div> </div> <div class="form-section"> <div class="form-section-title">Təsvir</div> <div class="lang-tabs"> <button class="lang-tab active"> AZ</button> <button class="lang-tab"> EN</button> </div> <div class="form-group"> <label>Azərbaycanca təsvir</label> <textarea id="ev-desc-az" style="min-height:100px">Azərbaycanda marketinq sənayesinin ən böyük illik forum tədbiridır. Peşəkarları bir araya gətirir, sənayenin gələcəyini müzakirə edirlər.</textarea> </div> </div> <div class="form-section"> <div class="form-section-title">Tarix & Yer</div> <div class="form-row cols3"> <div class="form-group"> <label>Başlanğıc tarixi</label> <input type="date" id="ev-date-start" value="2026-06-06"> </div> <div class="form-group"> <label>Bitmə tarixi</label> <input type="date" id="ev-date-end" value="2026-06-06"> </div> <div class="form-group"> <label>Başlanğıc saatı</label> <input type="text" value="09:00"> </div> </div> <div class="form-row cols2"> <div class="form-group"> <label>Məkan adı</label> <input type="text" id="ev-venue" value="Bakı Konqres Mərkəzi"> </div> <div class="form-group"> <label>Məkan ünvanı</label> <input type="text" value="H. Əliyev pr., Bakı"> </div> </div> </div> </div> <!-- Right panel --> <div style="display:flex;flex-direction:column;gap:14px"> <div class="form-section"> <div class="form-section-title">Status</div> <select id="ev-status"> <option value="active">● Aktiv (Saytda görünür)</option> <option value="upcoming">○ Draft (Yalnız admin)</option> <option value="past"> Tamamlandı</option> <option value="partner"> Partnyor tədbiri</option> </select> </div> <div class="form-section"> <div class="form-section-title">Kateqoriya</div> <select> <option>Marketinq & Reklam</option> <option>İnsan Resursları</option> <option>Texnologiya & İT</option> <option>Maliyyə & Biznes</option> <option>Media & Bloger</option> </select> </div> <div class="form-section"> <div class="form-section-title">Üz şəkli</div> <div class="upload-box"> <div class="upload-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div> <div class="upload-text">Şəkil sürüşdür və ya<br><b>yüklə</b></div> <div style="font-size:.6rem;color:var(--muted);margin-top:4px">1920×1080 · JPG/PNG</div> </div> </div> <div class="form-section"> <div class="form-section-title">Tənzimləmələr</div> <div style="display:flex;flex-direction:column;gap:10px"> <div style="display:flex;align-items:center;gap:8px;font-size:.72rem"> <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label> Bilet satışı aktiv
                 </div> <div style="display:flex;align-items:center;gap:8px;font-size:.72rem"> <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label> Sponsor müraciətinə icazə ver
                 </div> <div style="display:flex;align-items:center;gap:8px;font-size:.72rem"> <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label> Gizlət (saytda göstərmə)
-                </div> </div> </div> </div> </div> </div> <!-- TAB: Agenda --> <div id="evtab-agenda" style="display:none"> <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"> <div style="font-size:.78rem;color:var(--muted)" id="ev-program-sub">Yüklənir...</div> <button class="btn btn-gold" onclick="crudOpen('event_program',null)">+ Sessiya əlavə et</button> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th>Gün</th><th>Saat</th><th>Başlıq</th><th>Spiker</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="event_program-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- TAB: Speakers --> <div id="evtab-speakers" style="display:none"> <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"> <div style="font-size:.78rem;color:var(--muted)" id="ev-speakers-sub">Yüklənir...</div> <button class="btn btn-gold" onclick="crudOpen('event_speakers',null)">+ Spiker əlavə et</button> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th style="width:56px">Şəkil</th><th>Ad</th><th>Vəzifə</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="event_speakers-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- TAB: Sponsors --> <div id="evtab-sponsors" style="display:none"> <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"> <div style="font-size:.78rem;color:var(--muted)" id="ev-sponsors-sub">Yüklənir...</div> <button class="btn btn-gold" onclick="crudOpen('event_sponsors',null)">+ Sponsor əlavə et</button> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th style="width:56px">Logo</th><th>Şirkət</th><th>Səviyyə</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="event_sponsors-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- TAB: Tickets --> <div id="evtab-tickets" style="display:none"> <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"> <div style="font-size:.78rem;color:var(--muted)" id="ev-tickets-sub">Yüklənir...</div> <button class="btn btn-gold" onclick="crudOpen('event_tickets',null)">+ Bilet növü əlavə et</button> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th>Ad</th><th>Qiymət</th><th>Status</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="event_tickets-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- TAB: Registrations --> <div id="evtab-registrations" style="display:none"> <div style="display:flex;gap:8px;margin-bottom:14px"> <button class="btn btn-outline btn-sm"> CSV Export</button> <button class="btn btn-outline btn-sm"> Hamısına email göndər</button> <input type="text" placeholder="Ad, email və ya şirkət axtar..." style="margin-left:auto;width:220px;padding:6px 10px;border:1.5px solid var(--border);border-radius:7px;font-size:.72rem"> </div> <div class="card"> <table> <thead><tr><th>Ad Soyad</th><th>Email</th><th>Şirkət</th><th>Bilet</th><th>Tarix</th><th>Status</th></tr></thead> <tbody> <tr><td><b>Nigar Əliyeva</b></td><td style="font-size:.68rem">nigar@pasha.az</td><td style="font-size:.68rem">PASHA Holding</td><td><span class="status-badge" style="background:rgba(196,151,58,.12);color:var(--gold)">VIP</span></td><td style="font-size:.68rem;color:var(--muted)">03.07.2026</td><td><span class="status-badge status-active"> Təsdiqləndi</span></td></tr> <tr><td><b>Orxan Babayev</b></td><td style="font-size:.68rem">orxan@kapital.az</td><td style="font-size:.68rem">Kapital Bank</td><td><span class="status-badge status-draft">Standard</span></td><td style="font-size:.68rem;color:var(--muted)">02.07.2026</td><td><span class="status-badge status-active"> Təsdiqləndi</span></td></tr> <tr><td><b>Sevinc Həsənova</b></td><td style="font-size:.68rem">sevinc@silkway.az</td><td style="font-size:.68rem">Silk Way</td><td><span class="status-badge status-draft">Standard</span></td><td style="font-size:.68rem;color:var(--muted)">01.07.2026</td><td><span class="status-badge status-pending"> Gözləyir</span></td></tr> </tbody> </table> </div> </div> </div> <!-- ════════════════════════════════════════════════════
+                </div> </div> </div> </div> </div> </div> <!-- TAB: Agenda --> <div id="evtab-agenda" style="display:none"> <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"> <div style="font-size:.78rem;color:var(--muted)" id="ev-program-sub">Yüklənir...</div> <button class="btn btn-gold" onclick="crudOpen('event_program',null)">+ Sessiya əlavə et</button> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th>Gün</th><th>Saat</th><th>Başlıq</th><th>Spiker</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="event_program-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- TAB: Speakers --> <div id="evtab-speakers" style="display:none"> <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"> <div style="font-size:.78rem;color:var(--muted)" id="ev-speakers-sub">Yüklənir...</div> <button class="btn btn-gold" onclick="crudOpen('event_speakers',null)">+ Spiker əlavə et</button> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th style="width:56px">Şəkil</th><th>Ad</th><th>Vəzifə</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="event_speakers-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- TAB: Sponsors --> <div id="evtab-sponsors" style="display:none"> <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"> <div style="font-size:.78rem;color:var(--muted)" id="ev-sponsors-sub">Yüklənir...</div> <button class="btn btn-gold" onclick="crudOpen('event_sponsors',null)">+ Sponsor əlavə et</button> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th style="width:56px">Logo</th><th>Şirkət</th><th>Səviyyə</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="event_sponsors-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- TAB: Tickets --> <div id="evtab-tickets" style="display:none"> <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"> <div style="font-size:.78rem;color:var(--muted)" id="ev-tickets-sub">Yüklənir...</div> <button class="btn btn-gold" onclick="crudOpen('event_tickets',null)">+ Bilet növü əlavə et</button> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th>Ad</th><th>Qiymət</th><th>Status</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="event_tickets-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- TAB: Registrations --> <div id="evtab-registrations" style="display:none"> <div class="card" style="padding:32px 20px;text-align:center;color:var(--muted);font-size:.78rem">Qeydiyyatlar bilet satışı fintech API inteqrasiyası ilə birlikdə 2-ci mərhələdə aktivləşəcək.</div> </div> </div> <!-- ════════════════════════════════════════════════════
          BIZNES RADAR
     ═══════════════════════════════════════════════════════ --> <div class="view" id="view-radar"> <div class="page-hdr"> <div> <div class="page-title"> Biznes Radar — Xəbərlər</div> <div class="page-sub" id="news-sub">Yüklənir...</div> </div> <div style="margin-left:auto"><button class="btn btn-gold" onclick="crudOpen('news_items',null)">+ Yeni Xəbər</button></div> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th>Başlıq</th><th>Çip</th><th>Link</th><th>Status</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="news-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- ════════════════════════════════════════════════════
          FMR TV
@@ -699,7 +699,10 @@ VIP biznes görüşləri</textarea> </div> <div style="display:flex;gap:6px;just
         preview.innerHTML = '<div style="text-align:center;padding:12px 8px;background:#F9F7F3;border-radius:8px;margin-bottom:10px"><div style="font-size:2rem;margin-bottom:6px">'+icon+'</div><div style="font-weight:800;font-size:.84rem;margin-bottom:4px">'+title+'</div><div style="font-size:.72rem;color:#6B6878;line-height:1.5">'+brief+'</div></div><div style="font-size:.7rem;color:#6B6878;font-weight:600;margin-bottom:6px">Popup xidmətlər:</div><ul style="font-size:.7rem;color:#6B6878;padding-left:14px;line-height:1.8">'+listHtml+'</ul>';
         toggleSvcEdit('svc-edit-'+n, 'svc-preview-'+n);
         var btn = document.querySelector('#svc-card-'+n+' .btn-gold');
-        if(btn){btn.textContent=' Saxlanıldı';setTimeout(function(){btn.textContent='Yadda saxla';},1800);}
+        if(btn){btn.textContent=' Saxlanılır...';btn.disabled=true;}
+        scSaveView('services','services').then(function(){
+          if(btn){btn.disabled=false;btn.textContent=' Saxlanıldı';setTimeout(function(){btn.textContent='Yadda saxla';},1800);}
+        });
       }
       </script> </div> <!-- ══ view: partners ══ --> <div class="view" id="view-partners"> <div class="page-hdr"> <div> <div class="page-title"> Partnyorlarımız</div> <div class="page-sub" id="partners-sub">Yüklənir...</div> </div> <div style="margin-left:auto"><button class="btn btn-gold" onclick="crudOpen('partners',null)">+ Partnyor əlavə et</button></div> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th style="width:56px">Logo</th><th>Ad</th><th>Kateqoriya</th><th>Veb sayt</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="partners-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- ══ view: clients ══ --> <div class="view" id="view-clients"> <div class="page-hdr"> <div> <div class="page-title"> Müştərilər & Qurumlar</div> <div class="page-sub" id="clients-sub">Yüklənir...</div> </div> <div style="margin-left:auto"><button class="btn btn-gold" onclick="crudOpen('clients',null)">+ Müştəri əlavə et</button></div> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th style="width:56px">Logo</th><th>Ad</th><th>Kateqoriya</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="clients-tbody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <!-- ══ view: testimonials ══ --> <div class="view" id="view-testimonials"> <div class="page-hdr"> <div> <div class="page-title"> Rəylər</div> <div class="page-sub" id="testi-sub">Yüklənir...</div> </div> <div style="margin-left:auto"><button class="btn btn-gold" onclick="crudOpen('testimonials',null)">+ Rəy əlavə et</button></div> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th style="width:56px">Şəkil</th><th>Ad</th><th>Vəzifə / Şirkət</th><th>Rəy (AZ)</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="testimonials-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <div class="view" id="view-team"> <div class="page-hdr"> <div> <div class="page-title"> Komanda</div> <div class="page-sub" id="team-sub">Yüklənir...</div> </div> <div style="margin-left:auto"><button class="btn btn-gold" onclick="openTeamEdit(null)">+ Üzv əlavə et</button></div> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th style="width:56px">Şəkil</th><th>Ad Soyad</th><th>Vəzifə</th><th>LinkedIn</th><th style="width:60px">Sıra</th><th>Əməliyyat</th></tr></thead> <tbody id="team-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> <div class="view" id="view-careers"> <div class="page-hdr"> <div> <div class="page-title"> Karyera</div> <div class="page-sub" id="jobs-sub">Yüklənir...</div> </div> <div style="margin-left:auto"><button class="btn btn-gold" onclick="openJobEdit(null)">+ Vakansiya əlavə et</button></div> </div> <div class="card"> <div class="tbl-wrap"> <table> <thead><tr><th>Vəzifə</th><th>Departament</th><th>Yer</th><th>Növ</th><th>Status</th><th>Əməliyyat</th></tr></thead> <tbody id="jobs-tbody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənir...</td></tr></tbody> </table> </div> </div> </div> </div><!-- /content -->
 </div><!-- /main --> <script>
@@ -749,7 +752,7 @@ function showView(id, el){
     if(id==='services'){ setTimeout(function(){ filterServices(''); },50); }
   if(id==='inquiries'){ setTimeout(function(){ renderInquiries(); },50); }
   if(id==='events-list'){ setTimeout(function(){ renderEventsList(); },50); }
-  if(id==='dashboard'){ setTimeout(function(){ renderDashboardStats(); renderDashboardActivity(); },50); }
+  if(id==='dashboard'){ setTimeout(function(){ renderDashboardStats(); renderDashboardActivity(); loadDashboardForms(); loadDashboardActiveEvents(); },50); }
   if(id==='team'){ setTimeout(function(){ renderTeamList(); },50); }
   if(id==='careers'){ setTimeout(function(){ renderJobsList(); },50); }
   if(id==='partners'){ setTimeout(function(){ crudRenderList('partners'); },50); }
@@ -853,122 +856,53 @@ function closePanel(id){
   if(el)el.classList.remove('open');
 }
 
-/* ── Form-detail modal ───────────────────────────────────── */
-var FD_DATA = {
-  'inquiries': {
-    icon:'', title:'Müraciətlər', color:'var(--blue)', bg:'rgba(49,130,206,.1)',
-    total:247, thisMonth:42, pending:7,
-    stats:[{val:'247',lbl:'Cəmi müraciət'},{val:'42',lbl:'Bu ay'},{val:'7',lbl:'Cavabsız'}],
-    entries:[
-      {name:'Kamran İsmayılov',meta:'kamran@kapital.az · Marketing Air · Bu gün 09:14',status:'Yeni',sc:'status-new'},
-      {name:'Nigar Əliyeva',meta:'nigar@gmail.com · Ümumi sorğu · Dünən 14:50',status:'Gözləyir',sc:'status-pending'},
-      {name:'StartUp AZ',meta:'info@startupaz.com · Marketing Air paketi · Dünən 11:00',status:'Gözləyir',sc:'status-pending'},
-      {name:'Leyla Hüseynova',meta:'leyla@biz.az · Sponsor sorğusu · 03.07',status:'Cavablandı',sc:'status-active'},
-      {name:'Anar Babayev',meta:'anar@mail.ru · Ümumi · 02.07',status:'Cavablandı',sc:'status-active'},
-    ],
-    gotoView:'inquiries'
-  },
-  'partner': {
-    icon:'', title:'Partnyor Müraciətləri', color:'var(--gold)', bg:'rgba(196,151,58,.1)',
-    stats:[{val:'83',lbl:'Cəmi müraciət'},{val:'11',lbl:'Bu ay'},{val:'3',lbl:'Cavabsız'}],
-    entries:[
-      {name:'Azərsu ASC',meta:'info@azersu.az · Haqqımızda · Dünən 14:11',status:'Gözləyir',sc:'status-pending'},
-      {name:'Bakcell MMC',meta:'partner@bakcell.az · Tədbirlər · 03.07',status:'Yeni',sc:'status-new'},
-      {name:'PASHA Holding',meta:'bd@pasha.az · Ümumi · 01.07',status:'Cavablandı',sc:'status-active'},
-      {name:'Bank Respublika',meta:'pr@bankr.az · Media · 30.06',status:'Cavablandı',sc:'status-active'},
-    ],
-    gotoView:'inquiries'
-  },
-  'subscribe': {
-    icon:'', title:'Tədbir Abunəsi', color:'var(--green)', bg:'rgba(56,161,105,.1)',
-    stats:[{val:'1,840',lbl:'Cəmi abunəçi'},{val:'128',lbl:'Bu ay'},{val:'98%',lbl:'Aktiv'}],
-    entries:[
-      {name:'leyla.m@mail.ru',meta:'Ana səhifə footer · Bu gün 08:52',status:'Aktiv',sc:'status-active'},
-      {name:'anar.b@gmail.com',meta:'Tədbirlər səhifəsi · Dünən 16:30',status:'Aktiv',sc:'status-active'},
-      {name:'info@company.az',meta:'Ana səhifə footer · Dünən 12:15',status:'Aktiv',sc:'status-active'},
-      {name:'murad.s@mail.ru',meta:'Ana səhifə footer · 03.07',status:'Aktiv',sc:'status-active'},
-    ],
-    gotoView:'inquiries', gotoTab:'abune'
-  },
-  'cv': {
-    icon:'', title:'CV Göndərişlər', color:'var(--orange)', bg:'rgba(221,107,32,.1)',
-    stats:[{val:'62',lbl:'Cəmi CV'},{val:'8',lbl:'Bu ay'},{val:'4',lbl:'Yeni'}],
-    entries:[
-      {name:'Rauf Əlizadə',meta:'rauf.a@gmail.com · Karyera səhifəsi · Dünən 17:30',status:'Baxılır',sc:'status-pending'},
-      {name:'Günel Rəsulova',meta:'gunel@startup.az · Komandamız · 02.07',status:'Yeni',sc:'status-new'},
-      {name:'Elşən Quliyev',meta:'elshan@mail.ru · Karyera · 01.07',status:'Rədd edildi',sc:'status-badge'},
-      {name:'Nərmin Abbasova',meta:'nermin@gmail.com · Karyera · 30.06',status:'Qəbul edildi',sc:'status-active'},
-    ],
-    gotoView:'inquiries', gotoTab:'cv'
-  },
-  'radar-sub': {
-    icon:'', title:'Biznes Radar Abunəsi', color:'#7C3AED', bg:'rgba(124,58,237,.1)',
-    stats:[{val:'3,217',lbl:'Cəmi abunəçi'},{val:'204',lbl:'Bu ay'},{val:'94%',lbl:'Aktiv'}],
-    entries:[
-      {name:'radar.user@biz.az',meta:'Biznes Radar səhifəsi · Dünən 11:48',status:'Aktiv',sc:'status-active'},
-      {name:'boss@company.az',meta:'Biznes Radar · 03.07 09:20',status:'Aktiv',sc:'status-active'},
-      {name:'finance@bank.az',meta:'Radar newsletter · 02.07',status:'Aktiv',sc:'status-active'},
-      {name:'startup@az.com',meta:'Radar sidebar · 01.07',status:'Aktiv',sc:'status-active'},
-    ],
-    gotoView:'inquiries', gotoTab:'radar'
-  },
-  'sponsor': {
-    icon:'', title:'Sponsor Müraciətləri', color:'#0891B2', bg:'rgba(8,145,178,.1)',
-    stats:[{val:'38',lbl:'Cəmi müraciət'},{val:'6',lbl:'Bu ay'},{val:'2',lbl:'Cavabsız'}],
-    entries:[
-      {name:'Kamran İsmayılov',meta:'kamran@kapital.az · Tədbirlər/Sponsor ol · Dünən 15:30',status:'Yeni',sc:'status-new'},
-      {name:'Kapital Bank',meta:'pr@kapital.az · MMF 2026 · 03.07',status:'Gözləyir',sc:'status-pending'},
-      {name:'AzərGold',meta:'info@azergold.az · Bloger Forum · 01.07',status:'Cavablandı',sc:'status-active'},
-      {name:'Silk Way Airlines',meta:'partner@silkway.az · HR Forum · 29.06',status:'Bağlandı',sc:'status-active'},
-    ],
-    gotoView:'inquiries'
-  }
+/* ── Form-detail modal (real Supabase data) ─────────────── */
+var FD_TYPE_MAP = {
+  inquiries: {formTypes:['contact'], title:'Müraciətlər', color:'var(--blue)', bg:'rgba(49,130,206,.1)'},
+  partner:   {formTypes:['partner'], title:'Partnyor Müraciətləri', color:'var(--gold)', bg:'rgba(196,151,58,.1)'},
+  subscribe: {formTypes:['subscribe'], title:'Tədbir Abunəsi', color:'var(--green)', bg:'rgba(56,161,105,.1)'},
+  cv:        {formTypes:['career','team'], title:'CV Göndərişlər', color:'var(--orange)', bg:'rgba(221,107,32,.1)'},
+  sponsor:   {formTypes:['sponsorship'], title:'Sponsor Müraciətləri', color:'#0891B2', bg:'rgba(8,145,178,.1)'}
 };
+var _statusLabelAz = {new:'Yeni', pending:'Gözləyir', reviewed:'Cavablandı', archived:'Arxivləndi'};
+var _statusClsAz = {new:'status-new', pending:'status-pending', reviewed:'status-active', archived:''};
 
 function openFormDetail(type){
-  var d = FD_DATA[type];
-  if(!d) return;
-  // header
-  document.getElementById('fd-icon').textContent = d.icon;
-  document.getElementById('fd-title').textContent = d.title;
+  var cfg = FD_TYPE_MAP[type];
+  if(!cfg) return;
+  var list = (_dashboardApps||[]).filter(function(r){ return cfg.formTypes.indexOf(r.form_type) !== -1; });
+  var now = new Date();
+  var thisMonth = list.filter(function(r){ var d=new Date(r.created_at); return d.getFullYear()===now.getFullYear() && d.getMonth()===now.getMonth(); }).length;
+  var pending = list.filter(function(r){ return r.status==='new'; }).length;
+
+  document.getElementById('fd-title').textContent = cfg.title;
   var badge = document.getElementById('fd-badge');
-  badge.textContent = 'Cəmi: ' + d.stats[0].val;
-  badge.style.cssText = 'background:'+d.bg+';color:'+d.color+';font-weight:700';
-  // goto button
+  badge.textContent = 'Cəmi: ' + list.length;
+  badge.style.cssText = 'background:'+cfg.bg+';color:'+cfg.color+';font-weight:700';
+
   var gotoBtn = document.getElementById('fd-goto-btn');
   gotoBtn.onclick = function(){
-    var gv = d.gotoView, gt = d.gotoTab || null;
     closeFd();
-    setTimeout(function(){
-      showView(gv, null);
-      if(gt){
-        setTimeout(function(){
-          var tabs = document.querySelectorAll('.inq-tab');
-          var targetBtn = null;
-          tabs.forEach(function(t){
-            var oc = t.getAttribute('onclick')||'';
-            if(oc.indexOf("'"+gt+"'") !== -1) targetBtn = t;
-          });
-          if(targetBtn) filterInq(gt, targetBtn);
-        }, 80);
-      }
-    }, 180);
+    setTimeout(function(){ showView('inquiries', null); }, 180);
   };
-  // body
-  var statsHtml = '<div class="fd-stat-row">';
-  d.stats.forEach(function(s){
-    statsHtml += '<div class="fd-stat"><div class="fd-stat-val" style="color:'+d.color+'">'+s.val+'</div><div class="fd-stat-lbl">'+s.lbl+'</div></div>';
-  });
-  statsHtml += '</div>';
+
+  var statsHtml = '<div class="fd-stat-row">'+
+    '<div class="fd-stat"><div class="fd-stat-val" style="color:'+cfg.color+'">'+list.length+'</div><div class="fd-stat-lbl">Cəmi</div></div>'+
+    '<div class="fd-stat"><div class="fd-stat-val" style="color:'+cfg.color+'">'+thisMonth+'</div><div class="fd-stat-lbl">Bu ay</div></div>'+
+    '<div class="fd-stat"><div class="fd-stat-val" style="color:'+cfg.color+'">'+pending+'</div><div class="fd-stat-lbl">Cavabsız</div></div>'+
+  '</div>';
+
   var entriesHtml = '<div class="fd-section-title">Son daxilolmalar</div>';
-  d.entries.forEach(function(e){
+  if(!list.length){
+    entriesHtml += '<div style="padding:16px;text-align:center;color:var(--muted);font-size:.78rem">Hələ müraciət yoxdur.</div>';
+  }
+  list.slice(0,8).forEach(function(r){
     entriesHtml += '<div class="fd-entry">';
-    entriesHtml += '<div class="fd-entry-icon" style="background:'+d.bg+'">'+d.icon+'</div>';
     entriesHtml += '<div class="fd-entry-body">';
-    entriesHtml += '<div class="fd-entry-name">'+e.name+'</div>';
-    entriesHtml += '<div class="fd-entry-meta">'+e.meta+'</div>';
+    entriesHtml += '<div class="fd-entry-name">'+_escHtml(r.full_name)+'</div>';
+    entriesHtml += '<div class="fd-entry-meta">'+_escHtml(r.email||r.phone||'')+(r.subject?' · '+_escHtml(r.subject):'')+'</div>';
     entriesHtml += '</div>';
-    entriesHtml += '<span class="status-badge '+e.sc+'" style="flex-shrink:0;margin-top:2px">'+e.status+'</span>';
+    entriesHtml += '<span class="status-badge '+(_statusClsAz[r.status]||'')+'" style="flex-shrink:0;margin-top:2px">'+(_statusLabelAz[r.status]||r.status)+'</span>';
     entriesHtml += '</div>';
   });
   document.getElementById('fd-body').innerHTML = statsHtml + entriesHtml;
@@ -978,146 +912,78 @@ function closeFd(){
   document.getElementById('fd-overlay').classList.remove('open');
 }
 
-/* ── Entry-detail modal ──────────────────────────────────── */
-var ENTRY_DATA = [
-  // 0: Kamran/Müraciət
-  { type:' Müraciət', typeCls:'status-badge', typeColor:'rgba(49,130,206,.1)', typeText:'var(--blue)',
-    title:'Kamran İsmayılov — Müraciət',
-    fields:[
-      {lbl:'Ad Soyad', val:'Kamran İsmayılov'},
-      {lbl:'E-mail', val:'kamran@kapital.az'},
-      {lbl:'Şirkət', val:'Kapital Bank ASC'},
-      {lbl:'Mənbə', val:'Marketing Air səhifəsi'},
-      {lbl:'Tarix', val:'Bu gün · 09:14'},
-      {lbl:'Mesaj', val:'Salam, Marketing Air paketi haqqında ətraflı məlumat almaq istəyirəm. Aylıq abunəlik şərtləri nədir?'}
-    ],
-    status:'Yeni', gotoView:'inquiries', gotoTab:'marketing'
-  },
-  // 1: leyla/Abunə (no detail)
-  null,
-  // 2: Rauf/CV
-  { type:' CV', typeCls:'status-badge', typeColor:'rgba(221,107,32,.1)', typeText:'var(--orange)',
-    title:'Rauf Əlizadə — CV müraciəti',
-    fields:[
-      {lbl:'Ad Soyad', val:'Rauf Əlizadə'},
-      {lbl:'E-mail', val:'rauf.a@gmail.com'},
-      {lbl:'Vəzifə', val:'SMM Menecer'},
-      {lbl:'Mənbə', val:'Karyera səhifəsi'},
-      {lbl:'Tarix', val:'Dünən · 17:30'},
-      {lbl:'Qeyd', val:'Facemark komandası ilə işləmək istəyirəm. 3 il təcrübəm var.'}
-    ],
-    status:'Baxılır', gotoView:'inquiries', gotoTab:'cv'
-  },
-  // 3: Kamran/Sponsor
-  { type:' Sponsor', typeCls:'status-badge', typeColor:'rgba(8,145,178,.1)', typeText:'#0891B2',
-    title:'Kamran İsmayılov — Sponsor müraciəti',
-    fields:[
-      {lbl:'Ad Soyad', val:'Kamran İsmayılov'},
-      {lbl:'E-mail', val:'kamran@kapital.az'},
-      {lbl:'Şirkət', val:'Kapital Bank ASC'},
-      {lbl:'Mənbə', val:'Tədbirlər / Sponsor ol'},
-      {lbl:'Tarix', val:'Dünən · 15:30'},
-      {lbl:'Mesaj', val:'MMF 2026 tədbirinin əsas sponsoru olmaq istəyirik. Hansı paketlər mövcuddur?'}
-    ],
-    status:'Yeni', gotoView:'inquiries', gotoTab:'sponsor'
-  },
-  // 4: Azərsu/Partnyor
-  { type:' Partnyor', typeCls:'status-badge', typeColor:'rgba(196,151,58,.1)', typeText:'var(--gold)',
-    title:'Azərsu ASC — Partnyor müraciəti',
-    fields:[
-      {lbl:'Şirkət', val:'Azərsu ASC'},
-      {lbl:'E-mail', val:'info@azersu.az'},
-      {lbl:'Mənbə', val:'Haqqımızda səhifəsi'},
-      {lbl:'Tarix', val:'Dünən · 14:11'},
-      {lbl:'Mesaj', val:'Uzunmüddətli media partnyorluğu barədə danışmaq istərdik.'}
-    ],
-    status:'Gözləyir', gotoView:'inquiries', gotoTab:'partnyor'
-  },
-  // 5: radar (no detail)
-  null,
-  // 6: Günel/CV
-  { type:' CV', typeCls:'status-badge', typeColor:'rgba(221,107,32,.1)', typeText:'var(--orange)',
-    title:'Günel Rəsulova — CV müraciəti',
-    fields:[
-      {lbl:'Ad Soyad', val:'Günel Rəsulova'},
-      {lbl:'E-mail', val:'gunel@startup.az'},
-      {lbl:'Vəzifə', val:'Content Manager'},
-      {lbl:'Mənbə', val:'Komandamız səhifəsi'},
-      {lbl:'Tarix', val:'02.07 · 10:05'},
-      {lbl:'Qeyd', val:'Kontent yaradıcılığı sahəsində 4 il iş təcrübəm var.'}
-    ],
-    status:'Yeni', gotoView:'inquiries', gotoTab:'cv'
-  }
-];
+/* ── Dashboard "Forma Girişləri" — real Supabase data ────── */
+var _dashboardApps = [];
 
-function openEntryDetail(idx){
-  var d = ENTRY_DATA[idx];
-  if(!d) return;
-  // header
-  var tb = document.getElementById('ed-type-badge');
-  tb.textContent = d.type;
-  tb.style.cssText = 'background:'+d.typeColor+';color:'+d.typeText+';font-weight:700';
-  document.getElementById('ed-title').textContent = d.title;
-  // body
-  var bodyHtml = '';
-  d.fields.forEach(function(f){
-    var isMsg = f.lbl==='Mesaj'||f.lbl==='Qeyd';
-    bodyHtml += '<div class="ed-field">';
-    bodyHtml += '<div class="ed-label">'+f.lbl+'</div>';
-    if(isMsg){
-      bodyHtml += '<div class="ed-value" style="line-height:1.5;white-space:pre-wrap">'+f.val+'</div>';
-    } else {
-      bodyHtml += '<div class="ed-value">'+f.val+'</div>';
+async function loadDashboardForms(){
+  var res = await supabaseClient.from('applications').select('*').order('created_at',{ascending:false});
+  var data = res.data || [];
+  _dashboardApps = data;
+
+  var now = new Date();
+  function isThisMonth(d){
+    if(!d) return false;
+    var dt = new Date(d);
+    return dt.getFullYear()===now.getFullYear() && dt.getMonth()===now.getMonth();
+  }
+
+  var byType = {contact:[], partner:[], subscribe:[], career:[], team:[], sponsorship:[]};
+  data.forEach(function(r){ if(byType[r.form_type]) byType[r.form_type].push(r); });
+  var cvEntries = byType.career.concat(byType.team);
+
+  function setCard(prefix, list, showNew){
+    var totalEl = document.getElementById('fg-'+prefix+'-total');
+    var monthEl = document.getElementById('fg-'+prefix+'-month');
+    var newEl = document.getElementById('fg-'+prefix+'-new');
+    if(totalEl) totalEl.textContent = list.length;
+    var thisMonth = list.filter(function(r){ return isThisMonth(r.created_at); }).length;
+    if(monthEl) monthEl.textContent = '▲ +'+thisMonth+' bu ay';
+    if(newEl && showNew){
+      var newCount = list.filter(function(r){ return r.status==='new'; }).length;
+      newEl.textContent = newCount+' cavabsız';
     }
-    bodyHtml += '</div>';
-  });
-  // Status selector
-  bodyHtml += '<div class="ed-field"><div class="ed-label">Status</div>';
-  bodyHtml += '<div class="ed-status-row">';
-  var statuses = [
-    {lbl:'Yeni', bg:'rgba(49,130,206,.12)', color:'var(--blue)', bc:'rgba(49,130,206,.3)'},
-    {lbl:'Gözləyir', bg:'rgba(221,107,32,.12)', color:'var(--orange)', bc:'rgba(221,107,32,.3)'},
-    {lbl:'Cavablandı', bg:'rgba(56,161,105,.12)', color:'var(--green)', bc:'rgba(56,161,105,.3)'},
-    {lbl:'Bağlandı', bg:'rgba(107,104,120,.12)', color:'var(--muted)', bc:'rgba(107,104,120,.3)'},
-  ];
-  statuses.forEach(function(s){
-    var isActive = d.status===s.lbl;
-    var activeBox = isActive ? ';box-shadow:0 0 0 2px '+s.bc : '';
-    bodyHtml += '<button class="ed-status-btn"';
-    bodyHtml += ' data-bg="'+s.bg+'" data-bc="'+s.bc+'"';
-    bodyHtml += ' style="background:'+(isActive?s.bg:'transparent')+';color:'+s.color+';border-color:'+s.bc+activeBox+'"';
-    bodyHtml += ' onclick="setEdStatus(this)">';
-    bodyHtml += s.lbl+'</button>';
-  });
-  bodyHtml += '</div></div>';
-  document.getElementById('ed-body').innerHTML = bodyHtml;
-  // footer — data-attr pattern (avoids quote-escaping bugs)
-  var gv = d.gotoView || 'inquiries';
-  var gt = d.gotoTab || '';
-  document.getElementById('ed-footer').innerHTML =
-    '<button class="btn btn-gold" id="ed-goto-btn" data-gv="' + gv + '" data-gt="' + gt + '" onclick="edGotoModule(this)">Modula keç →</button>' +
-    '<button class="btn btn-outline" onclick="closeEd()">Bağla</button>';
-  document.getElementById('ed-overlay').classList.add('open');
+  }
+  setCard('inquiries', byType.contact, true);
+  setCard('partner', byType.partner, true);
+  setCard('subscribe', byType.subscribe, false);
+  setCard('cv', cvEntries, true);
+  setCard('sponsor', byType.sponsorship, true);
+
+  renderFormaEntries(data.slice(0,10));
 }
 
-function edGotoModule(btn) {
-  var gv = btn.getAttribute('data-gv') || 'inquiries';
-  var gt = btn.getAttribute('data-gt') || '';
-  closeEd();
-  setTimeout(function() {
-    showView(gv, null);
-    if (gt) {
-      setTimeout(function() {
-        var tabs = document.querySelectorAll('.inq-tab');
-        var tb = null;
-        tabs.forEach(function(t) {
-          var oc = t.getAttribute('onclick') || '';
-          if (oc.indexOf("'" + gt + "'") !== -1) tb = t;
-        });
-        if (tb) filterInq(gt, tb);
-      }, 80);
-    }
-  }, 180);
+function renderFormaEntries(rows){
+  var tbody = document.getElementById('forma-tbody');
+  if(!tbody) return;
+  var countEl = document.getElementById('forma-count');
+  if(countEl) countEl.textContent = rows.length + ' giriş';
+  if(!rows.length){
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Hələ heç bir giriş yoxdur.</td></tr>';
+    return;
+  }
+  var typeLabel = {contact:'Müraciət', partner:'Partnyor', subscribe:'Abunə', career:'CV', team:'CV', sponsorship:'Sponsor'};
+  var typeColor = {contact:'var(--blue)', partner:'var(--gold)', subscribe:'var(--green)', career:'var(--orange)', team:'var(--orange)', sponsorship:'#0891B2'};
+  var typeBg = {contact:'rgba(49,130,206,.1)', partner:'rgba(196,151,58,.1)', subscribe:'rgba(56,161,105,.1)', career:'rgba(221,107,32,.1)', team:'rgba(221,107,32,.1)', sponsorship:'rgba(8,145,178,.1)'};
+
+  tbody.innerHTML = rows.map(function(r){
+    var tl = typeLabel[r.form_type] || r.form_type;
+    var rowData = {
+      id: r.id, name: r.full_name, email: r.email||'', co: r.subject||'',
+      sub: tl + (r.subject ? ' — '+r.subject : ''),
+      msg: r.message || (r.cv_url ? ('CV: '+r.cv_url) : ''),
+      status: _statusLabelAz[r.status] || r.status
+    };
+    var dataAttr = _escHtml(JSON.stringify(rowData));
+    var dateStr = r.created_at ? new Date(r.created_at).toLocaleDateString('az-AZ') : '';
+    return '<tr data-type="'+_escHtml(tl)+'">'+
+      '<td><div style="font-size:.73rem;font-weight:700">'+_escHtml(r.full_name)+'</div><div style="font-size:.62rem;color:var(--muted)">'+_escHtml(r.email||r.phone||'—')+'</div></td>'+
+      '<td><span class="status-badge" style="background:'+(typeBg[r.form_type]||'')+';color:'+(typeColor[r.form_type]||'')+'">'+_escHtml(tl)+'</span></td>'+
+      '<td style="font-size:.68rem;color:var(--muted)">'+_escHtml(r.subject||'—')+'</td>'+
+      '<td style="font-size:.68rem;color:var(--muted)">'+dateStr+'</td>'+
+      '<td><span class="status-badge '+(_statusClsAz[r.status]||'')+'">'+_escHtml(_statusLabelAz[r.status]||r.status)+'</span></td>'+
+      '<td><button class="btn btn-sm btn-outline" data-payload="'+dataAttr+'" onclick="openInqReply(JSON.parse(this.getAttribute(&#39;data-payload&#39;)))">Bax</button></td>'+
+    '</tr>';
+  }).join('');
 }
 
 function closeEd(){
@@ -1296,6 +1162,42 @@ async function renderDashboardStats(){
   } else if(newInqEl){
     newInqEl.textContent = '—';
   }
+
+  var tvEl = document.getElementById('stat-tv-count');
+  var tvSubEl = document.getElementById('stat-tv-sub');
+  var tvRes = await supabaseClient.from('tv_videos').select('id', {count:'exact', head:true});
+  if(!tvRes.error){
+    if(tvEl) tvEl.textContent = tvRes.count!=null ? tvRes.count : '—';
+    if(tvSubEl) tvSubEl.textContent = 'Bazadan';
+  } else {
+    if(tvEl) tvEl.textContent = '—';
+    if(tvSubEl) tvSubEl.textContent = 'Xəta';
+  }
+}
+
+async function loadDashboardActiveEvents(){
+  var el = document.getElementById('dashboard-active-events');
+  if(!el) return;
+  var res = await supabaseClient.from('events').select('*').eq('status','active').order('date_start',{ascending:true});
+  var data = res.data || [];
+  if(res.error){
+    el.innerHTML = '<div style="grid-column:1/-1;padding:18px 20px;color:var(--muted);font-size:.72rem;text-align:center">Yüklənmə xətası: '+_escHtml(res.error.message)+'</div>';
+    return;
+  }
+  if(!data.length){
+    el.innerHTML = '<div style="grid-column:1/-1;padding:18px 20px;color:var(--muted);font-size:.72rem;text-align:center">Hazırda aktiv tədbir yoxdur.</div>';
+    return;
+  }
+  el.innerHTML = data.map(function(ev, i){
+    var dateStr = ev.date_start ? new Date(ev.date_start).toLocaleDateString('az-AZ') : '';
+    var meta = [ev.venue, dateStr].filter(Boolean).join(' · ');
+    var borderStyle = i < data.length-1 ? 'border-right:1px solid var(--border);' : '';
+    return '<div style="padding:18px 20px;'+borderStyle+'cursor:pointer" onclick="openEventEdit('+JSON.stringify(ev).replace(/"/g,'&quot;')+')">'+
+      '<div style="font-size:.73rem;font-weight:800;margin-bottom:3px">'+_escHtml(ev.title_az)+'</div>'+
+      '<div style="font-size:.62rem;color:var(--muted);margin-bottom:6px">'+_escHtml(meta||'—')+'</div>'+
+      '<div style="font-size:.65rem;color:var(--muted)">Bilet satışı: Fintech API gözlənilir</div>'+
+    '</div>';
+  }).join('');
 }
 
 function filterInq(cat, btn) {
@@ -2261,34 +2163,92 @@ function toggleNotifPanel(e){
   var p=document.getElementById('notif-panel');
   var isOpen=p.classList.contains('open');
   p.classList.toggle('open',!isOpen);
+  if(!isOpen) loadNotifications();
+}
+
+async function loadNotifications(){
+  var list=document.getElementById('notif-list');
+  var res=await supabaseClient.from('notifications').select('*').order('created_at',{ascending:false}).limit(20);
+  var data=res.data||[];
+  if(res.error){
+    if(list) list.innerHTML='<div style="padding:16px;text-align:center;color:var(--muted);font-size:.72rem">Yüklənmə xətası</div>';
+    return;
+  }
+  var unread=data.filter(function(n){ return !n.is_read; }).length;
+  var dot=document.querySelector('.tb-notif-dot');
+  if(dot) dot.style.display=unread>0?'block':'none';
+  if(!list) return;
+  if(!data.length){
+    list.innerHTML='<div style="padding:16px;text-align:center;color:var(--muted);font-size:.72rem">Hələ bildiriş yoxdur.</div>';
+    return;
+  }
+  function timeAgo(iso){
+    var d=new Date(iso), now=new Date(), diffMs=now-d, mins=Math.floor(diffMs/60000);
+    if(mins<1) return 'indicə';
+    if(mins<60) return mins+' dəqiqə əvvəl';
+    var hrs=Math.floor(mins/60);
+    if(hrs<24) return hrs+' saat əvvəl';
+    var days=Math.floor(hrs/24);
+    if(days<2) return 'Dünən · '+d.toLocaleTimeString('az-AZ',{hour:'2-digit',minute:'2-digit'});
+    return days+' gün əvvəl';
+  }
+  list.innerHTML=data.map(function(n){
+    var bg = n.is_read ? '' : "background:rgba(196,151,58,.04);";
+    return '<div style="padding:10px 14px;border-bottom:1px solid var(--border);'+bg+'cursor:pointer" onclick="markNotifRead(\''+n.id+'\')" onmouseover="this.style.background=\'var(--bg2)\'" onmouseout="this.style.background=\''+(n.is_read?'':'rgba(196,151,58,.04)')+'\'">'+
+      '<div style="display:flex;gap:10px;align-items:flex-start">'+
+      '<div style="flex:1">'+
+      '<div style="font-size:.72rem;font-weight:600;margin-bottom:2px">'+_escHtml(n.title)+'</div>'+
+      (n.body?'<div style="font-size:.65rem;color:var(--muted);line-height:1.4">'+_escHtml(n.body)+'</div>':'')+
+      '<div style="font-size:.6rem;color:var(--muted);margin-top:4px">'+timeAgo(n.created_at)+'</div>'+
+      '</div>'+
+      (n.is_read?'':'<div style="width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:4px"></div>')+
+      '</div></div>';
+  }).join('');
+}
+
+async function markNotifRead(id){
+  await supabaseClient.from('notifications').update({is_read:true}).eq('id',id);
+  loadNotifications();
+}
+
+async function markAllNotifsRead(){
+  await supabaseClient.from('notifications').update({is_read:true}).eq('is_read',false);
+  loadNotifications();
 }
 
 // ── Search ────────────────────────────────────────────────
-var SEARCH_INDEX=[
-  {type:'Tədbir',icon:'',title:'Milli Marketinq Forumu 2026',sub:'6 İyun · Bakı Konqres Mərkəzi',view:'event-new'},
-  {type:'Tədbir',icon:'',title:'Milli İnsan Resursları Forumu 2026',sub:'16 May · Baku Marriott Hotel',view:'events-list'},
-  {type:'Tədbir',icon:'',title:'Bloger & İnfluenser Forumu 2026',sub:'10–11 İyun · Dreamland Baku',view:'events-list'},
-  {type:'Xəbər',icon:'',title:'Fed faizi 25bp endirdi — qlobal bazarlar reaksiya verdi',sub:'Bazarlar · Reuters',view:'radar'},
-  {type:'Xəbər',icon:'',title:'Google $3 mlrd-a Inflection AI-ı aldı',sub:'Şirkətlər · TechCrunch',view:'radar'},
-  {type:'Xəbər',icon:'',title:'Bakıda ilk unicorn iddiası — AI startap $120M',sub:'Startap & VC · AZPROMO',view:'radar'},
-  {type:'Video',icon:'',title:'Elnur Həsənov ilə marketinq söhbəti',sub:'28:14 · Müsahibə',view:'fmr-tv'},
-  {type:'Video',icon:'',title:'MMF 2025 — Panel müzakirəsi',sub:'1:14:30 · Forum',view:'fmr-tv'},
-  {type:'Müraciət',icon:'',title:'Nigar Əliyeva — Qrup bilet (×10)',sub:'PASHA Holding · MMF 2026',view:'inquiries'},
-  {type:'Müraciət',icon:'',title:'Kamran İsmayılov — Qızıl Sponsor',sub:'Kapital Bank · MMF 2026',view:'inquiries'},
-  {type:'İstifadəçi',icon:'',title:'Rafiq Hunaltay',sub:'Super Admin · rafiq@facemark.az',view:'users'},
-  {type:'İstifadəçi',icon:'',title:'Aytən Həsənova',sub:'Event Manager · ayten@facemark.az',view:'users'},
-  {type:'Bilet',icon:'',title:'VIP — Milli Marketinq Forumu 2026',sub:'₼149 · 72/80 satılıb',view:'event-new'},
-  {type:'Modul',icon:'',title:'Marketing Air',sub:'Xidmət paketləri, portfolio',view:'marketing'},
-  {type:'Modul',icon:'',title:'Komanda',sub:'Üzv idarəetməsi',view:'team'},
-  {type:'Modul',icon:'',title:'Karyera',sub:'Vakansiyalar & müraciətlər',view:'careers'},
+var MODULE_INDEX=[
+  {type:'Modul',title:'Marketing Air',sub:'Xidmət paketləri, portfolio',view:'marketing'},
+  {type:'Modul',title:'Komanda',sub:'Üzv idarəetməsi',view:'team'},
+  {type:'Modul',title:'Karyera',sub:'Vakansiyalar & müraciətlər',view:'careers'},
 ];
 var searchSelectedIdx=-1;
+var _searchDebounce=null;
 function doSearch(q){
   var sr=document.getElementById('search-results');
   if(!q||q.length<1){sr.style.display='none';return;}
-  var matches=SEARCH_INDEX.filter(function(r){
-    return (r.title+r.sub+r.type).toLowerCase().indexOf(q.toLowerCase())>=0;
+  clearTimeout(_searchDebounce);
+  _searchDebounce=setTimeout(function(){ runRealSearch(q); },200);
+}
+async function runRealSearch(q){
+  var ql=q.toLowerCase();
+  var results=MODULE_INDEX.filter(function(r){
+    return (r.title+r.sub+r.type).toLowerCase().indexOf(ql)>=0;
   });
+  var res=await Promise.all([
+    supabaseClient.from('events').select('title_az, venue, date_start').ilike('title_az','%'+q+'%').limit(5),
+    supabaseClient.from('tv_videos').select('title_az, category').ilike('title_az','%'+q+'%').limit(5),
+    supabaseClient.from('applications').select('full_name, email, form_type').ilike('full_name','%'+q+'%').limit(5),
+    supabaseClient.from('profiles').select('full_name, email, role').ilike('full_name','%'+q+'%').limit(5)
+  ]);
+  (res[0].data||[]).forEach(function(r){ results.push({type:'Tədbir',title:r.title_az,sub:[r.venue,r.date_start].filter(Boolean).join(' · '),view:'events-list'}); });
+  (res[1].data||[]).forEach(function(r){ results.push({type:'Video',title:r.title_az,sub:r.category||'FMR TV',view:'fmr-tv'}); });
+  (res[2].data||[]).forEach(function(r){ results.push({type:'Müraciət',title:r.full_name,sub:(r.email||'')+' · '+r.form_type,view:'inquiries'}); });
+  (res[3].data||[]).forEach(function(r){ results.push({type:'İstifadəçi',title:r.full_name||r.email,sub:(r.role==='admin'?'Admin':'Redaktor')+' · '+(r.email||''),view:'users'}); });
+  renderSearchResults(results);
+}
+function renderSearchResults(matches){
+  var sr=document.getElementById('search-results');
   if(!matches.length){
     sr.innerHTML='<div style="padding:14px 16px;font-size:.72rem;color:var(--muted);text-align:center">Nəticə tapılmadı</div>';
     sr.style.display='block';
@@ -2297,10 +2257,9 @@ function doSearch(q){
   searchSelectedIdx=-1;
   sr.innerHTML=matches.slice(0,8).map(function(r,i){
     return '<div class="sr-item" data-idx="'+i+'" data-view="'+r.view+'" onmousedown="searchGo(\''+r.view+'\')" style="display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s" onmouseover="this.style.background=\'var(--bg2)\'" onmouseout="this.style.background=\'\'">'
-      +'<span style="font-size:1rem">'+r.icon+'</span>'
       +'<div style="flex:1;min-width:0">'
-      +'<div style="font-size:.72rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+r.title+'</div>'
-      +'<div style="font-size:.62rem;color:var(--muted)">'+r.type+' · '+r.sub+'</div>'
+      +'<div style="font-size:.72rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+_escHtml(r.title)+'</div>'
+      +'<div style="font-size:.62rem;color:var(--muted)">'+_escHtml(r.type)+' · '+_escHtml(r.sub||'')+'</div>'
       +'</div>'
       +'<span style="font-size:.6rem;color:var(--muted);background:var(--bg2);border-radius:4px;padding:1px 5px;flex-shrink:0">↵</span>'
       +'</div>';
@@ -2800,11 +2759,11 @@ function saveClientEdit() {
 .about-tab { background:none; border:none; color:var(--muted); font-size:.72rem; font-weight:700; padding:8px 14px; cursor:pointer; transition:var(--t); }
 .about-tab.active { color:var(--dark); background:var(--card); }
 .about-tab:hover { color:var(--dark); }
-</style> <div style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between"> <span style="font-size:.78rem;font-weight:800">Bildirişlər</span> <div style="display:flex;gap:6px;align-items:center"> <span style="font-size:.62rem;color:var(--gold);cursor:pointer;font-weight:700">Hamısını oxu</span> <button onclick="document.getElementById('notif-panel').classList.remove('open')" style="border:none;background:none;font-size:.8rem;cursor:pointer;color:var(--muted);padding:2px 4px"></button> </div> </div> <div style="max-height:380px;overflow-y:auto"> <!-- Unread --> <div style="padding:8px 14px 4px;font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Oxunmamış</div> <div style="padding:10px 14px;border-bottom:1px solid var(--border);background:rgba(196,151,58,.04);cursor:pointer" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background='rgba(196,151,58,.04)'"> <div style="display:flex;gap:10px;align-items:flex-start"> <div style="width:32px;height:32px;border-radius:8px;background:rgba(49,130,206,.12);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0"></div> <div style="flex:1"> <div style="font-size:.72rem;font-weight:600;margin-bottom:2px">Yeni sponsor müraciəti</div> <div style="font-size:.65rem;color:var(--muted);line-height:1.4"><b>Kapital Bank</b> MMF 2026 üçün Qızıl Sponsor statusu üzrə müraciət etdi.</div> <div style="font-size:.6rem;color:var(--muted);margin-top:4px">30 dəqiqə əvvəl</div> </div> <div style="width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:4px"></div> </div> </div> <div style="padding:10px 14px;border-bottom:1px solid var(--border);background:rgba(196,151,58,.04);cursor:pointer" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background='rgba(196,151,58,.04)'"> <div style="display:flex;gap:10px;align-items:flex-start"> <div style="width:32px;height:32px;border-radius:8px;background:rgba(56,161,105,.12);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0"></div> <div style="flex:1"> <div style="font-size:.72rem;font-weight:600;margin-bottom:2px">MMF 2026 VIP — 90% doldu</div> <div style="font-size:.65rem;color:var(--muted);line-height:1.4">VIP biletlər 90%-ə çatdı. Yalnız 8 yer qalıb.</div> <div style="font-size:.6rem;color:var(--muted);margin-top:4px">2 saat əvvəl</div> </div> <div style="width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:4px"></div> </div> </div> <!-- Read --> <div style="padding:8px 14px 4px;font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Əvvəlki</div> <div style="padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background=''"> <div style="display:flex;gap:10px;align-items:flex-start"> <div style="width:32px;height:32px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0"></div> <div style="flex:1"> <div style="font-size:.72rem;font-weight:600;margin-bottom:2px">Biznes Radar — 3 xəbər yayımlandı</div> <div style="font-size:.65rem;color:var(--muted)">Elçin Muradov tərəfindən əlavə edildi.</div> <div style="font-size:.6rem;color:var(--muted);margin-top:4px">Dünən · 15:42</div> </div> </div> </div> <div style="padding:10px 14px;cursor:pointer" onmouseover="this.style.background='var(--bg2)'" onmouseout="this.style.background=''"> <div style="display:flex;gap:10px;align-items:flex-start"> <div style="width:32px;height:32px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0"></div> <div style="flex:1"> <div style="font-size:.72rem;font-weight:600;margin-bottom:2px">Yeni karyera müraciəti</div> <div style="font-size:.65rem;color:var(--muted)">Content Manager vəzifəsinə 2 yeni müraciət daxil oldu.</div> <div style="font-size:.6rem;color:var(--muted);margin-top:4px">2 gün əvvəl</div> </div> </div> </div> </div> <div style="padding:10px 14px;border-top:1px solid var(--border);text-align:center"> <span style="font-size:.68rem;color:var(--gold);cursor:pointer;font-weight:700" onclick="showView('inquiries',null);document.getElementById('notif-panel').classList.remove('open')">Bütün bildirişlərə bax →</span> </div>
+</style> <div style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between"> <span style="font-size:.78rem;font-weight:800">Bildirişlər</span> <div style="display:flex;gap:6px;align-items:center"> <span style="font-size:.62rem;color:var(--gold);cursor:pointer;font-weight:700" onclick="markAllNotifsRead()">Hamısını oxu</span> <button onclick="document.getElementById('notif-panel').classList.remove('open')" style="border:none;background:none;font-size:.8rem;cursor:pointer;color:var(--muted);padding:2px 4px">×</button> </div> </div> <div id="notif-list" style="max-height:380px;overflow-y:auto"> <div style="padding:16px;text-align:center;color:var(--muted);font-size:.72rem">Yüklənir...</div> </div> <div style="padding:10px 14px;border-top:1px solid var(--border);text-align:center"> <span style="font-size:.68rem;color:var(--gold);cursor:pointer;font-weight:700" onclick="showView('inquiries',null);document.getElementById('notif-panel').classList.remove('open')">Bütün müraciətlərə bax →</span> </div>
 </div> <!-- ══ PANEL: PROFİL ══════════════════════════════════════ -->
-<div class="settings-overlay" id="panel-profile" onclick="closePanel('profile')"> <div class="settings-panel" onclick="event.stopPropagation()"> <div class="sp-header"> <span style="font-size:1rem"></span> <span class="sp-title">Profilim</span> <button class="sp-close" onclick="closePanel('profile')"></button> </div> <div class="sp-body"> <div class="sp-avatar-area"> <div class="sp-big-avatar">RH</div> <div> <div style="font-size:.75rem;font-weight:700;margin-bottom:3px">Rafiq Hunaltay</div> <div style="font-size:.65rem;color:var(--muted);margin-bottom:8px">rafiq@facemark.az</div> <button class="btn btn-outline btn-sm"> Foto dəyiş</button> </div> </div> <div class="sp-section"> <div class="sp-section-title">Şəxsi Məlumat</div> <div class="sp-input-row"> <div class="sp-field" style="flex:1"><div class="sp-label">Ad</div><input class="sp-input" value="Rafiq"></div> <div class="sp-field" style="flex:1"><div class="sp-label">Soyad</div><input class="sp-input" value="Hunaltay"></div> </div> <div class="sp-field"><div class="sp-label">Vəzifə / Rol</div><input class="sp-input" value="CEO & Founder"></div> <div class="sp-field"><div class="sp-label">Telefon</div><input class="sp-input" value="+994 50 ..."></div> </div> <div class="sp-section"> <div class="sp-section-title">Əlaqə</div> <div class="sp-field"><div class="sp-label">Email</div><input class="sp-input" value="rafiq@facemark.az" readonly style="opacity:.6"></div> <div class="sp-field"><div class="sp-label">LinkedIn</div><input class="sp-input" placeholder="linkedin.com/in/..."></div> </div> <div class="sp-section"> <div class="sp-section-title">Haqqımda</div> <div class="sp-field"><textarea class="sp-input" style="min-height:70px;resize:vertical" placeholder="Qısa bio..."></textarea></div> </div> </div> <div class="sp-footer"> <button class="btn btn-outline" onclick="closePanel('profile')">Ləğv et</button> <button class="btn btn-gold" onclick="closePanel('profile')"> Yadda saxla</button> </div> </div>
+<div class="settings-overlay" id="panel-profile" onclick="closePanel('profile')"> <div class="settings-panel" onclick="event.stopPropagation()"> <div class="sp-header"> <span style="font-size:1rem"></span> <span class="sp-title">Profilim</span> <button class="sp-close" onclick="closePanel('profile')"></button> </div> <div class="sp-body"> <div class="sp-avatar-area"> <div class="sp-big-avatar" id="sp-avatar-el">RH</div> <div> <div style="font-size:.75rem;font-weight:700;margin-bottom:3px" id="sp-name-el">Rafiq Hunaltay</div> <div style="font-size:.65rem;color:var(--muted);margin-bottom:8px" id="sp-email-el">rafiq@facemark.az</div> <button class="btn btn-outline btn-sm"> Foto dəyiş</button> </div> </div> <div class="sp-section"> <div class="sp-section-title">Şəxsi Məlumat</div> <div class="sp-input-row"> <div class="sp-field" style="flex:1"><div class="sp-label">Ad</div><input class="sp-input" id="sp-firstname-el" value="Rafiq"></div> <div class="sp-field" style="flex:1"><div class="sp-label">Soyad</div><input class="sp-input" id="sp-lastname-el" value="Hunaltay"></div> </div> <div class="sp-field"><div class="sp-label">Vəzifə / Rol</div><input class="sp-input" id="sp-role-el" value="CEO & Founder" readonly style="opacity:.6"></div> <div class="sp-field"><div class="sp-label">Telefon</div><input class="sp-input" value="+994 50 ..."></div> </div> <div class="sp-section"> <div class="sp-section-title">Əlaqə</div> <div class="sp-field"><div class="sp-label">Email</div><input class="sp-input" id="sp-emailfield-el" value="rafiq@facemark.az" readonly style="opacity:.6"></div> <div class="sp-field"><div class="sp-label">LinkedIn</div><input class="sp-input" placeholder="linkedin.com/in/..."></div> </div> <div class="sp-section"> <div class="sp-section-title">Haqqımda</div> <div class="sp-field"><textarea class="sp-input" style="min-height:70px;resize:vertical" placeholder="Qısa bio..."></textarea></div> </div> </div> <div class="sp-footer"> <button class="btn btn-outline" onclick="closePanel('profile')">Ləğv et</button> <button class="btn btn-gold" onclick="closePanel('profile')"> Yadda saxla</button> </div> </div>
 </div> <!-- ══ PANEL: HESAB PARAMETRLƏRİ ═════════════════════════ -->
-<div class="settings-overlay" id="panel-account" onclick="closePanel('account')"> <div class="settings-panel" onclick="event.stopPropagation()"> <div class="sp-header"> <span style="font-size:1rem"></span> <span class="sp-title">Hesab Parametrləri</span> <button class="sp-close" onclick="closePanel('account')"></button> </div> <div class="sp-body"> <div class="sp-section"> <div class="sp-section-title">Email ünvanı</div> <div class="sp-field"><div class="sp-label">Cari email</div><input class="sp-input" value="rafiq@facemark.az"></div> <div class="sp-field"><div class="sp-label">Yeni email</div><input class="sp-input" placeholder="yeni@facemark.az"></div> <div class="sp-field"><div class="sp-label">Cari şifrə ilə təsdiq</div><input class="sp-input" type="password" placeholder="••••••••"></div> <button class="btn btn-dark btn-sm">Email-i yenilə</button> </div> <div class="sp-section"> <div class="sp-section-title">Regional Tənzimləmələr</div> <div class="sp-field"> <div class="sp-label">Zaman dilimi</div> <select class="sp-input"><option>UTC+4 — Bakı, Tbilisi</option><option>UTC+3 — Moskva</option><option>UTC+0 — London</option></select> </div> <div class="sp-field"> <div class="sp-label">Tarix formatı</div> <select class="sp-input"><option>DD.MM.YYYY</option><option>MM/DD/YYYY</option><option>YYYY-MM-DD</option></select> </div> <div class="sp-field"> <div class="sp-label">Valyuta</div> <select class="sp-input"><option>₼ AZN — Azərbaycan Manatı</option><option>$ USD</option><option>€ EUR</option></select> </div> </div> <div class="sp-section"> <div class="sp-section-title">İki mərhələli doğrulama (2FA)</div> <div class="sp-toggle-row"> <div class="trl">SMS ilə doğrulama<span class="trs">Giriş zamanı SMS kodu göndərilir</span></div> <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label> </div> <div class="sp-toggle-row"> <div class="trl">Authenticator tətbiqi<span class="trs">Google Authenticator / Authy</span></div> <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label> </div> </div> <div class="sp-section"> <div class="sp-section-title" style="color:var(--red)">Təhlükəli zona</div> <div style="background:rgba(229,62,62,.06);border:1.5px solid rgba(229,62,62,.15);border-radius:8px;padding:12px"> <div style="font-size:.72rem;font-weight:700;margin-bottom:4px">Hesabı sil</div> <div style="font-size:.65rem;color:var(--muted);margin-bottom:10px">Bu əməliyyat geri qaytarıla bilməz. Bütün məlumatlar silinəcək.</div> <button class="btn btn-red btn-sm" style="border:1px solid rgba(229,62,62,.3)"> Hesabı sil</button> </div> </div> </div> <div class="sp-footer"> <button class="btn btn-outline" onclick="closePanel('account')">Bağla</button> <button class="btn btn-gold" onclick="closePanel('account')"> Yadda saxla</button> </div> </div>
+<div class="settings-overlay" id="panel-account" onclick="closePanel('account')"> <div class="settings-panel" onclick="event.stopPropagation()"> <div class="sp-header"> <span style="font-size:1rem"></span> <span class="sp-title">Hesab Parametrləri</span> <button class="sp-close" onclick="closePanel('account')"></button> </div> <div class="sp-body"> <div class="sp-section"> <div class="sp-section-title">Email ünvanı</div> <div class="sp-field"><div class="sp-label">Cari email</div><input class="sp-input" id="acc-email-el" value="rafiq@facemark.az" readonly style="opacity:.6"></div> <div class="sp-field"><div class="sp-label">Yeni email</div><input class="sp-input" placeholder="yeni@facemark.az"></div> <div class="sp-field"><div class="sp-label">Cari şifrə ilə təsdiq</div><input class="sp-input" type="password" placeholder="••••••••"></div> <button class="btn btn-dark btn-sm">Email-i yenilə</button> </div> <div class="sp-section"> <div class="sp-section-title">Regional Tənzimləmələr</div> <div class="sp-field"> <div class="sp-label">Zaman dilimi</div> <select class="sp-input"><option>UTC+4 — Bakı, Tbilisi</option><option>UTC+3 — Moskva</option><option>UTC+0 — London</option></select> </div> <div class="sp-field"> <div class="sp-label">Tarix formatı</div> <select class="sp-input"><option>DD.MM.YYYY</option><option>MM/DD/YYYY</option><option>YYYY-MM-DD</option></select> </div> <div class="sp-field"> <div class="sp-label">Valyuta</div> <select class="sp-input"><option>₼ AZN — Azərbaycan Manatı</option><option>$ USD</option><option>€ EUR</option></select> </div> </div> <div class="sp-section"> <div class="sp-section-title">İki mərhələli doğrulama (2FA)</div> <div class="sp-toggle-row"> <div class="trl">SMS ilə doğrulama<span class="trs">Giriş zamanı SMS kodu göndərilir</span></div> <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label> </div> <div class="sp-toggle-row"> <div class="trl">Authenticator tətbiqi<span class="trs">Google Authenticator / Authy</span></div> <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label> </div> </div> <div class="sp-section"> <div class="sp-section-title" style="color:var(--red)">Təhlükəli zona</div> <div style="background:rgba(229,62,62,.06);border:1.5px solid rgba(229,62,62,.15);border-radius:8px;padding:12px"> <div style="font-size:.72rem;font-weight:700;margin-bottom:4px">Hesabı sil</div> <div style="font-size:.65rem;color:var(--muted);margin-bottom:10px">Bu əməliyyat geri qaytarıla bilməz. Bütün məlumatlar silinəcək.</div> <button class="btn btn-red btn-sm" style="border:1px solid rgba(229,62,62,.3)"> Hesabı sil</button> </div> </div> </div> <div class="sp-footer"> <button class="btn btn-outline" onclick="closePanel('account')">Bağla</button> <button class="btn btn-gold" onclick="closePanel('account')"> Yadda saxla</button> </div> </div>
 </div> <!-- ══ PANEL: ŞİFRƏ ══════════════════════════════════════ -->
 <div class="settings-overlay" id="panel-password" onclick="closePanel('password')"> <div class="settings-panel" style="max-width:380px" onclick="event.stopPropagation()"> <div class="sp-header"> <span style="font-size:1rem"></span> <span class="sp-title">Şifrəni Dəyiş</span> <button class="sp-close" onclick="closePanel('password')"></button> </div> <div class="sp-body"> <div class="sp-section"> <div class="sp-section-title">Şifrə yeniləmə</div> <div class="sp-field"><div class="sp-label">Mövcud şifrə</div><input class="sp-input" type="password" placeholder="••••••••"></div> <div class="sp-field"> <div class="sp-label">Yeni şifrə</div> <input class="sp-input" type="password" placeholder="Ən azı 8 simvol" oninput="checkStrength(this.value)"> <div style="margin-top:6px"> <div style="background:var(--bg2);border-radius:4px;height:5px;overflow:hidden;margin-bottom:4px"> <div id="pw-strength-fill" style="height:100%;border-radius:4px;background:#ddd;width:0;transition:all .3s"></div> </div> <span id="pw-strength-label" style="font-size:.62rem;color:var(--muted)"></span> </div> </div> <div class="sp-field"><div class="sp-label">Yeni şifrəni təsdiqlə</div><input class="sp-input" type="password" placeholder="••••••••"></div> </div> <div class="sp-section"> <div class="sp-section-title">Şifrə tələbləri</div> <div style="font-size:.68rem;color:var(--muted);line-height:2"> Ən azı 8 simvol<br> Böyük hərf (A–Z)<br> Rəqəm (0–9)<br> Xüsusi simvol (!@#$%)
         </div> </div> </div> <div class="sp-footer"> <button class="btn btn-outline" onclick="closePanel('password')">Ləğv et</button> <button class="btn btn-gold" onclick="closePanel('password')"> Şifrəni yenilə</button> </div> </div>
@@ -2828,7 +2787,7 @@ function saveClientEdit() {
             onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'"> Göndər →
           </button> </div> <div id="help-form-success" style="display:none;text-align:center;padding:18px 0"> <div style="font-size:2rem;margin-bottom:6px"></div> <div style="font-size:.8rem;font-weight:600;color:var(--dark)">Müraciətiniz qəbul edildi!</div> <div style="font-size:.72rem;color:var(--muted);margin-top:4px">Ən qısa zamanda cavab veriləcək.</div> <button onclick="resetHelpForm()" style="margin-top:12px;padding:7px 18px;border-radius:7px;border:1.5px solid var(--border);background:var(--bg);font-size:.72rem;cursor:pointer;color:var(--dark)">Yeni müraciət</button> </div> </div> </div> <div class="sp-footer"> <a href="mailto:dev@facemark.az" style="text-decoration:none"> <button class="btn btn-outline" style="color:var(--gold);border-color:var(--gold)"> E-mail</button> </a> <button class="btn btn-outline" onclick="closePanel('help')">Bağla</button> </div> </div>
 </div> <!-- ══ LOGOUT CONFIRM ════════════════════════════════════ -->
-<div class="confirm-overlay" id="confirm-logout" onclick="closeLogout()"> <div class="confirm-box" onclick="event.stopPropagation()"> <div class="confirm-icon"></div> <div class="confirm-title">Çıxmaq istəyirsiniz?</div> <div class="confirm-sub">Aktiv sessiyanız sonlandırılacaq.<br>Yadda saxlanmamış dəyişikliklər itirilə bilər.</div> <div class="confirm-btns"> <button class="btn btn-outline" onclick="closeLogout()">Ləğv et</button> <button class="btn btn-red" style="border:1px solid rgba(229,62,62,.3)" onclick="closeLogout();supabaseClient.auth.signOut().then(()=>agShowLogin())">Çıxış et</button> </div> </div>
+<div class="confirm-overlay" id="confirm-logout" onclick="closeLogout()"> <div class="confirm-box" onclick="event.stopPropagation()"> <div class="confirm-icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div> <div class="confirm-title">Çıxmaq istəyirsiniz?</div> <div class="confirm-sub">Aktiv sessiyanız sonlandırılacaq.<br>Yadda saxlanmamış dəyişikliklər itirilə bilər.</div> <div class="confirm-btns"> <button class="btn btn-outline" onclick="closeLogout()">Ləğv et</button> <button class="btn btn-red" style="border:1px solid rgba(229,62,62,.3)" onclick="closeLogout();supabaseClient.auth.signOut().then(()=>agShowLogin())">Çıxış et</button> </div> </div>
 </div> <!-- ══ FORM DETAIL OVERLAY ══════════════════════════════════════ -->
 <div class="fd-overlay" id="fd-overlay" onclick="closeFd()"> <div class="fd-panel" onclick="event.stopPropagation()"> <div class="fd-header"> <span id="fd-icon" style="font-size:1.2rem"></span> <span class="fd-title" id="fd-title"></span> <span id="fd-badge" class="status-badge" style="margin-left:auto"></span> <button class="fd-close" onclick="closeFd()"></button> </div> <div class="fd-body" id="fd-body"></div> <div class="fd-footer"> <button class="btn btn-gold" id="fd-goto-btn" onclick="">Modula keç →</button> <button class="btn btn-outline" onclick="closeFd()">Bağla</button> </div> </div>
 </div> <!-- ══ ENTRY DETAIL OVERLAY ══════════════════════════════════════ -->
@@ -2848,7 +2807,7 @@ function saveClientEdit() {
 async function agCheckSession(){
   const { data:{ session } } = await supabaseClient.auth.getSession();
   if(!session){ agShowLogin(); return; }
-  const { data:profile, error } = await supabaseClient.from('profiles').select('role').eq('id', session.user.id).single();
+  const { data:profile, error } = await supabaseClient.from('profiles').select('full_name, role, email').eq('id', session.user.id).single();
   if(error || !profile || !['admin','editor'].includes(profile.role)){
     await supabaseClient.auth.signOut();
     agShowLogin('Bu hesabın admin panelə girişi yoxdur.');
@@ -2856,6 +2815,51 @@ async function agCheckSession(){
   }
   document.getElementById('authGate').style.display='none';
   document.getElementById('appRoot').style.display='flex';
+  applyCurrentUser(profile, session.user.email);
+  loadNotifications();
+}
+
+function applyCurrentUser(profile, authEmail){
+  var fullName = (profile.full_name || '').trim() || (authEmail ? authEmail.split('@')[0] : 'İstifadəçi');
+  var email = profile.email || authEmail || '';
+  var roleLabel = profile.role === 'admin' ? 'Admin' : 'Redaktor';
+  var nameParts = fullName.split(' ');
+  var initials = nameParts.map(function(p){ return p.charAt(0); }).join('').slice(0,2).toUpperCase() || 'İS';
+
+  ['tb-avatar-el','sb-avatar-el','ud-avatar-el','sp-avatar-el'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.textContent = initials;
+  });
+  var tbName = document.getElementById('tb-uname-el');
+  if(tbName) tbName.textContent = nameParts[0] + (nameParts[1] ? ' '+nameParts[1].charAt(0)+'.' : '');
+  var sbName = document.getElementById('sb-uname-text');
+  if(sbName) sbName.textContent = fullName;
+  var sbRole = document.getElementById('sb-urole-text');
+  if(sbRole) sbRole.textContent = roleLabel;
+  var udName = document.getElementById('ud-name-el');
+  if(udName) udName.textContent = fullName;
+  var udEmail = document.getElementById('ud-email-el');
+  if(udEmail) udEmail.textContent = email;
+  var udRole = document.getElementById('ud-role-el');
+  if(udRole) udRole.textContent = roleLabel;
+  var spName = document.getElementById('sp-name-el');
+  if(spName) spName.textContent = fullName;
+  var spEmail = document.getElementById('sp-email-el');
+  if(spEmail) spEmail.textContent = email;
+  var spFirst = document.getElementById('sp-firstname-el');
+  if(spFirst) spFirst.value = nameParts[0] || '';
+  var spLast = document.getElementById('sp-lastname-el');
+  if(spLast) spLast.value = nameParts.slice(1).join(' ') || '';
+  var spRole = document.getElementById('sp-role-el');
+  if(spRole) spRole.value = roleLabel;
+  var spEmailField = document.getElementById('sp-emailfield-el');
+  if(spEmailField) spEmailField.value = email;
+  var accEmail = document.getElementById('acc-email-el');
+  if(accEmail) accEmail.value = email;
+  var greetEl = document.getElementById('dashboard-greeting');
+  if(greetEl) greetEl.textContent = 'Salam, ' + nameParts[0];
+
+  setRole(profile.role === 'admin' ? 'super' : 'redaktor');
 }
 function agShowLogin(msg){
   document.getElementById('authGate').style.display='flex';
@@ -3360,6 +3364,21 @@ function crudActionsCell(key, r){
   '</div></td>';
 }
 
+function openEventNew(){
+  _currentEventId = null;
+  showView('event-new', null);
+  var titleEl = document.querySelector('#view-event-new .page-title');
+  var subEl = document.querySelector('#view-event-new .page-sub');
+  if(titleEl) titleEl.textContent = 'Yeni Tədbir';
+  if(subEl) subEl.textContent = '';
+  var setVal = function(id, val){ var el = document.getElementById(id); if(el) el.value = (val==null?'':val); };
+  ['ev-title-az','ev-title-en','ev-slug','ev-desc-az','ev-date-start','ev-date-end','ev-venue'].forEach(function(id){ setVal(id, ''); });
+  setVal('ev-status', 'upcoming');
+  ['event_program','event_speakers','event_sponsors','event_tickets'].forEach(function(key){
+    var tbody = document.getElementById(key+'-tbody');
+    if(tbody) tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Tədbiri əvvəlcə yadda saxlayın.</td></tr>';
+  });
+}
 function openEventEdit(ev){
   _currentEventId = ev.id;
   showView('event-new', null);
@@ -3414,6 +3433,12 @@ async function crudRenderList(key){
   var res = await q;
   var data = res.data, error = res.error;
   var subEl = cfg.sub ? document.getElementById(cfg.sub) : null;
+  // Update event tab badge (.ev-tab-num) with real DB count
+  var _evBadgeMap = {event_program:'agenda',event_speakers:'speakers',event_sponsors:'sponsors',event_tickets:'tickets'};
+  if (_evBadgeMap[key] && data) {
+    var _btn = document.querySelector('.ev-tab[onclick*="\'' + _evBadgeMap[key] + '\'"]');
+    if (_btn) { var _bdg = _btn.querySelector('.ev-tab-num'); if(_bdg) _bdg.textContent = data.length; }
+  }
   if(error){
     tbody.innerHTML = '<tr><td colspan="'+cfg.colspan+'" style="text-align:center;padding:20px;color:var(--muted);font-size:.78rem">Yüklənmə xətası: '+_tjEsc(error.message)+'</td></tr>';
     if(subEl) subEl.textContent = 'Xəta';
